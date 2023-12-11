@@ -1,5 +1,5 @@
 "use client";
-import { Button } from "@mui/material";
+import { Button, Stack, Typography } from "@mui/material";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import {
   Controller,
@@ -11,6 +11,7 @@ import {
 
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { MuiTelInput } from "mui-tel-input";
+import Grid from "@mui/material/Unstable_Grid2/Grid2";
 
 export default function Home() {
   return (
@@ -25,14 +26,42 @@ export default function Home() {
         }}
         onSuccess={(data) => console.log(data)}
       >
-        <TextFieldElement name="firstName" label="Nombre" required />
-        <TextFieldElement name="lastName" label="Apellido" />
-        <TelFieldElement name="phoneNumber" />
-        <DatePickerElement label="Fecha de nacimiento" name="birthdate" />
-        <TextFieldElement name="age" label="Edad" type="number" />
-        <Button type="submit" variant="contained">
-          Guardar
-        </Button>
+        <Grid container spacing={2} padding={2}>
+          <Grid xs={12}>
+            <Typography variant="h5" gutterBottom>
+              Datos generales de persona
+            </Typography>
+          </Grid>
+          <Grid xs={6}>
+            <TextFieldElement
+              fullWidth
+              name="firstName"
+              label="Nombre"
+              required
+            />
+          </Grid>
+          <Grid xs={6}>
+            <TextFieldElement fullWidth name="lastName" label="Apellido" />
+          </Grid>
+          <Grid xs={12}>
+            <TelFieldElement name="phoneNumber" />
+          </Grid>
+          <Grid xs={12}>
+            <DatePickerElement
+              sx={{ width: "100%" }}
+              label="Fecha de nacimiento"
+              name="birthdate"
+            />
+          </Grid>
+          <Grid xs={12}>
+            <TextFieldElement fullWidth name="age" label="Edad" type="number" />
+          </Grid>
+          <Grid xs={12}>
+            <Button type="submit" variant="contained">
+              Guardar
+            </Button>
+          </Grid>
+        </Grid>
       </FormContainer>
     </LocalizationProvider>
   );
