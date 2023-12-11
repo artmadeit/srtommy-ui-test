@@ -25,17 +25,23 @@ export default function EventListPage() {
   const router = useRouter();
   const { paginationModel, setPaginationModel } = usePagination();
 
+  const eventList = [
+    { id: 1, name: "Matrimonios Jovenes" },
+    { id: 2, name: "Servicio Dominical" },
+    { id: 3, name: "Graduación grupo de mujeres" },
+    { id: 4, name: "Viernes con Jesús" },
+  ];
   const isLoading = false;
   const events: Page<EventListItem> = {
     _embedded: {
-      events: [],
+      events: eventList,
     },
     _links: {},
     page: {
-      size: 1,
-      totalElements: 0,
+      size: eventList.length,
+      totalElements: eventList.length,
       totalPages: 1,
-      number: 1,
+      number: eventList.length,
     },
   };
 
@@ -43,7 +49,7 @@ export default function EventListPage() {
     () =>
       (
         [
-          { field: "name", headerName: "Nombre" },
+          { field: "name", flex: 1, headerName: "Nombre" },
           {
             field: "actions",
             type: "actions",
@@ -100,7 +106,7 @@ export default function EventListPage() {
           paginationMode="server"
           onPaginationModelChange={setPaginationModel}
           disableColumnFilter
-          rows={events?._embedded.patients || []}
+          rows={events?._embedded.events || []}
           localeText={esES.components.MuiDataGrid.defaultProps.localeText}
         />
       </div>
