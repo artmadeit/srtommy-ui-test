@@ -1,108 +1,11 @@
-"use client";
-import { Button, Stack, Typography } from "@mui/material";
-import { LocalizationProvider } from "@mui/x-date-pickers";
-import {
-  Controller,
-  DatePickerElement,
-  FormContainer,
-  TextFieldElement,
-  useFormContext,
-} from "react-hook-form-mui";
-
-import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
-import { MuiTelInput } from "mui-tel-input";
-import Grid from "@mui/material/Unstable_Grid2/Grid2";
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <LocalizationProvider dateAdapter={AdapterDateFns}>
-      <FormContainer
-        defaultValues={{
-          firstName: "",
-          lastName: "",
-          phoneNumber: "+51",
-          age: null,
-          birthdate: null,
-        }}
-        onSuccess={(data) => console.log(data)}
-      >
-        <Grid container spacing={2} padding={2}>
-          <Grid xs={12}>
-            <Typography variant="h5" gutterBottom>
-              Datos generales de persona
-            </Typography>
-          </Grid>
-          <Grid xs={6}>
-            <TextFieldElement
-              fullWidth
-              name="firstName"
-              label="Nombre"
-              required
-            />
-          </Grid>
-          <Grid xs={6}>
-            <TextFieldElement fullWidth name="lastName" label="Apellido" />
-          </Grid>
-          <Grid xs={12}>
-            <TelFieldElement name="phoneNumber" />
-          </Grid>
-          <Grid xs={12}>
-            <DatePickerElement
-              sx={{ width: "100%" }}
-              label="Fecha de nacimiento"
-              name="birthdate"
-            />
-          </Grid>
-          <Grid xs={12}>
-            <TextFieldElement fullWidth name="age" label="Edad" type="number" />
-          </Grid>
-          <Grid xs={12}>
-            <Button type="submit" variant="contained">
-              Guardar
-            </Button>
-          </Grid>
-        </Grid>
-      </FormContainer>
-    </LocalizationProvider>
+    <main>
+      <h1>Hola, soy el sr. Tommy</h1>
+      <p>Te ayudare en la administración de tu iglesia</p>
+      <Link href="/portal">Ingresar</Link>
+    </main>
   );
 }
-
-const TelFieldElement = ({ name }: { name: string }) => {
-  const {
-    control,
-    formState: { errors },
-  } = useFormContext();
-
-  return (
-    <Controller
-      control={control}
-      name={name}
-      // rules={{ required: true }}
-      render={({ field }) => (
-        <MuiTelInput
-          name={field.name}
-          value={field.value}
-          onChange={(value) => {
-            field.onChange(value.replace(/\s+/g, ""));
-          }}
-          // required
-          // TODO: error and helper
-          error={
-            Boolean(errors[name])
-            // touched.phoneNumber &&
-            // Boolean(errors.phoneNumber)
-          }
-          // helperText={
-          //   (errors[name]?.message as string) || ""
-          //   // (touched.phoneNumber &&
-          //   // 	errors.phoneNumber) ||
-          //   // ""
-          // }
-          fullWidth
-          label="Teléfono"
-          onlyCountries={["PE"]}
-        />
-      )}
-    />
-  );
-};
