@@ -27,7 +27,7 @@ import Loading from "../(components)/Loading";
 import EventIcon from "@mui/icons-material/Event";
 import PersonIcon from "@mui/icons-material/Person";
 
-const appName = "Atención farmacéutica";
+const appName = "Sr. Tommy - {TODO: mi iglesia}";
 
 const drawerWidth = 240;
 
