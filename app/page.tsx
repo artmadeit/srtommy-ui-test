@@ -2,6 +2,7 @@
 import { Button } from "@mui/material";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import {
+  Controller,
   DatePickerElement,
   FormContainer,
   TextFieldElement,
@@ -38,27 +39,41 @@ export default function Home() {
 }
 
 const TelFieldElement = ({ name }: { name: string }) => {
-  const { setValue, watch } = useFormContext();
-
-  const phoneNumber = watch(name);
+  const {
+    control,
+    formState: { errors },
+  } = useFormContext();
 
   return (
-    <MuiTelInput
-      value={phoneNumber}
-      onChange={(value) => setValue("phoneNumber", value.replace(/\s+/g, ""))}
-      // TODO: error and helper
-      // error={
-      // 	touched.phoneNumber &&
-      // 	Boolean(errors.phoneNumber)
-      // }
-      // helperText={
-      // 	(touched.phoneNumber &&
-      // 		errors.phoneNumber) ||
-      // 	""
-      // }
-      fullWidth
-      label="Teléfono"
-      onlyCountries={["PE"]}
+    <Controller
+      control={control}
+      name={name}
+      // rules={{ required: true }}
+      render={({ field }) => (
+        <MuiTelInput
+          name={field.name}
+          value={field.value}
+          onChange={(value) => {
+            field.onChange(value.replace(/\s+/g, ""));
+          }}
+          // required
+          // TODO: error and helper
+          error={
+            Boolean(errors[name])
+            // touched.phoneNumber &&
+            // Boolean(errors.phoneNumber)
+          }
+          // helperText={
+          //   (errors[name]?.message as string) || ""
+          //   // (touched.phoneNumber &&
+          //   // 	errors.phoneNumber) ||
+          //   // ""
+          // }
+          fullWidth
+          label="Teléfono"
+          onlyCountries={["PE"]}
+        />
+      )}
     />
   );
 };
