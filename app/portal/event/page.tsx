@@ -26,10 +26,14 @@ export default function EventListPage() {
   const { paginationModel, setPaginationModel } = usePagination();
 
   const eventList = [
-    { id: 1, name: "Matrimonios Jovenes" },
-    { id: 2, name: "Servicio Dominical" },
-    { id: 3, name: "Graduación grupo de mujeres" },
-    { id: 4, name: "Viernes con Jesús" },
+    { id: 1, name: "Matrimonios Jovenes" }, // 11 de diciembre, no hora?
+    { id: 2, name: "Servicio Dominical" }, // domingos, 10:00 am
+    { id: 3, name: "Graduación grupo de mujeres" }, //
+    { id: 4, name: "Viernes con Jesús" }, // 24 de noviembre, 7:30pm, jose mena
+    { id: 5, name: "Reunión de hombres" }, // 28 de octubre, 7:30pm
+    { id: 6, name: "Mujeres virtuosas" }, // miercoles a las 9:30am
+    { id: 7, name: "Celebremos juntos el dia del niño" }, // domingo 20 de agosto 10am
+    { id: 8, name: "Sobredosis Garden" }, // jueves 27-30 de agosto (ver: https://www.facebook.com/photo/?fbid=673593008144144&set=pcb.673593201477458)
   ];
   const isLoading = false;
   const events: Page<EventListItem> = {

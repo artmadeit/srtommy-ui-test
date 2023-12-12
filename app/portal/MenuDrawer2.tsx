@@ -123,7 +123,6 @@ export default function MenuDrawer2({ children }: React.PropsWithChildren<{}>) {
         sx={{
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           ml: { sm: `${drawerWidth}px` },
-          backgroundColor: "#6fa4e6",
         }}
       >
         <Toolbar>
