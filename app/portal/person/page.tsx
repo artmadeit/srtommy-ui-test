@@ -12,7 +12,6 @@ import {
 } from "@mui/x-data-grid";
 import SearchIcon from "@mui/icons-material/Search";
 import { withOutSorting } from "@/app/(components)/helpers/withOutSorting";
-import { Person } from "./Person";
 import { Page } from "@/app/(api)/pagination";
 import { usePagination } from "@/app/(components)/hook-customization/usePagination";
 
@@ -27,7 +26,7 @@ export default function PersonListPage() {
   const personList = [
     { id: 1, name: "Daniel" },
     { id: 2, name: "Michel" },
-    { id: 3, name: "a" },
+    { id: 3, name: "jhonny" },
     { id: 4, name: "b" },
   ];
 
@@ -50,7 +49,7 @@ export default function PersonListPage() {
     () =>
       (
         [
-          { field: "a", headerName: "A" },
+          { field: "a", headerName: "id" },
           { field: "name", headerName: "Nombre" },
           {
             field: "actions",
