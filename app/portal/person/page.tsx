@@ -14,6 +14,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import { withOutSorting } from "@/app/(components)/helpers/withOutSorting";
 import { Person } from "./Person";
 import { Page } from "@/app/(api)/pagination";
+import { usePagination } from "@/app/(components)/hook-customization/usePagination";
 
 type PersonListItem = {
   id: number;
@@ -21,6 +22,8 @@ type PersonListItem = {
 };
 
 export default function PersonListPage() {
+  const { paginationModel, setPaginationModel } = usePagination();
+
   const personList = [
     { id: 1, name: "Daniel" },
     { id: 2, name: "Michel" },
@@ -81,9 +84,12 @@ export default function PersonListPage() {
       <div style={{ height: "70vh", width: "100%" }}>
         <DataGrid
           loading={isLoading}
-          rows={people?._embedded.people || []}
           columns={columns}
+          paginationModel={paginationModel}
+          paginationMode="server"
+          onPaginationModelChange={setPaginationModel}
           disableColumnFilter
+          rows={people?._embedded.people || []}
           localeText={esES.components.MuiDataGrid.defaultProps.localeText}
         />
       </div>
