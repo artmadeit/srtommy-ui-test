@@ -41,6 +41,8 @@ export default function PersonListPage() {
     },
   };
 
+  const isLoading = false;
+
   const columns = React.useMemo(
     () =>
       (
@@ -77,7 +79,13 @@ export default function PersonListPage() {
         </Tooltip>
       </Stack>
       <div style={{ height: "70vh", width: "100%" }}>
-        <DataGrid rows={people?._embedded.people || []} columns={columns} />
+        <DataGrid
+          loading={isLoading}
+          rows={people?._embedded.people || []}
+          columns={columns}
+          disableColumnFilter
+          localeText={esES.components.MuiDataGrid.defaultProps.localeText}
+        />
       </div>
     </Stack>
   );
