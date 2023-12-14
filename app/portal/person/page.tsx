@@ -1,7 +1,14 @@
 "use client";
 
 import React from "react";
-import { Fab, Stack, Tooltip, Typography } from "@mui/material";
+import {
+  Fab,
+  InputAdornment,
+  Stack,
+  TextField,
+  Tooltip,
+  Typography,
+} from "@mui/material";
 import Link from "next/link";
 import AddIcon from "@mui/icons-material/Add";
 import {
@@ -80,6 +87,18 @@ export default function PersonListPage() {
           </Link>
         </Tooltip>
       </Stack>
+      <TextField
+        placeholder="Buscar"
+        variant="outlined"
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <SearchIcon />
+            </InputAdornment>
+          ),
+        }}
+        fullWidth
+      />
       <div style={{ height: "70vh", width: "100%" }}>
         <DataGrid
           loading={isLoading}
