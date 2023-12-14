@@ -27,6 +27,7 @@ import Loading from "../(components)/Loading";
 import EventIcon from "@mui/icons-material/Event";
 import PersonIcon from "@mui/icons-material/Person";
 import DashboardIcon from "@mui/icons-material/Dashboard";
+import ChurchIcon from "@mui/icons-material/Church";
 
 const appName = "Sr. Tommy - {TODO: mi iglesia}";
 
@@ -124,6 +125,20 @@ export default function MenuDrawer2({ children }: React.PropsWithChildren<{}>) {
               <DashboardIcon />
             </ListItemIcon>
             <ListItemText primary="Dashboard" />
+          </ListItemButton>
+        </ListItem>
+      </Link>
+      <Link
+        component={NextLink}
+        href="/portal/organization"
+        style={{ textDecoration: "none", color: "inherit" }}
+      >
+        <ListItem>
+          <ListItemButton>
+            <ListItemIcon>
+              <ChurchIcon />
+            </ListItemIcon>
+            <ListItemText primary="Organización" />
           </ListItemButton>
         </ListItem>
       </Link>
