@@ -34,7 +34,7 @@ export default function PersonListPage() {
     { id: 1, name: "Daniel" },
     { id: 2, name: "Michel" },
     { id: 3, name: "jhonny" },
-    { id: 4, name: "b" },
+    { id: 4, name: "Rosa" },
   ];
 
   const people: Page<PersonListItem> = {
@@ -56,7 +56,7 @@ export default function PersonListPage() {
     () =>
       (
         [
-          { field: "a", headerName: "id" },
+          { field: "a", headerName: "ID" },
           { field: "name", headerName: "Nombre" },
           {
             field: "actions",
@@ -106,6 +106,7 @@ export default function PersonListPage() {
           paginationModel={paginationModel}
           paginationMode="server"
           onPaginationModelChange={setPaginationModel}
+          checkboxSelection
           disableColumnFilter
           rows={people?._embedded.people || []}
           localeText={esES.components.MuiDataGrid.defaultProps.localeText}
