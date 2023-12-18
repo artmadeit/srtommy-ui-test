@@ -63,7 +63,7 @@ export default function CreatePerson() {
   );
 }
 
-const TelFieldElement = ({ name }: { name: string }) => {
+export const TelFieldElement = ({ name }: { name: string }) => {
   const {
     control,
     formState: { errors },

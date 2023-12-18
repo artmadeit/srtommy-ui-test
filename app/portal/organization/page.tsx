@@ -1,8 +1,10 @@
 "use client";
 
-import { Grid, Typography } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import React from "react";
 import { FormContainer, TextFieldElement } from "react-hook-form-mui";
+import { TelFieldElement } from "../person/create/page";
+import Grid from "@mui/material/Unstable_Grid2/Grid2";
 
 export default function Organization() {
   return (
@@ -10,19 +12,20 @@ export default function Organization() {
       defaultValues={{
         name: "",
         address: "",
+        phoneNumber: "+51",
       }}
       onSuccess={(x) => console.log(x)}
     >
       <Grid container spacing={2} padding={2}>
-        <Grid item xs={12}>
+        <Grid xs={12}>
           <Typography variant="h5" gutterBottom>
             Datos generales de la organización
           </Typography>
         </Grid>
-        <Grid item xs={6}>
+        <Grid xs={6}>
           <TextFieldElement name="name" label="Nombre" required fullWidth />
         </Grid>
-        <Grid item xs={6}>
+        <Grid xs={6}>
           <TextFieldElement
             name="address"
             label="Dirección"
@@ -30,8 +33,13 @@ export default function Organization() {
             fullWidth
           />
         </Grid>
-        <Grid item xs={12}>
-          Hola
+        <Grid xs={12}>
+          <TelFieldElement name="phoneNumber" />
+        </Grid>
+        <Grid xs={12}>
+          <Button type="submit" variant="contained">
+            Guardar
+          </Button>
         </Grid>
       </Grid>
     </FormContainer>
