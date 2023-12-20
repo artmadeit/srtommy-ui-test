@@ -29,6 +29,11 @@ export default function EventCreatePage() {
     >
       <Grid container spacing={2} padding={2}>
         <Grid xs={12}>
+          <Typography variant="h5" gutterBottom>
+            Datos del Evento
+          </Typography>
+        </Grid>
+        <Grid xs={12}>
           <TextFieldElement fullWidth name="name" label="Nombre" required />
         </Grid>
         <Grid xs={3}>
@@ -67,7 +72,7 @@ export default function EventCreatePage() {
           <TextFieldElement fullWidth name="place" label="Lugar" />
         </Grid>
         <Grid xs={12}>
-          <TextFieldElement fullWidth name="speaker" label="Speaker" />
+          <TextFieldElement fullWidth name="speaker" label="Ponente" />
         </Grid>
         <Grid xs={12}>
           <TextFieldElement
