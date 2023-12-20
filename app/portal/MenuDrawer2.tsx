@@ -28,6 +28,7 @@ import EventIcon from "@mui/icons-material/Event";
 import PersonIcon from "@mui/icons-material/Person";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import ChurchIcon from "@mui/icons-material/Church";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 const appName = "Sr. Tommy - {TODO: mi iglesia}";
 
@@ -172,8 +173,19 @@ export default function MenuDrawer2({ children }: React.PropsWithChildren<{}>) {
               width: "100%",
             }}
           >
-            <Typography variant="h6" noWrap component="div">
+            <Typography
+              variant="h6"
+              noWrap
+              component="div"
+              style={{
+                cursor: "pointer",
+                display: "flex",
+                alignItems: "center",
+              }}
+              onClick={() => console.log("click")}
+            >
               {appName}
+              <KeyboardArrowDownIcon />
             </Typography>
             <Button
               variant="text"
