@@ -10,8 +10,13 @@ import {
 
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import { MuiTelInput } from "mui-tel-input";
+import { useAuthApi } from "@/app/(api)/api";
+import { useRouter } from "next/navigation";
 
 export default function CreatePerson() {
+  const getApi = useAuthApi();
+  const router = useRouter();
+
   return (
     <FormContainer
       defaultValues={{
@@ -21,7 +26,12 @@ export default function CreatePerson() {
         age: null,
         birthdate: null,
       }}
-      onSuccess={(data) => console.log(data)}
+      onSuccess={async (data) => {
+        const api = await getApi();
+        await api.post("people", data);
+        alert("Guardado :)");
+        router.push("/portal/person");
+      }}
     >
       <Grid container spacing={2} padding={2}>
         <Grid xs={12}>
@@ -38,7 +48,12 @@ export default function CreatePerson() {
           />
         </Grid>
         <Grid xs={6}>
-          <TextFieldElement fullWidth name="lastName" label="Apellido" />
+          <TextFieldElement
+            fullWidth
+            name="lastName"
+            label="Apellido"
+            required
+          />
         </Grid>
         <Grid xs={12}>
           <TelFieldElement name="phoneNumber" />

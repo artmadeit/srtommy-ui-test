@@ -105,7 +105,7 @@ export default function PersonListPage() {
           paginationModel={paginationModel}
           paginationMode="server"
           onPaginationModelChange={setPaginationModel}
-          checkboxSelection
+          // checkboxSelection TODO: move this to meeting attendance
           disableColumnFilter
           rows={people?._embedded.people || []}
           localeText={esES.components.MuiDataGrid.defaultProps.localeText}
