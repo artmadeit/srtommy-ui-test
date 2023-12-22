@@ -19,8 +19,9 @@ import {
 } from "@mui/x-data-grid";
 import SearchIcon from "@mui/icons-material/Search";
 import { withOutSorting } from "@/app/(components)/helpers/withOutSorting";
-import { Page } from "@/app/(api)/pagination";
+import { SpringPage } from "@/app/(api)/pagination";
 import { usePagination } from "@/app/(components)/hook-customization/usePagination";
+import useSWR from "swr";
 
 type PersonListItem = {
   id: number;
@@ -30,33 +31,14 @@ type PersonListItem = {
 export default function PersonListPage() {
   const { paginationModel, setPaginationModel } = usePagination();
 
-  const personList = [
-    { id: 1, name: "Daniel" },
-    { id: 2, name: "Michel" },
-    { id: 3, name: "jhonny" },
-    { id: 4, name: "Rosa" },
-  ];
-
-  const people: Page<PersonListItem> = {
-    _embedded: {
-      people: personList,
-    },
-    _links: {},
-    page: {
-      size: personList.length,
-      totalElements: personList.length,
-      totalPages: 1,
-      number: personList.length,
-    },
-  };
-
-  const isLoading = false;
+  const { data: people, isLoading } =
+    useSWR<SpringPage<PersonListItem>>("people");
 
   const columns = React.useMemo(
     () =>
       (
         [
-          { field: "name", headerName: "Nombre" },
+          { field: "fullName", headerName: "Nombre" },
           {
             field: "actions",
             type: "actions",
@@ -105,9 +87,9 @@ export default function PersonListPage() {
           paginationModel={paginationModel}
           paginationMode="server"
           onPaginationModelChange={setPaginationModel}
-          checkboxSelection
+          // checkboxSelection TODO: move this to meeting attendance
           disableColumnFilter
-          rows={people?._embedded.people || []}
+          rows={people?.content || []}
           localeText={esES.components.MuiDataGrid.defaultProps.localeText}
         />
       </div>

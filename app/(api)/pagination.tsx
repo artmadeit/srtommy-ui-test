@@ -10,3 +10,7 @@ export type Page<T> = {
     number: number;
   };
 };
+
+export type SpringPage<T> = {
+  content: T[];
+};

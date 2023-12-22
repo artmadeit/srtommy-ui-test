@@ -103,6 +103,20 @@ export default function MenuDrawer2({ children }: React.PropsWithChildren<{}>) {
     <List>
       <Link
         component={NextLink}
+        href="/portal"
+        style={{ textDecoration: "none", color: "inherit" }}
+      >
+        <ListItem>
+          <ListItemButton>
+            <ListItemIcon>
+              <DashboardIcon />
+            </ListItemIcon>
+            <ListItemText primary="Dashboard" />
+          </ListItemButton>
+        </ListItem>
+      </Link>
+      <Link
+        component={NextLink}
         href="/portal/person"
         style={{ textDecoration: "none", color: "inherit" }}
       >
@@ -126,20 +140,6 @@ export default function MenuDrawer2({ children }: React.PropsWithChildren<{}>) {
               <EventIcon />
             </ListItemIcon>
             <ListItemText primary="Eventos" />
-          </ListItemButton>
-        </ListItem>
-      </Link>
-      <Link
-        component={NextLink}
-        href="/portal"
-        style={{ textDecoration: "none", color: "inherit" }}
-      >
-        <ListItem>
-          <ListItemButton>
-            <ListItemIcon>
-              <DashboardIcon />
-            </ListItemIcon>
-            <ListItemText primary="Dashboard" />
           </ListItemButton>
         </ListItem>
       </Link>
