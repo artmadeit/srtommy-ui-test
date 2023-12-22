@@ -56,7 +56,6 @@ export default function PersonListPage() {
     () =>
       (
         [
-          { field: "a", headerName: "ID" },
           { field: "name", headerName: "Nombre" },
           {
             field: "actions",
