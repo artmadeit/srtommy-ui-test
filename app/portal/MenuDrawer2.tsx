@@ -5,7 +5,16 @@ import { AccountCircle } from "@mui/icons-material";
 import ArrowRight from "@mui/icons-material/ArrowRight";
 import LogoutIcon from "@mui/icons-material/Logout";
 import MenuIcon from "@mui/icons-material/Menu";
-import { Button, Collapse, Link, Menu, MenuItem } from "@mui/material";
+import {
+  Button,
+  Collapse,
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  Link,
+  Menu,
+  MenuItem,
+} from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -51,6 +60,7 @@ export default function MenuDrawer2({ children }: React.PropsWithChildren<{}>) {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
+  const [openDialog, setOpenDialog] = React.useState(false);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -66,6 +76,10 @@ export default function MenuDrawer2({ children }: React.PropsWithChildren<{}>) {
   const handleProfile = () => {
     router.push("/profile");
     setAnchorEl(null);
+  };
+
+  const onClose = () => {
+    setOpenDialog(false);
   };
 
   const handleLogOut = () => {
@@ -182,7 +196,7 @@ export default function MenuDrawer2({ children }: React.PropsWithChildren<{}>) {
                 display: "flex",
                 alignItems: "center",
               }}
-              onClick={() => console.log("click")}
+              onClick={() => setOpenDialog(true)}
             >
               {appName}
               <KeyboardArrowDownIcon />
@@ -217,6 +231,7 @@ export default function MenuDrawer2({ children }: React.PropsWithChildren<{}>) {
                 Cerrar sesión
               </MenuItem>
             </Menu>
+            <DialogA open={openDialog} onClose={onClose} />
           </div>
         </Toolbar>
       </AppBar>
@@ -273,3 +288,17 @@ export default function MenuDrawer2({ children }: React.PropsWithChildren<{}>) {
     </Box>
   );
 }
+
+type DialogAProps = {
+  open: any;
+  onClose: () => void;
+};
+
+const DialogA = ({ open, onClose }: DialogAProps) => {
+  return (
+    <Dialog open={open} onClose={onClose}>
+      <DialogTitle>Dialog</DialogTitle>
+      <DialogContent>TO DO</DialogContent>
+    </Dialog>
+  );
+};
