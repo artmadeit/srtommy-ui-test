@@ -173,20 +173,13 @@ export default function MenuDrawer2({ children }: React.PropsWithChildren<{}>) {
               width: "100%",
             }}
           >
-            <Typography
-              variant="h6"
-              noWrap
-              component="div"
-              style={{
-                cursor: "pointer",
-                display: "flex",
-                alignItems: "center",
-              }}
-              onClick={() => console.log("click")}
+            <Button
+              variant="outlined"
+              color="inherit"
+              endIcon={<KeyboardArrowDownIcon />}
             >
               {appName}
-              <KeyboardArrowDownIcon />
-            </Typography>
+            </Button>
             <Button
               variant="text"
               color="inherit"
