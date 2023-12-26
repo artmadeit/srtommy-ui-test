@@ -14,6 +14,7 @@ import {
   Link,
   Menu,
   MenuItem,
+  Tooltip,
 } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -38,6 +39,12 @@ import PersonIcon from "@mui/icons-material/Person";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import ChurchIcon from "@mui/icons-material/Church";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import { DataGrid, GridActionsCellItem, GridColDef } from "@mui/x-data-grid";
+import SearchIcon from "@mui/icons-material/Search";
+import { withOutSorting } from "../(components)/helpers/withOutSorting";
+import { usePagination } from "../(components)/hook-customization/usePagination";
+import useSWR from "swr";
+import { SpringPage } from "../(api)/pagination";
 
 const appName = "Sr. Tommy - {TODO: mi iglesia}";
 
@@ -225,7 +232,7 @@ export default function MenuDrawer2({ children }: React.PropsWithChildren<{}>) {
                 Cerrar sesión
               </MenuItem>
             </Menu>
-            <DialogA open={openDialog} onClose={onClose} />
+            <DialogAccounts open={openDialog} onClose={onClose} />
           </div>
         </Toolbar>
       </AppBar>
@@ -283,16 +290,59 @@ export default function MenuDrawer2({ children }: React.PropsWithChildren<{}>) {
   );
 }
 
+type accountListItem = {
+  id: number;
+  name: string;
+};
+
 type DialogAProps = {
   open: any;
   onClose: () => void;
 };
 
-const DialogA = ({ open, onClose }: DialogAProps) => {
+const DialogAccounts = ({ open, onClose }: DialogAProps) => {
+  const { paginationModel, setPaginationModel } = usePagination();
+
+  const { data: accounts, isLoading } =
+    useSWR<SpringPage<accountListItem>>("organizations");
+
+  const columns = React.useMemo(
+    () =>
+      (
+        [
+          { field: "name", headerName: "Nombre" },
+          {
+            field: "actions",
+            type: "actions",
+            width: 90,
+            getActions: (params) => {
+              return [
+                <Tooltip title="Ver" key="see">
+                  <GridActionsCellItem label="ver" icon={<SearchIcon />} />
+                </Tooltip>,
+              ];
+            },
+          },
+        ] as GridColDef<accountListItem>[]
+      ).map(withOutSorting),
+    []
+  );
+
   return (
     <Dialog open={open} onClose={onClose}>
-      <DialogTitle>Dialog</DialogTitle>
-      <DialogContent>TO DO</DialogContent>
+      <DialogTitle>Selecciona otras cuentas</DialogTitle>
+      <DialogContent>
+        <div style={{ width: "100%", height: "70vh" }}>
+          <DataGrid
+            loading={isLoading}
+            columns={columns}
+            paginationModel={paginationModel}
+            paginationMode="server"
+            onPaginationModelChange={setPaginationModel}
+            rows={accounts?.content || []}
+          />
+        </div>
+      </DialogContent>
     </Dialog>
   );
 };
