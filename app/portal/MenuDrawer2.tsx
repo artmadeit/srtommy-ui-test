@@ -336,8 +336,10 @@ const DialogAccounts = ({ open, onClose }: DialogAProps) => {
   return (
     <Dialog open={open} onClose={onClose}>
       <DialogTitle display="flex" justifyContent="space-between">
-        Selecciona otras cuentas
-        <Button>Nueva Iglesia</Button>
+        Selecciona otra sede
+        <Link component={NextLink} href="/portal/organization/create">
+          <Button onClick={onClose}>Nueva Sede</Button>
+        </Link>
       </DialogTitle>
       <DialogContent>
         <div style={{ width: "100%", height: "70vh" }}>
