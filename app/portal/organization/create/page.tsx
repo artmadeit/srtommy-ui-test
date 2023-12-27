@@ -1,9 +1,10 @@
 import { Typography } from "@mui/material";
+import { OrganizationForm } from "../OrganizationForm";
 
 export default function OrganizationCreatePage() {
   return (
     <div>
-      <Typography variant="h5">Crear</Typography>
+      <OrganizationForm/>
     </div>
   );
 }
