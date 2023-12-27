@@ -39,7 +39,12 @@ import PersonIcon from "@mui/icons-material/Person";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import ChurchIcon from "@mui/icons-material/Church";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import { DataGrid, GridActionsCellItem, GridColDef } from "@mui/x-data-grid";
+import {
+  DataGrid,
+  GridActionsCellItem,
+  GridColDef,
+  esES,
+} from "@mui/x-data-grid";
 import SearchIcon from "@mui/icons-material/Search";
 import { withOutSorting } from "../(components)/helpers/withOutSorting";
 import { usePagination } from "../(components)/hook-customization/usePagination";
@@ -330,7 +335,10 @@ const DialogAccounts = ({ open, onClose }: DialogAProps) => {
 
   return (
     <Dialog open={open} onClose={onClose}>
-      <DialogTitle>Selecciona otras cuentas</DialogTitle>
+      <DialogTitle display="flex" justifyContent="space-between">
+        Selecciona otras cuentas
+        <Button>Nueva Iglesia</Button>
+      </DialogTitle>
       <DialogContent>
         <div style={{ width: "100%", height: "70vh" }}>
           <DataGrid
@@ -340,6 +348,7 @@ const DialogAccounts = ({ open, onClose }: DialogAProps) => {
             paginationMode="server"
             onPaginationModelChange={setPaginationModel}
             rows={accounts?.content || []}
+            localeText={esES.components.MuiDataGrid.defaultProps.localeText}
           />
         </div>
       </DialogContent>
