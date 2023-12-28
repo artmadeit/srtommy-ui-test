@@ -7,9 +7,10 @@ import { TelFieldElement } from "../person/create/page";
 
 type OrganizationFormProps = {
   title: string;
+  submit: (data: any) => Promise<void>;
 };
 
-export const OrganizationForm = ({ title }: OrganizationFormProps) => {
+export const OrganizationForm = ({ title, submit }: OrganizationFormProps) => {
   return (
     <FormContainer
       defaultValues={{
@@ -17,7 +18,7 @@ export const OrganizationForm = ({ title }: OrganizationFormProps) => {
         address: "",
         phoneNumber: "+51",
       }}
-      onSuccess={(x) => console.log(x)}
+      onSuccess={submit}
     >
       <Grid container spacing={2} padding={2}>
         <Grid xs={12}>

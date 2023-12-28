@@ -9,10 +9,11 @@ import { OrganizationForm } from "./OrganizationForm";
 
 export default function Organization() {
   return (
-      <Box>
-        <OrganizationForm title="Datos generales de la organización"/>
-      </Box>
+    <Box>
+      <OrganizationForm
+        title="Datos generales de la organización"
+        submit={async () => await console.log("Click =D")}
+      />
+    </Box>
   );
 }
-
-
