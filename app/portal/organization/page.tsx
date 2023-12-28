@@ -10,7 +10,7 @@ import { OrganizationForm } from "./OrganizationForm";
 export default function Organization() {
   return (
       <Box>
-        <OrganizationForm/>
+        <OrganizationForm title="Datos generales de la organización"/>
       </Box>
   );
 }

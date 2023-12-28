@@ -4,7 +4,7 @@ import { OrganizationForm } from "../OrganizationForm";
 export default function OrganizationCreatePage() {
   return (
     <div>
-      <OrganizationForm/>
+      <OrganizationForm title="Registrar Datos de la Organización"/>
     </div>
   );
 }
