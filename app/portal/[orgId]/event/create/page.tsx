@@ -31,7 +31,7 @@ export default function EventCreatePage({
       endTime: null,
       place: "",
       description: "",
-      speaker: "",
+      speakers: [],
     },
   });
 
@@ -106,12 +106,13 @@ export default function EventCreatePage({
         <Grid xs={12}>
           {/* TODO: make creatable */}
           <AutocompleteElement
+            multiple
             autocompleteProps={{
               onInputChange: (_event, newInputValue) => {
                 setSearchTextSpeaker(newInputValue);
               },
             }}
-            name="speaker"
+            name="speakers"
             label="Ponente(s)"
             options={
               people?.content.map((x) => ({
