@@ -234,21 +234,19 @@ export default function MenuDrawer2({
   );
 }
 
-type accountListItem = {
+type OrganizationListItem = {
   id: number;
   name: string;
 };
 
 type DialogAProps = {
-  open: any;
+  open: boolean;
   onClose: () => void;
 };
 
 const DialogAccounts = ({ open, onClose }: DialogAProps) => {
-  const { paginationModel, setPaginationModel } = usePagination();
-
   const { data: accounts, isLoading } =
-    useSWR<SpringPage<accountListItem>>("organizations");
+    useSWR<OrganizationListItem[]>("organizations");
 
   const columns = React.useMemo(
     () =>
@@ -267,7 +265,7 @@ const DialogAccounts = ({ open, onClose }: DialogAProps) => {
               ];
             },
           },
-        ] as GridColDef<accountListItem>[]
+        ] as GridColDef<OrganizationListItem>[]
       ).map(withOutSorting),
     []
   );
@@ -285,10 +283,8 @@ const DialogAccounts = ({ open, onClose }: DialogAProps) => {
           <DataGrid
             loading={isLoading}
             columns={columns}
-            paginationModel={paginationModel}
-            paginationMode="server"
-            onPaginationModelChange={setPaginationModel}
-            rows={accounts?.content || []}
+            rowCount={accounts?.length}
+            rows={accounts || []}
             localeText={esES.components.MuiDataGrid.defaultProps.localeText}
           />
         </div>
