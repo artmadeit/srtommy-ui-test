@@ -12,6 +12,9 @@ import {
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import useSWR from "swr";
 import { OrganizationDetail } from "../../Organization";
+import { Person } from "../../person/Person";
+import { SpringPage } from "@/app/(api)/pagination";
+import { useState } from "react";
 
 export default function EventCreatePage({
   params,
@@ -32,8 +35,13 @@ export default function EventCreatePage({
     },
   });
 
+  const [searchTextSpeaker, setSearchTextSpeaker] = useState("");
+
   const { data: organization } = useSWR<OrganizationDetail>(
     `organizations/${orgId}`
+  );
+  const { data: people } = useSWR<SpringPage<Person>>(
+    searchTextSpeaker ? `people` : `people?searchText=${searchTextSpeaker}`
   );
 
   return (
@@ -96,7 +104,22 @@ export default function EventCreatePage({
           />
         </Grid>
         <Grid xs={12}>
-          <TextFieldElement fullWidth name="speaker" label="Ponente(s)" />
+          {/* TODO: make creatable */}
+          <AutocompleteElement
+            autocompleteProps={{
+              onInputChange: (_event, newInputValue) => {
+                setSearchTextSpeaker(newInputValue);
+              },
+            }}
+            name="speaker"
+            label="Ponente(s)"
+            options={
+              people?.content.map((x) => ({
+                id: x.id,
+                label: x.firstName + " " + x.lastName,
+              })) || []
+            }
+          />
         </Grid>
         <Grid xs={12}>
           <TextFieldElement
