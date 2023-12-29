@@ -11,11 +11,16 @@ import {
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import { MuiTelInput } from "mui-tel-input";
 import { useAuthApi } from "@/app/(api)/api";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
-export default function CreatePerson() {
+export default function CreatePerson({
+  params,
+}: {
+  params: { orgId: number };
+}) {
   const getApi = useAuthApi();
   const router = useRouter();
+  const { orgId } = params;
 
   return (
     <FormContainer
@@ -30,7 +35,7 @@ export default function CreatePerson() {
         const api = await getApi();
         await api.post("people", data);
         alert("Guardado :)");
-        router.push("/portal/person");
+        router.push(`/portal/${orgId}/person`);
       }}
     >
       <Grid container spacing={2} padding={2}>
