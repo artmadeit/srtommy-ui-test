@@ -3,7 +3,7 @@
 import { FormContainer, TextFieldElement } from "react-hook-form-mui";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import { Button, Typography } from "@mui/material";
-import { TelFieldElement } from "../[orgId]/person/create/page";
+import { TelFieldElement } from "../person/create/page";
 
 type OrganizationFormProps = {
   title: string;

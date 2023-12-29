@@ -2,12 +2,12 @@
 
 // import { useAuth0 } from "@auth0/auth0-react";
 import { AccountCircle } from "@mui/icons-material";
-import ArrowRight from "@mui/icons-material/ArrowRight";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import LogoutIcon from "@mui/icons-material/Logout";
 import MenuIcon from "@mui/icons-material/Menu";
+import SearchIcon from "@mui/icons-material/Search";
 import {
   Button,
-  Collapse,
   Dialog,
   DialogContent,
   DialogTitle,
@@ -22,41 +22,34 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Divider from "@mui/material/Divider";
 import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
 import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
 import { styled } from "@mui/material/styles";
-import NextLink from "next/link";
-import { redirect, useRouter } from "next/navigation";
-import * as React from "react";
-import Loading from "../(components)/Loading";
-import EventIcon from "@mui/icons-material/Event";
-import PersonIcon from "@mui/icons-material/Person";
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import ChurchIcon from "@mui/icons-material/Church";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import {
   DataGrid,
   GridActionsCellItem,
   GridColDef,
   esES,
 } from "@mui/x-data-grid";
-import SearchIcon from "@mui/icons-material/Search";
-import { withOutSorting } from "../(components)/helpers/withOutSorting";
-import { usePagination } from "../(components)/hook-customization/usePagination";
+import NextLink from "next/link";
+import { redirect, useRouter } from "next/navigation";
+import * as React from "react";
 import useSWR from "swr";
 import { SpringPage } from "../(api)/pagination";
+import Loading from "../(components)/Loading";
+import { withOutSorting } from "../(components)/helpers/withOutSorting";
+import { usePagination } from "../(components)/hook-customization/usePagination";
 
 const appName = "Sr. Tommy - {TODO: mi iglesia}";
 
 const drawerWidth = 240;
 
-export default function MenuDrawer2({ children }: React.PropsWithChildren<{}>) {
+export default function MenuDrawer2({
+  children,
+  listDrawer,
+}: React.PropsWithChildren<{ listDrawer?: React.ReactNode }>) {
   const router = useRouter();
+
   // const { user, isAuthenticated, isLoading } = useAuth0();
   // const { logout } = useAuth0();
 
@@ -110,67 +103,6 @@ export default function MenuDrawer2({ children }: React.PropsWithChildren<{}>) {
 
   if (isLoading) return <Loading />;
   if (!isAuthenticated) return redirect("/");
-
-  const drawer = (
-    <List>
-      <Link
-        component={NextLink}
-        href="/portal"
-        style={{ textDecoration: "none", color: "inherit" }}
-      >
-        <ListItem>
-          <ListItemButton>
-            <ListItemIcon>
-              <DashboardIcon />
-            </ListItemIcon>
-            <ListItemText primary="Dashboard" />
-          </ListItemButton>
-        </ListItem>
-      </Link>
-      <Link
-        component={NextLink}
-        href="/portal/person"
-        style={{ textDecoration: "none", color: "inherit" }}
-      >
-        <ListItem>
-          <ListItemButton>
-            <ListItemIcon>
-              <PersonIcon />
-            </ListItemIcon>
-            <ListItemText primary="Personas" />
-          </ListItemButton>
-        </ListItem>
-      </Link>
-      <Link
-        component={NextLink}
-        href="/portal/event"
-        style={{ textDecoration: "none", color: "inherit" }}
-      >
-        <ListItem>
-          <ListItemButton>
-            <ListItemIcon>
-              <EventIcon />
-            </ListItemIcon>
-            <ListItemText primary="Eventos" />
-          </ListItemButton>
-        </ListItem>
-      </Link>
-      <Link
-        component={NextLink}
-        href="/portal/organization"
-        style={{ textDecoration: "none", color: "inherit" }}
-      >
-        <ListItem>
-          <ListItemButton>
-            <ListItemIcon>
-              <ChurchIcon />
-            </ListItemIcon>
-            <ListItemText primary="Organización" />
-          </ListItemButton>
-        </ListItem>
-      </Link>
-    </List>
-  );
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -262,7 +194,7 @@ export default function MenuDrawer2({ children }: React.PropsWithChildren<{}>) {
             },
           }}
         >
-          {drawer}
+          {listDrawer}
         </Drawer>
         <Drawer
           variant="permanent"
@@ -277,7 +209,7 @@ export default function MenuDrawer2({ children }: React.PropsWithChildren<{}>) {
         >
           <DrawerHeader />
           <Divider />
-          {drawer}
+          {listDrawer}
         </Drawer>
       </Box>
       <Box
