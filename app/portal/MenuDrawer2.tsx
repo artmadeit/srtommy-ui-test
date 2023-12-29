@@ -14,7 +14,9 @@ import {
   Link,
   Menu,
   MenuItem,
+  Stack,
   Tooltip,
+  Typography,
 } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -40,8 +42,6 @@ import Loading from "../(components)/Loading";
 import { withOutSorting } from "../(components)/helpers/withOutSorting";
 import { usePagination } from "../(components)/hook-customization/usePagination";
 
-const appName = "Sr. Tommy - {TODO: mi iglesia}";
-
 const drawerWidth = 240;
 
 export default function MenuDrawer2({
@@ -49,6 +49,7 @@ export default function MenuDrawer2({
   listDrawer,
 }: React.PropsWithChildren<{ listDrawer?: React.ReactNode }>) {
   const router = useRouter();
+  const organization = { name: "TODO: mi iglesia" };
 
   // const { user, isAuthenticated, isLoading } = useAuth0();
   // const { logout } = useAuth0();
@@ -131,14 +132,17 @@ export default function MenuDrawer2({
               width: "100%",
             }}
           >
-            <Button
-              variant="outlined"
-              color="inherit"
-              endIcon={<KeyboardArrowDownIcon />}
-              onClick={() => setOpenDialog(true)}
-            >
-              {appName}
-            </Button>
+            <Stack direction="row" spacing={2} alignItems="center">
+              <Typography>Sr. Tommy</Typography>
+              <Button
+                variant="outlined"
+                color="inherit"
+                endIcon={<KeyboardArrowDownIcon />}
+                onClick={() => setOpenDialog(true)}
+              >
+                {organization?.name || "Seleccione organización"}
+              </Button>
+            </Stack>
             <Button
               variant="text"
               color="inherit"
