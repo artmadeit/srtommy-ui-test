@@ -12,14 +12,22 @@ import NextLink from "next/link";
 import * as React from "react";
 import MenuDrawer2 from "../MenuDrawer2";
 
-export default function OrgLayout({ children }: { children: React.ReactNode }) {
+export default function OrgLayout({
+  children,
+  params,
+}: {
+  children: React.ReactNode;
+  params: { orgId: number };
+}) {
+  const { orgId } = params;
+
   return (
     <MenuDrawer2
       listDrawer={
         <List>
           <Link
             component={NextLink}
-            href="/portal"
+            href={`/portal/${orgId}/`}
             style={{ textDecoration: "none", color: "inherit" }}
           >
             <ListItem>
@@ -33,7 +41,7 @@ export default function OrgLayout({ children }: { children: React.ReactNode }) {
           </Link>
           <Link
             component={NextLink}
-            href="person"
+            href={`/portal/${orgId}/person`}
             style={{ textDecoration: "none", color: "inherit" }}
           >
             <ListItem>
@@ -47,7 +55,7 @@ export default function OrgLayout({ children }: { children: React.ReactNode }) {
           </Link>
           <Link
             component={NextLink}
-            href="/portal/event"
+            href={`/portal/${orgId}/event`}
             style={{ textDecoration: "none", color: "inherit" }}
           >
             <ListItem>
@@ -61,7 +69,7 @@ export default function OrgLayout({ children }: { children: React.ReactNode }) {
           </Link>
           <Link
             component={NextLink}
-            href="/portal/organization"
+            href={`/portal/${orgId}/organization`}
             style={{ textDecoration: "none", color: "inherit" }}
           >
             <ListItem>
