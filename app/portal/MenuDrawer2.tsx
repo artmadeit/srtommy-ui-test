@@ -47,9 +47,12 @@ const drawerWidth = 240;
 export default function MenuDrawer2({
   children,
   listDrawer,
-}: React.PropsWithChildren<{ listDrawer?: React.ReactNode }>) {
+  organization,
+}: React.PropsWithChildren<{
+  listDrawer?: React.ReactNode;
+  organization?: { name: string };
+}>) {
   const router = useRouter();
-  const organization = { name: "TODO: mi iglesia" };
 
   // const { user, isAuthenticated, isLoading } = useAuth0();
   // const { logout } = useAuth0();

@@ -1,3 +1,4 @@
+"use client";
 import ChurchIcon from "@mui/icons-material/Church";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import EventIcon from "@mui/icons-material/Event";
@@ -11,6 +12,7 @@ import ListItemText from "@mui/material/ListItemText";
 import NextLink from "next/link";
 import * as React from "react";
 import MenuDrawer2 from "../MenuDrawer2";
+import useSWR from "swr";
 
 export default function OrgLayout({
   children,
@@ -21,8 +23,11 @@ export default function OrgLayout({
 }) {
   const { orgId } = params;
 
+  const { data: organization } = useSWR(`organizations/${orgId}`);
+
   return (
     <MenuDrawer2
+      organization={organization}
       listDrawer={
         <List>
           <Link
