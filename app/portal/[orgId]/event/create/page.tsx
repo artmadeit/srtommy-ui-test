@@ -1,27 +1,44 @@
 "use client";
-import { Button, Typography } from "@mui/material";
+import { Autocomplete, Button, TextField, Typography } from "@mui/material";
 import {
+  AutocompleteElement,
   DatePickerElement,
   FormContainer,
   TextFieldElement,
   TimePickerElement,
+  useForm,
 } from "react-hook-form-mui";
 
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
+import useSWR from "swr";
+import { OrganizationDetail } from "../../Organization";
 
-export default function EventCreatePage() {
+export default function EventCreatePage({
+  params,
+}: {
+  params: { orgId: number };
+}) {
+  const { orgId } = params;
+  const formContext = useForm({
+    defaultValues: {
+      name: "",
+      startDate: null,
+      startTime: null,
+      endDate: null,
+      endTime: null,
+      place: "",
+      description: "",
+      speaker: "",
+    },
+  });
+
+  const { data: organization } = useSWR<OrganizationDetail>(
+    `organizations/${orgId}`
+  );
+
   return (
     <FormContainer
-      defaultValues={{
-        name: "",
-        startDate: null,
-        startTime: null,
-        endDate: null,
-        endTime: null,
-        place: "",
-        description: "",
-        speaker: "",
-      }}
+      formContext={formContext}
       onSuccess={(data) => console.log(data)}
     >
       <Grid container spacing={2} padding={2}>
@@ -66,10 +83,20 @@ export default function EventCreatePage() {
           />
         </Grid>
         <Grid xs={12}>
-          <TextFieldElement fullWidth name="place" label="Lugar" />
+          <AutocompleteElement
+            autocompleteProps={{
+              freeSolo: true,
+              onInputChange: (_event, newInputValue) => {
+                formContext.setValue("place", newInputValue);
+              },
+            }}
+            name="place"
+            label="Lugar"
+            options={[organization?.address]}
+          />
         </Grid>
         <Grid xs={12}>
-          <TextFieldElement fullWidth name="speaker" label="Ponente" />
+          <TextFieldElement fullWidth name="speaker" label="Ponente(s)" />
         </Grid>
         <Grid xs={12}>
           <TextFieldElement

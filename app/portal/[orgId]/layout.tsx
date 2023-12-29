@@ -13,6 +13,7 @@ import NextLink from "next/link";
 import * as React from "react";
 import MenuDrawer2 from "../MenuDrawer2";
 import useSWR from "swr";
+import { OrganizationDetail } from "./Organization";
 
 export default function OrgLayout({
   children,
@@ -23,7 +24,9 @@ export default function OrgLayout({
 }) {
   const { orgId } = params;
 
-  const { data: organization } = useSWR(`organizations/${orgId}`);
+  const { data: organization } = useSWR<OrganizationDetail>(
+    `organizations/${orgId}`
+  );
 
   return (
     <MenuDrawer2
