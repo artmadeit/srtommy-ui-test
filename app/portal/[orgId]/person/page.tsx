@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import {
   Fab,
   InputAdornment,
@@ -56,8 +56,10 @@ export const PersonTable = ({
 }) => {
   const { paginationModel, setPaginationModel } = usePagination();
 
-  const { data: people, isLoading } =
-    useSWR<SpringPage<PersonListItem>>("people");
+  const [searchText, setSearchText] = useState("");
+  const { data: people, isLoading } = useSWR<SpringPage<PersonListItem>>(
+    searchText ? `people?searchText=${searchText}` : `people`
+  );
 
   const columns = React.useMemo(
     () =>
@@ -94,6 +96,8 @@ export const PersonTable = ({
           ),
         }}
         fullWidth
+        value={searchText}
+        onChange={(event) => setSearchText(event.target.value)}
       />
       <div style={{ height: "70vh", width: "100%" }}>
         <DataGrid
@@ -104,6 +108,7 @@ export const PersonTable = ({
           onPaginationModelChange={setPaginationModel}
           disableColumnFilter
           rows={people?.content || []}
+          rowCount={people?.totalElements || 0}
           localeText={esES.components.MuiDataGrid.defaultProps.localeText}
           {...dataGridProps}
         />

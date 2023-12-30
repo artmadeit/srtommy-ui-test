@@ -41,7 +41,7 @@ export default function EventCreatePage({
     `organizations/${orgId}`
   );
   const { data: people } = useSWR<SpringPage<Person>>(
-    searchTextSpeaker ? `people` : `people?searchText=${searchTextSpeaker}`
+    searchTextSpeaker ? `people?searchText=${searchTextSpeaker}` : `people`
   );
 
   return (
