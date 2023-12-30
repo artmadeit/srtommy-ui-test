@@ -46,7 +46,11 @@ export default function PersonListPage() {
   );
 }
 
-export const PersonTable = () => {
+export const PersonTable = ({
+  checkboxSelection = false,
+}: {
+  checkboxSelection?: boolean;
+}) => {
   const { paginationModel, setPaginationModel } = usePagination();
 
   const { data: people, isLoading } =
@@ -95,10 +99,10 @@ export const PersonTable = () => {
           paginationModel={paginationModel}
           paginationMode="server"
           onPaginationModelChange={setPaginationModel}
-          // checkboxSelection TODO: move this to meeting attendance
           disableColumnFilter
           rows={people?.content || []}
           localeText={esES.components.MuiDataGrid.defaultProps.localeText}
+          checkboxSelection={checkboxSelection}
         />
       </div>
     </>
