@@ -1,8 +1,14 @@
+"use client";
 import { Button, Stack, Typography } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import { PersonTable } from "../../person/page";
+import { useState } from "react";
+import { GridRowSelectionModel } from "@mui/x-data-grid";
 
 export default function EventDetailPage() {
+  const [rowSelectionModel, setRowSelectionModel] =
+    useState<GridRowSelectionModel>([]);
+
   const event = {
     name: "Reunión de hombres diciembre",
     startTime: "15 de diciembre 2023 - 14:00",
@@ -23,11 +29,26 @@ export default function EventDetailPage() {
       </Grid>
       <Grid xs={12}>
         <Stack spacing={2}>
-          <PersonTable checkboxSelection />
+          <PersonTable
+            dataGridProps={{
+              keepNonExistentRowsSelected: true,
+              checkboxSelection: true,
+              rowSelectionModel: rowSelectionModel,
+              onRowSelectionModelChange: (newSelectionModel) => {
+                setRowSelectionModel(newSelectionModel);
+              },
+            }}
+          />
         </Stack>
       </Grid>
       <Grid xs={12}>
-        <Button type="submit" variant="contained">
+        <Button
+          type="submit"
+          variant="contained"
+          onClick={() => {
+            console.log(rowSelectionModel);
+          }}
+        >
           Registrar asistencia
         </Button>
       </Grid>

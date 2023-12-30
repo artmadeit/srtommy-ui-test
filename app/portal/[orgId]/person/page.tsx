@@ -13,6 +13,7 @@ import Link from "next/link";
 import AddIcon from "@mui/icons-material/Add";
 import {
   DataGrid,
+  DataGridProps,
   GridActionsCellItem,
   GridColDef,
   esES,
@@ -46,10 +47,12 @@ export default function PersonListPage() {
   );
 }
 
+export type MyDataGridProps = Omit<DataGridProps, "columns" | "rows">;
+
 export const PersonTable = ({
-  checkboxSelection = false,
+  dataGridProps = {},
 }: {
-  checkboxSelection?: boolean;
+  dataGridProps?: MyDataGridProps;
 }) => {
   const { paginationModel, setPaginationModel } = usePagination();
 
@@ -102,7 +105,7 @@ export const PersonTable = ({
           disableColumnFilter
           rows={people?.content || []}
           localeText={esES.components.MuiDataGrid.defaultProps.localeText}
-          checkboxSelection={checkboxSelection}
+          {...dataGridProps}
         />
       </div>
     </>
