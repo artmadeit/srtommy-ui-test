@@ -29,6 +29,24 @@ type PersonListItem = {
 };
 
 export default function PersonListPage() {
+  return (
+    <Stack direction="column" spacing={2}>
+      <Stack direction="row" alignItems="center" spacing={2}>
+        <Typography variant="h4">Personas</Typography>
+        <Tooltip title="Crear persona">
+          <Link href="person/create">
+            <Fab color="primary" aria-labelledby="create">
+              <AddIcon />
+            </Fab>
+          </Link>
+        </Tooltip>
+      </Stack>
+      <PersonTable />
+    </Stack>
+  );
+}
+
+export const PersonTable = () => {
   const { paginationModel, setPaginationModel } = usePagination();
 
   const { data: people, isLoading } =
@@ -38,7 +56,7 @@ export default function PersonListPage() {
     () =>
       (
         [
-          { field: "fullName", headerName: "Nombre" },
+          { field: "fullName", headerName: "Nombre", flex: 1 },
           {
             field: "actions",
             type: "actions",
@@ -57,17 +75,7 @@ export default function PersonListPage() {
   );
 
   return (
-    <Stack direction="column" spacing={2}>
-      <Stack direction="row" alignItems="center" spacing={2}>
-        <Typography variant="h4">Personas</Typography>
-        <Tooltip title="Crear persona">
-          <Link href="person/create">
-            <Fab color="primary" aria-labelledby="create">
-              <AddIcon />
-            </Fab>
-          </Link>
-        </Tooltip>
-      </Stack>
+    <>
       <TextField
         placeholder="Buscar"
         variant="outlined"
@@ -93,6 +101,6 @@ export default function PersonListPage() {
           localeText={esES.components.MuiDataGrid.defaultProps.localeText}
         />
       </div>
-    </Stack>
+    </>
   );
-}
+};

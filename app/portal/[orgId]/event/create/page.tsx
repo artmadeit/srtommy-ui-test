@@ -1,5 +1,5 @@
 "use client";
-import { Autocomplete, Button, TextField, Typography } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import {
   AutocompleteElement,
   DatePickerElement,
@@ -9,12 +9,12 @@ import {
   useForm,
 } from "react-hook-form-mui";
 
+import { SpringPage } from "@/app/(api)/pagination";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
+import { useState } from "react";
 import useSWR from "swr";
 import { OrganizationDetail } from "../../Organization";
 import { Person } from "../../person/Person";
-import { SpringPage } from "@/app/(api)/pagination";
-import { useState } from "react";
 
 export default function EventCreatePage({
   params,
