@@ -15,6 +15,8 @@ import { useState } from "react";
 import useSWR from "swr";
 import { OrganizationDetail } from "../../Organization";
 import { Person } from "../../person/Person";
+import { useDebounce } from "use-debounce";
+import { DEBOUNCE_WAIT_MS } from "@/app/(components)/helpers/debouncing";
 
 export default function EventCreatePage({
   params,
@@ -40,8 +42,13 @@ export default function EventCreatePage({
   const { data: organization } = useSWR<OrganizationDetail>(
     `organizations/${orgId}`
   );
+
+  const [searchTextDebounced] = useDebounce(
+    searchTextSpeaker,
+    DEBOUNCE_WAIT_MS
+  );
   const { data: people } = useSWR<SpringPage<Person>>(
-    searchTextSpeaker ? `people?searchText=${searchTextSpeaker}` : `people`
+    searchTextDebounced ? `people?searchText=${searchTextDebounced}` : `people`
   );
 
   return (

@@ -23,6 +23,8 @@ import { withOutSorting } from "@/app/(components)/helpers/withOutSorting";
 import { SpringPage } from "@/app/(api)/pagination";
 import { usePagination } from "@/app/(components)/hook-customization/usePagination";
 import useSWR from "swr";
+import { useDebounce, useDebouncedCallback } from "use-debounce";
+import { DEBOUNCE_WAIT_MS } from "@/app/(components)/helpers/debouncing";
 
 type PersonListItem = {
   id: number;
@@ -57,8 +59,9 @@ export const PersonTable = ({
   const { paginationModel, setPaginationModel } = usePagination();
 
   const [searchText, setSearchText] = useState("");
+  const [searchTextDebounced] = useDebounce(searchText, DEBOUNCE_WAIT_MS);
   const { data: people, isLoading } = useSWR<SpringPage<PersonListItem>>(
-    searchText ? `people?searchText=${searchText}` : `people`
+    searchTextDebounced ? `people?searchText=${searchTextDebounced}` : `people`
   );
 
   const columns = React.useMemo(
