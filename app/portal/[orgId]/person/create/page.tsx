@@ -33,7 +33,7 @@ export default function CreatePerson({
       }}
       onSuccess={async (data) => {
         const api = await getApi();
-        await api.post("people", data);
+        await api.post("people", { ...data, organizationId: orgId });
         alert("Guardado :)");
         router.push(`/portal/${orgId}/person`);
       }}
