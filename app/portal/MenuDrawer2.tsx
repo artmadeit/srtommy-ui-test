@@ -239,12 +239,12 @@ type OrganizationListItem = {
   name: string;
 };
 
-type DialogAProps = {
+type DialogOrganizationProps = {
   open: boolean;
   onClose: () => void;
 };
 
-const DialogAccounts = ({ open, onClose }: DialogAProps) => {
+const DialogAccounts = ({ open, onClose }: DialogOrganizationProps) => {
   const { data: accounts, isLoading } =
     useSWR<OrganizationListItem[]>("organizations");
 
@@ -252,18 +252,15 @@ const DialogAccounts = ({ open, onClose }: DialogAProps) => {
     () =>
       (
         [
-          { field: "name", headerName: "Nombre" },
           {
-            field: "actions",
-            type: "actions",
-            width: 90,
-            getActions: (params) => {
-              return [
-                <Tooltip title="Ver" key="see">
-                  <GridActionsCellItem label="ver" icon={<SearchIcon />} />
-                </Tooltip>,
-              ];
-            },
+            field: "name",
+            headerName: "Nombre",
+            renderCell: ({ row }) => (
+              <Link component={NextLink} href={`/portal/${row.id}`}>
+                {row.name}
+              </Link>
+            ),
+            flex: 1,
           },
         ] as GridColDef<OrganizationListItem>[]
       ).map(withOutSorting),
@@ -284,6 +281,7 @@ const DialogAccounts = ({ open, onClose }: DialogAProps) => {
             loading={isLoading}
             columns={columns}
             rowCount={accounts?.length}
+            hideFooter={true}
             rows={accounts || []}
             localeText={esES.components.MuiDataGrid.defaultProps.localeText}
           />
