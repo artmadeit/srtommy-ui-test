@@ -3,21 +3,19 @@
 import { FormContainer, TextFieldElement } from "react-hook-form-mui";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import { Button, Typography } from "@mui/material";
-import { TelFieldElement } from "../person/create/page";
+import { TelFieldElement } from "../portal/[orgId]/person/create/page";
+import { OrganizationDetail } from "../portal/[orgId]/Organization";
 
 type OrganizationFormProps = {
   title: string;
   submit: (data: any) => Promise<void>;
+  initialValues: OrganizationDetail
 };
 
-export const OrganizationForm = ({ title, submit }: OrganizationFormProps) => {
+export const OrganizationForm = ({ title, submit, initialValues }: OrganizationFormProps) => {
   return (
     <FormContainer
-      defaultValues={{
-        name: "",
-        address: "",
-        phoneNumber: "+51",
-      }}
+      defaultValues={initialValues}
       onSuccess={submit}
     >
       <Grid container spacing={2} padding={2}>
