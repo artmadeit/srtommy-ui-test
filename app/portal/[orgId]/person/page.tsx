@@ -25,6 +25,7 @@ import { usePagination } from "@/app/(components)/hook-customization/usePaginati
 import useSWR from "swr";
 import { useDebounce, useDebouncedCallback } from "use-debounce";
 import { DEBOUNCE_WAIT_MS } from "@/app/(components)/helpers/debouncing";
+import { useRouter } from "next/navigation";
 
 type PersonListItem = {
   id: number;
@@ -55,9 +56,9 @@ export const PersonTable = ({
   dataGridProps = {},
 }: {
   dataGridProps?: MyDataGridProps;
-}) => {
+}, ) => {
   const { paginationModel, setPaginationModel } = usePagination();
-
+  const router = useRouter();
   const [searchText, setSearchText] = useState("");
   const [searchTextDebounced] = useDebounce(searchText, DEBOUNCE_WAIT_MS);
   const { data: people, isLoading } = useSWR<SpringPage<PersonListItem>>(
@@ -76,7 +77,11 @@ export const PersonTable = ({
             getActions: (params) => {
               return [
                 <Tooltip title="Ver" key="see">
-                  <GridActionsCellItem icon={<SearchIcon />} label="Ver" />
+                  <GridActionsCellItem
+                    icon={<SearchIcon />}
+                    label="Ver"
+                    onClick={() => router.push(`/portal/1/person/${params.id}`)}
+                  />
                 </Tooltip>,
               ];
             },
