@@ -5,7 +5,10 @@ import { PersonTable } from "../../person/page";
 import { useState } from "react";
 import { GridRowSelectionModel } from "@mui/x-data-grid";
 
-export default function EventDetailPage() {
+export default function EventDetailPage({params}: {params: { id: number, orgId: number}}) {
+  
+  const {id, orgId} = params;
+  
   const [rowSelectionModel, setRowSelectionModel] =
     useState<GridRowSelectionModel>([]);
 
@@ -30,6 +33,7 @@ export default function EventDetailPage() {
       <Grid xs={12}>
         <Stack spacing={2}>
           <PersonTable
+            orgId={orgId}
             dataGridProps={{
               keepNonExistentRowsSelected: true,
               checkboxSelection: true,
