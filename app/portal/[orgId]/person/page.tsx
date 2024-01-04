@@ -25,13 +25,20 @@ import { usePagination } from "@/app/(components)/hook-customization/usePaginati
 import useSWR from "swr";
 import { useDebounce, useDebouncedCallback } from "use-debounce";
 import { DEBOUNCE_WAIT_MS } from "@/app/(components)/helpers/debouncing";
+import { useRouter } from "next/navigation";
 
 type PersonListItem = {
   id: number;
   name: string;
 };
 
-export default function PersonListPage() {
+export default function PersonListPage({
+  params,
+}: {
+  params: { orgId: number };
+}) {
+  const { orgId } = params;
+
   return (
     <Stack direction="column" spacing={2}>
       <Stack direction="row" alignItems="center" spacing={2}>
@@ -44,20 +51,24 @@ export default function PersonListPage() {
           </Link>
         </Tooltip>
       </Stack>
-      <PersonTable />
+      <PersonTable orgId={orgId} />
     </Stack>
   );
 }
 
 export type MyDataGridProps = Omit<DataGridProps, "columns" | "rows">;
 
+type PersonTableProps = {
+  dataGridProps?: MyDataGridProps;
+  orgId: number;
+};
+
 export const PersonTable = ({
   dataGridProps = {},
-}: {
-  dataGridProps?: MyDataGridProps;
-}) => {
+  orgId,
+}: PersonTableProps) => {
   const { paginationModel, setPaginationModel } = usePagination();
-
+  const router = useRouter();
   const [searchText, setSearchText] = useState("");
   const [searchTextDebounced] = useDebounce(searchText, DEBOUNCE_WAIT_MS);
   const { data: people, isLoading } = useSWR<SpringPage<PersonListItem>>(
@@ -76,14 +87,20 @@ export const PersonTable = ({
             getActions: (params) => {
               return [
                 <Tooltip title="Ver" key="see">
-                  <GridActionsCellItem icon={<SearchIcon />} label="Ver" />
+                  <GridActionsCellItem
+                    icon={<SearchIcon />}
+                    label="Ver"
+                    onClick={() =>
+                      router.push(`/portal/${orgId}/person/${params.id}`)
+                    }
+                  />
                 </Tooltip>,
               ];
             },
           },
         ] as GridColDef<PersonListItem>[]
       ).map(withOutSorting),
-    []
+    [router, orgId]
   );
 
   return (

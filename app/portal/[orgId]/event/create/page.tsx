@@ -14,9 +14,9 @@ import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import { useState } from "react";
 import useSWR from "swr";
 import { OrganizationDetail } from "../../Organization";
-import { Person } from "../../person/Person";
 import { useDebounce } from "use-debounce";
 import { DEBOUNCE_WAIT_MS } from "@/app/(components)/helpers/debouncing";
+import { PersonDetail } from "../../person/Person";
 
 export default function EventCreatePage({
   params,
@@ -47,7 +47,7 @@ export default function EventCreatePage({
     searchTextSpeaker,
     DEBOUNCE_WAIT_MS
   );
-  const { data: people } = useSWR<SpringPage<Person>>(
+  const { data: people } = useSWR<SpringPage<PersonDetail>>(
     searchTextDebounced ? `people?searchText=${searchTextDebounced}` : `people`
   );
 

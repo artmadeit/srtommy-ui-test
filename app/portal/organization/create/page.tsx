@@ -2,8 +2,8 @@
 
 import { useAuthApi } from "@/app/(api)/api";
 import { useRouter } from "next/navigation";
-import { OrganizationForm } from "../OrganizationForm";
 import MenuDrawer2 from "../../MenuDrawer2";
+import { OrganizationForm } from "@/app/(components)/OrganizationForm";
 
 export default function OrganizationCreatePage() {
   const getApi = useAuthApi();
@@ -18,6 +18,11 @@ export default function OrganizationCreatePage() {
   return (
     <MenuDrawer2>
       <OrganizationForm
+        initialValues={{
+          name: "",
+          address: "",
+          phoneNumber: "+51",
+        }}
         title="Registrar Datos de la Organización"
         submit={submit}
       />
