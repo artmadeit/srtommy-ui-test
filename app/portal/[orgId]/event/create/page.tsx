@@ -17,6 +17,23 @@ import { OrganizationDetail } from "../../Organization";
 import { useDebounce } from "use-debounce";
 import { DEBOUNCE_WAIT_MS } from "@/app/(components)/helpers/debouncing";
 import { PersonDetail } from "../../person/Person";
+import { useAuthApi } from "@/app/(api)/api";
+import { useRouter } from "next/navigation";
+type Option = {
+  id: number;
+  label: string;
+};
+
+type Event = {
+  name: string;
+  startDate: Date;
+  startTime: Date;
+  endDate: Date;
+  endTime: Date;
+  address: string;
+  description: string;
+  speakers: Option[];
+};
 
 export default function EventCreatePage({
   params,
@@ -24,21 +41,22 @@ export default function EventCreatePage({
   params: { orgId: number };
 }) {
   const { orgId } = params;
-  const formContext = useForm({
+  const formContext = useForm<Event>({
     defaultValues: {
       name: "",
-      startDate: null,
-      startTime: null,
-      endDate: null,
-      endTime: null,
-      place: "",
+      // startDate: null,
+      // startTime: null,
+      // endDate: null,
+      // endTime: null,
+      address: "",
       description: "",
       speakers: [],
     },
   });
 
   const [searchTextSpeaker, setSearchTextSpeaker] = useState("");
-
+  const getApi = useAuthApi();
+  const router = useRouter();
   const { data: organization } = useSWR<OrganizationDetail>(
     `organizations/${orgId}`
   );
@@ -51,10 +69,35 @@ export default function EventCreatePage({
     searchTextDebounced ? `people?searchText=${searchTextDebounced}` : `people`
   );
 
+  function getDateTime(date: Date, time: Date) {
+    return `${date.toISOString().split("T")[0]}T${
+      time.toISOString().split("T")[1]
+    }`;
+  }
+
   return (
     <FormContainer
       formContext={formContext}
-      onSuccess={(data) => console.log(data)}
+      onSuccess={async (values) => {
+        // const { startDate, endDate, startTime, endTime,
+        //    ...rest} = values;
+        const data = {
+          name: values.name,
+          address: values.address,
+          organizationId: orgId,
+          startTime: getDateTime(values.startDate, values.startTime),
+          endTime: getDateTime(values.endDate, values.endTime),
+          speakerIds: values.speakers.map((x) => x.id),
+        };
+
+        const response = await getApi().then((api) =>
+          api.post(`/events`, data)
+        );
+        alert("Guardado =D");
+        router.push(`/portal/${orgId}/event`);
+        // console.log(values.speakers);
+        // console.log(data)
+      }}
     >
       <Grid container spacing={2} padding={2}>
         <Grid xs={12}>
@@ -102,10 +145,10 @@ export default function EventCreatePage({
             autocompleteProps={{
               freeSolo: true,
               onInputChange: (_event, newInputValue) => {
-                formContext.setValue("place", newInputValue);
+                formContext.setValue("address", newInputValue);
               },
             }}
-            name="place"
+            name="address"
             label="Lugar"
             options={[organization?.address]}
           />
