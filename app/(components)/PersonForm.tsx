@@ -1,4 +1,4 @@
-"use-client";
+"use client";
 
 import { Controller, DatePickerElement, FormContainer, TextFieldElement, useFormContext } from "react-hook-form-mui";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
