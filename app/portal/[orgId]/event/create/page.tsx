@@ -88,6 +88,7 @@ export default function EventCreatePage({
           startTime: getDateTime(values.startDate, values.startTime),
           endTime: getDateTime(values.endDate, values.endTime),
           speakerIds: values.speakers.map((x) => x.id),
+          description: values.description,
         };
 
         const response = await getApi().then((api) =>

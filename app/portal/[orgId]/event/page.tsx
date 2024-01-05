@@ -14,7 +14,8 @@ import { useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { withOutSorting } from "@/app/(components)/helpers/withOutSorting";
 import { usePagination } from "@/app/(components)/hook-customization/usePagination";
-import { Page } from "@/app/(api)/pagination";
+import { Page, SpringPage } from "@/app/(api)/pagination";
+import useSWR from "swr";
 
 type EventListItem = {
   id: number;
@@ -35,7 +36,9 @@ export default function EventListPage() {
     { id: 7, name: "Celebremos juntos el dia del niño" }, // domingo 20 de agosto 10am
     { id: 8, name: "Sobredosis Garden" }, // jueves 27-30 de agosto (ver: https://www.facebook.com/photo/?fbid=673593008144144&set=pcb.673593201477458)
   ];
-  const isLoading = false;
+  // const isLoading = false;
+  const { data: events2, isLoading } =
+    useSWR<SpringPage<EventListItem[]>>("/events");
   const events: Page<EventListItem> = {
     _embedded: {
       events: eventList,
@@ -104,13 +107,13 @@ export default function EventListPage() {
       <div style={{ height: "70vh", width: "100%" }}>
         <DataGrid
           loading={isLoading}
-          columns={columns}
-          rowCount={events?.page.totalElements || 0}
+          columns={columns}          
           paginationModel={paginationModel}
           paginationMode="server"
           onPaginationModelChange={setPaginationModel}
           disableColumnFilter
-          rows={events?._embedded.events || []}
+          rows={events2?.content || []}
+          rowCount={events2?.totalElements || 0}
           localeText={esES.components.MuiDataGrid.defaultProps.localeText}
         />
       </div>
