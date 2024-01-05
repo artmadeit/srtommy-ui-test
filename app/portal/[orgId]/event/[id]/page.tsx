@@ -1,14 +1,17 @@
 "use client";
 import { Button, Stack, Typography } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
-import { PersonTable } from "../../person/page";
+import { PersonTable } from "../../person/PersonTable";
 import { useState } from "react";
 import { GridRowSelectionModel } from "@mui/x-data-grid";
 
-export default function EventDetailPage({params}: {params: { id: number, orgId: number}}) {
-  
-  const {id, orgId} = params;
-  
+export default function EventDetailPage({
+  params,
+}: {
+  params: { id: number; orgId: number };
+}) {
+  const { id, orgId } = params;
+
   const [rowSelectionModel, setRowSelectionModel] =
     useState<GridRowSelectionModel>([]);
 

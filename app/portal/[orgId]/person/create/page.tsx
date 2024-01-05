@@ -19,8 +19,6 @@ export default function CreatePerson({
         firstName: "",
         lastName: "",
         phoneNumber: "+51",
-        //  age: null,
-        //  birthdate: null,
       }}
       submit={async (data) => {
         const api = await getApi();
