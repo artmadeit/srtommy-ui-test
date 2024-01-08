@@ -1,9 +1,10 @@
 "use client";
-import { Button, Stack, Typography } from "@mui/material";
+import { Button, IconButton, Stack, Tooltip, Typography } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import { PersonTable } from "../../person/PersonTable";
 import { useState } from "react";
 import { GridRowSelectionModel } from "@mui/x-data-grid";
+import EditIcon from "@mui/icons-material/Edit";
 
 export default function EventDetailPage({
   params,
@@ -23,10 +24,15 @@ export default function EventDetailPage({
 
   return (
     <Grid container spacing={2} padding={2}>
-      <Grid xs={12}>
-        <Typography variant="h3" gutterBottom>
+      <Grid xs={12} display="flex" alignItems="center">
+        <Typography variant="h5" gutterBottom>
           {event.name}
         </Typography>
+        <Tooltip title="Editar">
+          <IconButton aria-label="edit">
+            <EditIcon sx={{ marginBottom: "0.35em" }} />
+          </IconButton>
+        </Tooltip>
       </Grid>
       <Grid xs={12}>
         <Typography variant="h6" gutterBottom>
