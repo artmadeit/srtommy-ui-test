@@ -3,6 +3,8 @@
 import { useAuthApi } from "@/app/(api)/api";
 import { usePathname, useRouter } from "next/navigation";
 import { PersonForm } from "@/app/(components)/PersonForm";
+import React from "react";
+import { SnackbarContext } from "@/app/(components)/SnackbarContext";
 
 export default function CreatePerson({
   params,
@@ -11,6 +13,7 @@ export default function CreatePerson({
 }) {
   const getApi = useAuthApi();
   const router = useRouter();
+  const alert = React.useContext(SnackbarContext);
   const { orgId } = params;
 
   return (
@@ -23,7 +26,7 @@ export default function CreatePerson({
       submit={async (data) => {
         const api = await getApi();
         await api.post("people", { ...data, organizationId: orgId });
-        alert("Guardado :)");
+        alert.showMessage("Persona registrada exitosamente");
         router.push(`/portal/${orgId}/person`);
       }}
     />

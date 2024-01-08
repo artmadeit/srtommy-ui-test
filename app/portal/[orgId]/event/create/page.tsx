@@ -11,7 +11,7 @@ import {
 
 import { SpringPage } from "@/app/(api)/pagination";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
-import { useState } from "react";
+import React, { useState } from "react";
 import useSWR from "swr";
 import { OrganizationDetail } from "../../Organization";
 import { useDebounce } from "use-debounce";
@@ -19,6 +19,7 @@ import { DEBOUNCE_WAIT_MS } from "@/app/(components)/helpers/debouncing";
 import { PersonDetail } from "../../person/Person";
 import { useAuthApi } from "@/app/(api)/api";
 import { useRouter } from "next/navigation";
+import { SnackbarContext } from "@/app/(components)/SnackbarContext";
 type Option = {
   id: number;
   label: string;
@@ -57,6 +58,7 @@ export default function EventCreatePage({
   const [searchTextSpeaker, setSearchTextSpeaker] = useState("");
   const getApi = useAuthApi();
   const router = useRouter();
+  const alert = React.useContext(SnackbarContext);
   const { data: organization } = useSWR<OrganizationDetail>(
     `organizations/${orgId}`
   );
@@ -94,7 +96,7 @@ export default function EventCreatePage({
         const response = await getApi().then((api) =>
           api.post(`/events`, data)
         );
-        alert("Guardado =D");
+        alert.showMessage("Evento registrado exitosamente");
         router.push(`/portal/${orgId}/event`);
         // console.log(values.speakers);
         // console.log(data)
