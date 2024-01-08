@@ -5,9 +5,9 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { es as dateFnsEs } from "date-fns/locale";
 import React from "react";
 import { SWRConfig } from "swr";
-// import { SnackbarProvider } from "../(components)/SnackbarContext";
 import { useAuthApi } from "../(api)/api";
 import { AxiosRequestConfig } from "axios";
+import { SnackbarProvider } from "../(components)/SnackbarContext";
 
 export const Providers = ({ children }: { children: React.ReactNode }) => {
   const getApi = useAuthApi();
@@ -30,9 +30,7 @@ export const Providers = ({ children }: { children: React.ReactNode }) => {
         dateAdapter={AdapterDateFns}
         adapterLocale={dateFnsEs}
       >
-        {/* <SnackbarProvider> */}
-        {children}
-        {/* </SnackbarProvider> */}
+        <SnackbarProvider>{children}</SnackbarProvider>
       </LocalizationProvider>
     </SWRConfig>
   );
