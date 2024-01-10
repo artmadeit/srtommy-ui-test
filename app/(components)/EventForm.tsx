@@ -5,17 +5,13 @@ import {
   SubmitHandler,
   TextFieldElement,
   TimePickerElement,
-  UseFormReturn,
   useForm,
 } from "react-hook-form-mui";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import { Button, Typography } from "@mui/material";
-import { useAuthApi } from "../(api)/api";
-import { useRouter } from "next/navigation";
 import React from "react";
 import { useDebounce } from "use-debounce";
 import { DEBOUNCE_WAIT_MS } from "./helpers/debouncing";
-import { SnackbarContext } from "./SnackbarContext";
 import { OrganizationDetail } from "../portal/[orgId]/Organization";
 import { SpringPage } from "../(api)/pagination";
 import useSWR from "swr";
@@ -45,9 +41,6 @@ type EventFormProps = {
 
 export const EventForm = ({ orgId, initialValues, submit }: EventFormProps) => {
   const [searchTextSpeaker, setSearchTextSpeaker] = React.useState("");
-  const getApi = useAuthApi();
-  const router = useRouter();
-  const alert = React.useContext(SnackbarContext);
 
   const formContext = useForm<Event>({
     defaultValues: initialValues,

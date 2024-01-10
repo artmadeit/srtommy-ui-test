@@ -1,22 +1,6 @@
 "use client";
-import { Box, Button, Typography } from "@mui/material";
-import {
-  AutocompleteElement,
-  DatePickerElement,
-  FormContainer,
-  TextFieldElement,
-  TimePickerElement,
-  useForm,
-} from "react-hook-form-mui";
-
-import { SpringPage } from "@/app/(api)/pagination";
-
-import React, { useState } from "react";
-import useSWR from "swr";
-import { OrganizationDetail } from "../../Organization";
-
-import { DEBOUNCE_WAIT_MS } from "@/app/(components)/helpers/debouncing";
-import { PersonDetail } from "../../person/Person";
+import { Box } from "@mui/material";
+import React from "react";
 import { useAuthApi } from "@/app/(api)/api";
 import { useRouter } from "next/navigation";
 import { SnackbarContext } from "@/app/(components)/SnackbarContext";
