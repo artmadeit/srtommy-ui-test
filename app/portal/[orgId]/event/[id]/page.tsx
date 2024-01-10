@@ -1,10 +1,7 @@
 "use client";
-import { Box, Button, IconButton, Stack, Tooltip, Typography } from "@mui/material";
-import Grid from "@mui/material/Unstable_Grid2/Grid2";
-import { PersonTable } from "../../person/PersonTable";
+import { Box, Typography } from "@mui/material";
 import { useState } from "react";
 import { GridRowSelectionModel } from "@mui/x-data-grid";
-import EditIcon from "@mui/icons-material/Edit";
 
 export default function EventDetailPage({
   params,
@@ -24,50 +21,7 @@ export default function EventDetailPage({
 
   return (
     <Box>
-      Hola
+      <Typography variant="h5">Editar evento</Typography>
     </Box>
-    // <Grid container spacing={2} padding={2}>
-    //   <Grid xs={12} display="flex" alignItems="center">
-    //     <Typography variant="h5" gutterBottom>
-    //       {event.name}
-    //     </Typography>
-    //     <Tooltip title="Editar">
-    //       <IconButton aria-label="edit">
-    //         <EditIcon sx={{ marginBottom: "0.35em" }} />
-    //       </IconButton>
-    //     </Tooltip>
-    //   </Grid>
-    //   <Grid xs={12}>
-    //     <Typography variant="h6" gutterBottom>
-    //       Toma de asistencia
-    //     </Typography>
-    //   </Grid>
-    //   <Grid xs={12}>
-    //     <Stack spacing={2}>
-    //       <PersonTable
-    //         orgId={orgId}
-    //         dataGridProps={{
-    //           keepNonExistentRowsSelected: true,
-    //           checkboxSelection: true,
-    //           rowSelectionModel: rowSelectionModel,
-    //           onRowSelectionModelChange: (newSelectionModel) => {
-    //             setRowSelectionModel(newSelectionModel);
-    //           },
-    //         }}
-    //       />
-    //     </Stack>
-    //   </Grid>
-    //   <Grid xs={12}>
-    //     <Button
-    //       type="submit"
-    //       variant="contained"
-    //       onClick={() => {
-    //         console.log(rowSelectionModel);
-    //       }}
-    //     >
-    //       Registrar asistencia
-    //     </Button>
-    //   </Grid>
-    // </Grid>
   );
 }

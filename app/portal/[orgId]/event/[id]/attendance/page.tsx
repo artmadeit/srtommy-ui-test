@@ -5,6 +5,7 @@ import { useState } from "react";
 import { GridRowSelectionModel } from "@mui/x-data-grid";
 import EditIcon from "@mui/icons-material/Edit";
 import { PersonTable } from "../../../person/PersonTable";
+import Link from "next/link";
 
 export default function AttendanceEvent({
   params,
@@ -29,9 +30,11 @@ export default function AttendanceEvent({
           {event.name}
         </Typography>
         <Tooltip title="Editar">
-          <IconButton aria-label="edit">
-            <EditIcon sx={{ marginBottom: "0.35em" }} />
-          </IconButton>
+          <Link href={`/portal/${orgId}/event/${id}`}>
+            <IconButton aria-label="edit">
+              <EditIcon sx={{ marginBottom: "0.35em" }} />
+            </IconButton>
+          </Link>
         </Tooltip>
       </Grid>
       <Grid xs={12}>
