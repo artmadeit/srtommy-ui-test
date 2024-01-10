@@ -67,7 +67,7 @@ export default function EventListPage() {
                   <GridActionsCellItem
                     icon={<SearchIcon />}
                     label="ver"
-                    onClick={() => router.push(`event/${params.row.id}`)}
+                    onClick={() => router.push(`event/${params.row.id}/attendance`)}
                   />
                 </Tooltip>,
               ];
