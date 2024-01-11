@@ -38,6 +38,23 @@ export default function EventCreatePage({
           speakers: [],
         }}
         submit={async (values) => {
+
+          if(!values.startDate) {
+            return 
+          }
+
+          if(!values.startTime) {
+            return 
+          }
+
+          if(!values.endDate) {
+            return 
+          }
+
+          if(!values.endTime) {
+            return 
+          }
+
           // const { startDate, endDate, startTime, endTime,
           //    ...rest} = values;
           const data = {

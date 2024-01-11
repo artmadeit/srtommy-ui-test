@@ -22,12 +22,12 @@ type Option = {
   label: string;
 };
 
-type Event = {
+export type EventFormValues = {
   name: string;
-  startDate: Date;
-  startTime: Date;
-  endDate: Date;
-  endTime: Date;
+  startDate?: Date;
+  startTime?: Date;
+  endDate?: Date;
+  endTime?: Date;
   address: string;
   description: string;
   speakers: Option[];
@@ -35,14 +35,14 @@ type Event = {
 
 type EventFormProps = {
   orgId: number;
-  initialValues: any;
-  submit: SubmitHandler<Event>;
+  initialValues: EventFormValues;
+  submit: SubmitHandler<EventFormValues>;
 };
 
 export const EventForm = ({ orgId, initialValues, submit }: EventFormProps) => {
   const [searchTextSpeaker, setSearchTextSpeaker] = React.useState("");
 
-  const formContext = useForm<Event>({
+  const formContext = useForm<EventFormValues>({
     defaultValues: initialValues,
   });
 
@@ -84,6 +84,7 @@ export const EventForm = ({ orgId, initialValues, submit }: EventFormProps) => {
             label="Hora inicio"
             name="startTime"
             required
+            
           />
         </Grid>
         <Grid xs={3}>
