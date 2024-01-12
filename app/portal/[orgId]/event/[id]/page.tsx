@@ -5,6 +5,7 @@ import { GridRowSelectionModel } from "@mui/x-data-grid";
 import { EventForm, EventFormValues } from "@/app/(components)/EventForm";
 import useSWR from "swr";
 import { PersonDetail } from "../../person/Person";
+import Loading from "@/app/(components)/Loading";
 
 type EventDetail = {
   id: number;
@@ -34,7 +35,7 @@ export default function EventDetailPage({
 
   const { data: event, isLoading } = useSWR<EventDetail>(`/events/${id}`);
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <Loading />;
 
   if (!event) return <div>Not found</div>;
 

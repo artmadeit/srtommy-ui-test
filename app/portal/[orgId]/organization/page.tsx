@@ -6,6 +6,7 @@ import { OrganizationForm } from "../../../(components)/OrganizationForm";
 import useSWR from "swr";
 import { OrganizationDetail } from "../Organization";
 import { api } from "@builder.io/react/dist/types/src/functions/string-to-function";
+import Loading from "@/app/(components)/Loading";
 
 export default function Organization({
   params,
@@ -18,7 +19,7 @@ export default function Organization({
     `/organizations/${orgId}`
   );
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <Loading/>;
 
   return (
     <Box>

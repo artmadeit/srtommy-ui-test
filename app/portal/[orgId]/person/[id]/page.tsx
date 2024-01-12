@@ -4,6 +4,7 @@ import { PersonForm } from "@/app/(components)/PersonForm";
 import useSWR from "swr";
 import { PersonDetail } from "../Person";
 import { Box } from "@mui/material";
+import Loading from "@/app/(components)/Loading";
 
 export default function PersonEdit({
   params,
@@ -14,7 +15,7 @@ export default function PersonEdit({
 
   const { data: person, isLoading } = useSWR<PersonDetail>(`/people/${id}`);
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <Loading />;
 
   return (
     <Box>
