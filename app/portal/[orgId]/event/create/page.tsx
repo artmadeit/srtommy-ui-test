@@ -5,6 +5,7 @@ import { useAuthApi } from "@/app/(api)/api";
 import { useRouter } from "next/navigation";
 import { SnackbarContext } from "@/app/(components)/SnackbarContext";
 import { EventForm } from "@/app/(components)/EventForm";
+import { parseISO } from "date-fns";
 
 export default function EventCreatePage({
   params,
@@ -30,9 +31,9 @@ export default function EventCreatePage({
         initialValues={{
           name: "",
           // startDate: null,
-          // startTime: null,
+          startTime: null,
           // endDate: null,
-          // endTime: null,
+          endTime: null,
           address: "",
           description: "",
           speakers: [],
@@ -54,9 +55,7 @@ export default function EventCreatePage({
           if(!values.endTime) {
             return 
           }
-
-          // const { startDate, endDate, startTime, endTime,
-          //    ...rest} = values;
+          
           const data = {
             name: values.name,
             address: values.address,

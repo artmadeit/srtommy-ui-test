@@ -16,6 +16,8 @@ import { OrganizationDetail } from "../portal/[orgId]/Organization";
 import { SpringPage } from "../(api)/pagination";
 import useSWR from "swr";
 import { PersonDetail } from "../portal/[orgId]/person/Person";
+import { DemoItem } from "@mui/x-date-pickers/internals/demo";
+import { MobileTimePicker } from "@mui/x-date-pickers";
 
 type Option = {
   id: number;
@@ -25,9 +27,9 @@ type Option = {
 export type EventFormValues = {
   name: string;
   startDate?: Date;
-  startTime?: Date;
+  startTime: Date | null;
   endDate?: Date;
-  endTime?: Date;
+  endTime: Date | null;
   address: string;
   description: string;
   speakers: Option[];
@@ -79,13 +81,19 @@ export const EventForm = ({ orgId, initialValues, submit }: EventFormProps) => {
           />
         </Grid>
         <Grid xs={3}>
-          <TimePickerElement
+          <MobileTimePicker
+            value={formContext.getValues().startTime}
+            ampm
+            onChange={(value) => formContext.setValue("startTime", value)}
+          />
+
+          {/* <TimePickerElement
             sx={{ width: "100%" }}
             label="Hora inicio"
             name="startTime"
             required
             
-          />
+          /> */}
         </Grid>
         <Grid xs={3}>
           <DatePickerElement
@@ -96,12 +104,17 @@ export const EventForm = ({ orgId, initialValues, submit }: EventFormProps) => {
           />
         </Grid>
         <Grid xs={3}>
-          <TimePickerElement
+          <MobileTimePicker
+            value={formContext.getValues().endTime}
+            ampm
+            onChange={(value) => formContext.setValue("endTime", value)}
+          />
+          {/* <TimePickerElement
             sx={{ width: "100%" }}
             label="Hora fin"
             name="endTime"
             required
-          />
+          /> */}
         </Grid>
         <Grid xs={12}>
           <AutocompleteElement
