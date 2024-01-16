@@ -7,6 +7,9 @@ import useSWR from "swr";
 import { OrganizationDetail } from "../Organization";
 import { api } from "@builder.io/react/dist/types/src/functions/string-to-function";
 import Loading from "@/app/(components)/Loading";
+import { useAuthApi } from "@/app/(api)/api";
+import { useRouter } from "next/navigation";
+import { SnackbarContext } from "@/app/(components)/SnackbarContext";
 
 export default function Organization({
   params,
@@ -19,6 +22,10 @@ export default function Organization({
     `/organizations/${orgId}`
   );
 
+  // const getApi = useAuthApi();
+  // const alert = React.useContext(SnackbarContext);
+  // const router = useRouter();   
+
   if (isLoading) return <Loading/>;
 
   return (
@@ -29,7 +36,7 @@ export default function Organization({
         <OrganizationForm
           initialValues={organization}
           title="Datos generales de la organización"
-          submit={async () => await console.log("Click =D")}
+          submit={async(values)=> console.log(values)}
         />
       )}
     </Box>

@@ -3,6 +3,6 @@ export type PersonDetail = {
   firstName: string;
   lastName: string;
   phoneNumber: string;
-  birthdate?: Date;
   age?: number;
+  birthdate?: Date;
 };
