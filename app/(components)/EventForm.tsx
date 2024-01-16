@@ -16,7 +16,6 @@ import { OrganizationDetail } from "../portal/[orgId]/Organization";
 import { SpringPage } from "../(api)/pagination";
 import useSWR from "swr";
 import { PersonDetail } from "../portal/[orgId]/person/Person";
-import { DemoItem } from "@mui/x-date-pickers/internals/demo";
 import { MobileTimePicker } from "@mui/x-date-pickers";
 
 type Option = {

@@ -5,7 +5,6 @@ import { useAuthApi } from "@/app/(api)/api";
 import { useRouter } from "next/navigation";
 import { SnackbarContext } from "@/app/(components)/SnackbarContext";
 import { EventForm } from "@/app/(components)/EventForm";
-import { parseISO } from "date-fns";
 
 export default function EventCreatePage({
   params,
@@ -39,23 +38,22 @@ export default function EventCreatePage({
           speakers: [],
         }}
         submit={async (values) => {
-
-          if(!values.startDate) {
-            return 
+          if (!values.startDate) {
+            return;
           }
 
-          if(!values.startTime) {
-            return 
+          if (!values.startTime) {
+            return;
           }
 
-          if(!values.endDate) {
-            return 
+          if (!values.endDate) {
+            return;
           }
 
-          if(!values.endTime) {
-            return 
+          if (!values.endTime) {
+            return;
           }
-          
+
           const data = {
             name: values.name,
             address: values.address,
@@ -71,8 +69,6 @@ export default function EventCreatePage({
           );
           alert.showMessage("Evento registrado exitosamente");
           router.push(`/portal/${orgId}/event`);
-          // console.log(values.speakers);
-          // console.log(data)
         }}
       />
     </Box>

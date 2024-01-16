@@ -1,7 +1,5 @@
 "use client";
-import { Box, Typography } from "@mui/material";
-import { useState } from "react";
-import { GridRowSelectionModel } from "@mui/x-data-grid";
+import { Box } from "@mui/material";
 import { EventForm, EventFormValues } from "@/app/(components)/EventForm";
 import useSWR from "swr";
 import { PersonDetail } from "../../person/Person";

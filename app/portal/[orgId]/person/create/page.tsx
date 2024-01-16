@@ -1,7 +1,7 @@
 "use client";
 
 import { useAuthApi } from "@/app/(api)/api";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { PersonForm } from "@/app/(components)/PersonForm";
 import React from "react";
 import { SnackbarContext } from "@/app/(components)/SnackbarContext";

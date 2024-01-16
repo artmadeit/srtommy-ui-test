@@ -1,7 +1,7 @@
 "use client";
 
 import { PersonForm } from "@/app/(components)/PersonForm";
-import useSWR, { mutate } from "swr";
+import useSWR from "swr";
 import { PersonDetail } from "../Person";
 import { Box } from "@mui/material";
 import Loading from "@/app/(components)/Loading";
@@ -26,13 +26,6 @@ export default function PersonEdit({
   const getApi = useAuthApi();
   const alert = React.useContext(SnackbarContext);
   const router = useRouter();
-  // const handleSubmit = async (values: PersonDetail) => {
-
-  //   const {organizationId, ...rest } = values;
-  //   const data = {
-
-  //   }
-  // }
 
   if (isLoading) return <Loading />;
 
