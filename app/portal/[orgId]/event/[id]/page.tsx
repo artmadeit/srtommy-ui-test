@@ -5,7 +5,7 @@ import useSWR from "swr";
 import { PersonDetail } from "../../person/Person";
 import Loading from "@/app/(components)/Loading";
 
-type EventDetail = {
+export type EventDetail = {
   id: number;
   name: string;
   startTime: Date;
