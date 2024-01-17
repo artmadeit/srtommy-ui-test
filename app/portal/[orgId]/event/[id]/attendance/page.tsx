@@ -1,5 +1,12 @@
 "use client";
-import { Button, IconButton, Stack, Tooltip, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  IconButton,
+  Stack,
+  Tooltip,
+  Typography,
+} from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import { useState } from "react";
 import { GridRowSelectionModel } from "@mui/x-data-grid";
@@ -8,6 +15,7 @@ import { PersonTable } from "../../../person/PersonTable";
 import Link from "next/link";
 import useSWR from "swr";
 import { EventDetail } from "../page";
+import { formatDateTime } from "@/app/(api)/date";
 
 export default function AttendanceEvent({
   params,
@@ -37,6 +45,10 @@ export default function AttendanceEvent({
             <Typography variant="h5" gutterBottom>
               {event.name}
             </Typography>
+            <Typography sx={{ marginLeft: "10px" }}>
+              Fecha: {formatDateTime(event.startTime)}
+            </Typography>
+
             <Tooltip title="Editar">
               <Link href={`/portal/${orgId}/event/${id}`}>
                 <IconButton aria-label="edit">

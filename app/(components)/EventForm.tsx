@@ -8,7 +8,7 @@ import {
   useForm,
 } from "react-hook-form-mui";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
-import { Button, Typography } from "@mui/material";
+import { Button, InputAdornment, TextField, Typography } from "@mui/material";
 import React from "react";
 import { useDebounce } from "use-debounce";
 import { DEBOUNCE_WAIT_MS } from "./helpers/debouncing";
@@ -16,7 +16,10 @@ import { OrganizationDetail } from "../portal/[orgId]/Organization";
 import { SpringPage } from "../(api)/pagination";
 import useSWR from "swr";
 import { PersonDetail } from "../portal/[orgId]/person/Person";
-import { MobileTimePicker } from "@mui/x-date-pickers";
+import { MobileTimePicker, TimePicker } from "@mui/x-date-pickers";
+import { renderTimeViewClock } from "@mui/x-date-pickers/timeViewRenderers";
+import { AccountCircle } from "@mui/icons-material";
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
 
 type Option = {
   id: number;
@@ -80,10 +83,20 @@ export const EventForm = ({ orgId, initialValues, submit }: EventFormProps) => {
           />
         </Grid>
         <Grid xs={3}>
-          <MobileTimePicker
+          {/* <MobileTimePicker
             value={formContext.getValues().startTime}
-            ampm
+            ampm           
             onChange={(value) => formContext.setValue("startTime", value)}
+          /> */}
+          <TimePicker
+            ampm
+            value={formContext.getValues().startTime}
+            onChange={(value) => formContext.setValue("startTime", value)}
+            viewRenderers={{
+              hours: renderTimeViewClock,
+              minutes: renderTimeViewClock,
+              seconds: renderTimeViewClock,
+            }}
           />
 
           {/* <TimePickerElement
@@ -103,11 +116,21 @@ export const EventForm = ({ orgId, initialValues, submit }: EventFormProps) => {
           />
         </Grid>
         <Grid xs={3}>
-          <MobileTimePicker
+          <TimePicker
+            ampm
+            value={formContext.getValues().endTime}
+            onChange={(value) => formContext.setValue("endTime", value)}
+            viewRenderers={{
+              hours: renderTimeViewClock,
+              minutes: renderTimeViewClock,
+              seconds: renderTimeViewClock,
+            }}
+          />
+          {/* <MobileTimePicker
             value={formContext.getValues().endTime}
             ampm
             onChange={(value) => formContext.setValue("endTime", value)}
-          />
+          /> */}
           {/* <TimePickerElement
             sx={{ width: "100%" }}
             label="Hora fin"
