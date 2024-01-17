@@ -22,15 +22,6 @@ export default function EventDetailPage({
 }) {
   const { id, orgId } = params;
 
-  // const [rowSelectionModel, setRowSelectionModel] =
-  //   useState<GridRowSelectionModel>([]);
-
-  // const event = {
-  //   name: "Reunión de hombres diciembre",
-  //   startTime: "15 de diciembre 2023 - 14:00",
-  //   endTime: "15 de diciembre 2023 - 18:00",
-  // };
-
   const { data: event, isLoading } = useSWR<EventDetail>(`/events/${id}`);
 
   if (isLoading) return <Loading />;

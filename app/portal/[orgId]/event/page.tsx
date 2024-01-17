@@ -1,7 +1,6 @@
 "use client";
 import { Fab, Stack, Tooltip, Typography } from "@mui/material";
 import Link from "next/link";
-
 import AddIcon from "@mui/icons-material/Add";
 import SearchIcon from "@mui/icons-material/Search";
 import {
@@ -36,21 +35,9 @@ export default function EventListPage() {
     { id: 7, name: "Celebremos juntos el dia del niño" }, // domingo 20 de agosto 10am
     { id: 8, name: "Sobredosis Garden" }, // jueves 27-30 de agosto (ver: https://www.facebook.com/photo/?fbid=673593008144144&set=pcb.673593201477458)
   ];
-  // const isLoading = false;
+
   const { data: events2, isLoading } =
     useSWR<SpringPage<EventListItem[]>>("/events");
-  const events: Page<EventListItem> = {
-    _embedded: {
-      events: eventList,
-    },
-    _links: {},
-    page: {
-      size: eventList.length,
-      totalElements: eventList.length,
-      totalPages: 1,
-      number: eventList.length,
-    },
-  };
 
   const columns = useMemo(
     () =>
@@ -67,7 +54,9 @@ export default function EventListPage() {
                   <GridActionsCellItem
                     icon={<SearchIcon />}
                     label="ver"
-                    onClick={() => router.push(`event/${params.row.id}/attendance`)}
+                    onClick={() =>
+                      router.push(`event/${params.row.id}/attendance`)
+                    }
                   />
                 </Tooltip>,
               ];
@@ -107,7 +96,7 @@ export default function EventListPage() {
       <div style={{ height: "70vh", width: "100%" }}>
         <DataGrid
           loading={isLoading}
-          columns={columns}          
+          columns={columns}
           paginationModel={paginationModel}
           paginationMode="server"
           onPaginationModelChange={setPaginationModel}

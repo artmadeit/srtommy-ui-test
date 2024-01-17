@@ -1,12 +1,5 @@
 "use client";
-import {
-  Box,
-  Button,
-  IconButton,
-  Stack,
-  Tooltip,
-  Typography,
-} from "@mui/material";
+import { Button, IconButton, Stack, Tooltip, Typography } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import { useState } from "react";
 import { GridRowSelectionModel } from "@mui/x-data-grid";
@@ -29,12 +22,6 @@ export default function AttendanceEvent({
 
   const { data: event } = useSWR<EventDetail>(`/events/${id}`);
 
-  // const event = {
-  //   name: "Reunión de hombres diciembre",
-  //   startTime: "15 de diciembre 2023 - 14:00",
-  //   endTime: "15 de diciembre 2023 - 18:00",
-  // };
-
   return (
     <Grid container spacing={2} padding={2}>
       {!event ? (
@@ -48,7 +35,6 @@ export default function AttendanceEvent({
             <Typography sx={{ marginLeft: "10px" }}>
               Fecha: {formatDateTime(event.startTime)}
             </Typography>
-
             <Tooltip title="Editar">
               <Link href={`/portal/${orgId}/event/${id}`}>
                 <IconButton aria-label="edit">
