@@ -15,7 +15,7 @@ export default function OrganizationCreatePage() {
   const submit = async (data: any) => {
     const api = await getApi();
     const response = await api.post("organizations", data);
-    alert.showMessage("Organización registrada exitosamente");
+    alert.showMessage("Guardado exitosamente");
     router.push("/portal/" + response.data.id);
   };
 

@@ -48,7 +48,7 @@ export default function PersonEdit({
               organizationId: orgId,
             });
             mutate();
-            alert.showMessage("Usuario editado");
+            alert.showMessage("Guardado exitosamente");
             router.push(`/portal/${orgId}/person`);
           }}
         />

@@ -67,7 +67,7 @@ export default function EventCreatePage({
           const response = await getApi().then((api) =>
             api.post(`/events`, data)
           );
-          alert.showMessage("Evento registrado exitosamente");
+          alert.showMessage("Guardado exitosamente");
           router.push(`/portal/${orgId}/event`);
         }}
       />

@@ -26,7 +26,7 @@ export default function CreatePerson({
       submit={async (data) => {
         const api = await getApi();
         await api.post("people", { ...data, organizationId: orgId });
-        alert.showMessage("Persona registrada exitosamente");
+        alert.showMessage("Guardado exitosamente");
         router.push(`/portal/${orgId}/person`);
       }}
     />

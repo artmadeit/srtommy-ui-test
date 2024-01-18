@@ -40,7 +40,7 @@ export default function Organization({
               address: formValues.address,
               phoneNumber: formValues.phoneNumber,
             });
-            alert.showMessage("Se editó");
+            alert.showMessage("Guardado exitosamente");
           }}
         />
       )}
