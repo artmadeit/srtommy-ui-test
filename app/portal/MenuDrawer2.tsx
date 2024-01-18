@@ -5,7 +5,6 @@ import { AccountCircle } from "@mui/icons-material";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import LogoutIcon from "@mui/icons-material/Logout";
 import MenuIcon from "@mui/icons-material/Menu";
-import SearchIcon from "@mui/icons-material/Search";
 import {
   Button,
   Dialog,
@@ -15,7 +14,6 @@ import {
   Menu,
   MenuItem,
   Stack,
-  Tooltip,
   Typography,
 } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
@@ -27,20 +25,13 @@ import IconButton from "@mui/material/IconButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import Toolbar from "@mui/material/Toolbar";
 import { styled } from "@mui/material/styles";
-import {
-  DataGrid,
-  GridActionsCellItem,
-  GridColDef,
-  esES,
-} from "@mui/x-data-grid";
+import { DataGrid, GridColDef, esES } from "@mui/x-data-grid";
 import NextLink from "next/link";
 import { redirect, useRouter } from "next/navigation";
 import * as React from "react";
 import useSWR from "swr";
-import { SpringPage } from "../(api)/pagination";
 import Loading from "../(components)/Loading";
 import { withOutSorting } from "../(components)/helpers/withOutSorting";
-import { usePagination } from "../(components)/hook-customization/usePagination";
 
 const drawerWidth = 240;
 

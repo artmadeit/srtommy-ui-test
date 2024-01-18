@@ -8,7 +8,6 @@ import { OrganizationDetail } from "../Organization";
 import Loading from "@/app/(components)/Loading";
 import { useAuthApi } from "@/app/(api)/api";
 import { SnackbarContext } from "@/app/(components)/SnackbarContext";
-// import { useRouter } from "next/navigation";
 
 export default function Organization({
   params,
@@ -23,7 +22,6 @@ export default function Organization({
 
   const getApi = useAuthApi();
   const alert = React.useContext(SnackbarContext);
-  // const router = useRouter();
 
   if (isLoading) return <Loading />;
 
@@ -43,7 +41,6 @@ export default function Organization({
               phoneNumber: formValues.phoneNumber,
             });
             alert.showMessage("Se editó");
-            // router.push("");
           }}
         />
       )}

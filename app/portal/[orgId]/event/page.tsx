@@ -13,7 +13,7 @@ import { useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { withOutSorting } from "@/app/(components)/helpers/withOutSorting";
 import { usePagination } from "@/app/(components)/hook-customization/usePagination";
-import { Page, SpringPage } from "@/app/(api)/pagination";
+import { SpringPage } from "@/app/(api)/pagination";
 import useSWR from "swr";
 
 type EventListItem = {
