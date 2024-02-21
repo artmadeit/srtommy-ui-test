@@ -1,5 +1,12 @@
 "use client";
-import { Button, IconButton, Stack, Tooltip, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  IconButton,
+  Stack,
+  Tooltip,
+  Typography,
+} from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import { useState } from "react";
 import { GridRowSelectionModel } from "@mui/x-data-grid";
@@ -28,20 +35,27 @@ export default function AttendanceEvent({
         "No hay evento registrado"
       ) : (
         <>
-          <Grid xs={12} display="flex" alignItems="center">
-            <Typography variant="h5" gutterBottom>
-              {event.name}
-            </Typography>
-            <Typography sx={{ marginLeft: "10px" }}>
-              Fecha: {formatDateTime(event.startTime)}
-            </Typography>
-            <Tooltip title="Editar">
-              <Link href={`/portal/${orgId}/event/${id}`}>
-                <IconButton aria-label="edit">
-                  <EditIcon sx={{ marginBottom: "0.35em" }} />
-                </IconButton>
-              </Link>
-            </Tooltip>
+          <Grid xs={12}>
+            <Box display="flex" alignItems="center">
+              <Typography variant="h5" gutterBottom>
+                {event.name}
+              </Typography>
+              <Tooltip title="Editar">
+                <Link href={`/portal/${orgId}/event/${id}`}>
+                  <IconButton aria-label="edit">
+                    <EditIcon sx={{ marginBottom: "0.35em" }} />
+                  </IconButton>
+                </Link>
+              </Tooltip>
+            </Box>
+            <Box>
+              <Typography>
+                Fecha Inicio: {formatDateTime(event.startTime)}
+              </Typography>
+              <Typography>
+                Fecha Fin: {formatDateTime(event.endTime)}
+              </Typography>
+            </Box>
           </Grid>
           <Grid xs={12}>
             <Typography variant="h6" gutterBottom>
