@@ -32,7 +32,7 @@ export default function Organization({
       ) : (
         <OrganizationForm
           initialValues={organization}
-          title="Datos generales de la organización"
+          title="Datos generales de la sede"
           submit={async (formValues) => {
             const api = await getApi();
             await api.put(`/organizations/${orgId}`, {

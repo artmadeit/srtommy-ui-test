@@ -85,7 +85,7 @@ export default function OrgLayout({
                 <ListItemIcon>
                   <ChurchIcon />
                 </ListItemIcon>
-                <ListItemText primary="Organización" />
+                <ListItemText primary="Sede" />
               </ListItemButton>
             </ListItem>
           </Link>

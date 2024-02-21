@@ -16,7 +16,7 @@ export default function PersonListPage({
     <Stack direction="column" spacing={2}>
       <Stack direction="row" alignItems="center" spacing={2}>
         <Typography variant="h4">Personas</Typography>
-        <Tooltip title="Crear persona">
+        <Tooltip title="Registrar">
           <Link href="person/create">
             <Fab color="primary" aria-labelledby="create">
               <AddIcon />
