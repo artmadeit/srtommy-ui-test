@@ -2,21 +2,21 @@
 
 import { Box } from "@mui/material";
 import React from "react";
-import { OrganizationForm } from "../../../(components)/OrganizationForm";
+import { LocationForm } from "../../../(components)/LocationForm";
 import useSWR from "swr";
-import { OrganizationDetail } from "../Organization";
+import { LocationDetail } from "../Location";
 import Loading from "@/app/(components)/Loading";
 import { useAuthApi } from "@/app/(api)/api";
 import { SnackbarContext } from "@/app/(components)/SnackbarContext";
 
-export default function Organization({
+export default function Location({
   params,
 }: {
   params: { orgId: number };
 }) {
   const { orgId } = params;
 
-  const { data: organization, isLoading } = useSWR<OrganizationDetail>(
+  const { data: organization, isLoading } = useSWR<LocationDetail>(
     `/organizations/${orgId}`
   );
 
@@ -30,7 +30,7 @@ export default function Organization({
       {!organization ? (
         <div>no existe tal organizacion</div>
       ) : (
-        <OrganizationForm
+        <LocationForm
           initialValues={organization}
           title="Datos generales de la sede"
           submit={async (formValues) => {

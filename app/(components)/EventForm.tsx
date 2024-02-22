@@ -12,7 +12,7 @@ import { Button, Typography } from "@mui/material";
 import React from "react";
 import { useDebounce } from "use-debounce";
 import { DEBOUNCE_WAIT_MS } from "./helpers/debouncing";
-import { OrganizationDetail } from "../portal/[orgId]/Organization";
+import { LocationDetail } from "../portal/[orgId]/Location";
 import { SpringPage } from "../(api)/pagination";
 import useSWR from "swr";
 import { PersonDetail } from "../portal/[orgId]/person/Person";
@@ -53,7 +53,7 @@ export const EventForm = ({ orgId, initialValues, submit }: EventFormProps) => {
     DEBOUNCE_WAIT_MS
   );
 
-  const { data: organization } = useSWR<OrganizationDetail>(
+  const { data: Location } = useSWR<LocationDetail>(
     `organizations/${orgId}`
   );
 
@@ -146,7 +146,7 @@ export const EventForm = ({ orgId, initialValues, submit }: EventFormProps) => {
             }}
             name="address"
             label="Lugar"
-            options={[organization?.address]}
+            options={[Location?.address]}
           />
         </Grid>
         <Grid xs={12}>

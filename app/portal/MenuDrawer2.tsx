@@ -38,10 +38,10 @@ const drawerWidth = 240;
 export default function MenuDrawer2({
   children,
   listDrawer,
-  organization,
+  location,
 }: React.PropsWithChildren<{
   listDrawer?: React.ReactNode;
-  organization?: { name: string };
+  location?: { name: string };
 }>) {
   const router = useRouter();
 
@@ -134,7 +134,7 @@ export default function MenuDrawer2({
                 endIcon={<KeyboardArrowDownIcon />}
                 onClick={() => setOpenDialog(true)}
               >
-                {organization?.name || "Seleccione organización"}
+                {location?.name || "Seleccione sede"}
               </Button>
             </Stack>
             <Button

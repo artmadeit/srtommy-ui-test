@@ -13,7 +13,7 @@ import NextLink from "next/link";
 import * as React from "react";
 import MenuDrawer2 from "../MenuDrawer2";
 import useSWR from "swr";
-import { OrganizationDetail } from "./Organization";
+import { LocationDetail } from "./Location";
 
 export default function OrgLayout({
   children,
@@ -24,13 +24,13 @@ export default function OrgLayout({
 }) {
   const { orgId } = params;
 
-  const { data: organization } = useSWR<OrganizationDetail>(
+  const { data: location } = useSWR<LocationDetail>(
     `organizations/${orgId}`
   );
 
   return (
     <MenuDrawer2
-      organization={organization}
+      location={location}
       listDrawer={
         <List>
           <Link
@@ -77,7 +77,7 @@ export default function OrgLayout({
           </Link>
           <Link
             component={NextLink}
-            href={`/portal/${orgId}/organization`}
+            href={`/portal/${orgId}/location`}
             style={{ textDecoration: "none", color: "inherit" }}
           >
             <ListItem>
