@@ -225,19 +225,19 @@ export default function MenuDrawer2({
   );
 }
 
-type OrganizationListItem = {
+type LocationListItem = {
   id: number;
   name: string;
 };
 
-type DialogOrganizationProps = {
+type DialogLocationProps = {
   open: boolean;
   onClose: () => void;
 };
 
-const DialogAccounts = ({ open, onClose }: DialogOrganizationProps) => {
+const DialogAccounts = ({ open, onClose }: DialogLocationProps) => {
   const { data: accounts, isLoading } =
-    useSWR<OrganizationListItem[]>("organizations");
+    useSWR<LocationListItem[]>("organizations");
 
   const columns = React.useMemo(
     () =>
@@ -253,7 +253,7 @@ const DialogAccounts = ({ open, onClose }: DialogOrganizationProps) => {
             ),
             flex: 1,
           },
-        ] as GridColDef<OrganizationListItem>[]
+        ] as GridColDef<LocationListItem>[]
       ).map(withOutSorting),
     []
   );
@@ -262,7 +262,7 @@ const DialogAccounts = ({ open, onClose }: DialogOrganizationProps) => {
     <Dialog open={open} onClose={onClose}>
       <DialogTitle display="flex" justifyContent="space-between">
         Selecciona otra sede
-        <Link component={NextLink} href="/portal/organization/create">
+        <Link component={NextLink} href="/portal/location/create">
           <Button onClick={onClose}>Nueva Sede</Button>
         </Link>
       </DialogTitle>

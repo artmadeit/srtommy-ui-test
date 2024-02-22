@@ -16,7 +16,7 @@ export default function Location({
 }) {
   const { orgId } = params;
 
-  const { data: organization, isLoading } = useSWR<LocationDetail>(
+  const { data: Location, isLoading } = useSWR<LocationDetail>(
     `/organizations/${orgId}`
   );
 
@@ -27,11 +27,11 @@ export default function Location({
 
   return (
     <Box>
-      {!organization ? (
+      {!Location ? (
         <div>no existe tal organizacion</div>
       ) : (
         <LocationForm
-          initialValues={organization}
+          initialValues={Location}
           title="Datos generales de la sede"
           submit={async (formValues) => {
             const api = await getApi();
