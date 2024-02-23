@@ -8,7 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { GridRowSelectionModel } from "@mui/x-data-grid";
 import EditIcon from "@mui/icons-material/Edit";
 import { PersonTable } from "../../../person/PersonTable";
@@ -16,6 +16,10 @@ import Link from "next/link";
 import useSWR from "swr";
 import { EventDetail } from "../page";
 import { formatDateTime } from "@/app/(api)/date";
+import { useAuthApi } from "@/app/(api)/api";
+import { SnackbarContext } from "@/app/(components)/SnackbarContext";
+import { useRouter } from "next/navigation";
+import Loading from "@/app/(components)/Loading";
 
 export default function AttendanceEvent({
   params,
@@ -24,10 +28,25 @@ export default function AttendanceEvent({
 }) {
   const { id, orgId } = params;
 
+  const getApi = useAuthApi();
+  const router = useRouter();
+  const alert = React.useContext(SnackbarContext);
+
+  const { data: event } = useSWR<EventDetail>(`/events/${id}`);
+  const { data: attendances, isLoading } = useSWR<number[]>(
+    `/events/${id}/attendance`
+  );
+
   const [rowSelectionModel, setRowSelectionModel] =
     useState<GridRowSelectionModel>([]);
 
-  const { data: event } = useSWR<EventDetail>(`/events/${id}`);
+  useEffect(() => {
+    if(attendances) {
+      setRowSelectionModel(attendances)
+    }
+  }, [attendances])
+
+  if (isLoading) return <Loading />;
 
   return (
     <Grid container spacing={2} padding={2}>
@@ -81,8 +100,12 @@ export default function AttendanceEvent({
             <Button
               type="submit"
               variant="contained"
-              onClick={() => {
-                console.log(rowSelectionModel);
+              onClick={async () => {
+                const api = await getApi();
+                await api.put(`/events/${id}/attendance`, {
+                  personIds: rowSelectionModel,
+                });
+                // console.log(rowSelectionModel);
               }}
             >
               Registrar asistencia

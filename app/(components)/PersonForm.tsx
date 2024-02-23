@@ -47,6 +47,7 @@ export const PersonForm = ({initialValues, submit}: PersonFormProps) => {
             sx={{ width: "100%" }}
             label="Fecha de nacimiento"
             name="birthdate"
+            //onchange ver
           />
         </Grid>
         <Grid xs={12}>
