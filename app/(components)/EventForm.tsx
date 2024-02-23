@@ -53,9 +53,7 @@ export const EventForm = ({ locId, initialValues, submit }: EventFormProps) => {
     DEBOUNCE_WAIT_MS
   );
 
-  const { data: Location } = useSWR<LocationDetail>(
-    `organizations/${locId}`
-  );
+  const { data: Location } = useSWR<LocationDetail>(`organizations/${locId}`);
 
   const { data: people } = useSWR<SpringPage<PersonDetail>>(
     searchTextDebounced ? `people?searchText=${searchTextDebounced}` : `people`
@@ -88,6 +86,7 @@ export const EventForm = ({ locId, initialValues, submit }: EventFormProps) => {
           /> */}
           <TimePicker
             ampm
+            sx={{ width: "100%" }}
             value={formContext.getValues().startTime}
             onChange={(value) => formContext.setValue("startTime", value)}
             viewRenderers={{
@@ -116,6 +115,7 @@ export const EventForm = ({ locId, initialValues, submit }: EventFormProps) => {
         <Grid xs={3}>
           <TimePicker
             ampm
+            sx={{ width: "100%" }}
             value={formContext.getValues().endTime}
             onChange={(value) => formContext.setValue("endTime", value)}
             viewRenderers={{
