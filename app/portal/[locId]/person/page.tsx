@@ -8,9 +8,9 @@ import { PersonTable } from "./PersonTable";
 export default function PersonListPage({
   params,
 }: {
-  params: { orgId: number };
+  params: { locId: number };
 }) {
-  const { orgId } = params;
+  const { locId } = params;
 
   return (
     <Stack direction="column" spacing={2}>
@@ -24,7 +24,7 @@ export default function PersonListPage({
           </Link>
         </Tooltip>
       </Stack>
-      <PersonTable orgId={orgId} />
+      <PersonTable locId={locId} />
     </Stack>
   );
 }

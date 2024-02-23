@@ -4,7 +4,7 @@ import { Controller, DatePickerElement, FormContainer, TextFieldElement, useForm
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import { Button, Typography } from "@mui/material";
 import { MuiTelInput } from "mui-tel-input";
-import { PersonDetail } from "../portal/[orgId]/person/Person";
+import { PersonDetail } from "../portal/[locId]/person/Person";
 
 type PersonFormProps = {
   initialValues: PersonDetail;

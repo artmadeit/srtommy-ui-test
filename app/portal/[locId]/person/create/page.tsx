@@ -9,12 +9,12 @@ import { SnackbarContext } from "@/app/(components)/SnackbarContext";
 export default function CreatePerson({
   params,
 }: {
-  params: { orgId: number };
+  params: { locId: number };
 }) {
   const getApi = useAuthApi();
   const router = useRouter();
   const alert = React.useContext(SnackbarContext);
-  const { orgId } = params;
+  const { locId } = params;
 
   return (
     <PersonForm
@@ -25,9 +25,9 @@ export default function CreatePerson({
       }}
       submit={async (data) => {
         const api = await getApi();
-        await api.post("people", { ...data, organizationId: orgId });
+        await api.post("people", { ...data, organizationId: locId });
         alert.showMessage("Guardado exitosamente");
-        router.push(`/portal/${orgId}/person`);
+        router.push(`/portal/${locId}/person`);
       }}
     />
   );

@@ -24,9 +24,9 @@ import Loading from "@/app/(components)/Loading";
 export default function AttendanceEvent({
   params,
 }: {
-  params: { id: number; orgId: number };
+  params: { id: number; locId: number };
 }) {
-  const { id, orgId } = params;
+  const { id, locId } = params;
 
   const getApi = useAuthApi();
   const router = useRouter();
@@ -41,10 +41,10 @@ export default function AttendanceEvent({
     useState<GridRowSelectionModel>([]);
 
   useEffect(() => {
-    if(attendances) {
-      setRowSelectionModel(attendances)
+    if (attendances) {
+      setRowSelectionModel(attendances);
     }
-  }, [attendances])
+  }, [attendances]);
 
   if (isLoading) return <Loading />;
 
@@ -60,7 +60,7 @@ export default function AttendanceEvent({
                 {event.name}
               </Typography>
               <Tooltip title="Editar">
-                <Link href={`/portal/${orgId}/event/${id}`}>
+                <Link href={`/portal/${locId}/event/${id}`}>
                   <IconButton aria-label="edit">
                     <EditIcon sx={{ marginBottom: "0.35em" }} />
                   </IconButton>
@@ -84,7 +84,7 @@ export default function AttendanceEvent({
           <Grid xs={12}>
             <Stack spacing={2}>
               <PersonTable
-                orgId={orgId}
+                locId={locId}
                 dataGridProps={{
                   keepNonExistentRowsSelected: true,
                   checkboxSelection: true,

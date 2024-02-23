@@ -15,17 +15,17 @@ import MenuDrawer2 from "../MenuDrawer2";
 import useSWR from "swr";
 import { LocationDetail } from "./Location";
 
-export default function OrgLayout({
+export default function LocLayout({
   children,
   params,
 }: {
   children: React.ReactNode;
-  params: { orgId: number };
+  params: { locId: number };
 }) {
-  const { orgId } = params;
+  const { locId } = params;
 
   const { data: location } = useSWR<LocationDetail>(
-    `organizations/${orgId}`
+    `organizations/${locId}`
   );
 
   return (
@@ -35,7 +35,7 @@ export default function OrgLayout({
         <List>
           <Link
             component={NextLink}
-            href={`/portal/${orgId}/`}
+            href={`/portal/${locId}/`}
             style={{ textDecoration: "none", color: "inherit" }}
           >
             <ListItem>
@@ -49,7 +49,7 @@ export default function OrgLayout({
           </Link>
           <Link
             component={NextLink}
-            href={`/portal/${orgId}/person`}
+            href={`/portal/${locId}/person`}
             style={{ textDecoration: "none", color: "inherit" }}
           >
             <ListItem>
@@ -63,7 +63,7 @@ export default function OrgLayout({
           </Link>
           <Link
             component={NextLink}
-            href={`/portal/${orgId}/event`}
+            href={`/portal/${locId}/event`}
             style={{ textDecoration: "none", color: "inherit" }}
           >
             <ListItem>
@@ -77,7 +77,7 @@ export default function OrgLayout({
           </Link>
           <Link
             component={NextLink}
-            href={`/portal/${orgId}/location`}
+            href={`/portal/${locId}/location`}
             style={{ textDecoration: "none", color: "inherit" }}
           >
             <ListItem>

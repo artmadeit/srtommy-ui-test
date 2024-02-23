@@ -18,9 +18,9 @@ export type EventDetail = {
 export default function EventDetailPage({
   params,
 }: {
-  params: { id: number; orgId: number };
+  params: { id: number; locId: number };
 }) {
-  const { id, orgId } = params;
+  const { id, locId } = params;
 
   const { data: event, isLoading } = useSWR<EventDetail>(`/events/${id}`);
 
@@ -42,7 +42,7 @@ export default function EventDetailPage({
   return (
     <Box>
       <EventForm
-        orgId={orgId}
+        locId={locId}
         initialValues={initialValues}
         submit={() => console.log("Enviar")}
       />

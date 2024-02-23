@@ -12,12 +12,12 @@ import { SnackbarContext } from "@/app/(components)/SnackbarContext";
 export default function Location({
   params,
 }: {
-  params: { orgId: number };
+  params: { locId: number };
 }) {
-  const { orgId } = params;
+  const { locId } = params;
 
   const { data: Location, isLoading } = useSWR<LocationDetail>(
-    `/organizations/${orgId}`
+    `/organizations/${locId}`
   );
 
   const getApi = useAuthApi();
@@ -35,7 +35,7 @@ export default function Location({
           title="Datos generales de la sede"
           submit={async (formValues) => {
             const api = await getApi();
-            await api.put(`/organizations/${orgId}`, {
+            await api.put(`/organizations/${locId}`, {
               name: formValues.name,
               address: formValues.address,
               phoneNumber: formValues.phoneNumber,

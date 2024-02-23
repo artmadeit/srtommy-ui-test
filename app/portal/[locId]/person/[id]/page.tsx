@@ -13,9 +13,9 @@ import { useRouter } from "next/navigation";
 export default function PersonEdit({
   params,
 }: {
-  params: { id: number; orgId: number };
+  params: { id: number; locId: number };
 }) {
-  const { id, orgId } = params;
+  const { id, locId } = params;
 
   const {
     data: person,
@@ -45,11 +45,11 @@ export default function PersonEdit({
               phoneNumber: formValues.phoneNumber,
               age: formValues.age,
               birthdate: formValues.birthdate,
-              organizationId: orgId,
+              organizationId: locId,
             });
             mutate();
             alert.showMessage("Guardado exitosamente");
-            router.push(`/portal/${orgId}/person`);
+            router.push(`/portal/${locId}/person`);
           }}
         />
       )}

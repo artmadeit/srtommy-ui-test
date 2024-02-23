@@ -12,10 +12,10 @@ import { Button, Typography } from "@mui/material";
 import React from "react";
 import { useDebounce } from "use-debounce";
 import { DEBOUNCE_WAIT_MS } from "./helpers/debouncing";
-import { LocationDetail } from "../portal/[orgId]/Location";
+import { LocationDetail } from "../portal/[locId]/Location";
 import { SpringPage } from "../(api)/pagination";
 import useSWR from "swr";
-import { PersonDetail } from "../portal/[orgId]/person/Person";
+import { PersonDetail } from "../portal/[locId]/person/Person";
 import { MobileTimePicker, TimePicker } from "@mui/x-date-pickers";
 import { renderTimeViewClock } from "@mui/x-date-pickers/timeViewRenderers";
 
@@ -36,12 +36,12 @@ export type EventFormValues = {
 };
 
 type EventFormProps = {
-  orgId: number;
+  locId: number;
   initialValues: EventFormValues;
   submit: SubmitHandler<EventFormValues>;
 };
 
-export const EventForm = ({ orgId, initialValues, submit }: EventFormProps) => {
+export const EventForm = ({ locId, initialValues, submit }: EventFormProps) => {
   const [searchTextSpeaker, setSearchTextSpeaker] = React.useState("");
 
   const formContext = useForm<EventFormValues>({
@@ -54,7 +54,7 @@ export const EventForm = ({ orgId, initialValues, submit }: EventFormProps) => {
   );
 
   const { data: Location } = useSWR<LocationDetail>(
-    `organizations/${orgId}`
+    `organizations/${locId}`
   );
 
   const { data: people } = useSWR<SpringPage<PersonDetail>>(

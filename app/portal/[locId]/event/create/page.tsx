@@ -9,9 +9,9 @@ import { EventForm } from "@/app/(components)/EventForm";
 export default function EventCreatePage({
   params,
 }: {
-  params: { orgId: number };
+  params: { locId: number };
 }) {
-  const { orgId } = params;
+  const { locId } = params;
 
   const getApi = useAuthApi();
   const router = useRouter();
@@ -26,7 +26,7 @@ export default function EventCreatePage({
   return (
     <Box>
       <EventForm
-        orgId={orgId}
+        locId={locId}
         initialValues={{
           name: "",
           // startDate: null,
@@ -57,7 +57,7 @@ export default function EventCreatePage({
           const data = {
             name: values.name,
             address: values.address,
-            organizationId: orgId,
+            organizationId: locId,
             startTime: getDateTime(values.startDate, values.startTime),
             endTime: getDateTime(values.endDate, values.endTime),
             speakerIds: values.speakers.map((x) => x.id),
@@ -68,7 +68,7 @@ export default function EventCreatePage({
             api.post(`/events`, data)
           );
           alert.showMessage("Guardado exitosamente");
-          router.push(`/portal/${orgId}/event`);
+          router.push(`/portal/${locId}/event`);
         }}
       />
     </Box>

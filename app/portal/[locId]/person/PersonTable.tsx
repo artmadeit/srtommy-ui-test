@@ -22,12 +22,12 @@ export type MyDataGridProps = Omit<DataGridProps, "columns" | "rows">;
 
 export type PersonTableProps = {
   dataGridProps?: MyDataGridProps;
-  orgId: number;
+  locId: number;
 };
 
 export const PersonTable = ({
   dataGridProps = {},
-  orgId,
+  locId,
 }: PersonTableProps) => {
   const { paginationModel, setPaginationModel } = usePagination();
   const router = useRouter();
@@ -53,7 +53,7 @@ export const PersonTable = ({
                     icon={<SearchIcon />}
                     label="Ver"
                     onClick={() =>
-                      router.push(`/portal/${orgId}/person/${params.id}`)
+                      router.push(`/portal/${locId}/person/${params.id}`)
                     }
                   />
                 </Tooltip>,
@@ -62,7 +62,7 @@ export const PersonTable = ({
           },
         ] as GridColDef<PersonListItem>[]
       ).map(withOutSorting),
-    [router, orgId]
+    [router, locId]
   );
 
   return (
