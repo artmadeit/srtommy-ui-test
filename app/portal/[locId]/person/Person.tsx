@@ -4,5 +4,5 @@ export type PersonDetail = {
   lastName: string;
   phoneNumber: string;
   age?: number;
-  birthdate?: Date;
+  birthdate?: Date | null;
 };
