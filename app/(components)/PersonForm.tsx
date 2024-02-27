@@ -13,15 +13,16 @@ import { Button, Typography } from "@mui/material";
 import { MuiTelInput } from "mui-tel-input";
 import { PersonDetail } from "../portal/[locId]/person/Person";
 import React from "react";
+import { differenceInYears } from "date-fns";
 
 type PersonFormProps = {
   initialValues: PersonDetail;
   submit: (data: any) => Promise<void>;
 };
 
-// function isValidDate(date: Date) {
-//   return date instanceof Date && !isNaN(date.getTime());
-// }
+function isValidDate(date: Date) {
+  return date instanceof Date && !isNaN(date.getTime());
+}
 
 export const PersonForm = ({ initialValues, submit }: PersonFormProps) => {
   const formContext = useForm({
@@ -31,10 +32,10 @@ export const PersonForm = ({ initialValues, submit }: PersonFormProps) => {
   const handleChange = (birthdate: Date | null) => {
     formContext.setValue("birthdate", birthdate);
 
-    // if (birthdate && isValidDate(birthdate)) {
-    //   const age = differenceInYears(new Date(), birthdate);
-    //   formContext.setValue("age", age);
-    // }
+    if (birthdate && isValidDate(birthdate)) {
+      const age = differenceInYears(new Date(), birthdate);
+      formContext.setValue("age", age);
+    }
   };
 
   return (
