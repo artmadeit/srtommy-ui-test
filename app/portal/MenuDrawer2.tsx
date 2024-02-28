@@ -73,10 +73,10 @@ export default function MenuDrawer2({
     setMobileOpen(!mobileOpen);
   };
 
-  const handleProfile = () => {
-    router.push("/profile");
-    setAnchorEl(null);
-  };
+  // const handleProfile = () => {
+  //   router.push("/profile");
+  //   setAnchorEl(null);
+  // };
 
   const onClose = () => {
     setOpenDialog(false);

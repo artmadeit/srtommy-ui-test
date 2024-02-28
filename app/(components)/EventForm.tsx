@@ -4,7 +4,6 @@ import {
   FormContainer,
   SubmitHandler,
   TextFieldElement,
-  TimePickerElement,
   useForm,
 } from "react-hook-form-mui";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
@@ -16,7 +15,7 @@ import { LocationDetail } from "../portal/[locId]/Location";
 import { SpringPage } from "../(api)/pagination";
 import useSWR from "swr";
 import { PersonDetail } from "../portal/[locId]/person/Person";
-import { MobileTimePicker, TimePicker } from "@mui/x-date-pickers";
+import { TimePicker } from "@mui/x-date-pickers";
 import { renderTimeViewClock } from "@mui/x-date-pickers/timeViewRenderers";
 
 type Option = {
@@ -95,14 +94,6 @@ export const EventForm = ({ locId, initialValues, submit }: EventFormProps) => {
               seconds: renderTimeViewClock,
             }}
           />
-
-          {/* <TimePickerElement
-            sx={{ width: "100%" }}
-            label="Hora inicio"
-            name="startTime"
-            required
-            
-          /> */}
         </Grid>
         <Grid xs={3}>
           <DatePickerElement
@@ -128,12 +119,6 @@ export const EventForm = ({ locId, initialValues, submit }: EventFormProps) => {
             value={formContext.getValues().endTime}
             ampm
             onChange={(value) => formContext.setValue("endTime", value)}
-          /> */}
-          {/* <TimePickerElement
-            sx={{ width: "100%" }}
-            label="Hora fin"
-            name="endTime"
-            required
           /> */}
         </Grid>
         <Grid xs={12}>

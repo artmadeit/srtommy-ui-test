@@ -40,7 +40,6 @@ export const PersonForm = ({ initialValues, submit }: PersonFormProps) => {
 
   return (
     <FormContainer formContext={formContext} onSuccess={submit}>
-      {JSON.stringify(initialValues)}
       <Grid container spacing={2} padding={2}>
         <Grid xs={12}>
           <Typography variant="h5" gutterBottom>

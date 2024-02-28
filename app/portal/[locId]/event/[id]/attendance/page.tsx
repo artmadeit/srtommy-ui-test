@@ -1,4 +1,5 @@
 "use client";
+
 import {
   Box,
   Button,
@@ -29,8 +30,8 @@ export default function AttendanceEvent({
   const { id, locId } = params;
 
   const getApi = useAuthApi();
-  const router = useRouter();
-  const alert = React.useContext(SnackbarContext);
+  // const router = useRouter();
+  // const alert = React.useContext(SnackbarContext);
 
   const { data: event } = useSWR<EventDetail>(`/events/${id}`);
   const { data: attendances, isLoading } = useSWR<number[]>(
@@ -105,7 +106,6 @@ export default function AttendanceEvent({
                 await api.put(`/events/${id}/attendance`, {
                   personIds: rowSelectionModel,
                 });
-                // console.log(rowSelectionModel);
               }}
             >
               Registrar asistencia
