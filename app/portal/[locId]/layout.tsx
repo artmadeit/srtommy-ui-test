@@ -15,6 +15,7 @@ import * as React from "react";
 import MenuDrawer2 from "../MenuDrawer2";
 import useSWR from "swr";
 import { LocationDetail } from "./Location";
+import WaterIcon from "@mui/icons-material/Water";
 
 export default function LocLayout({
   children,
@@ -25,9 +26,7 @@ export default function LocLayout({
 }) {
   const { locId } = params;
 
-  const { data: location } = useSWR<LocationDetail>(
-    `organizations/${locId}`
-  );
+  const { data: location } = useSWR<LocationDetail>(`organizations/${locId}`);
 
   return (
     <MenuDrawer2
@@ -59,6 +58,20 @@ export default function LocLayout({
                   <PersonIcon />
                 </ListItemIcon>
                 <ListItemText primary="Personas" />
+              </ListItemButton>
+            </ListItem>
+          </Link>
+          <Link
+            component={NextLink}
+            href={`/portal/${locId}/person`}
+            style={{ textDecoration: "none", color: "inherit" }}
+          >
+            <ListItem>
+              <ListItemButton>
+                <ListItemIcon>
+                  <WaterIcon />                  
+                </ListItemIcon>
+                <ListItemText primary="Bautizados"/>
               </ListItemButton>
             </ListItem>
           </Link>
