@@ -15,7 +15,7 @@ import * as React from "react";
 import MenuDrawer2 from "../MenuDrawer2";
 import useSWR from "swr";
 import { LocationDetail } from "./Location";
-import WaterIcon from "@mui/icons-material/Water";
+import GroupsIcon from '@mui/icons-material/Groups';
 
 export default function LocLayout({
   children,
@@ -69,9 +69,9 @@ export default function LocLayout({
             <ListItem>
               <ListItemButton>
                 <ListItemIcon>
-                  <WaterIcon />                  
+                  <GroupsIcon />                  
                 </ListItemIcon>
-                <ListItemText primary="Bautizados"/>
+                <ListItemText primary="Grupos"/>
               </ListItemButton>
             </ListItem>
           </Link>

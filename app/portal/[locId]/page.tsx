@@ -1,10 +1,9 @@
 export default function PortalHome() {
   return (
     <main>
-      TODO
       <iframe
         src="https://dashboard-srtommy.streamlit.app/?embed=true"
-        height="450"
+        height="500"
         style={{ width: "100%", border: "none" }}
       ></iframe>
     </main>
