@@ -76,7 +76,7 @@ export const PersonForm = ({ initialValues, submit }: PersonFormProps) => {
           />
         </Grid>
         <Grid xs={6}>
-          <CheckboxButtonGroup
+          <RadioButtonGroup
             label="Bautizado:"
             name="baptize"
             options={[
@@ -91,7 +91,9 @@ export const PersonForm = ({ initialValues, submit }: PersonFormProps) => {
             ]}
             row
           />
-          {/* <RadioButtonGroup
+        </Grid>
+        {/* <Grid xs={3}>
+          <CheckboxButtonGroup
             label="Bautizado:"
             name="baptize"
             options={[
@@ -105,8 +107,8 @@ export const PersonForm = ({ initialValues, submit }: PersonFormProps) => {
               },
             ]}
             row
-          /> */}
-        </Grid>
+          />          
+        </Grid> */}
         <Grid xs={12}>
           <TextFieldElement fullWidth name="age" label="Edad" type="number" />
         </Grid>
