@@ -1,15 +1,17 @@
 "use client";
 
 import {
+  CheckboxButtonGroup,
   Controller,
   DatePickerElement,
   FormContainer,
+  RadioButtonGroup,
   TextFieldElement,
   useForm,
   useFormContext,
 } from "react-hook-form-mui";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
-import { Button, Typography } from "@mui/material";
+import { Button, FormControl, FormLabel, Typography } from "@mui/material";
 import { MuiTelInput } from "mui-tel-input";
 import { PersonDetail } from "../portal/[locId]/person/Person";
 import React from "react";
@@ -65,13 +67,45 @@ export const PersonForm = ({ initialValues, submit }: PersonFormProps) => {
         <Grid xs={12}>
           <TelFieldElement name="phoneNumber" />
         </Grid>
-        <Grid xs={12}>
+        <Grid xs={6}>
           <DatePickerElement
             sx={{ width: "100%" }}
             name="birthdate"
             label="Fecha de nacimiento"
             onChange={handleChange}
           />
+        </Grid>
+        <Grid xs={6}>
+          <CheckboxButtonGroup
+            label="Bautizado:"
+            name="baptize"
+            options={[
+              {
+                id: "1",
+                label: "Si",
+              },
+              {
+                id: "2",
+                label: "No",
+              },
+            ]}
+            row
+          />
+          {/* <RadioButtonGroup
+            label="Bautizado:"
+            name="baptize"
+            options={[
+              {
+                id: "1",
+                label: "Si",
+              },
+              {
+                id: "2",
+                label: "No",
+              },
+            ]}
+            row
+          /> */}
         </Grid>
         <Grid xs={12}>
           <TextFieldElement fullWidth name="age" label="Edad" type="number" />
