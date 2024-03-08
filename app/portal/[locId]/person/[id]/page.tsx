@@ -35,7 +35,10 @@ export default function PersonEdit({
         <div>El usuario no ha esta registrado</div>
       ) : (
         <PersonForm
-          initialValues={person}
+          initialValues={{
+            ...person,
+            hasBeenBaptized: person.hasBeenBaptized ? "YES" : "NO",
+          }}
           submit={async (formValues) => {
             console.log(formValues);
             const api = await getApi();
@@ -46,6 +49,7 @@ export default function PersonEdit({
               age: formValues.age,
               birthdate: formValues.birthdate,
               organizationId: locId,
+              hasBeenBaptized: formValues.hasBeenBaptized === "YES",
             });
             mutate();
             alert.showMessage("Guardado exitosamente");
