@@ -13,12 +13,19 @@ import {
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import { Button, FormControl, FormLabel, Typography } from "@mui/material";
 import { MuiTelInput } from "mui-tel-input";
-import { PersonDetail } from "../portal/[locId]/person/Person";
+import {
+  PersonDetail,
+  PersonDetailBase,
+} from "../portal/[locId]/person/Person";
 import React from "react";
 import { differenceInYears } from "date-fns";
 
+export type PersonDetailFormInput = PersonDetailBase & {
+  hasBeenBaptized?: "YES" | "NO";
+};
+
 type PersonFormProps = {
-  initialValues: PersonDetail;
+  initialValues: PersonDetailFormInput;
   submit: (data: any) => Promise<void>;
 };
 
@@ -81,40 +88,20 @@ export const PersonForm = ({ initialValues, submit }: PersonFormProps) => {
         <Grid xs={4}>
           <RadioButtonGroup
             label="Bautizado:"
-            name="baptize"
+            name="hasBeenBaptized"
             options={[
               {
-                id: "1",
+                id: "YES",
                 label: "Si",
               },
               {
-                id: "2",
+                id: "NO",
                 label: "No",
               },
             ]}
             row
           />
         </Grid>
-        {/* <Grid xs={3}>
-          <CheckboxButtonGroup
-            label="Bautizado:"
-            name="baptize"
-            options={[
-              {
-                id: "1",
-                label: "Si",
-              },
-              {
-                id: "2",
-                label: "No",
-              },
-            ]}
-            row
-          />          
-        </Grid> */}
-        {/* <Grid xs={12}> */}
-
-        {/* </Grid> */}
         <Grid xs={12}>
           <Button type="submit" variant="contained">
             Guardar

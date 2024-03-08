@@ -25,7 +25,11 @@ export default function CreatePerson({
       }}
       submit={async (data) => {
         const api = await getApi();
-        await api.post("people", { ...data, organizationId: locId });
+        await api.post("people", {
+          ...data,
+          hasBeenBaptized: data.hasBeenBaptized === "YES",
+          organizationId: locId,
+        });
         alert.showMessage("Guardado exitosamente");
         router.push(`/portal/${locId}/person`);
       }}
