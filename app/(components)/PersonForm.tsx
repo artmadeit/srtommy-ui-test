@@ -67,7 +67,7 @@ export const PersonForm = ({ initialValues, submit }: PersonFormProps) => {
         <Grid xs={12}>
           <TelFieldElement name="phoneNumber" />
         </Grid>
-        <Grid xs={6}>
+        <Grid xs={4}>
           <DatePickerElement
             sx={{ width: "100%" }}
             name="birthdate"
@@ -75,7 +75,10 @@ export const PersonForm = ({ initialValues, submit }: PersonFormProps) => {
             onChange={handleChange}
           />
         </Grid>
-        <Grid xs={6}>
+        <Grid xs={4}>
+          <TextFieldElement fullWidth name="age" label="Edad" type="number" />
+        </Grid>
+        <Grid xs={4}>
           <RadioButtonGroup
             label="Bautizado:"
             name="baptize"
@@ -109,9 +112,9 @@ export const PersonForm = ({ initialValues, submit }: PersonFormProps) => {
             row
           />          
         </Grid> */}
-        <Grid xs={12}>
-          <TextFieldElement fullWidth name="age" label="Edad" type="number" />
-        </Grid>
+        {/* <Grid xs={12}> */}
+
+        {/* </Grid> */}
         <Grid xs={12}>
           <Button type="submit" variant="contained">
             Guardar
