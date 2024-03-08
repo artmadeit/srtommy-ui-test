@@ -1,7 +1,6 @@
 "use client";
 
 import {
-  CheckboxButtonGroup,
   Controller,
   DatePickerElement,
   FormContainer,
@@ -11,7 +10,7 @@ import {
   useFormContext,
 } from "react-hook-form-mui";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
-import { Button, FormControl, FormLabel, Typography } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import { MuiTelInput } from "mui-tel-input";
 import { PersonDetail } from "../portal/[locId]/person/Person";
 import React from "react";
@@ -95,26 +94,6 @@ export const PersonForm = ({ initialValues, submit }: PersonFormProps) => {
             row
           />
         </Grid>
-        {/* <Grid xs={3}>
-          <CheckboxButtonGroup
-            label="Bautizado:"
-            name="baptize"
-            options={[
-              {
-                id: "1",
-                label: "Si",
-              },
-              {
-                id: "2",
-                label: "No",
-              },
-            ]}
-            row
-          />          
-        </Grid> */}
-        {/* <Grid xs={12}> */}
-
-        {/* </Grid> */}
         <Grid xs={12}>
           <Button type="submit" variant="contained">
             Guardar
