@@ -32,6 +32,7 @@ import * as React from "react";
 import useSWR from "swr";
 import Loading from "../(components)/Loading";
 import { withOutSorting } from "../(components)/helpers/withOutSorting";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const drawerWidth = 240;
 
@@ -45,17 +46,8 @@ export default function MenuDrawer2({
 }>) {
   const router = useRouter();
 
-  // const { user, isAuthenticated, isLoading } = useAuth0();
-  // const { logout } = useAuth0();
-
-  const isLoading = false;
-  const isAuthenticated = true;
-  const user = {
-    nickname: "Arthur",
-  };
-  const logout = (anything: any) => {
-    // TODO:
-  };
+  const { user, isAuthenticated, isLoading, loginWithRedirect } = useAuth0();
+  const { logout } = useAuth0();
 
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -97,7 +89,7 @@ export default function MenuDrawer2({
   }));
 
   if (isLoading) return <Loading />;
-  if (!isAuthenticated) return redirect("/");
+  if (!isAuthenticated) return loginWithRedirect();
 
   return (
     <Box sx={{ display: "flex" }}>
