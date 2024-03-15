@@ -5,7 +5,7 @@ import tommyImage from "./tomy.png";
 
 export default function PortalHome() {
   return (
-    <main>
+    <main style={{ margin: "24px"}}>
       <MenuDrawer2
         listDrawer={
           <List>
