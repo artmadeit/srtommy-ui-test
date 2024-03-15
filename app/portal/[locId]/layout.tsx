@@ -106,7 +106,7 @@ export default function LocLayout({
         </List>
       }
     >
-      <Box px={2}>{children}</Box>
+      {children}
     </MenuDrawer2>
   );
 }

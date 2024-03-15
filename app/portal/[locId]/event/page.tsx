@@ -1,6 +1,6 @@
 "use client";
 
-import { Fab, Stack, Tooltip, Typography } from "@mui/material";
+import { Box, Fab, Stack, Tooltip, Typography } from "@mui/material";
 import Link from "next/link";
 import AddIcon from "@mui/icons-material/Add";
 import SearchIcon from "@mui/icons-material/Search";
@@ -69,7 +69,7 @@ export default function EventListPage() {
   );
 
   return (
-    <Stack direction="column" spacing={2}>
+    <Stack direction="column" spacing={2} p={4}>
       <Stack direction="row" alignItems="center" spacing={2}>
         <Typography variant="h4">Eventos</Typography>
         <Tooltip title="Registrar">
