@@ -1,6 +1,6 @@
 "use client";
 
-// import { useAuth0 } from "@auth0/auth0-react";
+import { useAuth0 } from "@auth0/auth0-react";
 import { AccountCircle } from "@mui/icons-material";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import LogoutIcon from "@mui/icons-material/Logout";
@@ -27,12 +27,10 @@ import Toolbar from "@mui/material/Toolbar";
 import { styled } from "@mui/material/styles";
 import { DataGrid, GridColDef, esES } from "@mui/x-data-grid";
 import NextLink from "next/link";
-import { redirect, useRouter } from "next/navigation";
 import * as React from "react";
 import useSWR from "swr";
 import Loading from "../(components)/Loading";
 import { withOutSorting } from "../(components)/helpers/withOutSorting";
-import { useAuth0 } from "@auth0/auth0-react";
 
 const drawerWidth = 240;
 
@@ -44,8 +42,6 @@ export default function MenuDrawer2({
   listDrawer?: React.ReactNode;
   location?: { name: string };
 }>) {
-  const router = useRouter();
-
   const { user, isAuthenticated, isLoading, loginWithRedirect } = useAuth0();
   const { logout } = useAuth0();
 
@@ -88,8 +84,13 @@ export default function MenuDrawer2({
     justifyContent: "flex-end",
   }));
 
+  React.useEffect(() => {
+    if (!isLoading && !isAuthenticated) {
+      loginWithRedirect();
+    }
+  }, [isLoading, isAuthenticated, loginWithRedirect]);
+
   if (isLoading) return <Loading />;
-  if (!isAuthenticated) return loginWithRedirect();
 
   return (
     <Box sx={{ display: "flex" }}>
