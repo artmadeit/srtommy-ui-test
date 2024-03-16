@@ -1,12 +1,11 @@
-import React, { Component, ReactElement } from "react";
-import styled from "@emotion/styled";
 import { colors } from "@atlaskit/theme";
-import { Draggable } from "@hello-pangea/dnd";
+import styled from "@emotion/styled";
 import type {
   DraggableProvided,
   DraggableStateSnapshot,
 } from "@hello-pangea/dnd";
-import { grid, borderRadius } from "./constants";
+import { Draggable } from "@hello-pangea/dnd";
+import { borderRadius, grid } from "./constants";
 import QuoteList from "./quote-list";
 import Title from "./title";
 import type { Quote } from "./types";
@@ -45,37 +44,39 @@ interface Props {
   useClone?: boolean;
 }
 
-export default class Column extends Component<Props> {
-  render(): ReactElement {
-    const title: string = this.props.title;
-    const quotes: Quote[] = this.props.quotes;
-    const index: number = this.props.index;
-    return (
-      <Draggable draggableId={title} index={index}>
-        {(provided: DraggableProvided, snapshot: DraggableStateSnapshot) => (
-          <Container ref={provided.innerRef} {...provided.draggableProps}>
-            <Header isDragging={snapshot.isDragging}>
-              <Title
-                {...provided.dragHandleProps}
-                aria-label={`${title} quote list`}
-              >
-                {title}
-              </Title>
-            </Header>
-            <QuoteList
-              listId={title}
-              listType="QUOTE"
-              style={{
-                backgroundColor: snapshot.isDragging ? colors.G50 : undefined,
-              }}
-              quotes={quotes}
-              internalScroll={this.props.isScrollable}
-              isCombineEnabled={Boolean(this.props.isCombineEnabled)}
-              useClone={Boolean(this.props.useClone)}
-            />
-          </Container>
-        )}
-      </Draggable>
-    );
-  }
+export default function Column({
+  title,
+  quotes,
+  index,
+  isScrollable,
+  isCombineEnabled,
+  useClone,
+}: Props) {
+  return (
+    <Draggable draggableId={title} index={index}>
+      {(provided: DraggableProvided, snapshot: DraggableStateSnapshot) => (
+        <Container ref={provided.innerRef} {...provided.draggableProps}>
+          <Header isDragging={snapshot.isDragging}>
+            <Title
+              {...provided.dragHandleProps}
+              aria-label={`${title} quote list`}
+            >
+              {title}
+            </Title>
+          </Header>
+          <QuoteList
+            listId={title}
+            listType="QUOTE"
+            style={{
+              backgroundColor: snapshot.isDragging ? colors.G50 : undefined,
+            }}
+            quotes={quotes}
+            internalScroll={isScrollable}
+            isCombineEnabled={Boolean(isCombineEnabled)}
+            useClone={Boolean(useClone)}
+          />
+        </Container>
+      )}
+    </Draggable>
+  );
 }
