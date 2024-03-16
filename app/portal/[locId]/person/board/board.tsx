@@ -1,17 +1,15 @@
-import React, { Component, ReactElement } from "react";
 import styled from "@emotion/styled";
-import { Global, css } from "@emotion/react";
-import { colors } from "@atlaskit/theme";
 import type {
-  DropResult,
   DraggableLocation,
+  DropResult,
   DroppableProvided,
 } from "@hello-pangea/dnd";
 import { DragDropContext, Droppable } from "@hello-pangea/dnd";
-import type { QuoteMap, Quote } from "./types";
+import { PartialAutoScrollerOptions } from "@hello-pangea/dnd/src/state/auto-scroller/fluid-scroller/auto-scroller-options-types";
+import React, { Component, ReactElement } from "react";
 import Column from "./column";
 import reorder, { reorderQuoteMap } from "./reorder";
-import { PartialAutoScrollerOptions } from "@hello-pangea/dnd/src/state/auto-scroller/fluid-scroller/auto-scroller-options-types";
+import type { Quote, QuoteMap } from "./types";
 
 interface ParentContainerProps {
   height: string;
@@ -24,7 +22,6 @@ const ParentContainer = styled.div<ParentContainerProps>`
 `;
 
 const Container = styled.div`
-  background-color: ${colors.B100};
   min-height: 100vh;
   /* like display:flex but will allow bleeding over the window width */
   min-width: 100vw;
@@ -37,7 +34,6 @@ interface Props {
   isCombineEnabled?: boolean;
   containerHeight?: string;
   useClone?: boolean;
-  applyGlobalStyles?: boolean;
   autoScrollerOptions?: PartialAutoScrollerOptions;
 }
 
@@ -50,7 +46,6 @@ export default class Board extends Component<Props, State> {
   /* eslint-disable react/sort-comp */
   static defaultProps = {
     isCombineEnabled: false,
-    applyGlobalStyles: true,
   };
 
   state: State = {
@@ -128,7 +123,6 @@ export default class Board extends Component<Props, State> {
       useClone,
       isCombineEnabled,
       withScrollableColumns,
-      applyGlobalStyles,
     } = this.props;
 
     const board = (
@@ -170,15 +164,6 @@ export default class Board extends Component<Props, State> {
             board
           )}
         </DragDropContext>
-        {applyGlobalStyles ? (
-          <Global
-            styles={css`
-              body {
-                background: ${colors.B200};
-              }
-            `}
-          />
-        ) : null}
       </React.Fragment>
     );
   }
