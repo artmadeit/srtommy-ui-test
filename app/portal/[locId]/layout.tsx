@@ -4,7 +4,7 @@ import ChurchIcon from "@mui/icons-material/Church";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import EventIcon from "@mui/icons-material/Event";
 import PersonIcon from "@mui/icons-material/Person";
-import { Box, Link } from "@mui/material";
+import { Link } from "@mui/material";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";

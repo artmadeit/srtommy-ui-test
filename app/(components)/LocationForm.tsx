@@ -18,7 +18,7 @@ export const LocationForm = ({ title, submit, initialValues }: LocationFormProps
       defaultValues={initialValues}
       onSuccess={submit}
     >
-      <Grid container spacing={2} padding={2}>
+      <Grid container spacing={2} margin={4}>
         <Grid xs={12}>
           <Typography variant="h5" gutterBottom>
             {title}
