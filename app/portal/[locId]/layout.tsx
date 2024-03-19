@@ -15,7 +15,8 @@ import * as React from "react";
 import MenuDrawer2 from "../MenuDrawer2";
 import useSWR from "swr";
 import { LocationDetail } from "./Location";
-import GroupsIcon from '@mui/icons-material/Groups';
+import GroupsIcon from "@mui/icons-material/Groups";
+import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
 
 export default function LocLayout({
   children,
@@ -69,9 +70,9 @@ export default function LocLayout({
             <ListItem>
               <ListItemButton>
                 <ListItemIcon>
-                  <GroupsIcon />                  
+                  <GroupsIcon />
                 </ListItemIcon>
-                <ListItemText primary="Grupos"/>
+                <ListItemText primary="Grupos" />
               </ListItemButton>
             </ListItem>
           </Link>
@@ -86,6 +87,20 @@ export default function LocLayout({
                   <EventIcon />
                 </ListItemIcon>
                 <ListItemText primary="Eventos" />
+              </ListItemButton>
+            </ListItem>
+          </Link>
+          <Link
+            component={NextLink}
+            href={`/portal/${locId}/courses`}
+            style={{ textDecoration: "none", color: "inherit" }}
+          >
+            <ListItem>
+              <ListItemButton>
+                <ListItemIcon>
+                  <LibraryBooksIcon />
+                </ListItemIcon>
+                <ListItemText primary="Cursos" />
               </ListItemButton>
             </ListItem>
           </Link>
