@@ -6,6 +6,7 @@ import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import React from "react";
 import {
   AutocompleteElement,
+  DatePickerElement,
   FormContainer,
   TextFieldElement,
   useForm,
@@ -15,6 +16,7 @@ import { PersonDetail } from "../../person/Person";
 import { useDebounce } from "use-debounce";
 import { DEBOUNCE_WAIT_MS } from "@/app/(components)/helpers/debouncing";
 import { LocationDetail } from "../../Location";
+import { TimePicker, renderTimeViewClock } from "@mui/x-date-pickers";
 
 type CourseCreatePageProps = {
   locId: number;
@@ -38,6 +40,10 @@ export default function CourseCreatePage({ locId }: CourseCreatePageProps) {
     defaultValues: {
       name: "",
       address: "",
+      startDate: null,
+      startTime: null,
+      endDate: null,
+      endTime: null,
       description: "",
       speakers: "",
     },
@@ -55,6 +61,36 @@ export default function CourseCreatePage({ locId }: CourseCreatePageProps) {
         </Grid>
         <Grid xs={12}>
           <TextFieldElement fullWidth name="name" label="Nombre" required />
+        </Grid>
+        <Grid xs={3}>
+          <DatePickerElement label="Fecha Inicio" name="startDate" required />
+        </Grid>
+        <Grid xs={3}>
+          <TimePicker
+            ampm
+            value={formContext.getValues().startTime}
+            onChange={(value) => formContext.setValue("startTime", value)}
+            viewRenderers={{
+              hours: renderTimeViewClock,
+              minutes: renderTimeViewClock,
+              seconds: renderTimeViewClock,
+            }}
+          />
+        </Grid>
+        <Grid xs={3}>
+          <DatePickerElement label="Fecha fin" name="endDate" required />
+        </Grid>
+        <Grid xs={3}>
+          <TimePicker
+            ampm
+            value={formContext.getValues().endTime}
+            onChange={(value) => formContext.setValue("endTime", value)}
+            viewRenderers={{
+              hours: renderTimeViewClock,
+              minutes: renderTimeViewClock,
+              seconds: renderTimeViewClock,
+            }}
+          />
         </Grid>
         <Grid xs={12}>
           <AutocompleteElement
