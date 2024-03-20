@@ -61,7 +61,7 @@ export default function CourseListPage() {
       <Stack direction="row" alignItems="center" spacing={2}>
         <Typography variant="h4">Cursos</Typography>
         <Tooltip title="Registrar">
-          <Link href="/portal/">
+          <Link href="courses/create">
             <Fab color="primary" aria-labelledby="add">
               <AddIcon />
             </Fab>
