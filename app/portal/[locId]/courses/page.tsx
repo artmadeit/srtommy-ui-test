@@ -3,13 +3,19 @@
 import { Fab, Stack, Tooltip, Typography } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import Link from "next/link";
-import { DataGrid, GridActionsCellItem, GridColDef } from "@mui/x-data-grid";
+import {
+  DataGrid,
+  GridActionsCellItem,
+  GridColDef,
+  esES,
+} from "@mui/x-data-grid";
 import { useMemo } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import { useRouter } from "next/navigation";
 import { withOutSorting } from "@/app/(components)/helpers/withOutSorting";
 import useSWR from "swr";
 import { SpringPage } from "@/app/(api)/pagination";
+import { usePagination } from "@/app/(components)/hook-customization/usePagination";
 
 type CourseLisItem = {
   id: number;
@@ -18,6 +24,7 @@ type CourseLisItem = {
 
 export default function CourseListPage() {
   const router = useRouter();
+  const { paginationModel, setPaginationModel } = usePagination();
   const { data: events2, isLoading } =
     useSWR<SpringPage<CourseLisItem>>("/events");
 
@@ -65,7 +72,11 @@ export default function CourseListPage() {
         <DataGrid
           loading={isLoading}
           columns={columns}
+          paginationModel={paginationModel}
+          paginationMode="server"
+          onPaginationModelChange={setPaginationModel}
           rows={events2?.content || []}
+          localeText={esES.components.MuiDataGrid.defaultProps.localeText}
         />
       </div>
     </Stack>
