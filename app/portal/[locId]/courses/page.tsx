@@ -25,7 +25,8 @@ type CourseLisItem = {
 export default function CourseListPage() {
   const router = useRouter();
   const { paginationModel, setPaginationModel } = usePagination();
-  const { data: events2, isLoading } =
+  
+  const { data: events, isLoading } =
     useSWR<SpringPage<CourseLisItem>>("/events");
 
   const columns = useMemo(
@@ -75,7 +76,7 @@ export default function CourseListPage() {
           paginationModel={paginationModel}
           paginationMode="server"
           onPaginationModelChange={setPaginationModel}
-          rows={events2?.content || []}
+          rows={events?.content || []}
           localeText={esES.components.MuiDataGrid.defaultProps.localeText}
         />
       </div>

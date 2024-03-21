@@ -1,143 +1,75 @@
 "use client";
 
-import { SpringPage } from "@/app/(api)/pagination";
-import { Button, Typography } from "@mui/material";
-import Grid from "@mui/material/Unstable_Grid2/Grid2";
+import { Box } from "@mui/material";
 import React from "react";
-import {
-  AutocompleteElement,
-  DatePickerElement,
-  FormContainer,
-  TextFieldElement,
-  useForm,
-} from "react-hook-form-mui";
-import useSWR from "swr";
-import { PersonDetail } from "../../person/Person";
-import { useDebounce } from "use-debounce";
-import { DEBOUNCE_WAIT_MS } from "@/app/(components)/helpers/debouncing";
-import { LocationDetail } from "../../Location";
-import { TimePicker, renderTimeViewClock } from "@mui/x-date-pickers";
+import { CourseForm } from "@/app/(components)/CourseForm";
+import { useAuthApi } from "@/app/(api)/api";
+import { useRouter } from "next/navigation";
+import { SnackbarContext } from "@/app/(components)/SnackbarContext";
 
-type CourseCreatePageProps = {
-  locId: number;
-};
+export default function CourseCreatePage({
+  params,
+}: {
+  params: { locId: number };
+}) {
+  const { locId } = params;
 
-export default function CourseCreatePage({ locId }: CourseCreatePageProps) {
-  const [searchTextSpeaker, setSearchTextSpeaker] = React.useState("");
+  const getApi = useAuthApi();
+  const router = useRouter();
+  const alert = React.useContext(SnackbarContext);
 
-  const [searchTextDebounced] = useDebounce(
-    searchTextSpeaker,
-    DEBOUNCE_WAIT_MS
-  );
-
-  const { data: Location } = useSWR<LocationDetail>(`organizations/${locId}`);
-
-  const { data: people } = useSWR<SpringPage<PersonDetail>>(
-    searchTextDebounced ? `people?searchText=${searchTextDebounced}` : `people`
-  );
-
-  const formContext = useForm({
-    defaultValues: {
-      name: "",
-      address: "",
-      startDate: null,
-      startTime: null,
-      endDate: null,
-      endTime: null,
-      description: "",
-      speakers: "",
-    },
-  });
-
-  const submit = () => {
-    console.log("Guardando");
-  };
+  function getDateTime(date: Date, time: Date) {
+    return `${date.toISOString().split("T")[0]}T${
+      time.toISOString().split("T")[1]
+    }`;
+  }
 
   return (
-    <FormContainer formContext={formContext} onSuccess={submit}>
-      <Grid container spacing={2} m={4}>
-        <Grid xs={12}>
-          <Typography variant="h5">Datos del curso</Typography>
-        </Grid>
-        <Grid xs={12}>
-          <TextFieldElement fullWidth name="name" label="Nombre" required />
-        </Grid>
-        <Grid xs={3}>
-          <DatePickerElement label="Fecha Inicio" name="startDate" required />
-        </Grid>
-        <Grid xs={3}>
-          <TimePicker
-            ampm
-            value={formContext.getValues().startTime}
-            onChange={(value) => formContext.setValue("startTime", value)}
-            viewRenderers={{
-              hours: renderTimeViewClock,
-              minutes: renderTimeViewClock,
-              seconds: renderTimeViewClock,
-            }}
-          />
-        </Grid>
-        <Grid xs={3}>
-          <DatePickerElement label="Fecha fin" name="endDate" required />
-        </Grid>
-        <Grid xs={3}>
-          <TimePicker
-            ampm
-            value={formContext.getValues().endTime}
-            onChange={(value) => formContext.setValue("endTime", value)}
-            viewRenderers={{
-              hours: renderTimeViewClock,
-              minutes: renderTimeViewClock,
-              seconds: renderTimeViewClock,
-            }}
-          />
-        </Grid>
-        <Grid xs={12}>
-          <AutocompleteElement
-            autocompleteProps={{
-              freeSolo: true,
-              onInputChange: (_event, newInputValue) => {
-                formContext.setValue("address", newInputValue);
-              },
-            }}
-            name="address"
-            label="Lugar"
-            options={[Location?.address]}
-          />
-        </Grid>
-        <Grid xs={12}>
-          <AutocompleteElement
-            multiple
-            autocompleteProps={{
-              onInputChange: (_event, newInputValue) => {
-                setSearchTextSpeaker(newInputValue);
-              },
-            }}
-            name="speakers"
-            label="Ponente(s)"
-            options={
-              people?.content.map((x) => ({
-                id: x.id,
-                label: x.firstName + "" + x.lastName,
-              })) || []
-            }
-          />
-        </Grid>
-        <Grid xs={12}>
-          <TextFieldElement
-            fullWidth
-            name="description"
-            label="Descripción"
-            multiline
-            minRows={4}
-          />
-        </Grid>
-        <Grid xs={6}>
-          <Button type="submit" variant="contained">
-            Guardar
-          </Button>
-        </Grid>
-      </Grid>
-    </FormContainer>
+    <Box>
+      <CourseForm
+        locId={locId}
+        initialValues={{
+          name: "",
+          startTime: null,
+          endTime: null,
+          address: "",
+          description: "",
+          speakers: [],
+        }}
+        submit={async (values) => {
+          if (!values.startDate) {
+            return;
+          }
+
+          if (!values.startTime) {
+            return;
+          }
+
+          if (!values.endDate) {
+            return;
+          }
+
+          if (!values.endTime) {
+            return;
+          }
+
+          const data = {
+            name: values.name,
+            address: values.address,
+            startTime: getDateTime(values.startDate, values.startTime),
+            endTime: getDateTime(values.endDate, values.endTime),
+            speakerIds: values.speakers.map((x) => x.id),
+            organizationId: locId,
+            description: values.description,
+            isACourse: true,
+          };
+
+          const response = await getApi().then((api) =>
+            api.post(`/events`, data)
+          );
+          alert.showMessage("Guardado exitosamente");
+        }}
+      />
+    </Box>
   );
 }
