@@ -26,8 +26,15 @@ export default function EventListPage() {
   const router = useRouter();
   const { paginationModel, setPaginationModel } = usePagination();
 
-  const { data: events, isLoading } =
-    useSWR<SpringPage<EventListItem[]>>("/events");
+  const { data: events, isLoading } = useSWR<SpringPage<EventListItem>>([
+    `/events`,
+    {
+      params: {
+        page: paginationModel.page,
+        size: paginationModel.pageSize,
+      },
+    },
+  ]);
 
   const columns = useMemo(
     () =>

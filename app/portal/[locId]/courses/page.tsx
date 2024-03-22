@@ -25,15 +25,23 @@ type CourseLisItem = {
 export default function CourseListPage() {
   const router = useRouter();
   const { paginationModel, setPaginationModel } = usePagination();
-  
-  const { data: events, isLoading } =
-    useSWR<SpringPage<CourseLisItem>>("/events");
+
+  const { data: events, isLoading } = useSWR<SpringPage<CourseLisItem>>([
+    `/events`,
+    {
+      params: {
+        page: paginationModel.page,
+        size: paginationModel.pageSize,
+        isACourse: true,
+      },
+    },
+  ]);
 
   const columns = useMemo(
     () =>
       (
         [
-          { field: "name", headerName: "Nombre" },
+          { field: "name", headerName: "Nombre", flex: 1 },
           {
             field: "actions",
             type: "actions",
