@@ -12,7 +12,7 @@ export default function PersonBoardPage({
   const { locId } = params;
 
   return (
-    <PeopleLayout value="board">
+    <PeopleLayout value="board" locId={locId}>
       <Board initial={authorQuoteMap}></Board>
     </PeopleLayout>
   );

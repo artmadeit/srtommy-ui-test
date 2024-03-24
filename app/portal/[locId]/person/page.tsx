@@ -11,7 +11,7 @@ export default function PersonListPage({
   const { locId } = params;
 
   return (
-    <PeopleLayout value="table">
+    <PeopleLayout value="table" locId={locId}>
       <PersonTable locId={locId} />
     </PeopleLayout>
   );

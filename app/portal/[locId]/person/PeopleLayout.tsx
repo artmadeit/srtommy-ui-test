@@ -15,9 +15,11 @@ import React from "react";
 export function PeopleLayout({
   children,
   value,
+  locId,
 }: {
   children: React.ReactNode;
   value: "table" | "board";
+  locId: number;
 }) {
   return (
     <Stack direction="column" spacing={2} p={4}>
@@ -37,7 +39,7 @@ export function PeopleLayout({
             value="table"
             aria-label="table"
             LinkComponent={Link}
-            href="person"
+            href={`/portal/${locId}/person`}
           >
             <TableRows />
           </ToggleButton>
@@ -45,7 +47,7 @@ export function PeopleLayout({
             value="board"
             aria-label="kanban board"
             LinkComponent={Link}
-            href="person/board"
+            href={`/portal/${locId}/person/board`}
           >
             <TableChart />
           </ToggleButton>
