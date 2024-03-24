@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import { colors } from "@atlaskit/theme";
 import type { DraggableProvided } from "@hello-pangea/dnd";
 import { borderRadius, grid } from "./constants";
-import type { Quote, AuthorColors } from "./types";
+import type { Quote } from "./types";
 
 interface Props {
   quote: Quote;
@@ -15,13 +15,9 @@ interface Props {
   index?: number;
 }
 
-const getBackgroundColor = (
-  isDragging: boolean,
-  isGroupedOver: boolean,
-  authorColors: AuthorColors
-) => {
+const getBackgroundColor = (isDragging: boolean, isGroupedOver: boolean) => {
   if (isDragging) {
-    return authorColors.soft;
+    return colors.B50;
   }
 
   if (isGroupedOver) {
@@ -57,7 +53,6 @@ const CloneBadge = styled.div`
 `;
 
 interface ContainerProps {
-  colors: AuthorColors;
   isDragging: boolean;
   isGroupedOver: boolean;
 }
@@ -67,7 +62,7 @@ const Container = styled.a<ContainerProps>`
   border: 2px solid transparent;
   border-color: ${(props) => getBorderColor(props.isDragging)};
   background-color: ${(props) =>
-    getBackgroundColor(props.isDragging, props.isGroupedOver, props.colors)};
+    getBackgroundColor(props.isDragging, props.isGroupedOver)};
   box-shadow: ${({ isDragging }) =>
     isDragging ? `2px 2px 1px ${colors.N70}` : "none"};
   box-sizing: border-box;
@@ -134,14 +129,10 @@ const Footer = styled.div`
   align-items: center;
 `;
 
-interface AuthorProps {
-  colors: AuthorColors;
-}
-
-const Author = styled.small<AuthorProps>`
+const Author = styled.small`
   flex-grow: 0;
   margin: 0;
-  background-color: ${(props) => props.colors.soft};
+  background-color: ${colors.B50};
   border-radius: ${borderRadius}px;
   font-weight: normal;
   padding: ${grid / 2}px;
@@ -183,7 +174,6 @@ function QuoteItem(props: Props) {
       href={quote.author.url}
       isDragging={isDragging}
       isGroupedOver={Boolean(isGroupedOver)}
-      colors={quote.author.colors}
       ref={provided.innerRef}
       {...provided.draggableProps}
       {...provided.dragHandleProps}
@@ -198,7 +188,7 @@ function QuoteItem(props: Props) {
       <Content>
         <BlockQuote>{quote.content}</BlockQuote>
         <Footer>
-          <Author colors={quote.author.colors}>{quote.author.name}</Author>
+          <Author>{quote.author.name}</Author>
           <QuoteId>id:{quote.id}</QuoteId>
         </Footer>
       </Content>

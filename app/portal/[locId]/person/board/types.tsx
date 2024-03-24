@@ -11,7 +11,6 @@ export type Author = {
   name: string;
   avatarUrl: string;
   url: string;
-  colors: AuthorColors;
 };
 
 export type Quote = {

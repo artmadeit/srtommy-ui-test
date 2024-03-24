@@ -1,4 +1,3 @@
-import { colors } from "@atlaskit/theme";
 import type { Author, Quote, QuoteMap } from "./types";
 const finnImg = "/finn-min.png";
 const bmoImg = "/bmo-min.png";
@@ -10,9 +9,6 @@ const jake: Author = {
   name: "Jake",
   url: "http://adventuretime.wikia.com/wiki/Jake",
   avatarUrl: jakeImg,
-  colors: {
-    soft: colors.Y50,
-  },
 };
 
 const BMO: Author = {
@@ -20,9 +16,6 @@ const BMO: Author = {
   name: "BMO",
   url: "http://adventuretime.wikia.com/wiki/BMO",
   avatarUrl: bmoImg,
-  colors: {
-    soft: colors.G50,
-  },
 };
 
 const finn: Author = {
@@ -30,9 +23,6 @@ const finn: Author = {
   name: "Finn",
   url: "http://adventuretime.wikia.com/wiki/Finn",
   avatarUrl: finnImg,
-  colors: {
-    soft: colors.B50,
-  },
 };
 
 const princess: Author = {
@@ -40,9 +30,6 @@ const princess: Author = {
   name: "Princess bubblegum",
   url: "http://adventuretime.wikia.com/wiki/Princess_Bubblegum",
   avatarUrl: princessImg,
-  colors: {
-    soft: colors.P50,
-  },
 };
 
 export const authors: Author[] = [jake, BMO, finn, princess];
