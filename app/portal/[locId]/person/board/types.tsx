@@ -4,7 +4,6 @@ export type Id = string;
 
 export type AuthorColors = {
   soft: string;
-  hard: string;
 };
 
 export type Author = {

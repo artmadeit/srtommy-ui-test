@@ -12,7 +12,6 @@ const jake: Author = {
   avatarUrl: jakeImg,
   colors: {
     soft: colors.Y50,
-    hard: colors.N400A,
   },
 };
 
@@ -23,7 +22,6 @@ const BMO: Author = {
   avatarUrl: bmoImg,
   colors: {
     soft: colors.G50,
-    hard: colors.N400A,
   },
 };
 
@@ -34,7 +32,6 @@ const finn: Author = {
   avatarUrl: finnImg,
   colors: {
     soft: colors.B50,
-    hard: colors.N400A,
   },
 };
 
@@ -45,7 +42,6 @@ const princess: Author = {
   avatarUrl: princessImg,
   colors: {
     soft: colors.P50,
-    hard: colors.N400A,
   },
 };
 

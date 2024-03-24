@@ -31,8 +31,8 @@ const getBackgroundColor = (
   return colors.N0;
 };
 
-const getBorderColor = (isDragging: boolean, authorColors: AuthorColors) =>
-  isDragging ? authorColors.hard : "transparent";
+const getBorderColor = (isDragging: boolean) =>
+  isDragging ? "rgba(9, 30, 66, 0.71)" : "transparent";
 
 const imageSize = 40;
 
@@ -65,7 +65,7 @@ interface ContainerProps {
 const Container = styled.a<ContainerProps>`
   border-radius: ${borderRadius}px;
   border: 2px solid transparent;
-  border-color: ${(props) => getBorderColor(props.isDragging, props.colors)};
+  border-color: ${(props) => getBorderColor(props.isDragging)};
   background-color: ${(props) =>
     getBackgroundColor(props.isDragging, props.isGroupedOver, props.colors)};
   box-shadow: ${({ isDragging }) =>
@@ -87,7 +87,6 @@ const Container = styled.a<ContainerProps>`
 
   &:focus {
     outline: none;
-    border-color: ${(props) => props.colors.hard};
     box-shadow: none;
   }
 
@@ -140,7 +139,6 @@ interface AuthorProps {
 }
 
 const Author = styled.small<AuthorProps>`
-  color: ${(props) => props.colors.hard};
   flex-grow: 0;
   margin: 0;
   background-color: ${(props) => props.colors.soft};
