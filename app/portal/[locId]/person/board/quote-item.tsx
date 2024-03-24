@@ -138,15 +138,6 @@ const Author = styled.small`
   padding: ${grid / 2}px;
 `;
 
-const QuoteId = styled.small`
-  flex-grow: 1;
-  flex-shrink: 1;
-  margin: 0;
-  font-weight: normal;
-  text-overflow: ellipsis;
-  text-align: right;
-`;
-
 function getStyle(provided: DraggableProvided, style?: CSSProperties | null) {
   if (!style) {
     return provided.draggableProps.style;
@@ -189,7 +180,6 @@ function QuoteItem(props: Props) {
         <BlockQuote>{quote.content}</BlockQuote>
         <Footer>
           <Author>{quote.author.name}</Author>
-          <QuoteId>id:{quote.id}</QuoteId>
         </Footer>
       </Content>
     </Container>
