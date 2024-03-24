@@ -27,7 +27,7 @@ export function PeopleLayout({
         <Stack direction="row" alignItems="center" spacing={2}>
           <Typography variant="h4">Personas</Typography>
           <Tooltip title="Registrar">
-            <Link href="person/create">
+            <Link href={`/portal/${locId}/person/create`}>
               <Fab color="primary" aria-labelledby="create">
                 <AddIcon />
               </Fab>
