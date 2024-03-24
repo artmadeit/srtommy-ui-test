@@ -113,31 +113,6 @@ const Content = styled.div`
   flex-direction: column;
 `;
 
-const BlockQuote = styled.div`
-  &::before {
-    content: open-quote;
-  }
-
-  &::after {
-    content: close-quote;
-  }
-`;
-
-const Footer = styled.div`
-  display: flex;
-  margin-top: ${grid}px;
-  align-items: center;
-`;
-
-const Author = styled.small`
-  flex-grow: 0;
-  margin: 0;
-  background-color: ${colors.B50};
-  border-radius: ${borderRadius}px;
-  font-weight: normal;
-  padding: ${grid / 2}px;
-`;
-
 function getStyle(provided: DraggableProvided, style?: CSSProperties | null) {
   if (!style) {
     return provided.draggableProps.style;
@@ -176,12 +151,7 @@ function QuoteItem(props: Props) {
     >
       <Avatar src={quote.author.avatarUrl} alt={quote.author.name} />
       {isClone ? <CloneBadge>Clone</CloneBadge> : null}
-      <Content>
-        <BlockQuote>{quote.content}</BlockQuote>
-        <Footer>
-          <Author>{quote.author.name}</Author>
-        </Footer>
-      </Content>
+      <Content>{quote.author.name}</Content>
     </Container>
   );
 }
