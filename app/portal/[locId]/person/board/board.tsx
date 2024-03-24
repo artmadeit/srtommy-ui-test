@@ -8,8 +8,8 @@ import { DragDropContext, Droppable } from "@hello-pangea/dnd";
 import { PartialAutoScrollerOptions } from "@hello-pangea/dnd/src/state/auto-scroller/fluid-scroller/auto-scroller-options-types";
 import React, { useState } from "react";
 import Column from "./column";
-import reorder, { reorderQuoteMap } from "./reorder";
-import type { Quote, QuoteMap } from "./types";
+import reorder, { reorderMap } from "./reorder";
+import type { Author, PersonMap } from "./types";
 
 interface ParentContainerProps {
   height: string;
@@ -29,7 +29,7 @@ const Container = styled.div`
 `;
 
 interface Props {
-  initial: QuoteMap;
+  initial: PersonMap;
   withScrollableColumns?: boolean;
   isCombineEnabled?: boolean;
   containerHeight?: string;
@@ -58,8 +58,8 @@ export default function Board({
         return;
       }
 
-      const column: Quote[] = columns[result.source.droppableId];
-      const withQuoteRemoved: Quote[] = [...column];
+      const column: Author[] = columns[result.source.droppableId];
+      const withQuoteRemoved: Author[] = [...column];
       withQuoteRemoved.splice(result.source.index, 1);
       setColumns({
         ...columns,
@@ -96,13 +96,13 @@ export default function Board({
       return;
     }
 
-    const data = reorderQuoteMap({
-      quoteMap: columns,
+    const data = reorderMap({
+      personMap: columns,
       source,
       destination,
     });
 
-    setColumns(data.quoteMap);
+    setColumns(data.personMap);
   };
 
   const board = (
@@ -120,7 +120,7 @@ export default function Board({
               key={key}
               index={index}
               title={key}
-              quotes={columns[key]}
+              authors={columns[key]}
               isScrollable={withScrollableColumns}
               isCombineEnabled={isCombineEnabled}
               useClone={useClone}

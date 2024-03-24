@@ -1,4 +1,4 @@
-import type { Quote, QuoteMap } from "./types";
+import type { Author, PersonMap } from "./types";
 import type { DraggableLocation } from "@hello-pangea/dnd";
 
 // a little function to help us with reordering the result
@@ -12,38 +12,38 @@ const reorder = (list: any[], startIndex: number, endIndex: number): any[] => {
 
 export default reorder;
 
-type ReorderQuoteMapArgs = {
-  quoteMap: QuoteMap;
+type ReorderPersonMapArgs = {
+  personMap: PersonMap;
   source: DraggableLocation;
   destination: DraggableLocation;
 };
 
-export type ReorderQuoteMapResult = {
-  quoteMap: QuoteMap;
+export type ReorderPersonMapResult = {
+  personMap: PersonMap;
 };
 
-export const reorderQuoteMap = ({
-  quoteMap,
+export const reorderMap = ({
+  personMap,
   source,
   destination,
-}: ReorderQuoteMapArgs): ReorderQuoteMapResult => {
-  const current: Quote[] = [...quoteMap[source.droppableId]];
-  const next: Quote[] = [...quoteMap[destination.droppableId]];
-  const target: Quote = current[source.index];
+}: ReorderPersonMapArgs): ReorderPersonMapResult => {
+  const current: Author[] = [...personMap[source.droppableId]];
+  const next: Author[] = [...personMap[destination.droppableId]];
+  const target: Author = current[source.index];
 
   // moving to same list
   if (source.droppableId === destination.droppableId) {
-    const reordered: Quote[] = reorder(
+    const reordered: Author[] = reorder(
       current,
       source.index,
       destination.index
     );
-    const result: QuoteMap = {
-      ...quoteMap,
+    const result: PersonMap = {
+      ...personMap,
       [source.droppableId]: reordered,
     };
     return {
-      quoteMap: result,
+      personMap: result,
     };
   }
 
@@ -54,14 +54,14 @@ export const reorderQuoteMap = ({
   // insert into next
   next.splice(destination.index, 0, target);
 
-  const result: QuoteMap = {
-    ...quoteMap,
+  const result: PersonMap = {
+    ...personMap,
     [source.droppableId]: current,
     [destination.droppableId]: next,
   };
 
   return {
-    quoteMap: result,
+    personMap: result,
   };
 };
 

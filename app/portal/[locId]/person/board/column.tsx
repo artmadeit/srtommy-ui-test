@@ -8,7 +8,7 @@ import { Draggable } from "@hello-pangea/dnd";
 import { borderRadius, grid } from "./constants";
 import QuoteList from "./quote-list";
 import Title from "./title";
-import type { Quote } from "./types";
+import type { Author } from "./types";
 
 const Container = styled.div`
   margin: ${grid}px;
@@ -37,7 +37,7 @@ const Header = styled.div<HeaderProps>`
 
 interface Props {
   title: string;
-  quotes: Quote[];
+  authors: Author[];
   index: number;
   isScrollable?: boolean;
   isCombineEnabled?: boolean;
@@ -46,7 +46,7 @@ interface Props {
 
 export default function Column({
   title,
-  quotes,
+  authors,
   index,
   isScrollable,
   isCombineEnabled,
@@ -70,7 +70,7 @@ export default function Column({
             style={{
               backgroundColor: snapshot.isDragging ? colors.G50 : undefined,
             }}
-            quotes={quotes}
+            authors={authors}
             internalScroll={isScrollable}
             isCombineEnabled={Boolean(isCombineEnabled)}
             useClone={Boolean(useClone)}

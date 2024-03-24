@@ -3,10 +3,10 @@ import styled from "@emotion/styled";
 import { colors } from "@atlaskit/theme";
 import type { DraggableProvided } from "@hello-pangea/dnd";
 import { borderRadius, grid } from "./constants";
-import type { Quote } from "./types";
+import type { Author } from "./types";
 
 interface Props {
-  quote: Quote;
+  author: Author;
   isDragging: boolean;
   provided: DraggableProvided;
   isClone?: boolean;
@@ -132,12 +132,12 @@ function getStyle(provided: DraggableProvided, style?: CSSProperties | null) {
 // things we should be doing in the selector as we do not know if consumers
 // will be using PureComponent
 function QuoteItem(props: Props) {
-  const { quote, isDragging, isGroupedOver, provided, style, isClone, index } =
+  const { author, isDragging, isGroupedOver, provided, style, isClone, index } =
     props;
 
   return (
     <Container
-      href={quote.author.url}
+      href={author.url}
       isDragging={isDragging}
       isGroupedOver={Boolean(isGroupedOver)}
       ref={provided.innerRef}
@@ -145,13 +145,13 @@ function QuoteItem(props: Props) {
       {...provided.dragHandleProps}
       style={getStyle(provided, style)}
       data-is-dragging={isDragging}
-      data-testid={quote.id}
+      data-testid={author.id}
       data-index={index}
-      aria-label={`${quote.author.name} quote ${quote.content}`}
+      aria-label={`${author.name}`}
     >
-      <Avatar src={quote.author.avatarUrl} alt={quote.author.name} />
+      <Avatar src={author.avatarUrl} alt={author.name} />
       {isClone ? <CloneBadge>Clone</CloneBadge> : null}
-      <Content>{quote.author.name}</Content>
+      <Content>{author.name}</Content>
     </Container>
   );
 }

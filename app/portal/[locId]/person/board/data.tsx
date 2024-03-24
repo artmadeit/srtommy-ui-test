@@ -1,4 +1,4 @@
-import type { Author, Quote, QuoteMap } from "./types";
+import type { Author, PersonMap } from "./types";
 const finnImg = "/finn-min.png";
 const bmoImg = "/bmo-min.png";
 const jakeImg = "/jake-min.png";
@@ -24,29 +24,8 @@ const finn: Author = {
   avatarUrl: finnImg,
 };
 
-const quotes: Quote[] = [
-  {
-    id: "1",
-    content: "Sometimes life is scary and dark",
-    author: BMO,
-  },
-  {
-    id: "3",
-    content: "You got to focus on what's real, man",
-    author: jake,
-  },
-  {
-    id: "4",
-    content: "Is that where creativity comes from? From sad biz?",
-    author: finn,
-  },
-];
-
-const getByAuthor = (author: Author, items: Quote[]): Quote[] =>
-  items.filter((quote: Quote) => quote.author === author);
-
-export const authorQuoteMap: QuoteMap = {
-  Visitante: getByAuthor(jake, quotes),
-  "En progreso de ser miembro": getByAuthor(finn, quotes),
-  Miembro: getByAuthor(BMO, quotes),
+export const authorQuoteMap: PersonMap = {
+  Visitante: [jake, finn],
+  "En progreso de ser miembro": [BMO],
+  Miembro: [],
 };

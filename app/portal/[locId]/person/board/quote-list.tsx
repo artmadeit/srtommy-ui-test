@@ -11,7 +11,7 @@ import type {
 import QuoteItem from "./quote-item";
 import { grid } from "./constants";
 import Title from "./title";
-import type { Quote } from "./types";
+import { Author } from "./types";
 
 export const getBackgroundColor = (
   isDraggingOver: boolean,
@@ -70,7 +70,7 @@ const Container = styled.div``;
 interface Props {
   listId?: string;
   listType?: string;
-  quotes: Quote[];
+  authors: Author[];
   title?: string;
   internalScroll?: boolean;
   scrollContainerStyle?: CSSProperties;
@@ -83,21 +83,21 @@ interface Props {
 }
 
 interface QuoteListProps {
-  quotes: Quote[];
+  authors: Author[];
 }
 
 function InnerQuoteList(props: QuoteListProps): ReactElement {
   return (
     <>
-      {props.quotes.map((quote: Quote, index: number) => (
-        <Draggable key={quote.id} draggableId={quote.id} index={index}>
+      {props.authors.map((author: Author, index: number) => (
+        <Draggable key={author.id} draggableId={author.id} index={index}>
           {(
             dragProvided: DraggableProvided,
             dragSnapshot: DraggableStateSnapshot
           ) => (
             <QuoteItem
-              key={quote.id}
-              quote={quote}
+              key={author.id}
+              author={author}
               isDragging={dragSnapshot.isDragging}
               isGroupedOver={Boolean(dragSnapshot.combineTargetFor)}
               provided={dragProvided}
@@ -113,19 +113,19 @@ const InnerQuoteListMemo = React.memo<QuoteListProps>(InnerQuoteList);
 
 interface InnerListProps {
   dropProvided: DroppableProvided;
-  quotes: Quote[];
+  authors: Author[];
   title: string | undefined | null;
 }
 
 function InnerList(props: InnerListProps) {
-  const { quotes, dropProvided } = props;
+  const { authors, dropProvided } = props;
   const title = props.title ? <Title>{props.title}</Title> : null;
 
   return (
     <Container>
       {title}
       <DropZone ref={dropProvided.innerRef}>
-        <InnerQuoteListMemo quotes={quotes} />
+        <InnerQuoteListMemo authors={authors} />
         {dropProvided.placeholder}
       </DropZone>
     </Container>
@@ -142,7 +142,7 @@ export default function QuoteList(props: Props): ReactElement {
     listId = "LIST",
     listType,
     style,
-    quotes,
+    authors,
     title,
     useClone,
   } = props;
@@ -158,7 +158,7 @@ export default function QuoteList(props: Props): ReactElement {
         useClone
           ? (provided, snapshot, descriptor) => (
               <QuoteItem
-                quote={quotes[descriptor.source.index]}
+                author={authors[descriptor.source.index]}
                 provided={provided}
                 isDragging={snapshot.isDragging}
                 isClone
@@ -181,14 +181,14 @@ export default function QuoteList(props: Props): ReactElement {
           {internalScroll ? (
             <ScrollContainer style={scrollContainerStyle}>
               <InnerList
-                quotes={quotes}
+                authors={authors}
                 title={title}
                 dropProvided={dropProvided}
               />
             </ScrollContainer>
           ) : (
             <InnerList
-              quotes={quotes}
+              authors={authors}
               title={title}
               dropProvided={dropProvided}
             />

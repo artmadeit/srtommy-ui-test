@@ -2,10 +2,6 @@ import { DraggableId, DraggableLocation } from "@hello-pangea/dnd";
 
 export type Id = string;
 
-export type AuthorColors = {
-  soft: string;
-};
-
 export type Author = {
   id: Id;
   name: string;
@@ -13,19 +9,13 @@ export type Author = {
   url: string;
 };
 
-export type Quote = {
-  id: Id;
-  content: string;
-  author: Author;
-};
-
 export type Dragging = {
   id: DraggableId;
   location: DraggableLocation;
 };
 
-export type QuoteMap = {
-  [key: string]: Quote[];
+export type PersonMap = {
+  [key: string]: Author[];
 };
 
 export type Task = {
