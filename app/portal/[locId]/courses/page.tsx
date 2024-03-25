@@ -1,9 +1,8 @@
 "use client";
 
-import { Box, Fab, Stack, Tooltip, Typography } from "@mui/material";
-import Link from "next/link";
+import { Fab, Stack, Tooltip, Typography } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
-import SearchIcon from "@mui/icons-material/Search";
+import Link from "next/link";
 import {
   DataGrid,
   GridActionsCellItem,
@@ -11,27 +10,29 @@ import {
   esES,
 } from "@mui/x-data-grid";
 import { useMemo } from "react";
+import SearchIcon from "@mui/icons-material/Search";
 import { useRouter } from "next/navigation";
 import { withOutSorting } from "@/app/(components)/helpers/withOutSorting";
-import { usePagination } from "@/app/(components)/hook-customization/usePagination";
-import { SpringPage } from "@/app/(api)/pagination";
 import useSWR from "swr";
+import { SpringPage } from "@/app/(api)/pagination";
+import { usePagination } from "@/app/(components)/hook-customization/usePagination";
 
-type EventListItem = {
+type CourseLisItem = {
   id: number;
   name: string;
 };
 
-export default function EventListPage() {
+export default function CourseListPage() {
   const router = useRouter();
   const { paginationModel, setPaginationModel } = usePagination();
 
-  const { data: events, isLoading } = useSWR<SpringPage<EventListItem>>([
+  const { data: events, isLoading } = useSWR<SpringPage<CourseLisItem>>([
     `/events`,
     {
       params: {
         page: paginationModel.page,
         size: paginationModel.pageSize,
+        isACourse: true,
       },
     },
   ]);
@@ -40,17 +41,17 @@ export default function EventListPage() {
     () =>
       (
         [
-          { field: "name", flex: 1, headerName: "Nombre" },
+          { field: "name", headerName: "Nombre", flex: 1 },
           {
             field: "actions",
             type: "actions",
             width: 80,
             getActions: (params) => {
               return [
-                <Tooltip title="Ver" key="edit">
+                <Tooltip title="Ver" key="see">
                   <GridActionsCellItem
                     icon={<SearchIcon />}
-                    label="ver"
+                    label="Ver"
                     onClick={() =>
                       router.push(`event/${params.row.id}/attendance`)
                     }
@@ -59,7 +60,7 @@ export default function EventListPage() {
               ];
             },
           },
-        ] as GridColDef<EventListItem>[]
+        ] as GridColDef<CourseLisItem>[]
       ).map(withOutSorting),
     [router]
   );
@@ -67,29 +68,15 @@ export default function EventListPage() {
   return (
     <Stack direction="column" spacing={2} p={4}>
       <Stack direction="row" alignItems="center" spacing={2}>
-        <Typography variant="h4">Eventos</Typography>
+        <Typography variant="h4">Cursos</Typography>
         <Tooltip title="Registrar">
-          <Link href="event/create">
+          <Link href="courses/create">
             <Fab color="primary" aria-labelledby="add">
               <AddIcon />
             </Fab>
           </Link>
         </Tooltip>
       </Stack>
-      {/* <TextField
-        placeholder="Buscar..."
-        variant="outlined"
-        value={searchText}
-        onChange={handleChange}
-        InputProps={{
-          startAdornment: (
-            <InputAdornment position="start">
-              <SearchIcon />
-            </InputAdornment>
-          ),
-        }}
-        fullWidth
-      /> */}
       <div style={{ height: "70vh", width: "100%" }}>
         <DataGrid
           loading={isLoading}
@@ -97,9 +84,7 @@ export default function EventListPage() {
           paginationModel={paginationModel}
           paginationMode="server"
           onPaginationModelChange={setPaginationModel}
-          disableColumnFilter
           rows={events?.content || []}
-          rowCount={events?.totalElements || 0}
           localeText={esES.components.MuiDataGrid.defaultProps.localeText}
         />
       </div>

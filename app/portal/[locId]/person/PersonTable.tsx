@@ -34,7 +34,19 @@ export const PersonTable = ({
   const [searchText, setSearchText] = useState("");
   const [searchTextDebounced] = useDebounce(searchText, DEBOUNCE_WAIT_MS);
   const { data: people, isLoading } = useSWR<SpringPage<PersonListItem>>(
-    searchTextDebounced ? `people?searchText=${searchTextDebounced}` : `people`
+    searchTextDebounced
+      ? [
+          `people `,
+          {
+            params: {
+              page: paginationModel.page,
+              size: paginationModel.pageSize,
+              searchText: searchTextDebounced,
+            },
+          },
+        ]
+      : `people`
+    // searchText=${searchTextDebounced}`] : `people`
   );
 
   const columns = React.useMemo(
