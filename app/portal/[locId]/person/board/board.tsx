@@ -59,11 +59,11 @@ export default function Board({
       }
 
       const column: Author[] = columns[result.source.droppableId];
-      const withQuoteRemoved: Author[] = [...column];
-      withQuoteRemoved.splice(result.source.index, 1);
+      const withPersonRemoved: Author[] = [...column];
+      withPersonRemoved.splice(result.source.index, 1);
       setColumns({
         ...columns,
-        [result.source.droppableId]: withQuoteRemoved,
+        [result.source.droppableId]: withPersonRemoved,
       });
       return;
     }

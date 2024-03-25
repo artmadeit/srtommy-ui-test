@@ -8,7 +8,7 @@ import type {
   DraggableProvided,
   DraggableStateSnapshot,
 } from "@hello-pangea/dnd";
-import QuoteItem from "./quote-item";
+import PersonItem from "./person-item";
 import { grid } from "./constants";
 import Title from "./title";
 import { Author } from "./types";
@@ -69,7 +69,6 @@ const Container = styled.div``;
 
 interface Props {
   listId?: string;
-  listType?: string;
   authors: Author[];
   title?: string;
   internalScroll?: boolean;
@@ -82,11 +81,11 @@ interface Props {
   useClone?: boolean;
 }
 
-interface QuoteListProps {
+interface PersonListProps {
   authors: Author[];
 }
 
-function InnerQuoteList(props: QuoteListProps): ReactElement {
+function InnerPersonList(props: PersonListProps): ReactElement {
   return (
     <>
       {props.authors.map((author: Author, index: number) => (
@@ -95,7 +94,7 @@ function InnerQuoteList(props: QuoteListProps): ReactElement {
             dragProvided: DraggableProvided,
             dragSnapshot: DraggableStateSnapshot
           ) => (
-            <QuoteItem
+            <PersonItem
               key={author.id}
               author={author}
               isDragging={dragSnapshot.isDragging}
@@ -109,7 +108,7 @@ function InnerQuoteList(props: QuoteListProps): ReactElement {
   );
 }
 
-const InnerQuoteListMemo = React.memo<QuoteListProps>(InnerQuoteList);
+const InnerPersonListMemo = React.memo<PersonListProps>(InnerPersonList);
 
 interface InnerListProps {
   dropProvided: DroppableProvided;
@@ -125,14 +124,14 @@ function InnerList(props: InnerListProps) {
     <Container>
       {title}
       <DropZone ref={dropProvided.innerRef}>
-        <InnerQuoteListMemo authors={authors} />
+        <InnerPersonListMemo authors={authors} />
         {dropProvided.placeholder}
       </DropZone>
     </Container>
   );
 }
 
-export default function QuoteList(props: Props): ReactElement {
+export default function PersonList(props: Props): ReactElement {
   const {
     ignoreContainerClipping,
     internalScroll,
@@ -140,7 +139,6 @@ export default function QuoteList(props: Props): ReactElement {
     isDropDisabled,
     isCombineEnabled,
     listId = "LIST",
-    listType,
     style,
     authors,
     title,
@@ -150,14 +148,14 @@ export default function QuoteList(props: Props): ReactElement {
   return (
     <Droppable
       droppableId={listId}
-      type={listType}
+      type="PERSON"
       ignoreContainerClipping={ignoreContainerClipping}
       isDropDisabled={isDropDisabled}
       isCombineEnabled={isCombineEnabled}
       renderClone={
         useClone
           ? (provided, snapshot, descriptor) => (
-              <QuoteItem
+              <PersonItem
                 author={authors[descriptor.source.index]}
                 provided={provided}
                 isDragging={snapshot.isDragging}

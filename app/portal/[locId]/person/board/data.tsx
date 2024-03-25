@@ -24,7 +24,7 @@ const finn: Author = {
   avatarUrl: finnImg,
 };
 
-export const authorQuoteMap: PersonMap = {
+export const personMap: PersonMap = {
   Visitante: [jake, finn],
   "En progreso de ser miembro": [BMO],
   Miembro: [],

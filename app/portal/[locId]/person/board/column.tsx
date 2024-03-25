@@ -6,7 +6,7 @@ import type {
 } from "@hello-pangea/dnd";
 import { Draggable } from "@hello-pangea/dnd";
 import { borderRadius, grid } from "./constants";
-import QuoteList from "./quote-list";
+import PersonList from "./person-list";
 import Title from "./title";
 import type { Author } from "./types";
 
@@ -59,14 +59,13 @@ export default function Column({
           <Header isDragging={snapshot.isDragging}>
             <Title
               {...provided.dragHandleProps}
-              aria-label={`${title} quote list`}
+              aria-label={`${title} person list`}
             >
               {title}
             </Title>
           </Header>
-          <QuoteList
+          <PersonList
             listId={title}
-            listType="QUOTE"
             style={{
               backgroundColor: snapshot.isDragging ? colors.G50 : undefined,
             }}

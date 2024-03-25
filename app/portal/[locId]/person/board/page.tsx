@@ -2,7 +2,7 @@
 
 import { PeopleLayout } from "../PeopleLayout";
 import Board from "./board";
-import { authorQuoteMap } from "./data";
+import { personMap } from "./data";
 
 export default function PersonBoardPage({
   params,
@@ -13,7 +13,7 @@ export default function PersonBoardPage({
 
   return (
     <PeopleLayout value="board" locId={locId}>
-      <Board initial={authorQuoteMap}></Board>
+      <Board initial={personMap}></Board>
     </PeopleLayout>
   );
 }

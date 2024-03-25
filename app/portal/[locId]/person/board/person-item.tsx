@@ -131,7 +131,7 @@ function getStyle(provided: DraggableProvided, style?: CSSProperties | null) {
 // Need to be super sure we are not relying on PureComponent here for
 // things we should be doing in the selector as we do not know if consumers
 // will be using PureComponent
-function QuoteItem(props: Props) {
+function PersonItem(props: Props) {
   const { author, isDragging, isGroupedOver, provided, style, isClone, index } =
     props;
 
@@ -156,4 +156,4 @@ function QuoteItem(props: Props) {
   );
 }
 
-export default React.memo<Props>(QuoteItem);
+export default React.memo<Props>(PersonItem);

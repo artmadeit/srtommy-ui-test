@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
 import { grid } from "./constants";
-import { colors } from "@atlaskit/theme";
 
 export default styled.h4`
   padding: ${grid}px;
@@ -10,7 +9,7 @@ export default styled.h4`
   position: relative;
 
   &:focus {
-    outline: 2px solid ${colors.P100};
+    outline: 2px solid #998dd9;
     outline-offset: 2px;
   }
 `;
