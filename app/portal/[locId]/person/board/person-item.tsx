@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import type { DraggableProvided } from "@hello-pangea/dnd";
 import { borderRadius, grid } from "./constants";
 import type { Author } from "./types";
+import { Avatar } from "@mui/material";
 
 interface Props {
   author: Author;
@@ -69,6 +70,7 @@ const Container = styled.a<ContainerProps>`
   min-height: ${imageSize}px;
   margin-bottom: ${grid}px;
   user-select: none;
+  text-decoration: none;
 
   /* anchor overrides */
   color: #091e42;
@@ -76,7 +78,6 @@ const Container = styled.a<ContainerProps>`
   &:hover,
   &:active {
     color: #091e42;
-    text-decoration: none;
   }
 
   &:focus {
@@ -86,15 +87,6 @@ const Container = styled.a<ContainerProps>`
 
   /* flexbox */
   display: flex;
-`;
-
-const Avatar = styled.img`
-  width: ${imageSize}px;
-  height: ${imageSize}px;
-  border-radius: 50%;
-  margin-right: ${grid}px;
-  flex-shrink: 0;
-  flex-grow: 0;
 `;
 
 const Content = styled.div`
@@ -110,6 +102,7 @@ const Content = styled.div`
   /* flex parent */
   display: flex;
   flex-direction: column;
+  padding-left: 0.5rem;
 `;
 
 function getStyle(provided: DraggableProvided, style?: CSSProperties | null) {
@@ -148,11 +141,40 @@ function PersonItem(props: Props) {
       data-index={index}
       aria-label={`${author.name}`}
     >
-      <Avatar src={author.avatarUrl} alt={author.name} />
+      <Avatar {...stringAvatar(author.name)} />
       {isClone ? <CloneBadge>Clone</CloneBadge> : null}
       <Content>{author.name}</Content>
     </Container>
   );
+}
+
+function stringToColor(string: string) {
+  let hash = 0;
+  let i;
+
+  /* eslint-disable no-bitwise */
+  for (i = 0; i < string.length; i += 1) {
+    hash = string.charCodeAt(i) + ((hash << 5) - hash);
+  }
+
+  let color = "#";
+
+  for (i = 0; i < 3; i += 1) {
+    const value = (hash >> (i * 8)) & 0xff;
+    color += `00${value.toString(16)}`.slice(-2);
+  }
+  /* eslint-enable no-bitwise */
+
+  return color;
+}
+
+function stringAvatar(name: string) {
+  return {
+    sx: {
+      bgcolor: stringToColor(name),
+    },
+    children: `${name.split(" ")[0][0]}`,
+  };
 }
 
 export default React.memo<Props>(PersonItem);

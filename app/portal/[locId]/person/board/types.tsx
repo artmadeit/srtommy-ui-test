@@ -5,7 +5,6 @@ export type Id = string;
 export type Author = {
   id: Id;
   name: string;
-  avatarUrl: string;
   url: string;
 };
 
