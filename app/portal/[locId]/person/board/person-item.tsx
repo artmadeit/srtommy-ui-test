@@ -57,7 +57,7 @@ interface ContainerProps {
   isGroupedOver: boolean;
 }
 
-const Container = styled.a<ContainerProps>`
+const Container = styled.div<ContainerProps>`
   border-radius: ${borderRadius}px;
   border: 2px solid transparent;
   border-color: ${(props) => getBorderColor(props.isDragging)};
@@ -70,7 +70,7 @@ const Container = styled.a<ContainerProps>`
   min-height: ${imageSize}px;
   margin-bottom: ${grid}px;
   user-select: none;
-  text-decoration: none;
+  cursor: pointer;
 
   /* anchor overrides */
   color: #091e42;
@@ -129,7 +129,6 @@ function PersonItem(props: Props) {
 
   return (
     <Container
-      href={author.url}
       isDragging={isDragging}
       isGroupedOver={Boolean(isGroupedOver)}
       ref={provided.innerRef}
