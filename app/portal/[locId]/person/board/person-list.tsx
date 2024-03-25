@@ -1,6 +1,5 @@
 import React, { CSSProperties, ReactElement } from "react";
 import styled from "@emotion/styled";
-import { colors } from "@atlaskit/theme";
 import { Droppable, Draggable } from "@hello-pangea/dnd";
 import type {
   DroppableProvided,
@@ -18,12 +17,12 @@ export const getBackgroundColor = (
   isDraggingFrom: boolean
 ): string => {
   if (isDraggingOver) {
-    return colors.R50;
+    return "#FFEBE6";
   }
   if (isDraggingFrom) {
-    return colors.T50;
+    return "#E6FCFF";
   }
-  return colors.N30;
+  return "#EBECF0";
 };
 
 interface WrapperProps {
