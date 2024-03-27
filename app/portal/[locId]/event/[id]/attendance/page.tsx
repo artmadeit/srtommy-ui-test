@@ -15,7 +15,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import { PersonTable } from "../../../person/PersonTable";
 import Link from "next/link";
 import useSWR from "swr";
-import { EventDetail } from "../page";
+import { EventDetail } from "../EventDetail";
 import { formatDateTime } from "@/app/(api)/date";
 import { useAuthApi } from "@/app/(api)/api";
 import { SnackbarContext } from "@/app/(components)/SnackbarContext";

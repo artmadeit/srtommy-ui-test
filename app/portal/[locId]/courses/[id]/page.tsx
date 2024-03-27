@@ -1,10 +1,12 @@
+"use client";
+
 import { CourseForm, CourseFormValues } from "@/app/(components)/CourseForm";
 import { Box } from "@mui/material";
 import useSWR from "swr";
 import { PersonDetail } from "../../person/Person";
 import Loading from "@/app/(components)/Loading";
 
-export type CourseDetail = {
+type CourseDetail = {
   id: number;
   name: string;
   startTime: Date;
@@ -14,7 +16,7 @@ export type CourseDetail = {
   speaker: PersonDetail[];
 };
 
-export function CourseDetailPage({
+export default function CourseDetailPage({
   params,
 }: {
   params: { id: number; locId: number };

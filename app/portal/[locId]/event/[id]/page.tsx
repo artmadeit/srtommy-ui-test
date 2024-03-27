@@ -2,18 +2,8 @@
 import { Box } from "@mui/material";
 import { EventForm, EventFormValues } from "@/app/(components)/EventForm";
 import useSWR from "swr";
-import { PersonDetail } from "../../person/Person";
 import Loading from "@/app/(components)/Loading";
-
-export type EventDetail = {
-  id: number;
-  name: string;
-  startTime: Date;
-  endTime: Date;
-  address: string;
-  description: string;
-  speakers: PersonDetail[];
-};
+import { EventDetail } from "./EventDetail";
 
 export default function EventDetailPage({
   params,
