@@ -1,5 +1,9 @@
 "use client";
 
+import { useAuthApi } from "@/app/(api)/api";
+import { formatDateTime } from "@/app/(api)/date";
+import Loading from "@/app/(components)/Loading";
+import EditIcon from "@mui/icons-material/Edit";
 import {
   Box,
   Button,
@@ -9,18 +13,18 @@ import {
   Typography,
 } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
-import React, { useEffect, useState } from "react";
 import { GridRowSelectionModel } from "@mui/x-data-grid";
-import EditIcon from "@mui/icons-material/Edit";
-import { PersonTable } from "../../../person/PersonTable";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import useSWR from "swr";
+import { PersonTable } from "../../../person/PersonTable";
 import { EventDetail } from "../EventDetail";
-import { formatDateTime } from "@/app/(api)/date";
-import { useAuthApi } from "@/app/(api)/api";
-import { SnackbarContext } from "@/app/(components)/SnackbarContext";
-import { useRouter } from "next/navigation";
-import Loading from "@/app/(components)/Loading";
+
+type EventAttendance = {
+  numberOfVisitors: number;
+  visitorsDescription: string;
+  personIds: number[];
+};
 
 export default function AttendanceEvent({
   params,
@@ -30,11 +34,9 @@ export default function AttendanceEvent({
   const { id, locId } = params;
 
   const getApi = useAuthApi();
-  // const router = useRouter();
-  // const alert = React.useContext(SnackbarContext);
 
   const { data: event } = useSWR<EventDetail>(`/events/${id}`);
-  const { data: attendances, isLoading } = useSWR<number[]>(
+  const { data: eventAttendance, isLoading } = useSWR<EventAttendance>(
     `/events/${id}/attendance`
   );
 
@@ -42,10 +44,10 @@ export default function AttendanceEvent({
     useState<GridRowSelectionModel>([]);
 
   useEffect(() => {
-    if (attendances) {
-      setRowSelectionModel(attendances);
+    if (eventAttendance) {
+      setRowSelectionModel(eventAttendance.personIds);
     }
-  }, [attendances]);
+  }, [eventAttendance]);
 
   if (isLoading) return <Loading />;
 
