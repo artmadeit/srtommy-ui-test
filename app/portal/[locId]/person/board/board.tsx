@@ -10,6 +10,7 @@ import React, { useState } from "react";
 import Column from "./column";
 import reorder, { reorderMap } from "./reorder";
 import type { Author, PersonMap } from "./types";
+import { getLabel } from "./data";
 
 interface ParentContainerProps {
   height: string;
@@ -51,10 +52,13 @@ export default function Board({
 
   const onDragEnd = (result: DropResult): void => {
     if (result.combine) {
+      // console.log("combine"); // NOTE: unused
       if (result.type === "COLUMN") {
         const shallow: string[] = [...ordered];
         shallow.splice(result.source.index, 1);
         setOrdered(shallow);
+
+        // console.log("combine column"); // NOTE: unused
         return;
       }
 
@@ -92,6 +96,7 @@ export default function Board({
         destination.index
       );
 
+      console.log("reorder column");
       setOrdered(newOrdered);
       return;
     }
@@ -102,6 +107,8 @@ export default function Board({
       destination,
     });
 
+    console.log("reorder map");
+    console.log(data.personMap);
     setColumns(data.personMap);
   };
 
@@ -115,11 +122,11 @@ export default function Board({
     >
       {(provided: DroppableProvided) => (
         <Container ref={provided.innerRef} {...provided.droppableProps}>
-          {ordered.map((key: string, index: number) => (
+          {ordered.map((key, index) => (
             <Column
               key={key}
               index={index}
-              title={key}
+              title={getLabel(key)}
               authors={columns[key]}
               isScrollable={withScrollableColumns}
               isCombineEnabled={isCombineEnabled}

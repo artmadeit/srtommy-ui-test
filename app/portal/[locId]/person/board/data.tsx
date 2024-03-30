@@ -15,8 +15,18 @@ const finn: Author = {
   name: "Finn",
 };
 
+export const getLabel = (column: string) => {
+  return (
+    {
+      VISITOR: "Visitante",
+      IN_PROGRESS: "En progreso de ser miembro",
+      MEMBER: "Miembro",
+    }[column] || "-"
+  );
+};
+
 export const personMap: PersonMap = {
-  Visitante: [jake, finn],
-  "En progreso de ser miembro": [BMO],
-  Miembro: [],
+  VISITOR: [jake, finn],
+  IN_PROGRESS: [BMO],
+  MEMBER: [],
 };
