@@ -64,20 +64,6 @@ export default function LocLayout({
           </Link>
           <Link
             component={NextLink}
-            href={`/portal/${locId}/groups`}
-            style={{ textDecoration: "none", color: "inherit" }}
-          >
-            <ListItem>
-              <ListItemButton>
-                <ListItemIcon>
-                  <GroupsIcon />
-                </ListItemIcon>
-                <ListItemText primary="Grupos" />
-              </ListItemButton>
-            </ListItem>
-          </Link>
-          <Link
-            component={NextLink}
             href={`/portal/${locId}/event`}
             style={{ textDecoration: "none", color: "inherit" }}
           >

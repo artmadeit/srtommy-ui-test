@@ -100,6 +100,7 @@ export default function Board({
       return;
     }
 
+    console.log({ columns, source, destination });
     const data = reorderMap({
       personMap: columns,
       source,
