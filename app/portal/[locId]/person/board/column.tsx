@@ -8,6 +8,7 @@ import { borderRadius, grid } from "./constants";
 import PersonList from "./person-list";
 import Title from "./title";
 import type { Author } from "./types";
+import { getLabel } from "./data";
 
 const Container = styled.div`
   margin: ${grid}px;
@@ -59,7 +60,7 @@ export default function Column({
               {...provided.dragHandleProps}
               aria-label={`${title} person list`}
             >
-              {title}
+              {getLabel(title)}
             </Title>
           </Header>
           <PersonList

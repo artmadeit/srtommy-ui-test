@@ -10,7 +10,6 @@ import React, { useState } from "react";
 import Column from "./column";
 import reorder, { reorderMap } from "./reorder";
 import type { Author, PersonMap } from "./types";
-import { getLabel } from "./data";
 
 interface ParentContainerProps {
   height: string;
@@ -126,7 +125,7 @@ export default function Board({
             <Column
               key={key}
               index={index}
-              title={getLabel(key)}
+              title={key}
               authors={columns[key]}
               isScrollable={withScrollableColumns}
               isCombineEnabled={isCombineEnabled}
