@@ -1,5 +1,4 @@
 export type PersonDetailBase = {
-  id?: number;
   firstName: string;
   lastName: string;
   phoneNumber: string;
@@ -10,3 +9,5 @@ export type PersonDetailBase = {
 export type PersonDetail = PersonDetailBase & {
   hasBeenBaptized?: boolean;
 };
+
+export type PersonDetailWithId = PersonDetail & { id: number };

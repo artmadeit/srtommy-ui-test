@@ -1,3 +1,8 @@
+import { Button, Typography } from "@mui/material";
+import Grid from "@mui/material/Unstable_Grid2/Grid2";
+import { TimePicker } from "@mui/x-date-pickers";
+import { renderTimeViewClock } from "@mui/x-date-pickers/timeViewRenderers";
+import React from "react";
 import {
   AutocompleteElement,
   DatePickerElement,
@@ -6,17 +11,12 @@ import {
   TextFieldElement,
   useForm,
 } from "react-hook-form-mui";
-import Grid from "@mui/material/Unstable_Grid2/Grid2";
-import { Button, Typography } from "@mui/material";
-import React from "react";
-import { useDebounce } from "use-debounce";
-import { DEBOUNCE_WAIT_MS } from "./helpers/debouncing";
-import { LocationDetail } from "../portal/[locId]/Location";
-import { SpringPage } from "../(api)/pagination";
 import useSWR from "swr";
-import { PersonDetail } from "../portal/[locId]/person/Person";
-import { TimePicker } from "@mui/x-date-pickers";
-import { renderTimeViewClock } from "@mui/x-date-pickers/timeViewRenderers";
+import { useDebounce } from "use-debounce";
+import { SpringPage } from "../(api)/pagination";
+import { LocationDetail } from "../portal/[locId]/Location";
+import { PersonDetailWithId } from "../portal/[locId]/person/Person";
+import { DEBOUNCE_WAIT_MS } from "./helpers/debouncing";
 
 type Option = {
   id: number;
@@ -54,7 +54,7 @@ export const EventForm = ({ locId, initialValues, submit }: EventFormProps) => {
 
   const { data: Location } = useSWR<LocationDetail>(`organizations/${locId}`);
 
-  const { data: people } = useSWR<SpringPage<PersonDetail>>(
+  const { data: people } = useSWR<SpringPage<PersonDetailWithId>>(
     searchTextDebounced ? `people?searchText=${searchTextDebounced}` : `people`
   );
 

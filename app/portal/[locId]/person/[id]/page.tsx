@@ -40,7 +40,6 @@ export default function PersonEdit({
             hasBeenBaptized: person.hasBeenBaptized ? "YES" : "NO",
           }}
           submit={async (formValues) => {
-            console.log(formValues);
             const api = await getApi();
             await api.put(`/people/${id}`, {
               firstName: formValues.firstName,

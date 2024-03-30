@@ -12,10 +12,7 @@ import {
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import { Button, Typography } from "@mui/material";
 import { MuiTelInput } from "mui-tel-input";
-import {
-  PersonDetail,
-  PersonDetailBase,
-} from "../portal/[locId]/person/Person";
+import { PersonDetailBase } from "../portal/[locId]/person/Person";
 import React from "react";
 import { differenceInYears } from "date-fns";
 
