@@ -31,6 +31,7 @@ import * as React from "react";
 import useSWR from "swr";
 import Loading from "../(components)/Loading";
 import { withOutSorting } from "../(components)/helpers/withOutSorting";
+import { ORG_ID } from "./location/create/constants";
 
 const drawerWidth = 240;
 
@@ -229,8 +230,9 @@ type DialogLocationProps = {
 };
 
 const DialogAccounts = ({ open, onClose }: DialogLocationProps) => {
-  const { data: accounts, isLoading } =
-    useSWR<LocationListItem[]>("organizations");
+  const { data: accounts, isLoading } = useSWR<LocationListItem[]>(
+    `organizations/${ORG_ID}/childs`
+  );
 
   const columns = React.useMemo(
     () =>

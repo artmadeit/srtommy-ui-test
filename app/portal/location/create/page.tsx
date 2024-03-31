@@ -6,6 +6,7 @@ import MenuDrawer2 from "../../MenuDrawer2";
 import { LocationForm } from "@/app/(components)/LocationForm";
 import React from "react";
 import { SnackbarContext } from "@/app/(components)/SnackbarContext";
+import { ORG_ID } from "./constants";
 
 export default function LocationCreatePage() {
   const getApi = useAuthApi();
@@ -14,7 +15,10 @@ export default function LocationCreatePage() {
 
   const submit = async (data: any) => {
     const api = await getApi();
-    const response = await api.post("organizations", data);
+    const response = await api.post("organizations/locations", {
+      ...data,
+      parentId: ORG_ID,
+    });
     alert.showMessage("Guardado exitosamente");
     router.push("/portal/" + response.data.id);
   };
