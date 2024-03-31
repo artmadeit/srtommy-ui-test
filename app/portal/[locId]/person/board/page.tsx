@@ -8,7 +8,7 @@ import Loading from "@/app/(components)/Loading";
 import { PersonDetailWithId } from "../Person";
 
 type Accountability = {
-  person: PersonDetailWithId;
+  child: PersonDetailWithId;
   // organization: Organization;
   type: string;
 };
@@ -34,11 +34,9 @@ export default function PersonBoardPage({
     ? accountabilities.reduce(
         (prev, currentValue) => {
           const author: Author = {
-            id: String(currentValue.person.id),
+            id: String(currentValue.child.id),
             name:
-              currentValue.person.firstName +
-              " " +
-              currentValue.person.lastName,
+              currentValue.child.firstName + " " + currentValue.child.lastName,
           };
 
           if (!prev[currentValue.type].map((x) => x.id).includes(author.id)) {
