@@ -41,7 +41,7 @@ export default function Location({ params }: { params: { locId: number } }) {
               alert.showMessage("Guardado exitosamente");
             }}
           />
-          <Groups />
+          <Groups locId={locId}/>
         </>
       )}
     </Box>
