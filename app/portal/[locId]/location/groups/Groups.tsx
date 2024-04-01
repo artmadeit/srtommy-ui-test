@@ -2,7 +2,12 @@
 
 import AddIcon from "@mui/icons-material/Add";
 import { Fab, Stack, Tooltip, Typography } from "@mui/material";
-import { DataGrid, GridActionsCellItem, GridColDef } from "@mui/x-data-grid";
+import {
+  DataGrid,
+  GridActionsCellItem,
+  GridColDef,
+  esES,
+} from "@mui/x-data-grid";
 import SearchIcon from "@mui/icons-material/Search";
 import Link from "next/link";
 import React from "react";
@@ -17,6 +22,7 @@ type GroupsProps = {
 type GroupListItem = {
   id: number;
   name: string;
+  type: string;
 };
 
 export function Groups({ locId }: GroupsProps) {
@@ -29,6 +35,7 @@ export function Groups({ locId }: GroupsProps) {
       (
         [
           { field: "name", headerName: "Nombre" },
+          { field: "type", headerName: "Tipo" },
           {
             field: "actions",
             type: "actions",
@@ -64,11 +71,12 @@ export function Groups({ locId }: GroupsProps) {
           </Link>
         </Tooltip>
       </Stack>
-      <div>
+      <div style={{ width: "100%", height: "70vh" }}>
         <DataGrid
           loading={isLoading}
           columns={columns}
           rows={groups || []}
+          localeText={esES.components.MuiDataGrid.defaultProps.localeText}
           // rowCount={}
         />
       </div>
