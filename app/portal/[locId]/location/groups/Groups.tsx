@@ -64,7 +64,7 @@ export function Groups({ locId }: GroupsProps) {
       <Stack direction="row" spacing={2} alignItems="center">
         <Typography variant="h6">Grupos y Ministerios</Typography>
         <Tooltip title="Registrar">
-          <Link href="/">
+          <Link href="location/groups/create">
             <Fab color="primary" aria-labelledby="add">
               <AddIcon />
             </Fab>
