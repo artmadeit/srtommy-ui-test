@@ -1,57 +1,37 @@
 "use client";
 
-import { Button, Typography } from "@mui/material";
-import { FormContainer, RadioButtonGroup, TextFieldElement } from "react-hook-form-mui";
-import Grid from "@mui/material/Unstable_Grid2/Grid2";
+import React from "react";
 import { GroupForm } from "@/app/(components)/GroupForm";
+import { useAuthApi } from "@/app/(api)/api";
+import { useRouter } from "next/navigation";
+import { SnackbarContext } from "@/app/(components)/SnackbarContext";
 
-export default function GroupCreatePage() {
-  
+export default function GroupCreatePage({
+  params,
+}: {
+  params: { id: number; locId: number };
+}) {
+  const { id, locId } = params;
+
+  const getApi = useAuthApi();
+  const router = useRouter();
+  const alert = React.useContext(SnackbarContext);
+
   return (
-    // <FormContainer onSuccess={submit}>
-    //   <Grid container spacing={2} margin={4}>
-    //     <Grid xs={12}>
-    //       <Typography variant="h5" gutterBottom>
-    //         Datos generales del Grupo/Ministerio
-    //       </Typography>
-    //     </Grid>
-    //     <Grid xs={12}>
-    //       <TextFieldElement fullWidth name="name" label="Nombre" required />
-    //     </Grid>
-    //     <Grid xs={12}>
-    //       <TextFieldElement
-    //         fullWidth
-    //         name="description"
-    //         label="Descripción"
-    //         multiline
-    //         rows={4}
-    //         required
-    //       />
-    //     </Grid>
-    //     <Grid>
-    //       <RadioButtonGroup
-    //         label="Tipo"
-    //         name="type"
-    //         options={[
-    //           {
-    //             id: "1",
-    //             label: "Grupo",
-    //           },
-    //           {
-    //             id: "2",
-    //             label:"Ministerios",
-    //           }
-    //         ]}
-    //         row
-    //       />
-    //     </Grid>
-    //     <Grid xs={12}>
-    //       <Button type="submit" variant="contained">
-    //         Guardar
-    //       </Button>
-    //     </Grid>
-    //   </Grid>
-    // </FormContainer>
-    <GroupForm/>
+    <GroupForm
+      initialValues={{
+        name: "",
+        description: "",
+        type: "GROUP",
+      }}
+      submit={async (data) => {
+        const api = await getApi();
+        await api.post("/organizations/locations/childs", {
+          ...data,
+          parentId: locId,
+        });
+        alert.showMessage("Guardado exitosamente");
+      }}
+    />
   );
 }

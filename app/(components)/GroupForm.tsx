@@ -1,18 +1,30 @@
 import { Button, Typography } from "@mui/material";
-import { FormContainer, RadioButtonGroup, TextFieldElement, useForm } from "react-hook-form-mui";
+import {
+  FormContainer,
+  RadioButtonGroup,
+  TextFieldElement,
+  useForm,
+} from "react-hook-form-mui";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 
-export const GroupForm = () => {
-  const submit = () => {
-    console.log("guardando");
-  };
+export type GroupDetail = {
+  name: string;
+  description: string;
+  type: "GROUP" | "MINISTRY";
+};
 
-  // const formContext = useForm({
-  //   defaultValues: initialValues,
-  // })
+type GroupFormContext = {
+  initialValues: GroupDetail;
+  submit: (data: any) => Promise<void>;
+};
+
+export const GroupForm = ({ submit, initialValues }: GroupFormContext) => {
+  const formContext = useForm({
+    defaultValues: initialValues,
+  });
 
   return (
-    <FormContainer  onSuccess={submit}>
+    <FormContainer formContext={formContext} onSuccess={submit}>
       <Grid container spacing={2} margin={4}>
         <Grid xs={12}>
           <Typography variant="h5" gutterBottom>
@@ -29,7 +41,6 @@ export const GroupForm = () => {
             label="Descripción"
             multiline
             rows={4}
-            required
           />
         </Grid>
         <Grid>
@@ -38,11 +49,11 @@ export const GroupForm = () => {
             name="type"
             options={[
               {
-                id: "1",
+                id: "GROUP",
                 label: "Grupo",
               },
               {
-                id: "2",
+                id: "MINISTRY",
                 label: "Ministerios",
               },
             ]}
@@ -57,4 +68,4 @@ export const GroupForm = () => {
       </Grid>
     </FormContainer>
   );
-}
+};
