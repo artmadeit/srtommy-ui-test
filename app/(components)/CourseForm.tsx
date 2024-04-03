@@ -84,10 +84,16 @@ export const CourseForm = ({
           <TextFieldElement fullWidth name="name" label="Nombre" required />
         </Grid>
         <Grid xs={3}>
-          <DatePickerElement label="Fecha Inicio" name="startDate" required />
+          <DatePickerElement
+            sx={{ width: "100%" }}
+            label="Fecha Inicio"
+            name="startDate"
+            required
+          />
         </Grid>
         <Grid xs={3}>
           <TimePicker
+            sx={{ width: "100%" }}
             ampm
             value={formContext.getValues().startTime}
             onChange={(value) => formContext.setValue("startTime", value)}
@@ -99,10 +105,16 @@ export const CourseForm = ({
           />
         </Grid>
         <Grid xs={3}>
-          <DatePickerElement label="Fecha fin" name="endDate" required />
+          <DatePickerElement
+            sx={{ width: "100%" }}
+            label="Fecha fin"
+            name="endDate"
+            required
+          />
         </Grid>
         <Grid xs={3}>
           <TimePicker
+            sx={{ width: "100%" }}
             ampm
             value={formContext.getValues().endTime}
             onChange={(value) => formContext.setValue("endTime", value)}
