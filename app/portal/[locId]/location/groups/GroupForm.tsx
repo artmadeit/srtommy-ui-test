@@ -8,6 +8,7 @@ import {
 import { PersonTable } from "../../person/PersonTable";
 import { useState } from "react";
 import { GridRowSelectionModel } from "@mui/x-data-grid";
+import { GroupTypeLabels } from "./Group";
 
 export type GroupDetail = {
   name: string;
@@ -59,11 +60,11 @@ export const GroupForm = ({
           options={[
             {
               id: "GROUP",
-              label: "Grupo",
+              label: GroupTypeLabels.GROUP,
             },
             {
               id: "MINISTRY",
-              label: "Ministerios",
+              label: GroupTypeLabels.MINISTRY,
             },
           ]}
           row

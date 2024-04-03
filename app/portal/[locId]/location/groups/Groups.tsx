@@ -14,6 +14,7 @@ import React from "react";
 import { withOutSorting } from "@/app/(components)/helpers/withOutSorting";
 import { useRouter } from "next/navigation";
 import useSWR from "swr";
+import { GroupTypeLabels } from "./Group";
 
 type GroupsProps = {
   locId: number;
@@ -22,7 +23,7 @@ type GroupsProps = {
 type GroupListItem = {
   id: number;
   name: string;
-  type: string;
+  type: "GROUP" | "MINISTRY";
 };
 
 export function Groups({ locId }: GroupsProps) {
@@ -35,7 +36,15 @@ export function Groups({ locId }: GroupsProps) {
       (
         [
           { field: "name", headerName: "Nombre", flex: 1 },
-          { field: "type", headerName: "Tipo", flex: 1  },
+          {
+            field: "type",
+            headerName: "Tipo",
+            flex: 1,
+            valueGetter: ({ row }) =>
+              row.type === "GROUP"
+                ? GroupTypeLabels.GROUP
+                : GroupTypeLabels.MINISTRY,
+          },
           {
             field: "actions",
             type: "actions",

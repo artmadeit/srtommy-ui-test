@@ -54,7 +54,7 @@ export default function AttendanceEvent({
   if (isLoading) return <Loading />;
 
   return (
-    <Grid container spacing={2} padding={2}>
+    <Grid container spacing={2} margin={4}>
       {!event ? (
         "No hay evento registrado"
       ) : (
