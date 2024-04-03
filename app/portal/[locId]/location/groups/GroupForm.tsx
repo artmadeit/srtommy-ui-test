@@ -1,11 +1,13 @@
-import { Button, Typography } from "@mui/material";
+import { Button, Stack, Typography } from "@mui/material";
 import {
   FormContainer,
   RadioButtonGroup,
   TextFieldElement,
   useForm,
 } from "react-hook-form-mui";
-import Grid from "@mui/material/Unstable_Grid2/Grid2";
+import { PersonTable } from "../../person/PersonTable";
+import { useState } from "react";
+import { GridRowSelectionModel } from "@mui/x-data-grid";
 
 export type GroupDetail = {
   name: string;
@@ -14,58 +16,79 @@ export type GroupDetail = {
 };
 
 type GroupFormContext = {
+  locId: number;
   initialValues: GroupDetail;
   submit: (data: any) => Promise<void>;
 };
 
-export const GroupForm = ({ submit, initialValues }: GroupFormContext) => {
+export const GroupForm = ({
+  locId,
+  submit,
+  initialValues,
+}: GroupFormContext) => {
   const formContext = useForm({
     defaultValues: initialValues,
   });
 
+  const [rowSelectionModel, setRowSelectionModel] =
+    useState<GridRowSelectionModel>([]);
+
+  // useEffect(() => {
+  //   if (eventAttendance) {
+  //     setRowSelectionModel(eventAttendance.personIds);
+  //   }
+  // }, [eventAttendance]);
+
   return (
     <FormContainer formContext={formContext} onSuccess={submit}>
-      <Grid container spacing={2} margin={4}>
-        <Grid xs={12}>
-          <Typography variant="h5" gutterBottom>
-            Datos generales del Grupo/Ministerio
-          </Typography>
-        </Grid>
-        <Grid xs={12}>
-          <TextFieldElement fullWidth name="name" label="Nombre" required />
-        </Grid>
-        <Grid xs={12}>
-          <TextFieldElement
-            fullWidth
-            name="description"
-            label="Descripción"
-            multiline
-            rows={4}
-          />
-        </Grid>
-        <Grid>
-          <RadioButtonGroup
-            label="Tipo"
-            name="type"
-            options={[
-              {
-                id: "GROUP",
-                label: "Grupo",
-              },
-              {
-                id: "MINISTRY",
-                label: "Ministerios",
-              },
-            ]}
-            row
-          />
-        </Grid>
-        <Grid xs={12}>
-          <Button type="submit" variant="contained">
-            Guardar
-          </Button>
-        </Grid>
-      </Grid>
+      <Stack spacing={2} margin={4}>
+        <Typography variant="h5" gutterBottom>
+          Datos generales del Grupo / Ministerio
+        </Typography>
+        <TextFieldElement fullWidth name="name" label="Nombre" required />
+        <TextFieldElement
+          fullWidth
+          name="description"
+          label="Descripción"
+          multiline
+          rows={4}
+        />
+        <RadioButtonGroup
+          label="Tipo"
+          name="type"
+          options={[
+            {
+              id: "GROUP",
+              label: "Grupo",
+            },
+            {
+              id: "MINISTRY",
+              label: "Ministerios",
+            },
+          ]}
+          row
+        />
+        <Typography variant="h5" gutterBottom>
+          Miembros
+        </Typography>
+        <Typography variant="body1" gutterBottom>
+          Seleccione quienes conforman su grupo / ministerio
+        </Typography>
+        <PersonTable
+          locId={locId}
+          dataGridProps={{
+            keepNonExistentRowsSelected: true,
+            checkboxSelection: true,
+            rowSelectionModel: rowSelectionModel,
+            onRowSelectionModelChange: (newSelectionModel) => {
+              setRowSelectionModel(newSelectionModel);
+            },
+          }}
+        />
+        <Button type="submit" variant="contained">
+          Guardar
+        </Button>
+      </Stack>
     </FormContainer>
   );
 };

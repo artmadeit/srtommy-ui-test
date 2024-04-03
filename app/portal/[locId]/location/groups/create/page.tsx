@@ -19,6 +19,7 @@ export default function GroupCreatePage({
 
   return (
     <GroupForm
+      locId={locId}
       initialValues={{
         name: "",
         description: "",
@@ -31,6 +32,7 @@ export default function GroupCreatePage({
           parentId: locId,
         });
         alert.showMessage("Guardado exitosamente");
+        router.push(`/portal/${locId}/location`);
       }}
     />
   );
