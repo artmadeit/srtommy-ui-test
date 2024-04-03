@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { GroupForm } from "@/app/(components)/GroupForm";
+import { GroupForm } from "../GroupForm";
 import { useAuthApi } from "@/app/(api)/api";
 import { useRouter } from "next/navigation";
 import { SnackbarContext } from "@/app/(components)/SnackbarContext";
