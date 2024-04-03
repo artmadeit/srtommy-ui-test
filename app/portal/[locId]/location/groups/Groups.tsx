@@ -56,7 +56,7 @@ export function Groups({ locId }: GroupsProps) {
                     label="Ver"
                     icon={<SearchIcon />}
                     onClick={() =>
-                      router.push(`event/${params.row.id}/attendance`)
+                      router.push(`location/groups/${params.row.id}`)
                     }
                   />
                 </Tooltip>,
