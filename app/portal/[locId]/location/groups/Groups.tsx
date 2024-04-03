@@ -34,8 +34,8 @@ export function Groups({ locId }: GroupsProps) {
     () =>
       (
         [
-          { field: "name", headerName: "Nombre" },
-          { field: "type", headerName: "Tipo" },
+          { field: "name", headerName: "Nombre", flex: 1 },
+          { field: "type", headerName: "Tipo", flex: 1  },
           {
             field: "actions",
             type: "actions",

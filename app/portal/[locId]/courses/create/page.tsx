@@ -68,6 +68,7 @@ export default function CourseCreatePage({
             api.post(`/events`, data)
           );
           alert.showMessage("Guardado exitosamente");
+          router.push(`/portal/${locId}/courses`);
         }}
       />
     </Box>
