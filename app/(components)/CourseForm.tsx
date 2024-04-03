@@ -13,14 +13,14 @@ import { useDebounce } from "use-debounce";
 import useSWR from "swr";
 import { LocationDetail } from "../portal/[locId]/Location";
 import { SpringPage } from "../(api)/pagination";
-import { PersonDetail } from "../portal/[locId]/person/Person";
+import { PersonDetailWithId } from "../portal/[locId]/person/Person";
 import { DEBOUNCE_WAIT_MS } from "./helpers/debouncing";
 import { TimePicker, renderTimeViewClock } from "@mui/x-date-pickers";
 
-type Option ={
+type Option = {
   id: number;
   label: string;
-}
+};
 
 export type CourseFormValues = {
   name: string;
@@ -29,9 +29,8 @@ export type CourseFormValues = {
   endDate?: Date;
   endTime: Date | null;
   address: string;
-  speakers: Option[]
+  speakers: Option[];
   description: string;
-
 };
 
 type CourseCreatePageProps = {
@@ -40,12 +39,16 @@ type CourseCreatePageProps = {
   submit: SubmitHandler<CourseFormValues>;
 };
 
-export const CourseForm = ({ locId, initialValues ,submit }: CourseCreatePageProps) => {
+export const CourseForm = ({
+  locId,
+  initialValues,
+  submit,
+}: CourseCreatePageProps) => {
   const [searchTextSpeaker, setSearchTextSpeaker] = React.useState("");
 
   const formContext = useForm<CourseFormValues>({
-    defaultValues: initialValues
-  })
+    defaultValues: initialValues,
+  });
 
   const [searchTextDebounced] = useDebounce(
     searchTextSpeaker,
@@ -54,7 +57,7 @@ export const CourseForm = ({ locId, initialValues ,submit }: CourseCreatePagePro
 
   const { data: Location } = useSWR<LocationDetail>(`organizations/${locId}`);
 
-  const { data: people } = useSWR<SpringPage<PersonDetail>>(
+  const { data: people } = useSWR<SpringPage<PersonDetailWithId>>(
     searchTextDebounced ? `people?searchText=${searchTextDebounced}` : `people`
   );
 
@@ -137,7 +140,7 @@ export const CourseForm = ({ locId, initialValues ,submit }: CourseCreatePagePro
               people?.content.map((x) => ({
                 id: x.id,
                 label: x.firstName + "" + x.lastName,
-              })) || [] 
+              })) || []
             }
           />
         </Grid>
