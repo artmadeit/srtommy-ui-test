@@ -15,10 +15,11 @@ import {
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import { GridRowSelectionModel } from "@mui/x-data-grid";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import useSWR from "swr";
 import { PersonTable } from "../../../person/PersonTable";
 import { EventDetail } from "../EventDetail";
+import { SnackbarContext } from "@/app/(components)/SnackbarContext";
 
 type EventAttendance = {
   numberOfVisitors: number;
@@ -33,6 +34,7 @@ export default function AttendanceEvent({
 }) {
   const { id, locId } = params;
 
+  const alert = useContext(SnackbarContext);
   const getApi = useAuthApi();
 
   const { data: event } = useSWR<EventDetail>(`/events/${id}`);
@@ -108,9 +110,10 @@ export default function AttendanceEvent({
                 await api.put(`/events/${id}/attendance`, {
                   personIds: rowSelectionModel,
                 });
+                alert.showMessage("Asistencia guardada exitosamente");
               }}
             >
-              Registrar asistencia
+              Registrar asistencias
             </Button>
           </Grid>
         </>
