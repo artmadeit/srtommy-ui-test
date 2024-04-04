@@ -2,7 +2,7 @@
 
 import { Box } from "@mui/material";
 import React from "react";
-import { LocationForm } from "../../../(components)/LocationForm";
+import { LocationForm } from "./LocationForm";
 import useSWR from "swr";
 import { LocationDetail } from "../Location";
 import Loading from "@/app/(components)/Loading";

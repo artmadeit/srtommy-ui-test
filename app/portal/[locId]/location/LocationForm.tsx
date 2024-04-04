@@ -3,8 +3,8 @@
 import { FormContainer, TextFieldElement } from "react-hook-form-mui";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import { Button, Typography } from "@mui/material";
-import { LocationDetail } from "../portal/[locId]/Location";
-import { TelFieldElement } from "../portal/[locId]/person/PersonForm";
+import { LocationDetail } from "../Location";
+import { TelFieldElement } from "../person/PersonForm";
 
 type LocationFormProps = {
   title: string;

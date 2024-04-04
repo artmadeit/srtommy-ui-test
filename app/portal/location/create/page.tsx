@@ -3,7 +3,7 @@
 import { useAuthApi } from "@/app/(api)/api";
 import { useRouter } from "next/navigation";
 import MenuDrawer2 from "../../MenuDrawer2";
-import { LocationForm } from "@/app/(components)/LocationForm";
+import { LocationForm } from "../../[locId]/location/LocationForm";
 import React from "react";
 import { SnackbarContext } from "@/app/(components)/SnackbarContext";
 import { ORG_ID } from "./constants";
