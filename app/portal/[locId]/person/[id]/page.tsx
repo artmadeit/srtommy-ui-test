@@ -1,6 +1,6 @@
 "use client";
 
-import { PersonForm } from "@/app/(components)/PersonForm";
+import { PersonForm } from "@/app/portal/[locId]/person/PersonForm";
 import useSWR from "swr";
 import { PersonDetail } from "../Person";
 import { Box } from "@mui/material";

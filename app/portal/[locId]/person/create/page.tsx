@@ -2,7 +2,7 @@
 
 import { useAuthApi } from "@/app/(api)/api";
 import { useRouter } from "next/navigation";
-import { PersonForm } from "@/app/(components)/PersonForm";
+import { PersonForm } from "@/app/portal/[locId]/person/PersonForm";
 import React from "react";
 import { SnackbarContext } from "@/app/(components)/SnackbarContext";
 
