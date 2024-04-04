@@ -24,6 +24,7 @@ export default function GroupCreatePage({
         name: "",
         description: "",
         type: "GROUP",
+        members: [],
       }}
       submit={async (data) => {
         const api = await getApi();

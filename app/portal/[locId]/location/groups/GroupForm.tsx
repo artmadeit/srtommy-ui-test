@@ -1,19 +1,27 @@
 import { Button, Stack, Typography } from "@mui/material";
 import {
+  AutocompleteElement,
   FormContainer,
   RadioButtonGroup,
   TextFieldElement,
   useForm,
 } from "react-hook-form-mui";
 import { PersonTable } from "../../person/PersonTable";
-import { useState } from "react";
+import React, { useState } from "react";
 import { GridRowSelectionModel } from "@mui/x-data-grid";
 import { GroupTypeLabels } from "./Group";
+import { useDebounce } from "use-debounce";
+import { DEBOUNCE_WAIT_MS } from "@/app/(components)/helpers/debouncing";
+import useSWR from "swr";
+import { SpringPage } from "@/app/(api)/pagination";
+import { PersonDetailWithId } from "../../person/Person";
+import { Option } from "@/app/(components)/Option";
 
 export type GroupDetail = {
   name: string;
   description: string;
   type: "GROUP" | "MINISTRY";
+  members: Option[];
 };
 
 type GroupFormContext = {
@@ -30,6 +38,13 @@ export const GroupForm = ({
   const formContext = useForm({
     defaultValues: initialValues,
   });
+
+  const [searchMember, setSearchMember] = React.useState("");
+  const [searchTextDebounced] = useDebounce(searchMember, DEBOUNCE_WAIT_MS);
+
+  const { data: people } = useSWR<SpringPage<PersonDetailWithId>>(
+    searchTextDebounced ? `people?searchText=${searchTextDebounced}` : `people`
+  );
 
   const [rowSelectionModel, setRowSelectionModel] =
     useState<GridRowSelectionModel>([]);
@@ -75,7 +90,25 @@ export const GroupForm = ({
         <Typography variant="body1" gutterBottom>
           Seleccione quienes conforman su grupo / ministerio
         </Typography>
-        <PersonTable
+        <Typography variant="h6">Lider(es):</Typography>
+        <Typography variant="h6">Miembro(s):</Typography>
+        <AutocompleteElement
+          multiple
+          autocompleteProps={{
+            onInputChange: (_event, newInputValue) => {
+              setSearchMember(newInputValue);
+            },
+          }}
+          name="members"
+          label="Miembros"
+          options={
+            people?.content.map((x) => ({
+              id: x.id,
+              label: x.firstName + " " + x.lastName,
+            })) || []
+          }
+        />
+        {/* <PersonTable
           locId={locId}
           dataGridProps={{
             keepNonExistentRowsSelected: true,
@@ -85,7 +118,7 @@ export const GroupForm = ({
               setRowSelectionModel(newSelectionModel);
             },
           }}
-        />
+        /> */}
         <Button type="submit" variant="contained">
           Guardar
         </Button>

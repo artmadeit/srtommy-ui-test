@@ -17,11 +17,7 @@ import { SpringPage } from "../(api)/pagination";
 import { LocationDetail } from "../portal/[locId]/Location";
 import { PersonDetailWithId } from "../portal/[locId]/person/Person";
 import { DEBOUNCE_WAIT_MS } from "./helpers/debouncing";
-
-type Option = {
-  id: number;
-  label: string;
-};
+import { Option } from "./Option";
 
 export type EventFormValues = {
   name: string;
