@@ -30,7 +30,7 @@ export type GroupDetail = {
 type GroupFormContext = {
   locId: number;
   initialValues: GroupDetail;
-  submit: (data: any) => Promise<void>;
+  submit: (data: GroupDetail) => Promise<void>;
 };
 
 export const GroupForm = ({

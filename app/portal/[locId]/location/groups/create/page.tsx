@@ -25,16 +25,34 @@ export default function GroupCreatePage({
         description: "",
         type: "GROUP",
         members: [],
+        leaders: [],
       }}
-      submit={async (data) => {
-        const api = await getApi();
-        await api.post("/organizations/locations/childs", {
-          ...data,
+      submit={async (values) => {
+        const data = {
+          name: values.name,
+          description: values.description,
+          type: values.type,
           parentId: locId,
-        });
+          leaderIds: values.leaders.map((x) => x.id),
+          memberIds: values.members.map((x) => x.id),
+        };
+
+        const response = await getApi().then((api) =>
+          api.post("/organizations/locations/childs", data)
+        );
         alert.showMessage("Guardado exitosamente");
         router.push(`/portal/${locId}/location`);
       }}
+      // submit={async (data) => {
+      //   const api = await getApi();
+      //   await api.post("/organizations/locations/childs", {
+      //     ...data,
+      //     parentId: locId,
+      //     leaderIds: data.leaders.map(()=>),
+      //   });
+      //   alert.showMessage("Guardado exitosamente");
+      //   router.push(`/portal/${locId}/location`);
+      // }}
     />
   );
 }
