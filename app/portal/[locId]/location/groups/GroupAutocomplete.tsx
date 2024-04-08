@@ -6,7 +6,12 @@ import useSWR from "swr";
 import { useDebounce } from "use-debounce";
 import { PersonDetailWithId } from "../../person/Person";
 
-export const GroupAutocomplete = () => {
+type GroupAutocompleteProps = {
+  name: string;
+  label: string;
+};
+
+export const GroupAutocomplete = ({ name, label }: GroupAutocompleteProps) => {
   const [searchMember, setSearchMember] = React.useState("");
   const [searchTextDebounced] = useDebounce(searchMember, DEBOUNCE_WAIT_MS);
   const { data: people } = useSWR<SpringPage<PersonDetailWithId>>(
@@ -21,8 +26,8 @@ export const GroupAutocomplete = () => {
           setSearchMember(newInputValue);
         },
       }}
-      name="members"
-      label="Miembros"
+      name={name}
+      label={label}
       options={
         people?.content.map((x) => ({
           id: x.id,
