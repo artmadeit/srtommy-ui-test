@@ -1,4 +1,4 @@
-import { Button, Stack, Typography } from "@mui/material";
+import { Button, Grid, Stack, Typography } from "@mui/material";
 import {
   AutocompleteElement,
   FormContainer,
@@ -16,6 +16,8 @@ import useSWR from "swr";
 import { SpringPage } from "@/app/(api)/pagination";
 import { PersonDetailWithId } from "../../person/Person";
 import { Option } from "@/app/(components)/Option";
+import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
+import { GroupAutocomplete } from "./GroupAutocomplete";
 
 export type GroupDetail = {
   name: string;
@@ -92,7 +94,8 @@ export const GroupForm = ({
         </Typography>
         <Typography variant="h6">Lider(es):</Typography>
         <Typography variant="h6">Miembro(s):</Typography>
-        <AutocompleteElement
+        <GroupAutocomplete />
+        {/* <AutocompleteElement
           multiple
           autocompleteProps={{
             onInputChange: (_event, newInputValue) => {
@@ -107,7 +110,7 @@ export const GroupForm = ({
               label: x.firstName + " " + x.lastName,
             })) || []
           }
-        />
+        /> */}
         {/* <PersonTable
           locId={locId}
           dataGridProps={{
@@ -119,9 +122,11 @@ export const GroupForm = ({
             },
           }}
         /> */}
+        {/* <Grid xs={3}> */}
         <Button type="submit" variant="contained">
           Guardar
         </Button>
+        {/* </Grid> */}
       </Stack>
     </FormContainer>
   );
