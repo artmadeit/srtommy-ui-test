@@ -16,6 +16,7 @@ import { withOutSorting } from "@/app/(components)/helpers/withOutSorting";
 import { usePagination } from "@/app/(components)/hook-customization/usePagination";
 import { SpringPage } from "@/app/(api)/pagination";
 import useSWR from "swr";
+import Calendar from "./Calendar";
 
 type EventListItem = {
   id: number;
@@ -90,7 +91,9 @@ export default function EventListPage() {
         }}
         fullWidth
       /> */}
-      <div style={{ height: "70vh", width: "100%" }}>
+      <Calendar />
+
+      {/* <div style={{ height: "70vh", width: "100%" }}>
         <DataGrid
           loading={isLoading}
           columns={columns}
@@ -102,7 +105,7 @@ export default function EventListPage() {
           rowCount={events?.totalElements || 0}
           localeText={esES.components.MuiDataGrid.defaultProps.localeText}
         />
-      </div>
+      </div> */}
     </Stack>
   );
 }
