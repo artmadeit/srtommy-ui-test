@@ -94,7 +94,7 @@ export const GroupForm = ({
           Seleccione quienes conforman su grupo / ministerio
         </Typography>
         <Typography variant="h6">Lider(es):</Typography>
-        <GroupAutocomplete name="leaders" label="Lider(es)"/>
+        <GroupAutocomplete name="leaders" label="Lider(es)" />
         <Typography variant="h6">Miembro(s):</Typography>
         <GroupAutocomplete name="members" label="Miembros" />
         {/* <AutocompleteElement
