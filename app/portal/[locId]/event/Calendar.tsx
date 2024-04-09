@@ -9,6 +9,8 @@ export default function Calendar() {
       locale={esLocale}
       plugins={[timeGridPlugin]}
       initialView="timeGridWeek"
+      nowIndicator
+      allDaySlot={false}
     />
   );
 }
