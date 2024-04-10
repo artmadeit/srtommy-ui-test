@@ -4,8 +4,9 @@ import useSWR from "swr";
 import { GroupDetail, GroupForm } from "../GroupForm";
 import Loading from "@/app/(components)/Loading";
 import { PersonDetail, PersonDetailWithId } from "../../../person/Person";
+import { fullName } from "../../../person/PersonTable";
 
-type GroupMembers = {
+export type GroupMembers = {
   LEADER: PersonDetailWithId[];
   IS_PART_OF: PersonDetailWithId[];
 };
@@ -35,13 +36,14 @@ export default function GroupDetailPage({
     members: members.IS_PART_OF.map((x) => {
       return {
         id: x.id,
-        label: x.firstName,
+        // label: x.firstName + " " + x.lastName,
+        label: fullName(x),
       };
     }),
     leaders: members.LEADER.map((x) => {
       return {
         id: x.id,
-        label: x.firstName,
+        label: fullName(x),
       };
     }),
   };
