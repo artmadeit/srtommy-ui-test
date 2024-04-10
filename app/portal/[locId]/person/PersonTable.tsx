@@ -48,7 +48,6 @@ export const PersonTable = ({
           },
         ]
       : `people`
-    // searchText=${searchTextDebounced}`] : `people`
   );
 
   const columns = React.useMemo(

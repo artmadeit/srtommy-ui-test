@@ -1,12 +1,10 @@
 import { Button, Grid, Stack, Typography } from "@mui/material";
 import {
-  AutocompleteElement,
   FormContainer,
   RadioButtonGroup,
   TextFieldElement,
   useForm,
 } from "react-hook-form-mui";
-import { PersonTable } from "../../person/PersonTable";
 import React, { useState } from "react";
 import { GridRowSelectionModel } from "@mui/x-data-grid";
 import { GroupTypeLabels } from "./Group";
@@ -16,7 +14,6 @@ import useSWR from "swr";
 import { SpringPage } from "@/app/(api)/pagination";
 import { PersonDetailWithId } from "../../person/Person";
 import { Option } from "@/app/(components)/Option";
-import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import { GroupAutocomplete } from "./GroupAutocomplete";
 
 export type GroupDetail = {
@@ -97,33 +94,6 @@ export const GroupForm = ({
         <GroupAutocomplete name="leaders" label="Lider(es)" />
         <Typography variant="h6">Miembro(s):</Typography>
         <GroupAutocomplete name="members" label="Miembros" />
-        {/* <AutocompleteElement
-          multiple
-          autocompleteProps={{
-            onInputChange: (_event, newInputValue) => {
-              setSearchMember(newInputValue);
-            },
-          }}
-          name="members"
-          label="Miembros"
-          options={
-            people?.content.map((x) => ({
-              id: x.id,
-              label: x.firstName + " " + x.lastName,
-            })) || []
-          }
-        /> */}
-        {/* <PersonTable
-          locId={locId}
-          dataGridProps={{
-            keepNonExistentRowsSelected: true,
-            checkboxSelection: true,
-            rowSelectionModel: rowSelectionModel,
-            onRowSelectionModelChange: (newSelectionModel) => {
-              setRowSelectionModel(newSelectionModel);
-            },
-          }}
-        /> */}
         {/* <Grid xs={3}> */}
         <Button type="submit" variant="contained">
           Guardar

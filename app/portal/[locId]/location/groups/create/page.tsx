@@ -43,16 +43,6 @@ export default function GroupCreatePage({
         alert.showMessage("Guardado exitosamente");
         router.push(`/portal/${locId}/location`);
       }}
-      // submit={async (data) => {
-      //   const api = await getApi();
-      //   await api.post("/organizations/locations/childs", {
-      //     ...data,
-      //     parentId: locId,
-      //     leaderIds: data.leaders.map(()=>),
-      //   });
-      //   alert.showMessage("Guardado exitosamente");
-      //   router.push(`/portal/${locId}/location`);
-      // }}
     />
   );
 }

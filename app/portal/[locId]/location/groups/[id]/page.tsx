@@ -3,7 +3,7 @@
 import useSWR from "swr";
 import { GroupDetail, GroupForm } from "../GroupForm";
 import Loading from "@/app/(components)/Loading";
-import { PersonDetail, PersonDetailWithId } from "../../../person/Person";
+import { PersonDetailWithId } from "../../../person/Person";
 import { fullName } from "../../../person/PersonTable";
 
 export type GroupMembers = {
@@ -36,7 +36,6 @@ export default function GroupDetailPage({
     members: members.IS_PART_OF.map((x) => {
       return {
         id: x.id,
-        // label: x.firstName + " " + x.lastName,
         label: fullName(x),
       };
     }),
