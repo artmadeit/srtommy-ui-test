@@ -51,7 +51,7 @@ export function Groups({ locId }: GroupsProps) {
             width: 80,
             getActions: (params) => {
               return [
-                <Tooltip title="Editar" key="see">
+                <Tooltip title="Ver / editar" key="see">
                   <GridActionsCellItem
                     label="Ver"
                     icon={<SearchIcon />}

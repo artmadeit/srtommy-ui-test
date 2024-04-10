@@ -94,11 +94,11 @@ export const GroupForm = ({
         <GroupAutocomplete name="leaders" label="Lider(es)" />
         <Typography variant="h6">Miembro(s):</Typography>
         <GroupAutocomplete name="members" label="Miembros" />
-        {/* <Grid xs={3}> */}
-        <Button type="submit" variant="contained">
-          Guardar
-        </Button>
-        {/* </Grid> */}
+        <Grid>
+          <Button type="submit" variant="contained">
+            Guardar
+          </Button>
+        </Grid>
       </Stack>
     </FormContainer>
   );
