@@ -14,12 +14,15 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
+  Stack,
   TextField,
   Typography,
 } from "@mui/material";
 import { LocationDetail } from "../Location";
 import { TelFieldElement } from "../person/PersonForm";
 import StarIcon from "@mui/icons-material/Star";
+import CircleIcon from "@mui/icons-material/Circle";
+import React from "react";
 
 type LocationFormProps = {
   title: string;
@@ -32,6 +35,9 @@ export const LocationForm = ({
   submit,
   initialValues,
 }: LocationFormProps) => {
+  // const fixedOptions = [churchRoles[0], churchRoles[1], churchRoles[2]];
+  // const [value, setValue] = React.useState([...fixedOptions]);
+
   return (
     <FormContainer defaultValues={initialValues} onSuccess={submit}>
       <Grid container spacing={2} margin={4}>
@@ -54,28 +60,50 @@ export const LocationForm = ({
         <Grid xs={12}>
           <TelFieldElement name="phoneNumber" />
         </Grid>
-        <Grid>
-          <Typography variant="h6">Roles en la Iglesia:</Typography>
-          <List>
-            <ListItem sx={{ padding: "0px" }}>
-              <ListItemIcon>
-                <StarIcon />
-              </ListItemIcon>
-              <ListItemText primary="Pastor, Líder de alabanza, Ujier" />
-            </ListItem>            
-          </List>
+        <Grid xs={12} container alignItems="center">
+          <Grid xs={12} sx={{ padding: "0px 0px 0px 8px" }}>
+            <Typography variant="h6">Roles en la Iglesia:</Typography>
+          </Grid>
+          <Grid xs={12} sx={{ padding: "0px 0px 0px 8px" }}>
+            <List>
+              <ListItem sx={{ padding: "0px" }}>
+                <ListItemIcon>
+                  <CircleIcon style={{ color: "#000000" }} fontSize="small" />
+                </ListItemIcon>
+                <ListItemText primary="Pastor, Líder de alabanza, Ujier" />
+              </ListItem>
+            </List>
+          </Grid>
+
           {/* <ul>
             <li>Pastor, Lider de alabanza, Ujier</li>            
           </ul> */}
-          <Typography>Otros roles:</Typography>
-          {/* <Autocomplete
-            freeSolo
-            multiple
-            options={[]}
-            renderInput={(params) => (
-              <TextFieldElement name="roles" label="Roles" {...params} />
-            )}
-          /> */}
+
+          {/* <Grid xs={2}>
+              <Typography>Otros roles:</Typography>
+            </Grid> */}
+          <Grid xs={12}>
+            <Autocomplete
+              freeSolo
+              multiple
+              options={[]}              
+              // onChange={(event, newValue) => {
+              //   setValue([
+              //     ...fixedOptions,
+              //     ...newValue.filter(
+              //       (option) => fixedOptions.indexOf(option) === -1
+              //     ),
+              //   ]);
+              // }}
+              renderInput={(params) => (
+                <TextFieldElement
+                  name="roles"
+                  label="Otros roles que desea añadir"
+                  {...params}
+                />
+              )}
+            />
+          </Grid>
           {/* <Autocomplete
             multiple
             freeSolo={true}            
@@ -93,3 +121,5 @@ export const LocationForm = ({
     </FormContainer>
   );
 };
+
+// const churchRoles = ["Pastor", "Líder de alabanza", "Ujier"];
