@@ -33,13 +33,13 @@ export default function GroupDetailPage({
     name: group.name,
     description: group.description,
     type: group.type,
-    members: members.IS_PART_OF.map((x) => {
+    members: members.IS_PART_OF?.map((x) => {
       return {
         id: x.id,
         label: fullName(x),
       };
     }),
-    leaders: members.LEADER.map((x) => {
+    leaders: members.LEADER?.map((x) => {
       return {
         id: x.id,
         label: fullName(x),

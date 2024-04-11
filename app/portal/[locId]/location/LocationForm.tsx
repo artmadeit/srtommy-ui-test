@@ -9,15 +9,16 @@ import { TelFieldElement } from "../person/PersonForm";
 type LocationFormProps = {
   title: string;
   submit: (data: any) => Promise<void>;
-  initialValues: LocationDetail
+  initialValues: LocationDetail;
 };
 
-export const LocationForm = ({ title, submit, initialValues }: LocationFormProps) => {
+export const LocationForm = ({
+  title,
+  submit,
+  initialValues,
+}: LocationFormProps) => {
   return (
-    <FormContainer
-      defaultValues={initialValues}
-      onSuccess={submit}
-    >
+    <FormContainer defaultValues={initialValues} onSuccess={submit}>
       <Grid container spacing={2} margin={4}>
         <Grid xs={12}>
           <Typography variant="h5" gutterBottom>
@@ -37,6 +38,15 @@ export const LocationForm = ({ title, submit, initialValues }: LocationFormProps
         </Grid>
         <Grid xs={12}>
           <TelFieldElement name="phoneNumber" />
+        </Grid>
+        <Grid>
+          <Typography>Roles en la Iglesia:</Typography>
+          <ul>
+            <li>Pastor</li>
+            <li>Lider de alabanza</li>
+            <li>Ujier</li>
+          </ul>
+          <Typography>Otros roles:</Typography>
         </Grid>
         <Grid xs={12}>
           <Button type="submit" variant="contained">
