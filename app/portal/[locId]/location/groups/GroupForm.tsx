@@ -84,16 +84,31 @@ export const GroupForm = ({
           ]}
           row
         />
-        <Typography variant="h5" gutterBottom>
+        <Typography variant="h6" gutterBottom>
           Miembros
         </Typography>
         <Typography variant="body1" gutterBottom>
           Seleccione quienes conforman su grupo / ministerio
         </Typography>
-        <Typography variant="h6">Lider(es):</Typography>
-        <GroupAutocomplete name="leaders" label="Lider(es)" />
-        <Typography variant="h6">Miembro(s):</Typography>
-        <GroupAutocomplete name="members" label="Miembros" />
+        <Stack direction="row" spacing={5} alignItems="center">
+          <Typography variant="h6">Lider(es):</Typography>
+          <div style={{ width: "100%" }}>
+            <GroupAutocomplete
+              name="leaders"
+              label="Escriba o seleccione el lider o lideres del grupo/ministerio"
+            />
+          </div>
+        </Stack>
+        <Stack direction="row" spacing={2} alignItems="center">
+          <Typography variant="h6">Miembro(s):</Typography>
+          <div style={{ width: "100%" }}>
+            <GroupAutocomplete
+              name="members"
+              label="Escriba o seleccione los miembros del grupo/ministerio"
+            />
+          </div>
+        </Stack>
+
         <Grid>
           <Button type="submit" variant="contained">
             Guardar

@@ -1,10 +1,25 @@
 "use client";
 
-import { FormContainer, TextFieldElement } from "react-hook-form-mui";
+import {
+  AutocompleteElement,
+  FormContainer,
+  TextFieldElement,
+} from "react-hook-form-mui";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
-import { Button, Typography } from "@mui/material";
+import {
+  Autocomplete,
+  Button,
+  Chip,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { LocationDetail } from "../Location";
 import { TelFieldElement } from "../person/PersonForm";
+import StarIcon from "@mui/icons-material/Star";
 
 type LocationFormProps = {
   title: string;
@@ -40,13 +55,34 @@ export const LocationForm = ({
           <TelFieldElement name="phoneNumber" />
         </Grid>
         <Grid>
-          <Typography>Roles en la Iglesia:</Typography>
-          <ul>
-            <li>Pastor</li>
-            <li>Lider de alabanza</li>
-            <li>Ujier</li>
-          </ul>
+          <Typography variant="h6">Roles en la Iglesia:</Typography>
+          <List>
+            <ListItem sx={{ padding: "0px" }}>
+              <ListItemIcon>
+                <StarIcon />
+              </ListItemIcon>
+              <ListItemText primary="Pastor, Líder de alabanza, Ujier" />
+            </ListItem>            
+          </List>
+          {/* <ul>
+            <li>Pastor, Lider de alabanza, Ujier</li>            
+          </ul> */}
           <Typography>Otros roles:</Typography>
+          {/* <Autocomplete
+            freeSolo
+            multiple
+            options={[]}
+            renderInput={(params) => (
+              <TextFieldElement name="roles" label="Roles" {...params} />
+            )}
+          /> */}
+          {/* <Autocomplete
+            multiple
+            freeSolo={true}            
+            name="roles"
+            label="Roles"
+            options={[]}
+          /> */}
         </Grid>
         <Grid xs={12}>
           <Button type="submit" variant="contained">
