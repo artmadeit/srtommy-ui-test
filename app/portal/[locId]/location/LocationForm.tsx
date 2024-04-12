@@ -2,7 +2,7 @@
 
 import { FormContainer, TextFieldElement } from "react-hook-form-mui";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
-import { Autocomplete, Button, Typography } from "@mui/material";
+import { Autocomplete, Button, Chip, Typography } from "@mui/material";
 import { LocationDetail } from "../Location";
 import { TelFieldElement } from "../person/PersonForm";
 import React from "react";
@@ -18,8 +18,8 @@ export const LocationForm = ({
   submit,
   initialValues,
 }: LocationFormProps) => {
-  // const fixedOptions = [churchRoles[0], churchRoles[1], churchRoles[2]];
-  // const [value, setValue] = React.useState([...fixedOptions]);
+  const fixedOptions = churchRoles;
+  const [value, setValue] = React.useState([...fixedOptions]);
 
   return (
     <FormContainer defaultValues={initialValues} onSuccess={submit}>
@@ -47,10 +47,11 @@ export const LocationForm = ({
           <Grid xs={12} sx={{ padding: "0px 0px 0px 8px" }}>
             <Typography variant="h6">Roles en la Iglesia:</Typography>
           </Grid>
-          {/* <Grid xs={12}>
+          <Grid xs={12}>
             <Autocomplete
               freeSolo
               multiple
+              id="fixed-tags-demo"
               options={[]}
               value={value}
               onChange={(event, newValue) => {
@@ -61,6 +62,16 @@ export const LocationForm = ({
                   ),
                 ]);
               }}
+              renderTags={(tagValue, getTagProps) =>
+                tagValue.map((option, index) => (
+                  // eslint-disable-next-line react/jsx-key
+                  <Chip
+                    label={option}                    
+                    {...getTagProps({ index })}
+                    disabled={fixedOptions.indexOf(option) !== -1}
+                  />
+                ))
+              }
               renderInput={(params) => (
                 <TextFieldElement
                   name="roles"
@@ -69,7 +80,7 @@ export const LocationForm = ({
                 />
               )}
             />
-          </Grid> */}
+          </Grid>
         </Grid>
         <Grid xs={12}>
           <Button type="submit" variant="contained">
@@ -81,4 +92,4 @@ export const LocationForm = ({
   );
 };
 
-// const churchRoles = ["Pastor", "Líder de alabanza", "Ujier"];
+const churchRoles = ["Pastor", "Líder de alabanza", "Ujier"];
