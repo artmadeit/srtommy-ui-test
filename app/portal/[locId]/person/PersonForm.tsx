@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  AutocompleteElement,
   Controller,
   DatePickerElement,
   FormContainer,
@@ -10,7 +11,7 @@ import {
   useFormContext,
 } from "react-hook-form-mui";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
-import { Button, Typography } from "@mui/material";
+import { Autocomplete, Button, Typography } from "@mui/material";
 import { MuiTelInput } from "mui-tel-input";
 import { PersonDetailBase } from "./Person";
 import React from "react";
@@ -96,6 +97,17 @@ export const PersonForm = ({ initialValues, submit }: PersonFormProps) => {
               },
             ]}
             row
+          />
+        </Grid>
+        <Grid>
+          <Grid>
+            <Typography variant="h6">Roles:</Typography>
+          </Grid>
+          <AutocompleteElement
+            multiple
+            name="role"
+            label="Roles"
+            options={[]}
           />
         </Grid>
         <Grid xs={12}>
