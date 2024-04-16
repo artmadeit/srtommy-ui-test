@@ -106,7 +106,7 @@ export const PersonForm = ({ initialValues, submit }: PersonFormProps) => {
           <AutocompleteElement
             multiple
             name="role"
-            label="Roles"
+            // label="Escriba o seleccione el rol(es)"
             options={[]}
           />
         </Grid>

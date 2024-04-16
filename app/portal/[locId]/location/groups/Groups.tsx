@@ -86,7 +86,6 @@ export function Groups({ locId }: GroupsProps) {
           columns={columns}
           rows={groups || []}
           localeText={esES.components.MuiDataGrid.defaultProps.localeText}
-          // rowCount={}
         />
       </div>
     </Stack>

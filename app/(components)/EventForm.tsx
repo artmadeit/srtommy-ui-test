@@ -74,11 +74,6 @@ export const EventForm = ({ locId, initialValues, submit }: EventFormProps) => {
           />
         </Grid>
         <Grid xs={3}>
-          {/* <MobileTimePicker
-            value={formContext.getValues().startTime}
-            ampm           
-            onChange={(value) => formContext.setValue("startTime", value)}
-          /> */}
           <TimePicker
             ampm
             sx={{ width: "100%" }}
@@ -111,11 +106,6 @@ export const EventForm = ({ locId, initialValues, submit }: EventFormProps) => {
               seconds: renderTimeViewClock,
             }}
           />
-          {/* <MobileTimePicker
-            value={formContext.getValues().endTime}
-            ampm
-            onChange={(value) => formContext.setValue("endTime", value)}
-          /> */}
         </Grid>
         <Grid xs={12}>
           <AutocompleteElement

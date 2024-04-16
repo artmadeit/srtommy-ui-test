@@ -61,19 +61,6 @@ export const CourseForm = ({
     searchTextDebounced ? `people?searchText=${searchTextDebounced}` : `people`
   );
 
-  // const formContext = useForm({
-  //   defaultValues: {
-  //     name: "",
-  //     address: "",
-  //     startDate: null,
-  //     startTime: null,
-  //     endDate: null,
-  //     endTime: null,
-  //     description: "",
-  //     speakers: "",
-  //   },
-  // });
-
   return (
     <FormContainer formContext={formContext} onSuccess={submit}>
       <Grid container spacing={2} m={4}>
