@@ -99,14 +99,14 @@ export const PersonForm = ({ initialValues, submit }: PersonFormProps) => {
             row
           />
         </Grid>
-        <Grid>
-          <Grid>
+        <Grid xs={12}>
+          <Grid sx={{ paddingBottom: "10px" }}>
             <Typography variant="h6">Roles:</Typography>
           </Grid>
           <AutocompleteElement
             multiple
             name="role"
-            // label="Escriba o seleccione el rol(es)"
+            label="Escriba o seleccione el rol(es)"
             options={[]}
           />
         </Grid>
