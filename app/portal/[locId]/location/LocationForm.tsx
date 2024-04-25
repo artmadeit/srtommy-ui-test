@@ -6,6 +6,7 @@ import { Autocomplete, Button, Chip, Typography } from "@mui/material";
 import { LocationDetail } from "../Location";
 import { TelFieldElement } from "../person/PersonForm";
 import React from "react";
+import useSWR from "swr";
 
 type LocationFormProps = {
   title: string;
@@ -18,8 +19,6 @@ export const LocationForm = ({
   submit,
   initialValues,
 }: LocationFormProps) => {
-  // TODO: call get organizations/locations/{id}/roles
-
   const fixedOptions = churchRoles;
   const [value, setValue] = React.useState([...fixedOptions]);
 

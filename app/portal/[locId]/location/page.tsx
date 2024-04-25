@@ -10,26 +10,43 @@ import { useAuthApi } from "@/app/(api)/api";
 import { SnackbarContext } from "@/app/(components)/SnackbarContext";
 import { Groups } from "./groups/Groups";
 
+type RolesLocation = {
+  name: string;
+  predifined: boolean;
+};
+
 export default function Location({ params }: { params: { locId: number } }) {
   const { locId } = params;
 
-  const { data: Location, isLoading } = useSWR<LocationDetail>(
+  const { data: location, isLoading } = useSWR<LocationDetail>(
     `/organizations/${locId}`
+  );
+  // TODO: call get organizations/locations/{id}/roles
+
+  const { data } = useSWR<RolesLocation>(
+    `/organizations/locations/${locId}/roles`
   );
 
   const getApi = useAuthApi();
   const alert = React.useContext(SnackbarContext);
 
   if (isLoading) return <Loading />;
+  if (!location) return <div>Not found</div>;
+
+  // const initialValues = {
+  //   name: location.name,
+  //   address: location.address,
+  //   phoneNumber: location.phoneNumber,
+  // };
 
   return (
     <Box>
-      {!Location ? (
+      {!location ? (
         <div>no existe tal organizacion</div>
       ) : (
         <>
           <LocationForm
-            initialValues={Location}
+            initialValues={location}
             title="Datos generales de la sede"
             submit={async (formValues) => {
               const api = await getApi();
@@ -37,7 +54,8 @@ export default function Location({ params }: { params: { locId: number } }) {
                 name: formValues.name,
                 address: formValues.address,
                 phoneNumber: formValues.phoneNumber,
-                roles: [], // TODO: andre
+                roles: [],
+                // roles: [], // TODO: andre
               });
               alert.showMessage("Guardado exitosamente");
             }}
