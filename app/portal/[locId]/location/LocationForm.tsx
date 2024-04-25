@@ -18,6 +18,8 @@ export const LocationForm = ({
   submit,
   initialValues,
 }: LocationFormProps) => {
+  // TODO: call get organizations/locations/{id}/roles
+
   const fixedOptions = churchRoles;
   const [value, setValue] = React.useState([...fixedOptions]);
 
@@ -66,7 +68,7 @@ export const LocationForm = ({
                 tagValue.map((option, index) => (
                   // eslint-disable-next-line react/jsx-key
                   <Chip
-                    label={option}                    
+                    label={option}
                     {...getTagProps({ index })}
                     disabled={fixedOptions.indexOf(option) !== -1}
                   />
@@ -75,7 +77,7 @@ export const LocationForm = ({
               renderInput={(params) => (
                 <TextFieldElement
                   name="roles"
-                  label="Otros roles que desee añadir"
+                  placeholder="Añada otros roles si desea"
                   {...params}
                 />
               )}

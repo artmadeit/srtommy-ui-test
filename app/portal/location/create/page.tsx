@@ -18,6 +18,8 @@ export default function LocationCreatePage() {
     const response = await api.post("organizations/locations", {
       ...data,
       parentId: ORG_ID,
+      // TODO: andre
+      roles: [],
     });
     alert.showMessage("Guardado exitosamente");
     router.push("/portal/" + response.data.id);

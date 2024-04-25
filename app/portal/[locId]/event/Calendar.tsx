@@ -14,6 +14,10 @@ export default function Calendar() {
       allDaySlot={false}
       selectable
       selectMirror
+      //   eventClick
+      // select
+      // unselect
+      // dateClick
     />
   );
 }

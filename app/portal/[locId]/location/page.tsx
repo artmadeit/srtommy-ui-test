@@ -33,15 +33,16 @@ export default function Location({ params }: { params: { locId: number } }) {
             title="Datos generales de la sede"
             submit={async (formValues) => {
               const api = await getApi();
-              await api.put(`/organizations/${locId}`, {
+              await api.put(`/organizations/locations/${locId}`, {
                 name: formValues.name,
                 address: formValues.address,
                 phoneNumber: formValues.phoneNumber,
+                roles: [], // TODO: andre
               });
               alert.showMessage("Guardado exitosamente");
             }}
           />
-          <Groups locId={locId}/>
+          <Groups locId={locId} />
         </>
       )}
     </Box>
