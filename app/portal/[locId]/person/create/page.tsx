@@ -29,6 +29,7 @@ export default function CreatePerson({
           ...data,
           hasBeenBaptized: data.hasBeenBaptized === "YES",
           organizationId: locId,
+          // TODO: check roles here
         });
         alert.showMessage("Guardado exitosamente");
         router.push(`/portal/${locId}/person`);

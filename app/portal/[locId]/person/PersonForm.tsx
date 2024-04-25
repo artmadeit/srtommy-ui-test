@@ -31,6 +31,8 @@ function isValidDate(date: Date) {
 }
 
 export const PersonForm = ({ initialValues, submit }: PersonFormProps) => {
+  // TODO: call get organizations/locations/{id}/roles con eso llenar los roles
+
   const formContext = useForm({
     defaultValues: initialValues,
   });

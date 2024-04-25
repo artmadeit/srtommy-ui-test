@@ -49,6 +49,8 @@ export default function PersonEdit({
               birthdate: formValues.birthdate,
               organizationId: locId,
               hasBeenBaptized: formValues.hasBeenBaptized === "YES",
+
+              // TODO: check roles here
             });
             mutate();
             alert.showMessage("Guardado exitosamente");
