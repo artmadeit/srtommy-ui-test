@@ -12,7 +12,7 @@ import { Groups } from "./groups/Groups";
 
 type RolesLocation = {
   name: string;
-  predifined: boolean;
+  predefined: boolean;
 };
 
 export default function Location({ params }: { params: { locId: number } }) {
@@ -22,8 +22,7 @@ export default function Location({ params }: { params: { locId: number } }) {
     `/organizations/${locId}`
   );
   // TODO: call get organizations/locations/{id}/roles
-
-  const { data } = useSWR<RolesLocation>(
+  const { data: roles } = useSWR<RolesLocation[]>(
     `/organizations/locations/${locId}/roles`
   );
 
@@ -31,13 +30,28 @@ export default function Location({ params }: { params: { locId: number } }) {
   const alert = React.useContext(SnackbarContext);
 
   if (isLoading) return <Loading />;
-  if (!location) return <div>Not found</div>;
+  if (!location || !roles) return <div>Not found</div>;
 
-  // const initialValues = {
-  //   name: location.name,
-  //   address: location.address,
-  //   phoneNumber: location.phoneNumber,
-  // };
+  const toSpanish = (x: string) => {
+    if (x === "PASTOR") {
+      return "pastor";
+    } else if (x === "WORSHIP_LEADER") {
+      return "líder de alabanza";
+    } else {
+      return "ujier";
+    }
+  };
+
+  const fixedOptions = roles
+    .filter((x) => x.predefined === true)
+    .map((x) => toSpanish(x.name));
+
+  const initialValues = {
+    name: location.name,
+    address: location.address,
+    phoneNumber: location.phoneNumber,
+    roles: [...fixedOptions],
+  };
 
   return (
     <Box>
@@ -46,17 +60,19 @@ export default function Location({ params }: { params: { locId: number } }) {
       ) : (
         <>
           <LocationForm
-            initialValues={location}
+            initialValues={initialValues}
             title="Datos generales de la sede"
+            fixedOptions={fixedOptions}
             submit={async (formValues) => {
-              const api = await getApi();
-              await api.put(`/organizations/locations/${locId}`, {
-                name: formValues.name,
-                address: formValues.address,
-                phoneNumber: formValues.phoneNumber,
-                roles: [],
-                // roles: [], // TODO: andre
-              });
+              // const api = await getApi();
+              // await api.put(`/organizations/locations/${locId}`, {
+              //   name: formValues.name,
+              //   address: formValues.address,
+              //   phoneNumber: formValues.phoneNumber,
+              //   roles: [],
+              //   // roles: [], // TODO: andre
+              // });
+              console.log(formValues)
               alert.showMessage("Guardado exitosamente");
             }}
           />

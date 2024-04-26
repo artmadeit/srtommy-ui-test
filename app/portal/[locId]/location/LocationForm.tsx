@@ -1,29 +1,43 @@
 "use client";
 
-import { FormContainer, TextFieldElement } from "react-hook-form-mui";
+import { FormContainer, TextFieldElement, useForm } from "react-hook-form-mui";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import { Autocomplete, Button, Chip, Typography } from "@mui/material";
 import { LocationDetail } from "../Location";
 import { TelFieldElement } from "../person/PersonForm";
 import React from "react";
 import useSWR from "swr";
+import { isArray } from "lodash";
+
+type LocationFormValues = {
+  name: string;
+  address: string;
+  phoneNumber: string;
+  roles: string[];
+};
 
 type LocationFormProps = {
   title: string;
-  submit: (data: any) => Promise<void>;
-  initialValues: LocationDetail;
+  submit: (data: LocationFormValues) => Promise<void>;
+  fixedOptions: string[];
+  initialValues: LocationFormValues;
 };
 
 export const LocationForm = ({
   title,
   submit,
   initialValues,
+  fixedOptions,
 }: LocationFormProps) => {
-  const fixedOptions = churchRoles;
-  const [value, setValue] = React.useState([...fixedOptions]);
+  // const fixedOptions = churchRoles;
+  // const [value, setValue] = React.useState([...fixedOptions]);
+
+  const formContext = useForm<LocationFormValues>({
+    defaultValues: initialValues,
+  });
 
   return (
-    <FormContainer defaultValues={initialValues} onSuccess={submit}>
+    <FormContainer formContext={formContext} onSuccess={submit}>
       <Grid container spacing={2} margin={4}>
         <Grid xs={12}>
           <Typography variant="h5" gutterBottom>
@@ -51,28 +65,36 @@ export const LocationForm = ({
           <Grid xs={12}>
             <Autocomplete
               freeSolo
-              multiple
+              multiple              
               id="fixed-tags-demo"
               options={[]}
-              value={value}
+              value={formContext.getValues().roles}
               onChange={(event, newValue) => {
-                setValue([
-                  ...fixedOptions,
-                  ...newValue.filter(
-                    (option) => fixedOptions.indexOf(option) === -1
-                  ),
-                ]);
+                console.log(newValue);
+                formContext.setValue(
+                  "roles",
+                  [
+                    ...fixedOptions,
+                    ...newValue.filter(
+                      (option) => fixedOptions.indexOf(option) === -1
+                    ),
+                  ],
+                  { shouldValidate: true }
+                );
               }}
-              renderTags={(tagValue, getTagProps) =>
-                tagValue.map((option, index) => (
-                  // eslint-disable-next-line react/jsx-key
-                  <Chip
-                    label={option}
-                    {...getTagProps({ index })}
-                    disabled={fixedOptions.indexOf(option) !== -1}
-                  />
-                ))
-              }
+              renderTags={(tagValue, getTagProps) => {
+                console.log(tagValue);
+                return isArray(tagValue)
+                  ? tagValue.map((option, index) => (
+                      <Chip
+                        label={option}
+                        {...getTagProps({ index })}
+                        key={option}
+                        disabled={fixedOptions.indexOf(option) !== -1}
+                      />
+                    ))
+                  : null;
+              }}
               renderInput={(params) => (
                 <TextFieldElement
                   name="roles"
@@ -93,4 +115,4 @@ export const LocationForm = ({
   );
 };
 
-const churchRoles = ["Pastor", "Líder de alabanza", "Ujier"];
+// const churchRoles = ["Pastor", "Líder de alabanza", "Ujier"];
