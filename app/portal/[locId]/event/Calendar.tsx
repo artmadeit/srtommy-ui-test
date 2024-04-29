@@ -15,7 +15,14 @@ export default function Calendar() {
       selectable
       selectMirror
       //   eventClick
-      // select
+      selectAllow={({ start, end }) => {
+        // for allowing only select / drag only in that day
+        return end.getDate() - start.getDate() <= 0;
+      }}
+      select={({ start, end, jsEvent }) => {
+        console.log(start, end);
+        console.log(jsEvent);
+      }}
       // unselect
       // dateClick
     />
