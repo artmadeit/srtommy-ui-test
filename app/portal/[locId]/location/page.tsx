@@ -12,7 +12,7 @@ import { Groups } from "./groups/Groups";
 
 type RolesLocation = {
   name: string;
-  predefined: boolean;
+  isPredefined: boolean;
 };
 
 export default function Location({ params }: { params: { locId: number } }) {
@@ -21,7 +21,7 @@ export default function Location({ params }: { params: { locId: number } }) {
   const { data: location, isLoading } = useSWR<LocationDetail>(
     `/organizations/${locId}`
   );
-  // TODO: call get organizations/locations/{id}/roles
+
   const { data: roles } = useSWR<RolesLocation[]>(
     `/organizations/locations/${locId}/roles`
   );
@@ -43,20 +43,23 @@ export default function Location({ params }: { params: { locId: number } }) {
   };
 
   const fixedOptions: string[] = roles
-    .filter((x) => x.predefined === true)
+    .filter((x) => x.isPredefined === true)
     .map((x) => toSpanish(x.name));
 
   const initialValues = {
     name: location.name,
     address: location.address,
     phoneNumber: location.phoneNumber,
-    roles: [...fixedOptions],
+    roles: [
+      ...fixedOptions,
+      ...roles.filter((x) => !x.isPredefined).map((x) => x.name),
+    ],
   };
 
   return (
     <Box>
       {!location ? (
-        <div>no existe tal organizacion</div>
+        <div>No existe tal organizacion</div>
       ) : (
         <>
           <LocationForm
@@ -69,10 +72,10 @@ export default function Location({ params }: { params: { locId: number } }) {
                 name: formValues.name,
                 address: formValues.address,
                 phoneNumber: formValues.phoneNumber,
-                roles: formValues.roles.filter((role)=> !fixedOptions.includes(role)),
-                // roles: [], // TODO: andre
+                roles: formValues.roles.filter(
+                  (role) => !fixedOptions.includes(role)
+                ),
               });
-              console.log(formValues)
               alert.showMessage("Guardado exitosamente");
             }}
           />
