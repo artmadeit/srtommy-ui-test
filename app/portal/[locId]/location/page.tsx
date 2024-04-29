@@ -34,15 +34,15 @@ export default function Location({ params }: { params: { locId: number } }) {
 
   const toSpanish = (x: string) => {
     if (x === "PASTOR") {
-      return "pastor";
+      return "Pastor";
     } else if (x === "WORSHIP_LEADER") {
-      return "líder de alabanza";
+      return "Líder de alabanza";
     } else {
-      return "ujier";
+      return "Ujier";
     }
   };
 
-  const fixedOptions = roles
+  const fixedOptions: string[] = roles
     .filter((x) => x.predefined === true)
     .map((x) => toSpanish(x.name));
 
@@ -64,14 +64,14 @@ export default function Location({ params }: { params: { locId: number } }) {
             title="Datos generales de la sede"
             fixedOptions={fixedOptions}
             submit={async (formValues) => {
-              // const api = await getApi();
-              // await api.put(`/organizations/locations/${locId}`, {
-              //   name: formValues.name,
-              //   address: formValues.address,
-              //   phoneNumber: formValues.phoneNumber,
-              //   roles: [],
-              //   // roles: [], // TODO: andre
-              // });
+              const api = await getApi();
+              await api.put(`/organizations/locations/${locId}`, {
+                name: formValues.name,
+                address: formValues.address,
+                phoneNumber: formValues.phoneNumber,
+                roles: formValues.roles.filter((role)=> !fixedOptions.includes(role)),
+                // roles: [], // TODO: andre
+              });
               console.log(formValues)
               alert.showMessage("Guardado exitosamente");
             }}
