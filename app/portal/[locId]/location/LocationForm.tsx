@@ -1,13 +1,16 @@
 "use client";
 
-import { FormContainer, TextFieldElement, useForm } from "react-hook-form-mui";
+import {
+  Autocomplete,
+  Button,
+  Chip,
+  TextField,
+  Typography,
+} from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
-import { Autocomplete, Button, Chip, Typography } from "@mui/material";
-import { LocationDetail } from "../Location";
-import { TelFieldElement } from "../person/PersonForm";
-import React from "react";
-import useSWR from "swr";
 import { isArray } from "lodash";
+import { FormContainer, TextFieldElement, useForm } from "react-hook-form-mui";
+import { TelFieldElement } from "../person/PersonForm";
 
 type LocationFormValues = {
   name: string;
@@ -29,9 +32,6 @@ export const LocationForm = ({
   initialValues,
   fixedOptions,
 }: LocationFormProps) => {
-  // const fixedOptions = churchRoles;
-  // const [value, setValue] = React.useState([...fixedOptions]);
-
   const formContext = useForm<LocationFormValues>({
     defaultValues: initialValues,
   });
@@ -65,12 +65,12 @@ export const LocationForm = ({
           <Grid xs={12}>
             <Autocomplete
               freeSolo
-              multiple              
-              id="fixed-tags-demo"
+              multiple
+              clearOnBlur
+              id="roles"
               options={[]}
               value={formContext.getValues().roles}
               onChange={(event, newValue) => {
-                console.log(newValue);
                 formContext.setValue(
                   "roles",
                   [
@@ -83,7 +83,6 @@ export const LocationForm = ({
                 );
               }}
               renderTags={(tagValue, getTagProps) => {
-                console.log(tagValue);
                 return isArray(tagValue)
                   ? tagValue.map((option, index) => (
                       <Chip
@@ -96,9 +95,8 @@ export const LocationForm = ({
                   : null;
               }}
               renderInput={(params) => (
-                <TextFieldElement
-                  name="roles"
-                  placeholder="Añada otros roles si desea"
+                <TextField
+                  placeholder="Añada otros roles si desea presionando enter"
                   {...params}
                 />
               )}
@@ -114,5 +112,3 @@ export const LocationForm = ({
     </FormContainer>
   );
 };
-
-// const churchRoles = ["Pastor", "Líder de alabanza", "Ujier"];
