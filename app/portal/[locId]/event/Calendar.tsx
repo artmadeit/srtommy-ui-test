@@ -3,6 +3,7 @@ import interactionPlugin from "@fullcalendar/interaction"; // for selectable
 import timeGridPlugin from "@fullcalendar/timegrid";
 
 import esLocale from "@fullcalendar/core/locales/es";
+import { differenceInDays } from "date-fns";
 
 export default function Calendar() {
   return (
@@ -17,7 +18,7 @@ export default function Calendar() {
       //   eventClick
       selectAllow={({ start, end }) => {
         // for allowing only select / drag only in that day
-        return end.getDate() - start.getDate() <= 0;
+        return differenceInDays(end, start) <= 0;
       }}
       select={({ start, end, jsEvent }) => {
         console.log(start, end);
