@@ -1,11 +1,19 @@
-import FullCalendar from "@fullcalendar/react";
 import interactionPlugin from "@fullcalendar/interaction"; // for selectable
+import FullCalendar from "@fullcalendar/react";
 import timeGridPlugin from "@fullcalendar/timegrid";
 
 import esLocale from "@fullcalendar/core/locales/es";
 import { differenceInDays } from "date-fns";
 
-export default function Calendar() {
+export default function Calendar({
+  onSelect,
+}: {
+  onSelect: (arg: {
+    start: Date;
+    end: Date;
+    jsEvent: MouseEvent | null;
+  }) => void;
+}) {
   return (
     <FullCalendar
       locale={esLocale}
@@ -17,12 +25,11 @@ export default function Calendar() {
       selectMirror
       //   eventClick
       selectAllow={({ start, end }) => {
-        // for allowing only select / drag only in that day
+        // for allowing to select only dates in same day
         return differenceInDays(end, start) <= 0;
       }}
       select={({ start, end, jsEvent }) => {
-        console.log(start, end);
-        console.log(jsEvent);
+        onSelect({ start, end, jsEvent });
       }}
       // unselect
       // dateClick

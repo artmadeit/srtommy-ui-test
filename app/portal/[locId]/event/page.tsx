@@ -1,111 +1,91 @@
 "use client";
 
-import { Box, Fab, Stack, Tooltip, Typography } from "@mui/material";
-import Link from "next/link";
-import AddIcon from "@mui/icons-material/Add";
-import SearchIcon from "@mui/icons-material/Search";
-import {
-  DataGrid,
-  GridActionsCellItem,
-  GridColDef,
-  esES,
-} from "@mui/x-data-grid";
-import { useMemo } from "react";
-import { useRouter } from "next/navigation";
-import { withOutSorting } from "@/app/(components)/helpers/withOutSorting";
-import { usePagination } from "@/app/(components)/hook-customization/usePagination";
-import { SpringPage } from "@/app/(api)/pagination";
-import useSWR from "swr";
+import { Dialog, Stack, Typography } from "@mui/material";
 import Calendar from "./Calendar";
+
+import { useAuthApi } from "@/app/(api)/api";
+import { SnackbarContext } from "@/app/(components)/SnackbarContext";
+import { useContext, useState } from "react";
+import { EventForm } from "@/app/(components)/EventForm";
 
 type EventListItem = {
   id: number;
   name: string;
 };
 
-export default function EventListPage() {
-  const router = useRouter();
-  const { paginationModel, setPaginationModel } = usePagination();
+export default function EventListPage({
+  params,
+}: {
+  params: { locId: number };
+}) {
+  const { locId } = params;
 
-  const { data: events, isLoading } = useSWR<SpringPage<EventListItem>>([
-    `/events`,
-    {
-      params: {
-        page: paginationModel.page,
-        size: paginationModel.pageSize,
-      },
-    },
-  ]);
+  const getApi = useAuthApi();
+  const alert = useContext(SnackbarContext);
 
-  const columns = useMemo(
-    () =>
-      (
-        [
-          { field: "name", flex: 1, headerName: "Nombre" },
-          {
-            field: "actions",
-            type: "actions",
-            width: 80,
-            getActions: (params) => {
-              return [
-                <Tooltip title="Ver" key="edit">
-                  <GridActionsCellItem
-                    icon={<SearchIcon />}
-                    label="ver"
-                    onClick={() =>
-                      router.push(`event/${params.row.id}/attendance`)
-                    }
-                  />
-                </Tooltip>,
-              ];
-            },
-          },
-        ] as GridColDef<EventListItem>[]
-      ).map(withOutSorting),
-    [router]
-  );
+  function getDateTime(date: Date, time: Date) {
+    return `${date.toISOString().split("T")[0]}T${
+      time.toISOString().split("T")[1]
+    }`;
+  }
+
+  const [open, setOpen] = useState(false);
 
   return (
     <Stack direction="column" spacing={2} p={4}>
       <Stack direction="row" alignItems="center" spacing={2}>
         <Typography variant="h4">Eventos</Typography>
-        <Tooltip title="Registrar">
-          <Link href="event/create">
-            <Fab color="primary" aria-labelledby="add">
-              <AddIcon />
-            </Fab>
-          </Link>
-        </Tooltip>
       </Stack>
-      {/* <TextField
-        placeholder="Buscar..."
-        variant="outlined"
-        value={searchText}
-        onChange={handleChange}
-        InputProps={{
-          startAdornment: (
-            <InputAdornment position="start">
-              <SearchIcon />
-            </InputAdornment>
-          ),
+      <Calendar
+        onSelect={(x) => {
+          setOpen(true);
         }}
-        fullWidth
-      /> */}
-      <Calendar />
+      />
+      <Dialog open={open} onClose={() => setOpen(false)}>
+        <EventForm
+          locId={locId}
+          initialValues={{
+            name: "",
+            startTime: null,
+            endTime: null,
+            address: "",
+            description: "",
+            speakers: [],
+          }}
+          submit={async (values) => {
+            if (!values.startDate) {
+              return;
+            }
 
-      {/* <div style={{ height: "70vh", width: "100%" }}>
-        <DataGrid
-          loading={isLoading}
-          columns={columns}
-          paginationModel={paginationModel}
-          paginationMode="server"
-          onPaginationModelChange={setPaginationModel}
-          disableColumnFilter
-          rows={events?.content || []}
-          rowCount={events?.totalElements || 0}
-          localeText={esES.components.MuiDataGrid.defaultProps.localeText}
+            if (!values.startTime) {
+              return;
+            }
+
+            if (!values.endDate) {
+              return;
+            }
+
+            if (!values.endTime) {
+              return;
+            }
+
+            const data = {
+              name: values.name,
+              address: values.address,
+              organizationId: locId,
+              startTime: getDateTime(values.startDate, values.startTime),
+              endTime: getDateTime(values.endDate, values.endTime),
+              speakerIds: values.speakers.map((x) => x.id),
+              description: values.description,
+            };
+
+            const response = await getApi().then((api) =>
+              api.post(`/events`, data)
+            );
+            alert.showMessage("Guardado exitosamente");
+          }}
         />
-      </div> */}
+      </Dialog>
     </Stack>
   );
 }
