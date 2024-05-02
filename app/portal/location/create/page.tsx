@@ -46,7 +46,7 @@ export default function LocationCreatePage() {
           name: "",
           address: "",
           phoneNumber: "+51",
-          roles: [],
+          roles: fixedOptions,
         }}
         fixedOptions={fixedOptions}
         title="Registrar Datos de la Sede"

@@ -56,6 +56,7 @@ export default function Location({ params }: { params: { locId: number } }) {
             title="Datos generales de la sede"
             fixedOptions={fixedOptions}
             submit={async (formValues) => {
+              
               const api = await getApi();
               await api.put(`/organizations/locations/${locId}`, {
                 name: formValues.name,
@@ -65,6 +66,7 @@ export default function Location({ params }: { params: { locId: number } }) {
                   (role) => !fixedOptions.includes(role)
                 ),
               });
+              console.log(formValues)
               alert.showMessage("Guardado exitosamente");
             }}
           />
