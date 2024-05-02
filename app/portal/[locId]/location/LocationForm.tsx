@@ -12,7 +12,7 @@ import { isArray } from "lodash";
 import { FormContainer, TextFieldElement, useForm } from "react-hook-form-mui";
 import { TelFieldElement } from "../person/PersonForm";
 
-type LocationFormValues = {
+export type LocationFormValues = {
   name: string;
   address: string;
   phoneNumber: string;

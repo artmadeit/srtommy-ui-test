@@ -9,8 +9,9 @@ import Loading from "@/app/(components)/Loading";
 import { useAuthApi } from "@/app/(api)/api";
 import { SnackbarContext } from "@/app/(components)/SnackbarContext";
 import { Groups } from "./groups/Groups";
+import { getFixedOptions } from "./Roles";
 
-type RolesLocation = {
+export type RolesLocation = {
   name: string;
   isPredefined: boolean;
 };
@@ -32,19 +33,7 @@ export default function Location({ params }: { params: { locId: number } }) {
   if (isLoading) return <Loading />;
   if (!location || !roles) return <div>Not found</div>;
 
-  const toSpanish = (x: string) => {
-    if (x === "PASTOR") {
-      return "Pastor";
-    } else if (x === "WORSHIP_LEADER") {
-      return "Líder de alabanza";
-    } else {
-      return "Ujier";
-    }
-  };
-
-  const fixedOptions: string[] = roles
-    .filter((x) => x.isPredefined === true)
-    .map((x) => toSpanish(x.name));
+  const fixedOptions: string[] = getFixedOptions(roles);
 
   const initialValues = {
     name: location.name,
@@ -67,6 +56,7 @@ export default function Location({ params }: { params: { locId: number } }) {
             title="Datos generales de la sede"
             fixedOptions={fixedOptions}
             submit={async (formValues) => {
+              
               const api = await getApi();
               await api.put(`/organizations/locations/${locId}`, {
                 name: formValues.name,
@@ -76,6 +66,7 @@ export default function Location({ params }: { params: { locId: number } }) {
                   (role) => !fixedOptions.includes(role)
                 ),
               });
+              console.log(formValues)
               alert.showMessage("Guardado exitosamente");
             }}
           />
