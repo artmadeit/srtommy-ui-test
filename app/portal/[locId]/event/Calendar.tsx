@@ -5,14 +5,16 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import esLocale from "@fullcalendar/core/locales/es";
 import { differenceInDays } from "date-fns";
 
+export type DatesSelection = {
+  start: Date;
+  end: Date;
+  jsEvent: MouseEvent | null;
+};
+
 export default function Calendar({
   onSelect,
 }: {
-  onSelect: (arg: {
-    start: Date;
-    end: Date;
-    jsEvent: MouseEvent | null;
-  }) => void;
+  onSelect: (arg: DatesSelection) => void;
 }) {
   return (
     <FullCalendar

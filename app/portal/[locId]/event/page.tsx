@@ -1,17 +1,13 @@
 "use client";
 
 import { Dialog, Stack, Typography } from "@mui/material";
-import Calendar from "./Calendar";
+import Calendar, { DatesSelection } from "./Calendar";
 
 import { useAuthApi } from "@/app/(api)/api";
 import { SnackbarContext } from "@/app/(components)/SnackbarContext";
 import { useContext, useState } from "react";
 import { EventForm } from "@/app/(components)/EventForm";
-
-type EventListItem = {
-  id: number;
-  name: string;
-};
+import { DateSpan } from "@fullcalendar/core/internal";
 
 export default function EventListPage({
   params,
@@ -30,6 +26,7 @@ export default function EventListPage({
   }
 
   const [open, setOpen] = useState(false);
+  const [spanSelected, setSpanSelected] = useState<DatesSelection>();
 
   return (
     <Stack direction="column" spacing={2} p={4}>
@@ -38,51 +35,52 @@ export default function EventListPage({
       </Stack>
       <Calendar
         onSelect={(x) => {
-          setOpen(true);
+          setSpanSelected(x);
         }}
       />
-      <Dialog open={open} onClose={() => setOpen(false)}>
+      <Dialog
+        open={Boolean(spanSelected)}
+        onClose={() => setSpanSelected(undefined)}
+      >
         <EventForm
           locId={locId}
           initialValues={{
             name: "",
-            startTime: null,
-            endTime: null,
+            date: spanSelected?.start,
+            startTime: spanSelected?.start,
+            endTime: spanSelected?.end,
             address: "",
             description: "",
             speakers: [],
           }}
           submit={async (values) => {
-            if (!values.startDate) {
-              return;
-            }
+            console.log(values);
+            // if (!values.startTime) {
+            //   return;
+            // }
 
-            if (!values.startTime) {
-              return;
-            }
+            // if (!values.date) {
+            //   return;
+            // }
 
-            if (!values.endDate) {
-              return;
-            }
+            // if (!values.endTime) {
+            //   return;
+            // }
 
-            if (!values.endTime) {
-              return;
-            }
+            // const data = {
+            //   name: values.name,
+            //   address: values.address,
+            //   organizationId: locId,
+            //   startTime: getDateTime(values.date, values.startTime),
+            //   endTime: getDateTime(values.date, values.endTime),
+            //   speakerIds: values.speakers.map((x) => x.id),
+            //   description: values.description,
+            // };
 
-            const data = {
-              name: values.name,
-              address: values.address,
-              organizationId: locId,
-              startTime: getDateTime(values.startDate, values.startTime),
-              endTime: getDateTime(values.endDate, values.endTime),
-              speakerIds: values.speakers.map((x) => x.id),
-              description: values.description,
-            };
-
-            const response = await getApi().then((api) =>
-              api.post(`/events`, data)
-            );
-            alert.showMessage("Guardado exitosamente");
+            // const response = await getApi().then((api) =>
+            //   api.post(`/events`, data)
+            // );
+            // alert.showMessage("Guardado exitosamente");
           }}
         />
       </Dialog>

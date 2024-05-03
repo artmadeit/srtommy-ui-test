@@ -21,10 +21,9 @@ import { Option } from "./Option";
 
 export type EventFormValues = {
   name: string;
-  startDate?: Date;
-  startTime: Date | null;
-  endDate?: Date;
-  endTime: Date | null;
+  date?: Date;
+  startTime?: Date | null;
+  endTime?: Date | null;
   address: string;
   description: string;
   speakers: Option[];
@@ -63,17 +62,23 @@ export const EventForm = ({ locId, initialValues, submit }: EventFormProps) => {
           </Typography>
         </Grid>
         <Grid xs={12}>
-          <TextFieldElement fullWidth name="name" label="Nombre" required />
+          <TextFieldElement
+            fullWidth
+            name="name"
+            label="Título"
+            required
+            autoFocus
+          />
         </Grid>
-        <Grid xs={3}>
+        <Grid xs={4}>
           <DatePickerElement
             sx={{ width: "100%" }}
-            label="Fecha inicio"
-            name="startDate"
+            label="Fecha"
+            name="date"
             required
           />
         </Grid>
-        <Grid xs={3}>
+        <Grid xs={4}>
           <TimePicker
             ampm
             sx={{ width: "100%" }}
@@ -86,15 +91,7 @@ export const EventForm = ({ locId, initialValues, submit }: EventFormProps) => {
             }}
           />
         </Grid>
-        <Grid xs={3}>
-          <DatePickerElement
-            sx={{ width: "100%" }}
-            label="Fecha fin"
-            name="endDate"
-            required
-          />
-        </Grid>
-        <Grid xs={3}>
+        <Grid xs={4}>
           <TimePicker
             ampm
             sx={{ width: "100%" }}
