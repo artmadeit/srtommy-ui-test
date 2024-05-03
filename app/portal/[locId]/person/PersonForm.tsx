@@ -16,26 +16,38 @@ import { MuiTelInput } from "mui-tel-input";
 import { PersonDetailBase } from "./Person";
 import React from "react";
 import { differenceInYears } from "date-fns";
+import useSWR from "swr";
+import { RolesLocation } from "../location/page";
 
 export type PersonDetailFormInput = PersonDetailBase & {
   hasBeenBaptized?: "YES" | "NO";
+  roles: string[];
 };
 
 type PersonFormProps = {
   initialValues: PersonDetailFormInput;
   submit: (data: any) => Promise<void>;
+  locId: number;
 };
 
 function isValidDate(date: Date) {
   return date instanceof Date && !isNaN(date.getTime());
 }
 
-export const PersonForm = ({ initialValues, submit }: PersonFormProps) => {
-  // TODO: call get organizations/locations/{id}/roles con eso llenar los roles
+export const PersonForm = ({
+  initialValues,
+  submit,
+  locId,
+}: PersonFormProps) => {
+  const { data: roles } = useSWR<RolesLocation[]>(
+    `/organizations/locations/${locId}/roles`
+  );
 
   const formContext = useForm({
     defaultValues: initialValues,
   });
+
+  if (!roles) return <div>Not found</div>;
 
   const handleChange = (birthdate: Date | null) => {
     formContext.setValue("birthdate", birthdate);
@@ -107,9 +119,14 @@ export const PersonForm = ({ initialValues, submit }: PersonFormProps) => {
           </Grid>
           <AutocompleteElement
             multiple
-            name="role"
+            name="roles"
             label="Escriba o seleccione el rol(es)"
-            options={[]}
+            options={roles.map((x) => {
+              return {
+                id: x.id,
+                label: x.name,
+              };
+            })}
           />
         </Grid>
         <Grid xs={12}>

@@ -22,18 +22,21 @@ export default function CreatePerson({
         firstName: "",
         lastName: "",
         phoneNumber: "+51",
+        roles: [],
       }}
       submit={async (data) => {
-        const api = await getApi();
-        await api.post("people", {
-          ...data,
-          hasBeenBaptized: data.hasBeenBaptized === "YES",
-          organizationId: locId,
-          // TODO: check roles here
-        });
+        console.log(data)
+        // const api = await getApi();
+        // await api.post("people", {
+        //   ...data,
+        //   hasBeenBaptized: data.hasBeenBaptized === "YES",
+        //   organizationId: locId,
+        //   // TODO: check roles here
+        // });
         alert.showMessage("Guardado exitosamente");
         router.push(`/portal/${locId}/person`);
       }}
+      locId={locId}
     />
   );
 }

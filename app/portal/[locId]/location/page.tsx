@@ -12,6 +12,7 @@ import { Groups } from "./groups/Groups";
 import { getFixedOptions } from "./Roles";
 
 export type RolesLocation = {
+  id: number;
   name: string;
   isPredefined: boolean;
 };
