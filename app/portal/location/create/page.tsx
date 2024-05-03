@@ -31,8 +31,7 @@ export default function LocationCreatePage() {
     const api = await getApi();
     const response = await api.post("organizations/locations", {
       ...data,
-      parentId: ORG_ID,
-      // TODO: andre
+      parentId: ORG_ID,      
       roles: data.roles.filter((role) => !fixedOptions.includes(role)),
     });
     alert.showMessage("Guardado exitosamente");
