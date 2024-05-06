@@ -125,7 +125,7 @@ export const PersonForm = ({
             options={roles.map((x) => {
               return {
                 id: x.id,
-                label: x.name,
+                label: x.isPredefined ? toSpanish(x.name) : x.name,
               };
             })}
           />
