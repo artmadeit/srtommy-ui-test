@@ -6,7 +6,7 @@ export const getFixedOptions = (roles: RolesLocation[]): string[] => {
     .map((x) => toSpanish(x.name));
 };
 
-const toSpanish = (x: string) => {
+export const toSpanish = (x: string) => {
   if (x === "PASTOR") {
     return "Pastor";
   } else if (x === "WORSHIP_LEADER") {

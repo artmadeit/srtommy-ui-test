@@ -18,15 +18,16 @@ import React from "react";
 import { differenceInYears } from "date-fns";
 import useSWR from "swr";
 import { RolesLocation } from "../location/page";
+import { toSpanish } from "../location/Roles";
 
 export type PersonDetailFormInput = PersonDetailBase & {
   hasBeenBaptized?: "YES" | "NO";
-  roles: string[];
+  roles: RolesLocation[];
 };
 
 type PersonFormProps = {
   initialValues: PersonDetailFormInput;
-  submit: (data: any) => Promise<void>;
+  submit: (data: PersonDetailFormInput) => Promise<void>;
   locId: number;
 };
 
