@@ -25,14 +25,12 @@ export default function CreatePerson({
         roles: [],
       }}
       submit={async (data) => {
-        console.log(data)
         const api = await getApi();
         await api.post("people", {
           ...data,
           hasBeenBaptized: data.hasBeenBaptized === "YES",
           organizationId: locId,
-          roles: data.roles.map((x)=> x.id)
-          // TODO: check roles here
+          roles: data.roles.map((x) => x.id),
         });
         alert.showMessage("Guardado exitosamente");
         router.push(`/portal/${locId}/person`);

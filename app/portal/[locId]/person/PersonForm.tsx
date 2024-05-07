@@ -122,6 +122,7 @@ export const PersonForm = ({
             multiple
             name="roles"
             label="Escriba o seleccione el rol(es)"
+            // isOptionEqualToValue={(option, value)=> option.id === value.id}
             options={roles.map((x) => {
               return {
                 id: x.id,
