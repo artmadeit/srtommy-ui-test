@@ -7,6 +7,7 @@ import {
   AutocompleteElement,
   DatePickerElement,
   FormContainer,
+  SelectElement,
   SubmitHandler,
   TextFieldElement,
   useForm,
@@ -19,7 +20,9 @@ import { PersonDetailWithId } from "../portal/[locId]/person/Person";
 import { DEBOUNCE_WAIT_MS } from "./helpers/debouncing";
 import { Option } from "./Option";
 import PlaceIcon from "@mui/icons-material/Place";
+import PlaceOutlinedIcon from "@mui/icons-material/PlaceOutlined";
 import GroupIcon from "@mui/icons-material/Group";
+import GroupOutlinedIcon from "@mui/icons-material/GroupOutlined";
 
 export type EventFormValues = {
   name: string;
@@ -67,7 +70,8 @@ export const EventForm = ({ locId, initialValues, submit }: EventFormProps) => {
           <TextFieldElement
             fullWidth
             name="name"
-            label="Agregar título"
+            placeholder="Agregar título"
+            sx={{ padding: "10px 0px" }}
             variant="standard"
             required
             autoFocus
@@ -117,11 +121,13 @@ export const EventForm = ({ locId, initialValues, submit }: EventFormProps) => {
             }}
             textFieldProps={{
               InputProps: {
-                startAdornment: <PlaceIcon />,
+                startAdornment: <PlaceOutlinedIcon />,
               },
               placeholder: " Agregar lugar",
-              
-              
+              variant: "standard",
+              sx: {
+                padding: "10px 0px",
+              },
             }}
             name="address"
             // label="Agregar lugar"
@@ -139,11 +145,13 @@ export const EventForm = ({ locId, initialValues, submit }: EventFormProps) => {
             }}
             textFieldProps={{
               InputProps: {
-                startAdornment: <GroupIcon />,
+                startAdornment: <GroupOutlinedIcon />,
               },
               placeholder: " Agregar ponente(s)",
-              
-              
+              variant: "standard",
+              sx: {
+                padding: "10px 0px",
+              },
             }}
             name="speakers"
             // label="Ponente(s)"
@@ -165,6 +173,7 @@ export const EventForm = ({ locId, initialValues, submit }: EventFormProps) => {
             InputProps={{
               placeholder: "Agregar descripción",
             }}
+            variant="standard"
           />
         </Grid>
         <Grid xs={6}>
