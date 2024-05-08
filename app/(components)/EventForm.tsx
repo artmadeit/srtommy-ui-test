@@ -1,4 +1,4 @@
-import { Button, Typography } from "@mui/material";
+import { Button, InputAdornment, Typography } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import { TimePicker } from "@mui/x-date-pickers";
 import { renderTimeViewClock } from "@mui/x-date-pickers/timeViewRenderers";
@@ -18,6 +18,8 @@ import { LocationDetail } from "../portal/[locId]/Location";
 import { PersonDetailWithId } from "../portal/[locId]/person/Person";
 import { DEBOUNCE_WAIT_MS } from "./helpers/debouncing";
 import { Option } from "./Option";
+import PlaceIcon from "@mui/icons-material/Place";
+import GroupIcon from "@mui/icons-material/Group";
 
 export type EventFormValues = {
   name: string;
@@ -56,16 +58,17 @@ export const EventForm = ({ locId, initialValues, submit }: EventFormProps) => {
   return (
     <FormContainer formContext={formContext} onSuccess={submit}>
       <Grid container spacing={2} margin={4}>
-        <Grid xs={12}>
+        {/* <Grid xs={12}>
           <Typography variant="h5" gutterBottom>
             Datos del Evento
           </Typography>
-        </Grid>
+        </Grid> */}
         <Grid xs={12}>
           <TextFieldElement
             fullWidth
             name="name"
-            label="Título"
+            label="Agregar título"
+            variant="standard"
             required
             autoFocus
           />
@@ -112,8 +115,16 @@ export const EventForm = ({ locId, initialValues, submit }: EventFormProps) => {
                 formContext.setValue("address", newInputValue);
               },
             }}
+            textFieldProps={{
+              InputProps: {
+                startAdornment: <PlaceIcon />,
+              },
+              placeholder: " Agregar lugar",
+              
+              
+            }}
             name="address"
-            label="Lugar"
+            // label="Agregar lugar"
             options={[Location?.address]}
           />
         </Grid>
@@ -126,8 +137,16 @@ export const EventForm = ({ locId, initialValues, submit }: EventFormProps) => {
                 setSearchTextSpeaker(newInputValue);
               },
             }}
+            textFieldProps={{
+              InputProps: {
+                startAdornment: <GroupIcon />,
+              },
+              placeholder: " Agregar ponente(s)",
+              
+              
+            }}
             name="speakers"
-            label="Ponente(s)"
+            // label="Ponente(s)"
             options={
               people?.content.map((x) => ({
                 id: x.id,
@@ -140,9 +159,12 @@ export const EventForm = ({ locId, initialValues, submit }: EventFormProps) => {
           <TextFieldElement
             fullWidth
             name="description"
-            label="Descripción"
+            // label="Agregar descripción"
             multiline
             minRows={4}
+            InputProps={{
+              placeholder: "Agregar descripción",
+            }}
           />
         </Grid>
         <Grid xs={6}>
