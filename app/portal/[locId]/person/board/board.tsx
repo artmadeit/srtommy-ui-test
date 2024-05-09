@@ -41,7 +41,6 @@ export default function Board({
   initial,
   autoScrollerOptions,
   isCombineEnabled = false,
-
   containerHeight,
   useClone,
   withScrollableColumns,

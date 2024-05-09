@@ -2,7 +2,6 @@
 
 import { Dialog, Stack, Typography } from "@mui/material";
 import Calendar, { DatesSelection } from "./Calendar";
-
 import { useAuthApi } from "@/app/(api)/api";
 import { SnackbarContext } from "@/app/(components)/SnackbarContext";
 import { useContext, useState } from "react";

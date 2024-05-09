@@ -1,4 +1,4 @@
-import { Button, InputAdornment, Typography } from "@mui/material";
+import { Button } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import { TimePicker } from "@mui/x-date-pickers";
 import { renderTimeViewClock } from "@mui/x-date-pickers/timeViewRenderers";
@@ -19,9 +19,7 @@ import { LocationDetail } from "../portal/[locId]/Location";
 import { PersonDetailWithId } from "../portal/[locId]/person/Person";
 import { DEBOUNCE_WAIT_MS } from "./helpers/debouncing";
 import { Option } from "./Option";
-import PlaceIcon from "@mui/icons-material/Place";
 import PlaceOutlinedIcon from "@mui/icons-material/PlaceOutlined";
-import GroupIcon from "@mui/icons-material/Group";
 import GroupOutlinedIcon from "@mui/icons-material/GroupOutlined";
 
 export type EventFormValues = {
@@ -61,11 +59,6 @@ export const EventForm = ({ locId, initialValues, submit }: EventFormProps) => {
   return (
     <FormContainer formContext={formContext} onSuccess={submit}>
       <Grid container spacing={2} margin={4}>
-        {/* <Grid xs={12}>
-          <Typography variant="h5" gutterBottom>
-            Datos del Evento
-          </Typography>
-        </Grid> */}
         <Grid xs={12}>
           <TextFieldElement
             fullWidth
@@ -127,7 +120,11 @@ export const EventForm = ({ locId, initialValues, submit }: EventFormProps) => {
               },
               {
                 id: 3,
-                label: "c",
+                label: "Todos los meses, el primer jueves",
+              },
+              {
+                id: 4,
+                label: "Personalizar",
               },
             ]}
           />
@@ -151,7 +148,6 @@ export const EventForm = ({ locId, initialValues, submit }: EventFormProps) => {
               },
             }}
             name="address"
-            // label="Agregar lugar"
             options={[Location?.address]}
           />
         </Grid>
@@ -188,7 +184,6 @@ export const EventForm = ({ locId, initialValues, submit }: EventFormProps) => {
           <TextFieldElement
             fullWidth
             name="description"
-            // label="Agregar descripción"
             multiline
             minRows={4}
             InputProps={{

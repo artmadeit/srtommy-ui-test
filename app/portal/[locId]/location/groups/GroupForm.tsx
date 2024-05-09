@@ -108,7 +108,6 @@ export const GroupForm = ({
             />
           </div>
         </Stack>
-
         <Grid>
           <Button type="submit" variant="contained">
             Guardar

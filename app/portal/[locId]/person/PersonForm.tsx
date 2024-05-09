@@ -11,7 +11,7 @@ import {
   useFormContext,
 } from "react-hook-form-mui";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
-import { Autocomplete, Button, Typography } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import { MuiTelInput } from "mui-tel-input";
 import { PersonDetailBase } from "./Person";
 import React from "react";

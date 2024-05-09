@@ -43,10 +43,8 @@ const CloneBadge = styled.div`
   right: -${imageSize / 3}px;
   top: -${imageSize / 3}px;
   transform: rotate(40deg);
-
   height: ${imageSize}px;
   width: ${imageSize}px;
-
   display: flex;
   justify-content: center;
   align-items: center;
