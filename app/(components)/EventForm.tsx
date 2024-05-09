@@ -112,6 +112,27 @@ export const EventForm = ({ locId, initialValues, submit }: EventFormProps) => {
           />
         </Grid>
         <Grid xs={12}>
+          <SelectElement
+            label="No se repite"
+            name="b"
+            sx={{ width: "100%" }}
+            options={[
+              {
+                id: 1,
+                label: "Cada Domingo",
+              },
+              {
+                id: 2,
+                label: "Cada semana, el jueves",
+              },
+              {
+                id: 3,
+                label: "c",
+              },
+            ]}
+          />
+        </Grid>
+        <Grid xs={12}>
           <AutocompleteElement
             autocompleteProps={{
               freeSolo: true,
