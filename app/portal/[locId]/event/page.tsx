@@ -50,6 +50,7 @@ export default function EventListPage({
             endTime: spanSelected?.end,
             address: "",
             description: "",
+            isRecurrent: false,
             speakers: [],
           }}
           submit={async (values) => {

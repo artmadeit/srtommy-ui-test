@@ -1,10 +1,12 @@
-import { Button } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import { TimePicker } from "@mui/x-date-pickers";
 import { renderTimeViewClock } from "@mui/x-date-pickers/timeViewRenderers";
 import React from "react";
 import {
   AutocompleteElement,
+  CheckboxButtonGroup,
+  CheckboxElement,
   DatePickerElement,
   FormContainer,
   SelectElement,
@@ -28,6 +30,7 @@ export type EventFormValues = {
   startTime?: Date | null;
   endTime?: Date | null;
   address: string;
+  isRecurrent: any;
   description: string;
   speakers: Option[];
 };
@@ -44,6 +47,9 @@ export const EventForm = ({ locId, initialValues, submit }: EventFormProps) => {
   const formContext = useForm<EventFormValues>({
     defaultValues: initialValues,
   });
+
+  const watch = formContext.watch;
+  const watchIsRecurrent = watch("isRecurrent");
 
   const [searchTextDebounced] = useDebounce(
     searchTextSpeaker,
@@ -105,7 +111,9 @@ export const EventForm = ({ locId, initialValues, submit }: EventFormProps) => {
           />
         </Grid>
         <Grid xs={12}>
-          <SelectElement
+          <CheckboxElement name="isRecurrent" label="No se repite" />
+          {watchIsRecurrent && <Box>hola</Box>}
+          {/* <SelectElement
             label="No se repite"
             name="b"
             sx={{ width: "100%" }}
@@ -127,7 +135,7 @@ export const EventForm = ({ locId, initialValues, submit }: EventFormProps) => {
                 label: "Personalizar",
               },
             ]}
-          />
+          /> */}
         </Grid>
         <Grid xs={12}>
           <AutocompleteElement
