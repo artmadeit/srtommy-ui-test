@@ -62,6 +62,8 @@ export const EventForm = ({ locId, initialValues, submit }: EventFormProps) => {
     searchTextDebounced ? `people?searchText=${searchTextDebounced}` : `people`
   );
 
+  const chipSX = { ":focus": { background: "#1976d2", color: "#fff" } };
+
   return (
     <FormContainer formContext={formContext} onSuccess={submit}>
       <Grid container spacing={2} margin={4}>
@@ -111,21 +113,58 @@ export const EventForm = ({ locId, initialValues, submit }: EventFormProps) => {
           />
         </Grid>
         <Grid xs={12}>
-          <CheckboxElement name="isRecurrent" label="No se repite" />
-          {/* {watchIsRecurrent && (
+          <CheckboxElement name="isRecurrent" label="Se repite" />
+          {watchIsRecurrent && (
             <Box>
               <Typography>Repetir el</Typography>
-              <Stack direction="row" spacing={1}>
-                <Chip label="D" size="small" />
-                <Chip label="L" size="small" />
-                <Chip label="M" size="small" />
-                <Chip label="M" size="small" />
-                <Chip label="J" size="small" />
-                <Chip label="V" size="small" />
-                <Chip label="S" size="small" />
+              <Stack direction="row" spacing={1.5}>
+                <Chip
+                  label="D"
+                  size="small"
+                  // sx={chipSX}
+                  color="primary"
+                  variant="filled"
+                  onClick={() => console.log("D")}
+                />
+                <Chip
+                  label="L"
+                  size="small"
+                  // sx={chipSX}
+                  onClick={() => console.log("L")}
+                />
+                <Chip
+                  label="M"
+                  size="small"
+                  // sx={chipSX}
+                  onClick={() => console.log("M")}
+                />
+                <Chip
+                  label="X"
+                  size="small"
+                  // sx={chipSX}
+                  onClick={() => console.log("X")}
+                />
+                <Chip
+                  label="J"
+                  size="small"
+                  // sx={chipSX}
+                  onClick={() => console.log("J")}
+                />
+                <Chip
+                  label="V"
+                  size="small"
+                  // sx={chipSX}
+                  onClick={() => console.log("V")}
+                />
+                <Chip
+                  label="S"
+                  size="small"
+                  // sx={chipSX}
+                  onClick={() => console.log("S")}
+                />
               </Stack>
             </Box>
-          )} */}
+          )}
         </Grid>
         <Grid xs={12}>
           <AutocompleteElement
