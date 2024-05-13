@@ -6,7 +6,6 @@ import { useAuthApi } from "@/app/(api)/api";
 import { SnackbarContext } from "@/app/(components)/SnackbarContext";
 import { useContext, useState } from "react";
 import { EventForm } from "@/app/(components)/EventForm";
-import { DateSpan } from "@fullcalendar/core/internal";
 
 export default function EventListPage({
   params,

@@ -1,4 +1,4 @@
-import { Box, Button } from "@mui/material";
+import { Box, Button, Chip, Stack, Typography } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import { TimePicker } from "@mui/x-date-pickers";
 import { renderTimeViewClock } from "@mui/x-date-pickers/timeViewRenderers";
@@ -112,30 +112,20 @@ export const EventForm = ({ locId, initialValues, submit }: EventFormProps) => {
         </Grid>
         <Grid xs={12}>
           <CheckboxElement name="isRecurrent" label="No se repite" />
-          {watchIsRecurrent && <Box>hola</Box>}
-          {/* <SelectElement
-            label="No se repite"
-            name="b"
-            sx={{ width: "100%" }}
-            options={[
-              {
-                id: 1,
-                label: "Cada Domingo",
-              },
-              {
-                id: 2,
-                label: "Cada semana, el jueves",
-              },
-              {
-                id: 3,
-                label: "Todos los meses, el primer jueves",
-              },
-              {
-                id: 4,
-                label: "Personalizar",
-              },
-            ]}
-          /> */}
+          {/* {watchIsRecurrent && (
+            <Box>
+              <Typography>Repetir el</Typography>
+              <Stack direction="row" spacing={1}>
+                <Chip label="D" size="small" />
+                <Chip label="L" size="small" />
+                <Chip label="M" size="small" />
+                <Chip label="M" size="small" />
+                <Chip label="J" size="small" />
+                <Chip label="V" size="small" />
+                <Chip label="S" size="small" />
+              </Stack>
+            </Box>
+          )} */}
         </Grid>
         <Grid xs={12}>
           <AutocompleteElement
@@ -179,7 +169,6 @@ export const EventForm = ({ locId, initialValues, submit }: EventFormProps) => {
               },
             }}
             name="speakers"
-            // label="Ponente(s)"
             options={
               people?.content.map((x) => ({
                 id: x.id,

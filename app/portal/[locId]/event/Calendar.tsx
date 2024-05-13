@@ -1,7 +1,6 @@
 import interactionPlugin from "@fullcalendar/interaction"; // for selectable
 import FullCalendar from "@fullcalendar/react";
 import timeGridPlugin from "@fullcalendar/timegrid";
-
 import esLocale from "@fullcalendar/core/locales/es";
 import { differenceInDays } from "date-fns";
 
