@@ -5,8 +5,6 @@ type WeekChipProps = {
   chipsValue: string[];
 };
 
-// const chipsValue = ["D", "L", "M", "X", "J", "V", "S"];
-
 export const WeekChips = ({ onChange, chipsValue }: WeekChipProps) => {
   const toggle = (weekDay: string) => {
     if (chipsValue.includes(weekDay)) {
@@ -16,20 +14,18 @@ export const WeekChips = ({ onChange, chipsValue }: WeekChipProps) => {
     }
   };
 
-  console.log(chipsValue)
+  console.log(chipsValue);
   return (
     <Stack direction="row" spacing={1.5}>
       <Chip
         label="D"
         size="small"
-        // sx={chipSX}
         color={chipsValue.includes("D") ? "primary" : "default"}
         onClick={() => toggle("D")}
       />
       <Chip
         label="L"
         size="small"
-        // sx={chipSX}
         color={chipsValue.includes("L") ? "primary" : "default"}
         onClick={() => toggle("L")}
       />

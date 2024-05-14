@@ -1,15 +1,13 @@
-import { Box, Button, Chip, Stack, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import { TimePicker } from "@mui/x-date-pickers";
 import { renderTimeViewClock } from "@mui/x-date-pickers/timeViewRenderers";
 import React from "react";
 import {
   AutocompleteElement,
-  CheckboxButtonGroup,
   CheckboxElement,
   DatePickerElement,
   FormContainer,
-  SelectElement,
   SubmitHandler,
   TextFieldElement,
   useForm,
@@ -64,8 +62,8 @@ export const EventForm = ({ locId, initialValues, submit }: EventFormProps) => {
     searchTextDebounced ? `people?searchText=${searchTextDebounced}` : `people`
   );
 
-  const weekdays = watch('weekdays')
-  
+  const weekdays = watch("weekdays");
+
   return (
     <FormContainer formContext={formContext} onSuccess={submit}>
       <Grid container spacing={2} margin={4}>
