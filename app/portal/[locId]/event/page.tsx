@@ -50,6 +50,7 @@ export default function EventListPage({
             address: "",
             description: "",
             isRecurrent: false,
+            weekdays: ["L", "M"],
             speakers: [],
           }}
           submit={async (values) => {

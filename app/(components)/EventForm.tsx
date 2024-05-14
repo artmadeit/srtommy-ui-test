@@ -23,6 +23,7 @@ import { DEBOUNCE_WAIT_MS } from "./helpers/debouncing";
 import { Option } from "./Option";
 import PlaceOutlinedIcon from "@mui/icons-material/PlaceOutlined";
 import GroupOutlinedIcon from "@mui/icons-material/GroupOutlined";
+import { WeekChips } from "./WeekChips";
 
 export type EventFormValues = {
   name: string;
@@ -32,6 +33,7 @@ export type EventFormValues = {
   address: string;
   isRecurrent: any;
   description: string;
+  weekdays: string[];
   speakers: Option[];
 };
 
@@ -62,8 +64,8 @@ export const EventForm = ({ locId, initialValues, submit }: EventFormProps) => {
     searchTextDebounced ? `people?searchText=${searchTextDebounced}` : `people`
   );
 
-  const chipSX = { ":focus": { background: "#1976d2", color: "#fff" } };
-
+  const weekdays = watch('weekdays')
+  
   return (
     <FormContainer formContext={formContext} onSuccess={submit}>
       <Grid container spacing={2} margin={4}>
@@ -117,52 +119,12 @@ export const EventForm = ({ locId, initialValues, submit }: EventFormProps) => {
           {watchIsRecurrent && (
             <Box>
               <Typography>Repetir el</Typography>
-              <Stack direction="row" spacing={1.5}>
-                <Chip
-                  label="D"
-                  size="small"
-                  // sx={chipSX}
-                  color="primary"
-                  variant="filled"
-                  onClick={() => console.log("D")}
-                />
-                <Chip
-                  label="L"
-                  size="small"
-                  // sx={chipSX}
-                  onClick={() => console.log("L")}
-                />
-                <Chip
-                  label="M"
-                  size="small"
-                  // sx={chipSX}
-                  onClick={() => console.log("M")}
-                />
-                <Chip
-                  label="X"
-                  size="small"
-                  // sx={chipSX}
-                  onClick={() => console.log("X")}
-                />
-                <Chip
-                  label="J"
-                  size="small"
-                  // sx={chipSX}
-                  onClick={() => console.log("J")}
-                />
-                <Chip
-                  label="V"
-                  size="small"
-                  // sx={chipSX}
-                  onClick={() => console.log("V")}
-                />
-                <Chip
-                  label="S"
-                  size="small"
-                  // sx={chipSX}
-                  onClick={() => console.log("S")}
-                />
-              </Stack>
+              <WeekChips
+                chipsValue={weekdays}
+                onChange={(weekdays) =>
+                  formContext.setValue("weekdays", weekdays)
+                }
+              />
             </Box>
           )}
         </Grid>
