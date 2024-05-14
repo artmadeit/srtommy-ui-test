@@ -28,6 +28,7 @@ export type EventFormValues = {
   date?: Date;
   startTime?: Date | null;
   endTime?: Date | null;
+  endDate?: Date | null;
   address: string;
   isRecurrent: any;
   description: string;
@@ -116,13 +117,25 @@ export const EventForm = ({ locId, initialValues, submit }: EventFormProps) => {
           <CheckboxElement name="isRecurrent" label="Se repite" />
           {watchIsRecurrent && (
             <Box>
-              <Typography>Repetir el</Typography>
+              <Typography sx={{ padding: "10px 0px" }}>Repetir el</Typography>
               <WeekChips
                 chipsValue={weekdays}
                 onChange={(weekdays) =>
                   formContext.setValue("weekdays", weekdays)
                 }
               />
+              <Box
+                sx={{
+                  padding: "10px 0px",
+                  display: "flex",
+                  alignItems: "center",
+                }}
+              >
+                <Typography>Finaliza el: </Typography>
+                <Grid xs={4}>
+                  <DatePickerElement name="endDate" />
+                </Grid>
+              </Box>
             </Box>
           )}
         </Grid>
