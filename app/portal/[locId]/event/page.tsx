@@ -1,11 +1,12 @@
 "use client";
 
-import { Dialog, Stack, Typography } from "@mui/material";
+import { Dialog, IconButton, Stack, Typography } from "@mui/material";
 import Calendar, { DatesSelection } from "./Calendar";
 import { useAuthApi } from "@/app/(api)/api";
 import { SnackbarContext } from "@/app/(components)/SnackbarContext";
 import { useContext, useState } from "react";
 import { EventForm } from "@/app/(components)/EventForm";
+import CloseIcon from "@mui/icons-material/Close";
 
 export default function EventListPage({
   params,
@@ -36,10 +37,17 @@ export default function EventListPage({
           setSpanSelected(x);
         }}
       />
-      <Dialog
-        open={Boolean(spanSelected)}
-        onClose={() => setSpanSelected(undefined)}
-      >
+      <Dialog open={Boolean(spanSelected)}>
+        <IconButton
+          onClick={() => setSpanSelected(undefined)}
+          sx={{
+            position: "absolute",
+            right: 8,
+            top: 8,
+          }}
+        >
+          <CloseIcon />
+        </IconButton>
         <EventForm
           locId={locId}
           initialValues={{

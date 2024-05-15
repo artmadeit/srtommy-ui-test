@@ -164,18 +164,23 @@ export const EventForm = ({ locId, initialValues, submit }: EventFormProps) => {
         <Grid xs={12}>
           {/* TODO: make creatable */}
           <AutocompleteElement
-            multiple
+            multiple            
+            // sx={{
+            //   "& .MuiIcon-root": { mt: -2 }
+            // }}
             autocompleteProps={{
               onInputChange: (_event, newInputValue) => {
                 setSearchTextSpeaker(newInputValue);
               },
+              size: "small",
             }}
             textFieldProps={{
-              InputProps: {
-                startAdornment: <GroupOutlinedIcon />,
-              },
+              // InputProps: {
+              //   startAdornment: <GroupOutlinedIcon />,
+              // },
               placeholder: " Agregar ponente(s)",
               variant: "standard",
+              // size: "small",
               sx: {
                 padding: "10px 0px",
               },
@@ -194,7 +199,7 @@ export const EventForm = ({ locId, initialValues, submit }: EventFormProps) => {
             fullWidth
             name="description"
             multiline
-            minRows={4}
+            minRows={1}
             InputProps={{
               placeholder: "Agregar descripción",
             }}
