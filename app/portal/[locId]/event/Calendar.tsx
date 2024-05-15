@@ -3,6 +3,8 @@ import FullCalendar from "@fullcalendar/react";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import esLocale from "@fullcalendar/core/locales/es";
 import { differenceInDays } from "date-fns";
+import { useAuthApi } from "@/app/(api)/api";
+import { EventInput } from "@fullcalendar/core/index.js";
 
 export type DatesSelection = {
   start: Date;
@@ -15,6 +17,8 @@ export default function Calendar({
 }: {
   onSelect: (arg: DatesSelection) => void;
 }) {
+  const getApi = useAuthApi();
+
   return (
     <FullCalendar
       locale={esLocale}
@@ -34,6 +38,17 @@ export default function Calendar({
       }}
       // unselect
       // dateClick
+      events={(info, successCallback, failureCallback) => {
+        return getApi().then((api) =>
+          api
+            .get<EventInput[]>("events", {
+              params: { start: info.start, end: info.end },
+            })
+            .then((r) => r.data)
+            .then((events) => successCallback(events))
+            .catch((err) => failureCallback(err))
+        );
+      }}
     />
   );
 }
