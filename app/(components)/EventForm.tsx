@@ -31,7 +31,7 @@ export type EventFormValues = {
   address: string;
   isRecurrent: any;
   description: string;
-  weekdays: string[];
+  daysOfWeek: number[];
   speakers: Option[];
 };
 
@@ -62,7 +62,7 @@ export const EventForm = ({ locId, initialValues, submit }: EventFormProps) => {
     searchTextDebounced ? `people?searchText=${searchTextDebounced}` : `people`
   );
 
-  const weekdays = watch("weekdays");
+  const daysOfWeek = watch("daysOfWeek");
 
   return (
     <FormContainer formContext={formContext} onSuccess={submit}>
@@ -118,9 +118,9 @@ export const EventForm = ({ locId, initialValues, submit }: EventFormProps) => {
             <Box>
               <Typography>Repetir el</Typography>
               <WeekChips
-                chipsValue={weekdays}
-                onChange={(weekdays) =>
-                  formContext.setValue("weekdays", weekdays)
+                chipsValue={daysOfWeek}
+                onChange={(daysOfWeek) =>
+                  formContext.setValue("daysOfWeek", daysOfWeek)
                 }
               />
             </Box>

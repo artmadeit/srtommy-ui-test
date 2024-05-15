@@ -1,12 +1,12 @@
 import { Chip, Stack } from "@mui/material";
 
 type WeekChipProps = {
-  onChange: (chipsValue: string[]) => void;
-  chipsValue: string[];
+  onChange: (chipsValue: number[]) => void;
+  chipsValue: number[];
 };
 
 export const WeekChips = ({ onChange, chipsValue }: WeekChipProps) => {
-  const toggle = (weekDay: string) => {
+  const toggle = (weekDay: number) => {
     if (chipsValue.includes(weekDay)) {
       onChange(chipsValue.filter((x) => x !== weekDay));
     } else {
@@ -20,44 +20,44 @@ export const WeekChips = ({ onChange, chipsValue }: WeekChipProps) => {
       <Chip
         label="D"
         size="small"
-        color={chipsValue.includes("D") ? "primary" : "default"}
-        onClick={() => toggle("D")}
+        color={chipsValue.includes(0) ? "primary" : "default"}
+        onClick={() => toggle(0)}
       />
       <Chip
         label="L"
         size="small"
-        color={chipsValue.includes("L") ? "primary" : "default"}
-        onClick={() => toggle("L")}
+        color={chipsValue.includes(1) ? "primary" : "default"}
+        onClick={() => toggle(1)}
       />
       <Chip
         label="M"
         size="small"
-        color={chipsValue.includes("M") ? "primary" : "default"}
-        onClick={() => toggle("M")}
+        color={chipsValue.includes(2) ? "primary" : "default"}
+        onClick={() => toggle(2)}
       />
       <Chip
         label="X"
         size="small"
-        color={chipsValue.includes("X") ? "primary" : "default"}
-        onClick={() => toggle("X")}
+        color={chipsValue.includes(3) ? "primary" : "default"}
+        onClick={() => toggle(3)}
       />
       <Chip
         label="J"
         size="small"
-        color={chipsValue.includes("J") ? "primary" : "default"}
-        onClick={() => toggle("J")}
+        color={chipsValue.includes(4) ? "primary" : "default"}
+        onClick={() => toggle(4)}
       />
       <Chip
         label="V"
         size="small"
-        color={chipsValue.includes("V") ? "primary" : "default"}
-        onClick={() => toggle("V")}
+        color={chipsValue.includes(5) ? "primary" : "default"}
+        onClick={() => toggle(5)}
       />
       <Chip
         label="S"
         size="small"
-        color={chipsValue.includes("S") ? "primary" : "default"}
-        onClick={() => toggle("S")}
+        color={chipsValue.includes(6) ? "primary" : "default"}
+        onClick={() => toggle(6)}
       />
     </Stack>
   );
