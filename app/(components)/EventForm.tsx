@@ -78,6 +78,10 @@ export const EventForm = ({ locId, initialValues, submit }: EventFormProps) => {
             autoFocus
           />
         </Grid>
+        <Grid xs={12}>
+          <Button sx={{ mr: 1, mb: 1 }}>Evento</Button>
+          <Button sx={{ mb: 1 }}>Curso</Button>
+        </Grid>
         <Grid xs={4}>
           <DatePickerElement
             sx={{ width: "100%" }}
