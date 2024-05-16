@@ -20,7 +20,6 @@ import { PersonDetailWithId } from "../portal/[locId]/person/Person";
 import { DEBOUNCE_WAIT_MS } from "./helpers/debouncing";
 import { Option } from "./Option";
 import PlaceOutlinedIcon from "@mui/icons-material/PlaceOutlined";
-import GroupOutlinedIcon from "@mui/icons-material/GroupOutlined";
 import { WeekChips } from "./WeekChips";
 
 export type EventFormValues = {
@@ -164,10 +163,7 @@ export const EventForm = ({ locId, initialValues, submit }: EventFormProps) => {
         <Grid xs={12}>
           {/* TODO: make creatable */}
           <AutocompleteElement
-            multiple            
-            // sx={{
-            //   "& .MuiIcon-root": { mt: -2 }
-            // }}
+            multiple
             autocompleteProps={{
               onInputChange: (_event, newInputValue) => {
                 setSearchTextSpeaker(newInputValue);
@@ -175,12 +171,8 @@ export const EventForm = ({ locId, initialValues, submit }: EventFormProps) => {
               size: "small",
             }}
             textFieldProps={{
-              // InputProps: {
-              //   startAdornment: <GroupOutlinedIcon />,
-              // },
               placeholder: " Agregar ponente(s)",
               variant: "standard",
-              // size: "small",
               sx: {
                 padding: "10px 0px",
               },

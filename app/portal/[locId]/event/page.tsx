@@ -30,7 +30,7 @@ export default function EventListPage({
   return (
     <Stack direction="column" spacing={2} p={4}>
       <Stack direction="row" alignItems="center" spacing={2}>
-        <Typography variant="h4">Eventos</Typography>
+        <Typography variant="h4">Eventos y cursos</Typography>
       </Stack>
       <Calendar
         onSelect={(x) => {
