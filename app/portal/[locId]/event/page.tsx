@@ -59,8 +59,10 @@ export default function EventListPage({
             description: "",
             isRecurrent: false,
             daysOfWeek: [],
+            type: 0,
             speakers: [],
           }}
+          
           submit={async (values) => {
             console.log(values);
             // if (!values.startTime) {

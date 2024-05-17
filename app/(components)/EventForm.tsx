@@ -11,6 +11,7 @@ import {
   SubmitHandler,
   TextFieldElement,
   useForm,
+  ToggleButtonGroupElement,
 } from "react-hook-form-mui";
 import useSWR from "swr";
 import { useDebounce } from "use-debounce";
@@ -21,6 +22,7 @@ import { DEBOUNCE_WAIT_MS } from "./helpers/debouncing";
 import { Option } from "./Option";
 import PlaceOutlinedIcon from "@mui/icons-material/PlaceOutlined";
 import { WeekChips } from "./WeekChips";
+import { ToogleButton } from "./ToogleButton";
 
 export type EventFormValues = {
   name: string;
@@ -32,6 +34,7 @@ export type EventFormValues = {
   isRecurrent: any;
   description: string;
   daysOfWeek: number[];
+  type: number;
   speakers: Option[];
 };
 
@@ -63,6 +66,8 @@ export const EventForm = ({ locId, initialValues, submit }: EventFormProps) => {
   );
 
   const daysOfWeek = watch("daysOfWeek");
+  const typeOfEvents = watch("type");
+  // const tipoEventos = ["Evento", "Curso"];
 
   return (
     <FormContainer formContext={formContext} onSuccess={submit}>
@@ -79,8 +84,24 @@ export const EventForm = ({ locId, initialValues, submit }: EventFormProps) => {
           />
         </Grid>
         <Grid xs={12}>
-          <Button sx={{ mr: 1, mb: 1 }}>Evento</Button>
-          <Button sx={{ mb: 1 }}>Curso</Button>
+          {/* <ToggleButtonGroupElement
+            name="eventType"
+            exclusive
+            options={[
+              {
+                id: "event",
+                label: "Evento",
+              },
+              {
+                id: "course",
+                label: "Curso",
+              },
+            ]}
+          /> */}
+          <ToogleButton
+            eventType={typeOfEvents}
+            onChange={(type) => formContext.setValue("type", type)}
+          />
         </Grid>
         <Grid xs={4}>
           <DatePickerElement
