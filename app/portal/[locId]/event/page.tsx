@@ -33,6 +33,7 @@ export default function EventListPage({
         <Typography variant="h4">Eventos y cursos</Typography>
       </Stack>
       <Calendar
+        organizationId={locId}
         onSelect={(x) => {
           setSpanSelected(x);
         }}

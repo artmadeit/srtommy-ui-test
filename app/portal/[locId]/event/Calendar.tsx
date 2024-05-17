@@ -13,9 +13,12 @@ export type DatesSelection = {
 };
 
 export default function Calendar({
+  organizationId,
   onSelect,
 }: {
+  organizationId: number,
   onSelect: (arg: DatesSelection) => void;
+
 }) {
   const getApi = useAuthApi();
 
@@ -42,7 +45,7 @@ export default function Calendar({
         return getApi().then((api) =>
           api
             .get<EventInput[]>("events", {
-              params: { start: info.start, end: info.end },
+              params: { organizationId, start: info.start, end: info.end },
             })
             .then((r) => r.data)
             .then((events) => successCallback(events))
