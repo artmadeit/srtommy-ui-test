@@ -24,9 +24,9 @@ export default function EventListPage({
     }`;
   }
 
-  const [open, setOpen] = useState(false);
   const [spanSelected, setSpanSelected] = useState<DatesSelection>();
 
+  const close = () => setSpanSelected(undefined);
   return (
     <Stack direction="column" spacing={2} p={4}>
       <Stack direction="row" alignItems="center" spacing={2}>
@@ -39,7 +39,7 @@ export default function EventListPage({
       />
       <Dialog open={Boolean(spanSelected)}>
         <IconButton
-          onClick={() => setSpanSelected(undefined)}
+          onClick={close}
           sx={{
             position: "absolute",
             right: 8,
@@ -64,33 +64,31 @@ export default function EventListPage({
           }}
           
           submit={async (values) => {
-            console.log(values);
-            // if (!values.startTime) {
-            //   return;
-            // }
+            if (!values.startTime) {
+              return;
+            }
 
-            // if (!values.date) {
-            //   return;
-            // }
+            if (!values.date) {
+              return;
+            }
 
-            // if (!values.endTime) {
-            //   return;
-            // }
+            if (!values.endTime) {
+              return;
+            }
 
-            // const data = {
-            //   name: values.name,
-            //   address: values.address,
-            //   organizationId: locId,
-            //   startTime: getDateTime(values.date, values.startTime),
-            //   endTime: getDateTime(values.date, values.endTime),
-            //   speakerIds: values.speakers.map((x) => x.id),
-            //   description: values.description,
-            // };
+            const data = {
+              name: values.name,
+              address: values.address,
+              organizationId: locId,
+              startTime: getDateTime(values.date, values.startTime),
+              endTime: getDateTime(values.date, values.endTime),
+              speakerIds: values.speakers.map((x) => x.id),
+              description: values.description,
+            };
 
-            // const response = await getApi().then((api) =>
-            //   api.post(`/events`, data)
-            // );
-            // alert.showMessage("Guardado exitosamente");
+            await getApi().then((api) => api.post(`/events`, data));
+            close();
+            alert.showMessage("Guardado exitosamente");
           }}
         />
       </Dialog>
