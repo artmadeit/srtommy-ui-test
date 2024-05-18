@@ -8,6 +8,12 @@ import { useContext, useState } from "react";
 import { EventForm } from "@/app/(components)/EventForm";
 import CloseIcon from "@mui/icons-material/Close";
 
+function getDateTime(date: Date, time: Date) {
+  return `${date.toISOString().split("T")[0]}T${
+    time.toISOString().split("T")[1]
+  }`;
+}
+
 export default function EventListPage({
   params,
 }: {
@@ -18,15 +24,10 @@ export default function EventListPage({
   const getApi = useAuthApi();
   const alert = useContext(SnackbarContext);
 
-  function getDateTime(date: Date, time: Date) {
-    return `${date.toISOString().split("T")[0]}T${
-      time.toISOString().split("T")[1]
-    }`;
-  }
-
   const [spanSelected, setSpanSelected] = useState<DatesSelection>();
 
   const close = () => setSpanSelected(undefined);
+
   return (
     <Stack direction="column" spacing={2} p={4}>
       <Stack direction="row" alignItems="center" spacing={2}>
@@ -63,7 +64,6 @@ export default function EventListPage({
             type: 0,
             speakers: [],
           }}
-          
           submit={async (values) => {
             if (!values.startTime) {
               return;
@@ -77,14 +77,23 @@ export default function EventListPage({
               return;
             }
 
+            if (values.isRecurrent && !values.endRecur) {
+              return;
+            }
+
             const data = {
               name: values.name,
               address: values.address,
               organizationId: locId,
               startTime: getDateTime(values.date, values.startTime),
-              endTime: getDateTime(values.date, values.endTime),
+              endTime: getDateTime(
+                (values.isRecurrent ? values.endRecur : values.date) as Date,
+                values.endTime
+              ),
               speakerIds: values.speakers.map((x) => x.id),
               description: values.description,
+              isRecurrent: values.isRecurrent,
+              daysOfWeek: values.daysOfWeek,
             };
 
             await getApi().then((api) => api.post(`/events`, data));

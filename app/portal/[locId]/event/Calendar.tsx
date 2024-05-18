@@ -2,7 +2,7 @@ import interactionPlugin from "@fullcalendar/interaction"; // for selectable
 import FullCalendar from "@fullcalendar/react";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import esLocale from "@fullcalendar/core/locales/es";
-import { differenceInDays } from "date-fns";
+import { differenceInDays, format } from "date-fns";
 import { useAuthApi } from "@/app/(api)/api";
 import { EventInput } from "@fullcalendar/core/index.js";
 
@@ -16,9 +16,8 @@ export default function Calendar({
   organizationId,
   onSelect,
 }: {
-  organizationId: number,
+  organizationId: number;
   onSelect: (arg: DatesSelection) => void;
-
 }) {
   const getApi = useAuthApi();
 
@@ -48,7 +47,22 @@ export default function Calendar({
               params: { organizationId, start: info.start, end: info.end },
             })
             .then((r) => r.data)
-            .then((events) => successCallback(events))
+            .then((events) =>
+              successCallback(
+                events.map((event) => {
+                  if (event.daysOfWeek && event.daysOfWeek.length > 0) {
+                    if (event.start instanceof Date) {
+                      event.startTime = format(event.start, "HH:mm:SS");
+                    }
+                    if (event.end instanceof Date) {
+                      event.endTime = format(event.end, "HH:mm:SS");
+                    }
+                  }
+
+                  return event;
+                })
+              )
+            )
             .catch((err) => failureCallback(err))
         );
       }}

@@ -29,9 +29,9 @@ export type EventFormValues = {
   date?: Date;
   startTime?: Date | null;
   endTime?: Date | null;
-  endDate?: Date | null;
+  endRecur?: Date | null;
   address: string;
-  isRecurrent: any;
+  isRecurrent: boolean;
   description: string;
   daysOfWeek: number[];
   type: number;
@@ -66,8 +66,7 @@ export const EventForm = ({ locId, initialValues, submit }: EventFormProps) => {
   );
 
   const daysOfWeek = watch("daysOfWeek");
-  const typeOfEvents = watch("type");
-  // const tipoEventos = ["Evento", "Curso"];
+  const type = watch("type");
 
   return (
     <FormContainer formContext={formContext} onSuccess={submit}>
@@ -84,22 +83,8 @@ export const EventForm = ({ locId, initialValues, submit }: EventFormProps) => {
           />
         </Grid>
         <Grid xs={12}>
-          {/* <ToggleButtonGroupElement
-            name="eventType"
-            exclusive
-            options={[
-              {
-                id: "event",
-                label: "Evento",
-              },
-              {
-                id: "course",
-                label: "Curso",
-              },
-            ]}
-          /> */}
           <ToogleButton
-            eventType={typeOfEvents}
+            eventType={type}
             onChange={(type) => formContext.setValue("type", type)}
           />
         </Grid>
@@ -157,7 +142,7 @@ export const EventForm = ({ locId, initialValues, submit }: EventFormProps) => {
               >
                 <Typography>Finaliza el: </Typography>
                 <Grid xs={4}>
-                  <DatePickerElement name="endDate" />
+                  <DatePickerElement name="endRecur" />
                 </Grid>
               </Box>
             </Box>
