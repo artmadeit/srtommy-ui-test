@@ -60,8 +60,10 @@ export default function EventListPage({
             description: "",
             isRecurrent: false,
             daysOfWeek: [],
+            type: 0,
             speakers: [],
           }}
+          
           submit={async (values) => {
             if (!values.startTime) {
               return;
