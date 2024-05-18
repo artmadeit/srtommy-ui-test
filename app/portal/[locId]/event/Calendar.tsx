@@ -5,6 +5,7 @@ import esLocale from "@fullcalendar/core/locales/es";
 import { differenceInDays, format } from "date-fns";
 import { useAuthApi } from "@/app/(api)/api";
 import { EventInput } from "@fullcalendar/core/index.js";
+import { useRouter } from "next/navigation";
 
 export type DatesSelection = {
   start: Date;
@@ -20,6 +21,7 @@ export default function Calendar({
   onSelect: (arg: DatesSelection) => void;
 }) {
   const getApi = useAuthApi();
+  const router = useRouter();
 
   return (
     <FullCalendar
@@ -30,7 +32,6 @@ export default function Calendar({
       allDaySlot={false}
       selectable
       selectMirror
-      //   eventClick
       selectAllow={({ start, end }) => {
         // for allowing to select only dates in same day
         return differenceInDays(end, start) <= 0;
@@ -40,6 +41,9 @@ export default function Calendar({
       }}
       // unselect
       // dateClick
+      eventClick={(info) => {
+        router.push("event/" + info.event.id + "/attendance");
+      }}
       events={(info, successCallback, failureCallback) => {
         return getApi().then((api) =>
           api
@@ -62,7 +66,7 @@ export default function Calendar({
                   if (event.isACourse) {
                     event.backgroundColor = "green";
                   }
-
+                  event.classNames = ["cursor-pointer"];
                   return event;
                 })
               )

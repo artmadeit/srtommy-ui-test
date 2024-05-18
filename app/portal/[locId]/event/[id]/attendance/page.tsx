@@ -62,7 +62,7 @@ export default function AttendanceEvent({
           <Grid xs={12}>
             <Box display="flex" alignItems="center">
               <Typography variant="h5" gutterBottom>
-                {event.name}
+                {event.title}
               </Typography>
               <Tooltip title="Editar">
                 <Link href={`/portal/${locId}/event/${id}`}>
@@ -74,11 +74,9 @@ export default function AttendanceEvent({
             </Box>
             <Box>
               <Typography>
-                Fecha Inicio: {formatDateTime(event.startTime)}
+                Fecha Inicio: {formatDateTime(event.start)}
               </Typography>
-              <Typography>
-                Fecha Fin: {formatDateTime(event.endTime)}
-              </Typography>
+              <Typography>Fecha Fin: {formatDateTime(event.end)}</Typography>
             </Box>
           </Grid>
           <Grid xs={12}>
