@@ -94,6 +94,7 @@ export default function EventListPage({
               description: values.description,
               isRecurrent: values.isRecurrent,
               daysOfWeek: values.daysOfWeek,
+              isACourse: values.type === 1,
             };
 
             await getApi().then((api) => api.post(`/events`, data));

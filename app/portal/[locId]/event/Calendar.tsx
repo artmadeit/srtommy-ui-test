@@ -59,6 +59,10 @@ export default function Calendar({
                     }
                   }
 
+                  if (event.isACourse) {
+                    event.backgroundColor = "green";
+                  }
+
                   return event;
                 })
               )
