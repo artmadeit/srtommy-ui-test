@@ -14,7 +14,6 @@ export const WeekChips = ({ onChange, chipsValue }: WeekChipProps) => {
     }
   };
 
-  console.log(chipsValue);
   return (
     <Stack direction="row" spacing={1.5}>
       <Chip
