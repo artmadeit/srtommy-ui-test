@@ -17,7 +17,6 @@ import { useDebounce } from "use-debounce";
 import { DEBOUNCE_WAIT_MS } from "@/app/(components)/helpers/debouncing";
 import { useRouter } from "next/navigation";
 import { PersonListItem } from "./PersonListItem";
-import { GroupMembers } from "../location/groups/[id]/page";
 import { PersonDetailWithId } from "./Person";
 
 export type MyDataGridProps = Omit<DataGridProps, "columns" | "rows">;
