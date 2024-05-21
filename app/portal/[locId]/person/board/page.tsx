@@ -9,7 +9,6 @@ import { PersonDetailWithId } from "../Person";
 
 type Accountability = {
   child: PersonDetailWithId;
-  // organization: Organization;
   type: string;
 };
 
