@@ -17,9 +17,10 @@ import { GridRowSelectionModel } from "@mui/x-data-grid";
 import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
 import useSWR from "swr";
-import { PersonTable } from "../../../person/PersonTable";
+import { PersonTable, fullName } from "../../../person/PersonTable";
 import { EventDetail } from "../EventDetail";
 import { SnackbarContext } from "@/app/(components)/SnackbarContext";
+import { EventForm, EventFormValues } from "@/app/(components)/EventForm";
 
 type EventAttendance = {
   numberOfVisitors: number;
@@ -52,6 +53,24 @@ export default function AttendanceEvent({
   }, [eventAttendance]);
 
   if (isLoading) return <Loading />;
+  if (!event) return <div>Not found</div>;
+
+  const initialValues: EventFormValues = {
+    name: event.title,
+    date: event.start,
+    startTime: event.start,
+    endTime: event.end,
+    type: event.isACourse ? 1 : 0,
+    daysOfWeek: event.daysOfWeek,
+    isRecurrent: event.daysOfWeek && event.daysOfWeek.length > 0,
+    address: event.address,
+    speakers: event.speakers.map((speaker) => ({
+      id: speaker.id,
+      label: fullName(speaker),
+    })),
+    // speakers: event.speakers.map((x)=> x.firstName),
+    description: event.description,
+  };
 
   return (
     <Grid container spacing={2} margin={4}>
@@ -61,7 +80,12 @@ export default function AttendanceEvent({
         <>
           <Grid xs={12}>
             <Box display="flex" alignItems="center">
-              <Typography variant="h5" gutterBottom>
+              <EventForm
+                locId={locId}
+                initialValues={initialValues}
+                submit={() => console.log("Hola")}
+              />
+              {/* <Typography variant="h5" gutterBottom>
                 {event.title}
               </Typography>
               <Tooltip title="Editar">
@@ -70,14 +94,14 @@ export default function AttendanceEvent({
                     <EditIcon sx={{ marginBottom: "0.35em" }} />
                   </IconButton>
                 </Link>
-              </Tooltip>
+              </Tooltip> */}
             </Box>
-            <Box>
+            {/* <Box>
               <Typography>
                 Fecha Inicio: {formatDateTime(event.start)}
               </Typography>
               <Typography>Fecha Fin: {formatDateTime(event.end)}</Typography>
-            </Box>
+            </Box> */}
           </Grid>
           <Grid xs={12}>
             <Typography variant="h6" gutterBottom>
