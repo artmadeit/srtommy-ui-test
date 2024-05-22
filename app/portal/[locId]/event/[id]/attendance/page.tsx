@@ -1,20 +1,15 @@
 "use client";
 
 import { useAuthApi } from "@/app/(api)/api";
-import { formatDateTime } from "@/app/(api)/date";
 import Loading from "@/app/(components)/Loading";
-import EditIcon from "@mui/icons-material/Edit";
 import {
   Box,
   Button,
-  IconButton,
   Stack,
-  Tooltip,
   Typography,
 } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import { GridRowSelectionModel } from "@mui/x-data-grid";
-import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
 import useSWR from "swr";
 import { PersonTable, fullName } from "../../../person/PersonTable";
@@ -68,7 +63,6 @@ export default function AttendanceEvent({
       id: speaker.id,
       label: fullName(speaker),
     })),
-    // speakers: event.speakers.map((x)=> x.firstName),
     description: event.description,
   };
 
@@ -85,23 +79,7 @@ export default function AttendanceEvent({
                 initialValues={initialValues}
                 submit={() => console.log("Hola")}
               />
-              {/* <Typography variant="h5" gutterBottom>
-                {event.title}
-              </Typography>
-              <Tooltip title="Editar">
-                <Link href={`/portal/${locId}/event/${id}`}>
-                  <IconButton aria-label="edit">
-                    <EditIcon sx={{ marginBottom: "0.35em" }} />
-                  </IconButton>
-                </Link>
-              </Tooltip> */}
             </Box>
-            {/* <Box>
-              <Typography>
-                Fecha Inicio: {formatDateTime(event.start)}
-              </Typography>
-              <Typography>Fecha Fin: {formatDateTime(event.end)}</Typography>
-            </Box> */}
           </Grid>
           <Grid xs={12}>
             <Typography variant="h6" gutterBottom>
