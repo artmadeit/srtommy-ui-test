@@ -19,44 +19,44 @@ export const WeekChips = ({ onChange, chipsValue }: WeekChipProps) => {
       <Chip
         label="L"
         size="small"
-        color={chipsValue.includes(0) ? "primary" : "default"}
-        onClick={() => toggle(0)}
-      />
-      <Chip
-        label="M"
-        size="small"
         color={chipsValue.includes(1) ? "primary" : "default"}
         onClick={() => toggle(1)}
       />
       <Chip
-        label="Mi"
+        label="M"
         size="small"
         color={chipsValue.includes(2) ? "primary" : "default"}
         onClick={() => toggle(2)}
       />
       <Chip
-        label="J"
+        label="Mi"
         size="small"
         color={chipsValue.includes(3) ? "primary" : "default"}
         onClick={() => toggle(3)}
       />
       <Chip
-        label="V"
+        label="J"
         size="small"
         color={chipsValue.includes(4) ? "primary" : "default"}
         onClick={() => toggle(4)}
       />
       <Chip
-        label="S"
+        label="V"
         size="small"
         color={chipsValue.includes(5) ? "primary" : "default"}
         onClick={() => toggle(5)}
       />
       <Chip
-        label="D"
+        label="S"
         size="small"
         color={chipsValue.includes(6) ? "primary" : "default"}
         onClick={() => toggle(6)}
+      />
+      <Chip
+        label="D"
+        size="small"
+        color={chipsValue.includes(0) ? "primary" : "default"}
+        onClick={() => toggle(0)}
       />
     </Stack>
   );

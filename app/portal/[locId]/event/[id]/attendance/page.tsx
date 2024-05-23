@@ -2,12 +2,7 @@
 
 import { useAuthApi } from "@/app/(api)/api";
 import Loading from "@/app/(components)/Loading";
-import {
-  Box,
-  Button,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Stack, Typography } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import { GridRowSelectionModel } from "@mui/x-data-grid";
 import { useContext, useEffect, useState } from "react";
@@ -16,6 +11,7 @@ import { PersonTable, fullName } from "../../../person/PersonTable";
 import { EventDetail } from "../EventDetail";
 import { SnackbarContext } from "@/app/(components)/SnackbarContext";
 import { EventForm, EventFormValues } from "@/app/(components)/EventForm";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 type EventAttendance = {
   numberOfVisitors: number;
@@ -73,7 +69,13 @@ export default function AttendanceEvent({
       ) : (
         <>
           <Grid xs={12}>
-            <Box display="flex" alignItems="center">
+            <Box>
+              <Button
+                variant="text"
+                color="inherit"
+                startIcon={<DeleteIcon />}
+                onClick={() => console.log("Baby I love you so")}
+              ></Button>
               <EventForm
                 locId={locId}
                 initialValues={initialValues}
