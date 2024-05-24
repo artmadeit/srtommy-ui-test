@@ -2,7 +2,7 @@
 
 import { useAuthApi } from "@/app/(api)/api";
 import Loading from "@/app/(components)/Loading";
-import { Box, Button, Stack, Typography } from "@mui/material";
+import { Box, Button, Fab, Stack, Tooltip, Typography } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import { GridRowSelectionModel } from "@mui/x-data-grid";
 import { useContext, useEffect, useState } from "react";
@@ -70,12 +70,13 @@ export default function AttendanceEvent({
         <>
           <Grid xs={12}>
             <Box>
-              <Button
-                variant="text"
-                color="inherit"
-                startIcon={<DeleteIcon />}
-                onClick={() => console.log("Baby I love you so")}
-              ></Button>
+              <div style={{ display: "flex", justifyContent: "flex-end" }}>
+                <Tooltip title="Eliminar">
+                  <Fab aria-labelledby="delete">
+                    <DeleteIcon />
+                  </Fab>
+                </Tooltip>
+              </div>
               <EventForm
                 locId={locId}
                 initialValues={initialValues}
