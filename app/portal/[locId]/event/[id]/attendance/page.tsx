@@ -81,6 +81,7 @@ export default function AttendanceEvent({
                 locId={locId}
                 initialValues={initialValues}
                 submit={() => console.log("Hola")}
+                editable={false}
               />
             </Box>
           </Grid>

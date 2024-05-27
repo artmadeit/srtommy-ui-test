@@ -101,6 +101,7 @@ export default function EventListPage({
             close();
             alert.showMessage("Guardado exitosamente");
           }}
+          editable={true}
         />
       </Dialog>
     </Stack>
