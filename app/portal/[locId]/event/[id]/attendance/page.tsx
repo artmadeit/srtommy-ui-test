@@ -23,6 +23,7 @@ import { EventDetail } from "../EventDetail";
 import { SnackbarContext } from "@/app/(components)/SnackbarContext";
 import { EventForm, EventFormValues } from "@/app/(components)/EventForm";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { FormContainer, RadioButtonGroup } from "react-hook-form-mui";
 
 type EventAttendance = {
   numberOfVisitors: number;
@@ -85,10 +86,7 @@ export default function AttendanceEvent({
             <Box>
               <div style={{ display: "flex", justifyContent: "flex-end" }}>
                 <Tooltip title="Eliminar">
-                  <Fab
-                    aria-labelledby="delete"
-                    onClick={() => setOpenD(true)}
-                  >
+                  <Fab aria-labelledby="delete" onClick={() => setOpenD(true)}>
                     <DeleteIcon />
                   </Fab>
                 </Tooltip>
@@ -152,7 +150,28 @@ const DialogDelete = ({ close, open }: DialogDeleteProps) => {
   return (
     <Dialog open={open} onClose={close}>
       <DialogTitle>Borrar el evento recurrente</DialogTitle>
-      <DialogContent>ABCCD</DialogContent>
+      <DialogContent>
+        <FormContainer>
+          <RadioButtonGroup
+            label=""
+            name="eventR"
+            options={[
+              {
+                id: "THIS_EVENT",
+                label: "Este evento",
+              },
+              {
+                id: "THIS_AND_THE_FOLLOWING_EVENTS",
+                label: "Este y los eventos siguientes",
+              },
+              {
+                id: "ALL_EVENTS",
+                label: "Todos los eventos",
+              },
+            ]}
+          />
+        </FormContainer>
+      </DialogContent>
       <DialogActions>
         <Button onClick={close}>Cancelar</Button>
         <Button>Aceptar</Button>
