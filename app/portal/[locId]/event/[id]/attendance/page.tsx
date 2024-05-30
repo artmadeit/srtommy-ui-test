@@ -23,7 +23,12 @@ import { EventDetail } from "../EventDetail";
 import { SnackbarContext } from "@/app/(components)/SnackbarContext";
 import { EventForm, EventFormValues } from "@/app/(components)/EventForm";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { FormContainer, RadioButtonGroup } from "react-hook-form-mui";
+import {
+  FormContainer,
+  RadioButtonGroup,
+  SubmitHandler,
+  useForm,
+} from "react-hook-form-mui";
 
 type EventAttendance = {
   numberOfVisitors: number;
@@ -98,7 +103,16 @@ export default function AttendanceEvent({
                 editable={false}
               />
             </Box>
-            <DialogDelete open={openD} close={() => setOpenD(false)} />
+            <DialogDelete
+              open={openD}
+              close={() => setOpenD(false)}
+              initialValues={{
+                eventR: "THIS_EVENT",
+              }}
+              onDelete={async () => {
+                await console.log("Eliminar");
+              }}
+            />
           </Grid>
           <Grid xs={12}>
             <Typography variant="h6" gutterBottom>
@@ -141,17 +155,32 @@ export default function AttendanceEvent({
   );
 }
 
+type EventRecur = {
+  eventR: "THIS_EVENT" | "THIS_AND_THE_FOLLOWING_EVENTS" | "ALL_EVENTS";
+};
+
 type DialogDeleteProps = {
   close: () => void;
   open: boolean;
+  initialValues: EventRecur;
+  onDelete: () => void;
 };
 
-const DialogDelete = ({ close, open }: DialogDeleteProps) => {
+const DialogDelete = ({
+  close,
+  open,
+  onDelete,
+  initialValues,
+}: DialogDeleteProps) => {
+  const formContext = useForm<EventRecur>({
+    defaultValues: initialValues,
+  });
+
   return (
     <Dialog open={open} onClose={close}>
       <DialogTitle>Borrar el evento recurrente</DialogTitle>
-      <DialogContent>
-        <FormContainer>
+      <FormContainer formContext={formContext} onSuccess={onDelete}>
+        <DialogContent>
           <RadioButtonGroup
             label=""
             name="eventR"
@@ -170,12 +199,12 @@ const DialogDelete = ({ close, open }: DialogDeleteProps) => {
               },
             ]}
           />
-        </FormContainer>
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={close}>Cancelar</Button>
-        <Button>Aceptar</Button>
-      </DialogActions>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={close}>Cancelar</Button>
+          <Button>Aceptar</Button>
+        </DialogActions>
+      </FormContainer>
     </Dialog>
   );
 };
