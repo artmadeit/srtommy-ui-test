@@ -103,16 +103,18 @@ export default function AttendanceEvent({
                 editable={false}
               />
             </Box>
-            <DialogDelete
-              open={openD}
-              close={() => setOpenD(false)}
-              initialValues={{
-                eventR: "THIS_EVENT",
-              }}
-              onDelete={async () => {
-                await console.log("Eliminar");
-              }}
-            />
+            {event.daysOfWeek && event.daysOfWeek.length > 0 && (
+              <DialogDelete
+                open={openD}
+                close={() => setOpenD(false)}
+                initialValues={{
+                  eventR: "THIS_EVENT",
+                }}
+                onDelete={async () => {
+                  await console.log("Eliminar");
+                }}
+              />
+            )}
           </Grid>
           <Grid xs={12}>
             <Typography variant="h6" gutterBottom>
