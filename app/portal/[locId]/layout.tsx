@@ -71,7 +71,7 @@ export default function LocLayout({
                 <ListItemIcon>
                   <EventIcon />
                 </ListItemIcon>
-                <ListItemText primary="Eventos" />
+                <ListItemText primary="Eventos y cursos" />
               </ListItemButton>
             </ListItem>
           </Link>
