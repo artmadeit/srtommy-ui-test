@@ -2,7 +2,7 @@ import interactionPlugin from "@fullcalendar/interaction"; // for selectable
 import FullCalendar from "@fullcalendar/react";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import esLocale from "@fullcalendar/core/locales/es";
-import { differenceInDays, format } from "date-fns";
+import { differenceInDays, format, formatISO } from "date-fns";
 import { useAuthApi } from "@/app/(api)/api";
 import { EventInput } from "@fullcalendar/core/index.js";
 import { useRouter } from "next/navigation";
@@ -42,7 +42,12 @@ export default function Calendar({
       // unselect
       // dateClick
       eventClick={(info) => {
-        router.push("event/" + info.event.id + "/attendance");
+        const event = info.event;
+        const formattedStartDate = formatISO(event.start as Date);
+        const formattedEndDate = formatISO(event.end as Date);
+        router.push(
+          `event/${event.id}/attendance?startDate=${formattedStartDate}&endDate=${formattedEndDate}`
+        );
       }}
       events={(info, successCallback, failureCallback) => {
         return getApi().then((api) =>
