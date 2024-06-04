@@ -41,9 +41,15 @@ type EventFormProps = {
   locId: number;
   initialValues: EventFormValues;
   submit: SubmitHandler<EventFormValues>;
+  editable: boolean;
 };
 
-export const EventForm = ({ locId, initialValues, submit }: EventFormProps) => {
+export const EventForm = ({
+  locId,
+  initialValues,
+  submit,
+  editable,
+}: EventFormProps) => {
   const [searchTextSpeaker, setSearchTextSpeaker] = React.useState("");
 
   const formContext = useForm<EventFormValues>({
@@ -122,7 +128,19 @@ export const EventForm = ({ locId, initialValues, submit }: EventFormProps) => {
           />
         </Grid>
         <Grid xs={12}>
-          <CheckboxElement name="isRecurrent" label="Se repite" />
+          <CheckboxElement
+            onChange={(e) => {
+              // console.log(e.target.checked)
+              if (e.target.checked) {
+                const date = formContext.getValues().date;
+                formContext.setValue("daysOfWeek", date ? [date.getDay()] : []);
+              } else {
+                formContext.setValue("daysOfWeek", []);
+              }
+            }}
+            name="isRecurrent"
+            label="Se repite"
+          />
           {watchIsRecurrent && (
             <Box>
               <Typography sx={{ padding: "10px 0px" }}>Repetir el</Typography>
@@ -208,9 +226,14 @@ export const EventForm = ({ locId, initialValues, submit }: EventFormProps) => {
           />
         </Grid>
         <Grid xs={6}>
-          <Button type="submit" variant="contained">
+          {editable && (
+            <Button type="submit" variant="contained">
+              Guardar
+            </Button>
+          )}
+          {/* <Button type="submit" variant="contained">
             Guardar
-          </Button>
+          </Button> */}
         </Grid>
       </Grid>
     </FormContainer>

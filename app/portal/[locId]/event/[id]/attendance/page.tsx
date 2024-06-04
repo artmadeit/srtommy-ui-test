@@ -5,17 +5,30 @@ import Loading from "@/app/(components)/Loading";
 import {
   Box,
   Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Fab,
   Stack,
+  Tooltip,
   Typography,
 } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import { GridRowSelectionModel } from "@mui/x-data-grid";
-import { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import useSWR from "swr";
 import { PersonTable, fullName } from "../../../person/PersonTable";
 import { EventDetail } from "../EventDetail";
 import { SnackbarContext } from "@/app/(components)/SnackbarContext";
 import { EventForm, EventFormValues } from "@/app/(components)/EventForm";
+import DeleteIcon from "@mui/icons-material/Delete";
+import {
+  FormContainer,
+  RadioButtonGroup,
+  SubmitHandler,
+  useForm,
+} from "react-hook-form-mui";
 
 type EventAttendance = {
   numberOfVisitors: number;
@@ -37,6 +50,8 @@ export default function AttendanceEvent({
   const { data: eventAttendance, isLoading } = useSWR<EventAttendance>(
     `/events/${id}/attendance`
   );
+
+  const [openD, setOpenD] = React.useState(false);
 
   const [rowSelectionModel, setRowSelectionModel] =
     useState<GridRowSelectionModel>([]);
@@ -73,13 +88,33 @@ export default function AttendanceEvent({
       ) : (
         <>
           <Grid xs={12}>
-            <Box display="flex" alignItems="center">
+            <Box>
+              <div style={{ display: "flex", justifyContent: "flex-end" }}>
+                <Tooltip title="Eliminar">
+                  <Fab aria-labelledby="delete" onClick={() => setOpenD(true)}>
+                    <DeleteIcon />
+                  </Fab>
+                </Tooltip>
+              </div>
               <EventForm
                 locId={locId}
                 initialValues={initialValues}
                 submit={() => console.log("Hola")}
+                editable={false}
               />
             </Box>
+            {event.daysOfWeek && event.daysOfWeek.length > 0 && (
+              <DialogDelete
+                open={openD}
+                close={() => setOpenD(false)}
+                initialValues={{
+                  eventR: "THIS_EVENT",
+                }}
+                onDelete={async () => {
+                  await console.log("Eliminar");
+                }}
+              />
+            )}
           </Grid>
           <Grid xs={12}>
             <Typography variant="h6" gutterBottom>
@@ -121,3 +156,57 @@ export default function AttendanceEvent({
     </Grid>
   );
 }
+
+type EventRecur = {
+  eventR: "THIS_EVENT" | "THIS_AND_THE_FOLLOWING_EVENTS" | "ALL_EVENTS";
+};
+
+type DialogDeleteProps = {
+  close: () => void;
+  open: boolean;
+  initialValues: EventRecur;
+  onDelete: () => void;
+};
+
+const DialogDelete = ({
+  close,
+  open,
+  onDelete,
+  initialValues,
+}: DialogDeleteProps) => {
+  const formContext = useForm<EventRecur>({
+    defaultValues: initialValues,
+  });
+
+  return (
+    <Dialog open={open} onClose={close}>
+      <DialogTitle>Borrar el evento recurrente</DialogTitle>
+      <FormContainer formContext={formContext} onSuccess={onDelete}>
+        <DialogContent>
+          <RadioButtonGroup
+            label=""
+            name="eventR"
+            options={[
+              {
+                id: "THIS_EVENT",
+                label: "Este evento",
+              },
+              {
+                id: "THIS_AND_THE_FOLLOWING_EVENTS",
+                label: "Este y los eventos siguientes",
+              },
+              {
+                id: "ALL_EVENTS",
+                label: "Todos los eventos",
+              },
+            ]}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={close}>Cancelar</Button>
+          <Button>Aceptar</Button>
+        </DialogActions>
+      </FormContainer>
+    </Dialog>
+  );
+};

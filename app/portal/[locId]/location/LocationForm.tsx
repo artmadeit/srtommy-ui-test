@@ -96,7 +96,8 @@ export const LocationForm = ({
               }}
               renderInput={(params) => (
                 <TextField
-                  placeholder="Añada otros roles si desea presionando enter"
+                  required
+                  placeholder="Si desea añada otros roles, luego presione enter"
                   {...params}
                 />
               )}

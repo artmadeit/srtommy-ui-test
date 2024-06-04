@@ -148,12 +148,6 @@ export default function MenuDrawer2({
                 "aria-labelledby": "basic-button",
               }}
             >
-              {/* <MenuItem onClick={handleProfile}>
-                <ListItemIcon>
-                  <AccountCircle />
-                </ListItemIcon>
-                Perfil
-              </MenuItem> */}
               <MenuItem onClick={handleLogOut}>
                 <ListItemIcon>
                   <LogoutIcon />
@@ -208,7 +202,6 @@ export default function MenuDrawer2({
         component="main"
         sx={{
           flexGrow: 1,
-          // p: 3,
           width: { sm: `calc(100% - ${drawerWidth}px)` },
         }}
       >
