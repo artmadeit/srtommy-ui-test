@@ -37,7 +37,7 @@ export const PersonTable = ({
   const { data: people, isLoading } = useSWR<SpringPage<PersonListItem>>(
     searchTextDebounced
       ? [
-          `people `,
+          `people`,
           {
             params: {
               page: paginationModel.page,
