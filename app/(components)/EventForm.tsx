@@ -159,7 +159,14 @@ export const EventForm = ({
               >
                 <Typography>Finaliza el: </Typography>
                 <Grid xs={4}>
-                  <DatePickerElement name="endRecur" />
+                  <DatePickerElement
+                    name="endRecur"
+                    inputProps={{
+                      sx: {
+                        width: "170px",
+                      },
+                    }}
+                  />
                 </Grid>
               </Box>
             </Box>
