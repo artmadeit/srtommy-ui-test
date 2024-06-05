@@ -2,6 +2,7 @@
 
 import { useAuth0 } from "@auth0/auth0-react";
 import { AccountCircle } from "@mui/icons-material";
+import PersonIcon from "@mui/icons-material/Person";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import LogoutIcon from "@mui/icons-material/Logout";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -153,6 +154,12 @@ export default function MenuDrawer2({
                   <LogoutIcon />
                 </ListItemIcon>
                 Cerrar sesión
+              </MenuItem>
+              <MenuItem onClick={() => console.log("redirigiendo a perfil")}>
+                <ListItemIcon>
+                  <PersonIcon />
+                </ListItemIcon>
+                Perfil
               </MenuItem>
             </Menu>
             <DialogAccounts open={openDialog} onClose={onClose} />
