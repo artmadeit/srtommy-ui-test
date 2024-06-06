@@ -3,10 +3,13 @@ import Image from "next/image";
 import MenuDrawer2 from "./MenuDrawer2";
 import tommyImage from "./tomy.png";
 
-export default function PortalHome() {
+export default function PortalHome({ params }: { params: { locId: number } }) {
+  const { locId } = params;
+
   return (
-    <main style={{ margin: "24px"}}>
+    <main style={{ margin: "24px" }}>
       <MenuDrawer2
+        locId={locId}
         listDrawer={
           <List>
             <ListItem>

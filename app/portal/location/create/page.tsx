@@ -14,7 +14,12 @@ import { getFixedOptions } from "../../[locId]/location/Roles";
 import useSWR from "swr";
 import { RolesLocation } from "../../[locId]/location/page";
 
-export default function LocationCreatePage() {
+export default function LocationCreatePage({
+  params,
+}: {
+  params: { locId: number };
+}) {
+  const { locId } = params;
   const getApi = useAuthApi();
   const router = useRouter();
   const alert = React.useContext(SnackbarContext);
@@ -31,7 +36,7 @@ export default function LocationCreatePage() {
     const api = await getApi();
     const response = await api.post("organizations/locations", {
       ...data,
-      parentId: ORG_ID,      
+      parentId: ORG_ID,
       roles: data.roles.filter((role) => !fixedOptions.includes(role)),
     });
     alert.showMessage("Guardado exitosamente");
@@ -39,7 +44,7 @@ export default function LocationCreatePage() {
   };
 
   return (
-    <MenuDrawer2>
+    <MenuDrawer2 locId={locId}>
       <LocationForm
         initialValues={{
           name: "",

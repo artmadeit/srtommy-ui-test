@@ -33,6 +33,7 @@ import useSWR from "swr";
 import Loading from "../(components)/Loading";
 import { withOutSorting } from "../(components)/helpers/withOutSorting";
 import { ORG_ID } from "./location/create/constants";
+import { useRouter } from "next/navigation";
 
 const drawerWidth = 240;
 
@@ -40,9 +41,11 @@ export default function MenuDrawer2({
   children,
   listDrawer,
   location,
+  locId,
 }: React.PropsWithChildren<{
   listDrawer?: React.ReactNode;
   location?: { name: string };
+  locId: number;
 }>) {
   const { user, isAuthenticated, isLoading, loginWithRedirect } = useAuth0();
   const { logout } = useAuth0();
@@ -85,6 +88,8 @@ export default function MenuDrawer2({
     ...theme.mixins.toolbar,
     justifyContent: "flex-end",
   }));
+
+  const router = useRouter();
 
   React.useEffect(() => {
     if (!isLoading && !isAuthenticated) {
@@ -155,7 +160,9 @@ export default function MenuDrawer2({
                 </ListItemIcon>
                 Cerrar sesión
               </MenuItem>
-              <MenuItem onClick={() => console.log("redirigiendo a perfil")}>
+              <MenuItem
+                onClick={() => router.push(`/portal/${locId}/profile`)}
+              >
                 <ListItemIcon>
                   <PersonIcon />
                 </ListItemIcon>

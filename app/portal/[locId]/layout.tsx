@@ -31,6 +31,7 @@ export default function LocLayout({
   return (
     <MenuDrawer2
       location={location}
+      locId={locId}
       listDrawer={
         <List>
           <Link
