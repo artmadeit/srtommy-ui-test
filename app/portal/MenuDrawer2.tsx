@@ -154,19 +154,17 @@ export default function MenuDrawer2({
                 "aria-labelledby": "basic-button",
               }}
             >
+              <MenuItem onClick={() => router.push(`/portal/${locId}/profile`)}>
+                <ListItemIcon>
+                  <PersonIcon />
+                </ListItemIcon>
+                Perfil
+              </MenuItem>
               <MenuItem onClick={handleLogOut}>
                 <ListItemIcon>
                   <LogoutIcon />
                 </ListItemIcon>
                 Cerrar sesión
-              </MenuItem>
-              <MenuItem
-                onClick={() => router.push(`/portal/${locId}/profile`)}
-              >
-                <ListItemIcon>
-                  <PersonIcon />
-                </ListItemIcon>
-                Perfil
               </MenuItem>
             </Menu>
             <DialogAccounts open={openDialog} onClose={onClose} />
