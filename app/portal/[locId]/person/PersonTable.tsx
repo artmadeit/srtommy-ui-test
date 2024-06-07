@@ -34,20 +34,17 @@ export const PersonTable = ({
   const router = useRouter();
   const [searchText, setSearchText] = useState("");
   const [searchTextDebounced] = useDebounce(searchText, DEBOUNCE_WAIT_MS);
-  const { data: people, isLoading } = useSWR<SpringPage<PersonListItem>>(
-    searchTextDebounced
-      ? [
-          `people`,
-          {
-            params: {
-              page: paginationModel.page,
-              size: paginationModel.pageSize,
-              searchText: searchTextDebounced,
-            },
-          },
-        ]
-      : `people`
-  );
+  const { data: people, isLoading } = useSWR<SpringPage<PersonListItem>>([
+    `people`,
+    {
+      params: {
+        organizationId: locId,
+        page: paginationModel.page,
+        size: paginationModel.pageSize,
+        ...(searchTextDebounced ? { searchText: searchTextDebounced } : {}),
+      },
+    },
+  ]);
 
   const columns = React.useMemo(
     () =>
