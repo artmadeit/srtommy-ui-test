@@ -19,10 +19,11 @@ import { differenceInYears } from "date-fns";
 import useSWR from "swr";
 import { RolesLocation } from "../location/page";
 import { toSpanish } from "../location/Roles";
+import { Option } from "@/app/(components)/Option";
 
 export type PersonDetailFormInput = PersonDetailBase & {
   hasBeenBaptized?: "YES" | "NO";
-  roles: RolesLocation[];
+  roles: Option[];
 };
 
 type PersonFormProps = {
@@ -123,12 +124,7 @@ export const PersonForm = ({
             name="roles"
             label="Escriba o seleccione el rol(es)"
             // isOptionEqualToValue={(option, value)=> option.id === value.id}
-            options={roles.map((x) => {
-              return {
-                id: x.id,
-                label: x.isPredefined ? toSpanish(x.name) : x.name,
-              };
-            })}
+            options={roles.map(roleToOption)}
           />
         </Grid>
         <Grid xs={12}>
@@ -180,3 +176,10 @@ export const TelFieldElement = ({ name }: { name: string }) => {
     />
   );
 };
+
+export function roleToOption(x: RolesLocation): Option {
+  return {
+    id: x.id,
+    label: x.isPredefined ? toSpanish(x.name) : x.name,
+  };
+}

@@ -1,15 +1,18 @@
 "use client";
 
-import { PersonForm } from "@/app/portal/[locId]/person/PersonForm";
-import useSWR from "swr";
-import { PersonDetail } from "../Person";
-import { Box } from "@mui/material";
-import Loading from "@/app/(components)/Loading";
 import { useAuthApi } from "@/app/(api)/api";
-import React from "react";
+import Loading from "@/app/(components)/Loading";
 import { SnackbarContext } from "@/app/(components)/SnackbarContext";
+import {
+  PersonForm,
+  roleToOption,
+} from "@/app/portal/[locId]/person/PersonForm";
+import { Box } from "@mui/material";
 import { useRouter } from "next/navigation";
+import React from "react";
+import useSWR from "swr";
 import { RolesLocation } from "../../location/page";
+import { PersonDetail } from "../Person";
 
 export default function PersonEdit({
   params,
@@ -33,7 +36,7 @@ export default function PersonEdit({
   const router = useRouter();
 
   if (isLoading) return <Loading />;
-  if(!roles) return <div>Not found</div>
+  if (!roles) return <div>Not found</div>;
 
   return (
     <Box>
@@ -44,7 +47,7 @@ export default function PersonEdit({
           initialValues={{
             ...person,
             hasBeenBaptized: person.hasBeenBaptized ? "YES" : "NO",
-            roles: roles,
+            roles: roles.map(roleToOption),
           }}
           submit={async (formValues) => {
             const api = await getApi();
