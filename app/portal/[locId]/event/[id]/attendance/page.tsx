@@ -23,6 +23,7 @@ import { EventDetail } from "../EventDetail";
 import { SnackbarContext } from "@/app/(components)/SnackbarContext";
 import { EventForm, EventFormValues } from "@/app/(components)/EventForm";
 import DeleteIcon from "@mui/icons-material/Delete";
+import HistoryIcon from "@mui/icons-material/History";
 import {
   FormContainer,
   RadioButtonGroup,
@@ -116,10 +117,22 @@ export default function AttendanceEvent({
               />
             )}
           </Grid>
-          <Grid xs={12}>
+          <Grid xs={12} display="flex" alignItems="center">
             <Typography variant="h6" gutterBottom>
               Toma de asistencia
             </Typography>
+            {event.daysOfWeek && event.daysOfWeek.length > 0 && (
+              <div>
+                <Tooltip title="Historial">
+                  <Fab
+                    aria-labelledby="history"
+                    onClick={() => console.log("Historial")}
+                  >
+                    <HistoryIcon />
+                  </Fab>
+                </Tooltip>
+              </div>
+            )}
           </Grid>
           <Grid xs={12}>
             <Stack spacing={2}>
