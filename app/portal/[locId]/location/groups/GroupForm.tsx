@@ -39,16 +39,6 @@ export const GroupForm = ({
     defaultValues: initialValues,
   });
 
-  const [searchMember, setSearchMember] = React.useState("");
-  const [searchTextDebounced] = useDebounce(searchMember, DEBOUNCE_WAIT_MS);
-
-  const { data: people } = useSWR<SpringPage<PersonDetailWithId>>(
-    searchTextDebounced ? `people?searchText=${searchTextDebounced}` : `people`
-  );
-
-  const [rowSelectionModel, setRowSelectionModel] =
-    useState<GridRowSelectionModel>([]);
-
   // useEffect(() => {
   //   if (eventAttendance) {
   //     setRowSelectionModel(eventAttendance.personIds);
@@ -94,6 +84,7 @@ export const GroupForm = ({
           <Typography variant="h6">Lider(es):</Typography>
           <div style={{ width: "100%" }}>
             <GroupAutocomplete
+              locId={locId}
               name="leaders"
               label="Escriba o seleccione el lider o lideres del grupo/ministerio"
             />
@@ -103,6 +94,7 @@ export const GroupForm = ({
           <Typography variant="h6">Miembro(s):</Typography>
           <div style={{ width: "100%" }}>
             <GroupAutocomplete
+              locId={locId}
               name="members"
               label="Escriba o seleccione los miembros del grupo/ministerio"
             />

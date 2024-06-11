@@ -9,14 +9,26 @@ import { PersonDetailWithId } from "../../person/Person";
 type GroupAutocompleteProps = {
   name: string;
   label: string;
+  locId: number;
 };
 
-export const GroupAutocomplete = ({ name, label }: GroupAutocompleteProps) => {
+export const GroupAutocomplete = ({
+  name,
+  label,
+  locId,
+}: GroupAutocompleteProps) => {
   const [searchMember, setSearchMember] = React.useState("");
   const [searchTextDebounced] = useDebounce(searchMember, DEBOUNCE_WAIT_MS);
-  const { data: people } = useSWR<SpringPage<PersonDetailWithId>>(
-    searchTextDebounced ? `people?searchText=${searchTextDebounced}` : `people`
-  );
+
+  const { data: people } = useSWR<SpringPage<PersonDetailWithId>>([
+    `people`,
+    {
+      params: {
+        organizationId: locId,
+        ...(searchTextDebounced ? { searchText: searchTextDebounced } : {}),
+      },
+    },
+  ]);
 
   return (
     <AutocompleteElement
