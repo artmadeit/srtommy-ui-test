@@ -23,11 +23,11 @@ export default function PersonEdit({
 
   const {
     data: person,
-    mutate,
+    mutate: mutatePerson,
     isLoading,
   } = useSWR<PersonDetail>(`/people/${id}`);
 
-  const { data: roles } = useSWR<RolesLocation[]>(
+  const { data: roles, mutate: mutateRoles } = useSWR<RolesLocation[]>(
     `/organizations/locations/${locId}/person/${id}/roles`
   );
 
@@ -61,7 +61,8 @@ export default function PersonEdit({
               hasBeenBaptized: formValues.hasBeenBaptized === "YES",
               roles: formValues.roles.map((x) => x.id),
             });
-            mutate();
+            mutatePerson();
+            mutateRoles();
             alert.showMessage("Guardado exitosamente");
             router.push(`/portal/${locId}/person`);
           }}
