@@ -24,6 +24,7 @@ import { FormContainer, RadioButtonGroup, useForm } from "react-hook-form-mui";
 import useSWR from "swr";
 import { PersonTable, fullName } from "../../../person/PersonTable";
 import { EventDetail } from "../EventDetail";
+import HistoryIcon from "@mui/icons-material/History";
 
 type EventAttendance = {
   numberOfVisitors: number;
@@ -111,10 +112,22 @@ export default function AttendanceEvent({
               />
             )}
           </Grid>
-          <Grid xs={12}>
+          <Grid xs={12} display="flex" alignItems="center">
             <Typography variant="h6" gutterBottom>
               Toma de asistencia
             </Typography>
+            {event.daysOfWeek && event.daysOfWeek.length > 0 && (
+              <div>
+                <Tooltip title="Historial">
+                  <Fab
+                    aria-labelledby="history"
+                    onClick={() => console.log("Historial")}
+                  >
+                    <HistoryIcon />
+                  </Fab>
+                </Tooltip>
+              </div>
+            )}
           </Grid>
           <Grid xs={12}>
             <Stack spacing={2}>

@@ -49,7 +49,7 @@ export default function Location({ params }: { params: { locId: number } }) {
   return (
     <Box>
       {!location ? (
-        <div>No existe tal organizacion</div>
+        <div>No existe tal organización</div>
       ) : (
         <>
           <LocationForm
