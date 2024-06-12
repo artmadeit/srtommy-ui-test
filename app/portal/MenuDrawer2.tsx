@@ -154,7 +154,13 @@ export default function MenuDrawer2({
                 "aria-labelledby": "basic-button",
               }}
             >
-              <MenuItem onClick={() => router.push(`/portal/profile`)}>
+              <MenuItem
+                onClick={() =>
+                  locId
+                    ? router.push(`/portal/${locId}/profile`)
+                    : router.push(`/portal/profile`)
+                }
+              >
                 <ListItemIcon>
                   <PersonIcon />
                 </ListItemIcon>
