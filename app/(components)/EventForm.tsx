@@ -66,9 +66,15 @@ export const EventForm = ({
 
   const { data: Location } = useSWR<LocationDetail>(`organizations/${locId}`);
 
-  const { data: people } = useSWR<SpringPage<PersonDetailWithId>>(
-    searchTextDebounced ? `people?searchText=${searchTextDebounced}` : `people`
-  );
+  const { data: people } = useSWR<SpringPage<PersonDetailWithId>>([
+    `people`,
+    {
+      params: {
+        organizationId: locId,
+        ...(searchTextDebounced ? { searchText: searchTextDebounced } : {}),
+      },
+    },
+  ]);
 
   const daysOfWeek = watch("daysOfWeek");
   const type = watch("type");
