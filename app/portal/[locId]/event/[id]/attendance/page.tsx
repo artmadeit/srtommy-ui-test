@@ -1,7 +1,10 @@
 "use client";
 
 import { useAuthApi } from "@/app/(api)/api";
+import { EventForm, EventFormValues } from "@/app/(components)/EventForm";
 import Loading from "@/app/(components)/Loading";
+import { SnackbarContext } from "@/app/(components)/SnackbarContext";
+import DeleteIcon from "@mui/icons-material/Delete";
 import {
   Box,
   Button,
@@ -17,18 +20,10 @@ import {
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import { GridRowSelectionModel } from "@mui/x-data-grid";
 import React, { useContext, useEffect, useState } from "react";
+import { FormContainer, RadioButtonGroup, useForm } from "react-hook-form-mui";
 import useSWR from "swr";
 import { PersonTable, fullName } from "../../../person/PersonTable";
 import { EventDetail } from "../EventDetail";
-import { SnackbarContext } from "@/app/(components)/SnackbarContext";
-import { EventForm, EventFormValues } from "@/app/(components)/EventForm";
-import DeleteIcon from "@mui/icons-material/Delete";
-import {
-  FormContainer,
-  RadioButtonGroup,
-  SubmitHandler,
-  useForm,
-} from "react-hook-form-mui";
 
 type EventAttendance = {
   numberOfVisitors: number;
