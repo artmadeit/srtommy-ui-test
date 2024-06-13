@@ -25,6 +25,7 @@ import useSWR from "swr";
 import { PersonTable, fullName } from "../../../person/PersonTable";
 import { EventDetail } from "../EventDetail";
 import HistoryIcon from "@mui/icons-material/History";
+import { DialogDelete2 } from "@/app/(components)/DialogDelete2";
 
 type EventAttendance = {
   numberOfVisitors: number;
@@ -48,6 +49,7 @@ export default function AttendanceEvent({
   );
 
   const [openDeleteDialog, setOpenDeleteDialog] = React.useState(false);
+  const [openDeleteDialog2, setOpenDeleteDialog2] = React.useState(false);
 
   const [rowSelectionModel, setRowSelectionModel] =
     useState<GridRowSelectionModel>([]);
@@ -94,7 +96,12 @@ export default function AttendanceEvent({
                   <Fab
                     aria-labelledby="delete"
                     color="primary"
-                    onClick={() => setOpenDeleteDialog(true)}
+                    onClick={() =>
+                      isRecurrent
+                        ? setOpenDeleteDialog(true)
+                        : setOpenDeleteDialog2(true)
+                    }
+                    // onClick={() => setOpenDeleteDialog(true)}
                   >
                     <DeleteIcon />
                   </Fab>
@@ -107,7 +114,7 @@ export default function AttendanceEvent({
                 editable={false}
               />
             </Box>
-            {isRecurrent && (
+            {isRecurrent ? (
               <DialogDelete
                 open={openDeleteDialog}
                 close={() => setOpenDeleteDialog(false)}
@@ -118,7 +125,15 @@ export default function AttendanceEvent({
                   await console.log("Eliminar");
                 }}
               />
+            ) : (
+              <DialogDelete2
+                open={openDeleteDialog2}
+                close={() => setOpenDeleteDialog2(false)}
+              />
             )}
+            {/* {isRecurrent && (
+              
+            )} */}
           </Grid>
           <Grid xs={12} display="flex" alignItems="center">
             <Typography variant="h6" gutterBottom>
