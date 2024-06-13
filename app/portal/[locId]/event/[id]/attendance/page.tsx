@@ -61,14 +61,17 @@ export default function AttendanceEvent({
   if (isLoading) return <Loading />;
   if (!event) return <div>Not found</div>;
 
+  const recurrentEvent = event.recurrentEvent || event;
+  const isRecurrent = Boolean(event.recurrentEvent);
+
   const initialValues: EventFormValues = {
     name: event.title,
     date: event.start,
     startTime: event.start,
     endTime: event.end,
+    isRecurrent,
+    daysOfWeek: isRecurrent ? recurrentEvent.daysOfWeek : [],
     type: event.isACourse ? 1 : 0,
-    daysOfWeek: event.daysOfWeek,
-    isRecurrent: event.daysOfWeek && event.daysOfWeek.length > 0,
     address: event.address,
     speakers: event.speakers.map((speaker) => ({
       id: speaker.id,
@@ -99,7 +102,7 @@ export default function AttendanceEvent({
                 editable={false}
               />
             </Box>
-            {event.daysOfWeek && event.daysOfWeek.length > 0 && (
+            {isRecurrent && (
               <DialogDelete
                 open={openD}
                 close={() => setOpenD(false)}
@@ -116,7 +119,7 @@ export default function AttendanceEvent({
             <Typography variant="h6" gutterBottom>
               Toma de asistencia
             </Typography>
-            {event.daysOfWeek && event.daysOfWeek.length > 0 && (
+            {isRecurrent && (
               <div>
                 <Tooltip title="Historial">
                   <Fab

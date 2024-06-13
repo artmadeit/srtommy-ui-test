@@ -43,11 +43,7 @@ export default function Calendar({
       // dateClick
       eventClick={(info) => {
         const event = info.event;
-        const formattedStartDate = formatISO(event.start as Date);
-        const formattedEndDate = formatISO(event.end as Date);
-        router.push(
-          `event/${event.id}/attendance?startDate=${formattedStartDate}&endDate=${formattedEndDate}`
-        );
+        router.push(`event/${event.id}/attendance`);
       }}
       events={(info, successCallback, failureCallback) => {
         return getApi().then((api) =>
@@ -59,15 +55,6 @@ export default function Calendar({
             .then((events) =>
               successCallback(
                 events.map((event) => {
-                  if (event.daysOfWeek && event.daysOfWeek.length > 0) {
-                    if (event.start instanceof Date) {
-                      event.startTime = format(event.start, "HH:mm:SS");
-                    }
-                    if (event.end instanceof Date) {
-                      event.endTime = format(event.end, "HH:mm:SS");
-                    }
-                  }
-
                   if (event.isACourse) {
                     event.backgroundColor = "green";
                   }

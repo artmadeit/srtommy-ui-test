@@ -1,5 +1,5 @@
 "use client";
-import { PersonDetail, PersonDetailWithId } from "../../person/Person";
+import { PersonDetailWithId } from "../../person/Person";
 
 export type EventDetail = {
   id: number;
@@ -11,4 +11,5 @@ export type EventDetail = {
   address: string;
   description: string;
   speakers: PersonDetailWithId[];
+  recurrentEvent?: EventDetail;
 };
