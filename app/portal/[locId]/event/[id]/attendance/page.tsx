@@ -47,7 +47,7 @@ export default function AttendanceEvent({
     `/events/${id}/attendance`
   );
 
-  const [openD, setOpenD] = React.useState(false);
+  const [openDeleteDialog, setOpenDeleteDialog] = React.useState(false);
 
   const [rowSelectionModel, setRowSelectionModel] =
     useState<GridRowSelectionModel>([]);
@@ -91,7 +91,10 @@ export default function AttendanceEvent({
             <Box>
               <div style={{ display: "flex", justifyContent: "flex-end" }}>
                 <Tooltip title="Eliminar">
-                  <Fab aria-labelledby="delete" onClick={() => setOpenD(true)}>
+                  <Fab
+                    aria-labelledby="delete"
+                    onClick={() => setOpenDeleteDialog(true)}
+                  >
                     <DeleteIcon />
                   </Fab>
                 </Tooltip>
@@ -105,10 +108,10 @@ export default function AttendanceEvent({
             </Box>
             {isRecurrent && (
               <DialogDelete
-                open={openD}
-                close={() => setOpenD(false)}
+                open={openDeleteDialog}
+                close={() => setOpenDeleteDialog(false)}
                 initialValues={{
-                  eventR: "THIS_EVENT",
+                  option: "THIS_EVENT",
                 }}
                 onDelete={async () => {
                   await console.log("Eliminar");
@@ -170,7 +173,7 @@ export default function AttendanceEvent({
 }
 
 type EventRecur = {
-  eventR: "THIS_EVENT" | "THIS_AND_THE_FOLLOWING_EVENTS" | "ALL_EVENTS";
+  option: "THIS_EVENT" | "THIS_AND_THE_FOLLOWING_EVENTS" | "ALL_EVENTS";
 };
 
 type DialogDeleteProps = {
@@ -197,7 +200,7 @@ const DialogDelete = ({
         <DialogContent>
           <RadioButtonGroup
             label=""
-            name="eventR"
+            name="option"
             options={[
               {
                 id: "THIS_EVENT",
