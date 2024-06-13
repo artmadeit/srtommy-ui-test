@@ -71,6 +71,7 @@ export default function AttendanceEvent({
     endTime: event.end,
     isRecurrent,
     daysOfWeek: isRecurrent ? recurrentEvent.daysOfWeek : [],
+    endRecur: isRecurrent ? recurrentEvent.end : null,
     type: event.isACourse ? 1 : 0,
     address: event.address,
     speakers: event.speakers.map((speaker) => ({
