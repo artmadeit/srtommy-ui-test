@@ -93,6 +93,7 @@ export default function AttendanceEvent({
                 <Tooltip title="Eliminar">
                   <Fab
                     aria-labelledby="delete"
+                    color="primary"
                     onClick={() => setOpenDeleteDialog(true)}
                   >
                     <DeleteIcon />
@@ -123,18 +124,6 @@ export default function AttendanceEvent({
             <Typography variant="h6" gutterBottom>
               Toma de asistencia
             </Typography>
-            {isRecurrent && (
-              <div>
-                <Tooltip title="Historial">
-                  <Fab
-                    aria-labelledby="history"
-                    onClick={() => console.log("Historial")}
-                  >
-                    <HistoryIcon />
-                  </Fab>
-                </Tooltip>
-              </div>
-            )}
           </Grid>
           <Grid xs={12}>
             <Stack spacing={2}>
