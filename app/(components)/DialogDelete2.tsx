@@ -9,9 +9,10 @@ import {
 type DialogDelete2Props = {
   open: boolean;
   close: () => void;
+  onDelete: () => void;
 };
 
-export const DialogDelete2 = ({ open, close }: DialogDelete2Props) => {
+export const DialogDelete2 = ({ open, close, onDelete }: DialogDelete2Props) => {
   return (
     <Dialog open={open} onClose={close}>
       <DialogTitle>Deseas eliminar</DialogTitle>
@@ -20,7 +21,7 @@ export const DialogDelete2 = ({ open, close }: DialogDelete2Props) => {
       </DialogContent>
       <DialogActions>
         <Button onClick={close}>Cancelar</Button>
-        <Button onClick={() => console.log("Eliminando")}>Eliminar</Button>
+        <Button onClick={onDelete}>Eliminar</Button>
       </DialogActions>
     </Dialog>
   );
