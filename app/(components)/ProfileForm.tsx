@@ -94,6 +94,26 @@ export const ProfileForm = () => {
 
           const Culqi = new CulqiCheckout(publicKey, config);
           Culqi.open();
+
+          const handleCulqiAction = () => {
+            if (Culqi.token) {
+              const token = Culqi.token.id;
+              Culqi.close();
+              console.log("Se ha creado un Token: ", token);
+              //En esta linea de codigo debemos enviar el "Culqi.token.id"
+              //hacia tu servidor con Ajax
+            } else if (Culqi.order) {
+              // ¡Objeto Order creado exitosamente!
+              Culqi.close();
+              const order = Culqi.order;
+              console.log("Se ha creado el objeto Order: ", order);
+            } else {
+              // Mostramos JSON de objeto error en consola
+              console.log("Error : ", Culqi.error);
+            }
+          };
+
+          Culqi.culqi = handleCulqiAction;
         }}
       />
     </FormContainer>
