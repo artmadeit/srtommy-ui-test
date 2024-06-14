@@ -37,10 +37,10 @@ export const ProfileForm = () => {
           const settings = {
             title: "Culqi  store 2",
             currency: "PEN", // Este parámetro es requerido para realizar pagos yape
-            amount: 8000, // Este parámetro es requerido para realizar pagos yape(80.00)
+            amount: 120 * 100, // Este parámetro es requerido para realizar pagos yape(80.00)
             order: "ord_live_d1P0Tu1n7Od4nZdp", // Este parámetro es requerido para realizar pagos con pagoEfectivo, billeteras y Cuotéalo
-            xculqirsaid: "Inserta aquí el id de tu llave pública RSA",
-            rsapublickey: "Inserta aquí tu llave pública RSA",
+            // xculqirsaid: "Inserta aquí el id de tu llave pública RSA",
+            // rsapublickey: "Inserta aquí tu llave pública RSA",
           };
 
           const client = {
@@ -70,19 +70,19 @@ export const ProfileForm = () => {
             theme: "default",
             hiddenCulqiLogo: false,
             hiddenBannerContent: false,
-            hiddenBanner: false,
+            hiddenBanner: true,
             hiddenToolBarAmount: false,
             menuType: "sidebar", // sidebar / sliderTop / select
-            buttonCardPayText: "Pagar tal monto", //
+            buttonCardPayText: "Pagar monto", //
             logo: null, // 'http://www.childrensociety.ms/wp-content/uploads/2019/11/MCS-Logo-2019-no-text.jpg',
-            defaultStyle: {
-              bannerColor: "blue", // hexadecimal
-              buttonBackground: "yellow", // hexadecimal
-              menuColor: "pink", // hexadecimal
-              linksColor: "green", // hexadecimal
-              buttonTextColor: "blue", // hexadecimal
-              priceColor: "red",
-            },
+            // defaultStyle: {
+            //   bannerColor: "blue", // hexadecimal
+            //   buttonBackground: "yellow", // hexadecimal
+            //   menuColor: "pink", // hexadecimal
+            //   linksColor: "green", // hexadecimal
+            //   buttonTextColor: "blue", // hexadecimal
+            //   priceColor: "red",
+            // },
           };
 
           const config = {
