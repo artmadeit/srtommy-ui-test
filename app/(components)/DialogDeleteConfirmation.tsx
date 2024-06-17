@@ -6,13 +6,13 @@ import {
   DialogTitle,
 } from "@mui/material";
 
-type DialogDelete2Props = {
+type DialogDeleteConfirmationProps = {
   open: boolean;
   close: () => void;
   onDelete: () => void;
 };
 
-export const DialogDelete2 = ({ open, close, onDelete }: DialogDelete2Props) => {
+export const DialogDeleteConfirmation = ({ open, close, onDelete }: DialogDeleteConfirmationProps) => {
   return (
     <Dialog open={open} onClose={close}>
       <DialogTitle>Deseas eliminar</DialogTitle>

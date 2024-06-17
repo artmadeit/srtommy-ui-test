@@ -24,8 +24,7 @@ import { FormContainer, RadioButtonGroup, useForm } from "react-hook-form-mui";
 import useSWR from "swr";
 import { PersonTable, fullName } from "../../../person/PersonTable";
 import { EventDetail } from "../EventDetail";
-import HistoryIcon from "@mui/icons-material/History";
-import { DialogDelete2 } from "@/app/(components)/DialogDelete2";
+import { DialogDeleteConfirmation } from "@/app/(components)/DialogDeleteConfirmation";
 import { useRouter } from "next/navigation";
 
 type EventAttendance = {
@@ -146,7 +145,7 @@ export default function AttendanceEvent({
                 }}
               />
             ) : (
-              <DialogDelete2
+              <DialogDeleteConfirmation
                 open={openDeleteDialog2}
                 close={() => setOpenDeleteDialog2(false)}
                 onDelete={deleteEvent}
