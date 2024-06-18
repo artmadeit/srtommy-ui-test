@@ -51,7 +51,6 @@ export default function AttendanceEvent({
 
   const [openDeleteDialog, setOpenDeleteDialog] = React.useState(false);
   const [openDeleteDialog2, setOpenDeleteDialog2] = React.useState(false);
-  // const [itemToDelete, setItemToDelete] = React.useState(null);
 
   const [rowSelectionModel, setRowSelectionModel] =
     useState<GridRowSelectionModel>([]);
@@ -68,11 +67,17 @@ export default function AttendanceEvent({
   const recurrentEvent = event.recurrentEvent || event;
   const isRecurrent = Boolean(event.recurrentEvent);
 
-  const deleteEvent = async () => {
-    // if (itemToDelete === null) {
-    //   return;
-    // }
+  const deleteEventRecur = async (values: DeleteEventRecurrentForm) => {
+    await getApi().then((api) =>
+      api.delete(`/events/${id}`, {
+        data: {
+          option: values.option,
+        },
+      })
+    );
+  };
 
+  const deleteEvent = async () => {
     await getApi().then((api) =>
       api.delete(`/events/${id}`, {
         data: {
@@ -82,7 +87,6 @@ export default function AttendanceEvent({
     );
     alert.showMessage("Eliminado");
     router.push(`/portal/${locId}/event`);
-    // setItemToDelete(null);
   };
 
   const initialValues: EventFormValues = {
@@ -140,9 +144,7 @@ export default function AttendanceEvent({
                 initialValues={{
                   option: "THIS_EVENT",
                 }}
-                onDelete={async () => {
-                  await console.log("Eliminar");
-                }}
+                onDelete={deleteEventRecur}
               />
             ) : (
               <DialogDeleteConfirmation
@@ -193,15 +195,15 @@ export default function AttendanceEvent({
   );
 }
 
-type EventRecur = {
+type DeleteEventRecurrentForm = {
   option: "THIS_EVENT" | "THIS_AND_THE_FOLLOWING_EVENTS" | "ALL_EVENTS";
 };
 
 type DialogDeleteProps = {
   close: () => void;
   open: boolean;
-  initialValues: EventRecur;
-  onDelete: () => void;
+  initialValues: DeleteEventRecurrentForm;
+  onDelete: (values: DeleteEventRecurrentForm) => void;
 };
 
 const DialogDelete = ({
@@ -210,15 +212,18 @@ const DialogDelete = ({
   onDelete,
   initialValues,
 }: DialogDeleteProps) => {
-  const formContext = useForm<EventRecur>({
+  const formContext = useForm<DeleteEventRecurrentForm>({
     defaultValues: initialValues,
   });
 
   return (
     <Dialog open={open} onClose={close}>
-      <DialogTitle>Borrar el evento recurrente</DialogTitle>
       <FormContainer formContext={formContext} onSuccess={onDelete}>
+        <DialogTitle>Borrar el evento recurrente</DialogTitle>
         <DialogContent>
+          <Typography>
+            Para eliminar seleccione una de las siguientes opciones:
+          </Typography>
           <RadioButtonGroup
             label=""
             name="option"
@@ -240,7 +245,7 @@ const DialogDelete = ({
         </DialogContent>
         <DialogActions>
           <Button onClick={close}>Cancelar</Button>
-          <Button>Aceptar</Button>
+          <Button type="submit">Eliminar</Button>
         </DialogActions>
       </FormContainer>
     </Dialog>
