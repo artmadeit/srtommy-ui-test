@@ -50,9 +50,9 @@ export const ProfileForm = () => {
           const paymentMethods = {
             // las opciones se ordenan según se configuren
             tarjeta: true,
-            yape: true,
-            billetera: true,
-            bancaMovil: true,
+            yape: false,
+            billetera: false,
+            bancaMovil: false,
             agente: false,
             cuotealo: false,
           };

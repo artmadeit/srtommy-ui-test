@@ -9,7 +9,7 @@ declare class CulqiCheckout {
 
   error: any;
 
-  token?: { id: any };
+  token?: { id: string };
 
   culqi: () => void;
 }
