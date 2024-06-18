@@ -24,8 +24,8 @@ import { FormContainer, RadioButtonGroup, useForm } from "react-hook-form-mui";
 import useSWR from "swr";
 import { PersonTable, fullName } from "../../../person/PersonTable";
 import { EventDetail } from "../EventDetail";
-import HistoryIcon from "@mui/icons-material/History";
-import { DialogDelete2 } from "@/app/(components)/DialogDelete2";
+import { DialogDeleteConfirmation } from "@/app/(components)/DialogDeleteConfirmation";
+import { useRouter } from "next/navigation";
 
 type EventAttendance = {
   numberOfVisitors: number;
@@ -42,6 +42,7 @@ export default function AttendanceEvent({
 
   const alert = useContext(SnackbarContext);
   const getApi = useAuthApi();
+  const router = useRouter();
 
   const { data: event } = useSWR<EventDetail>(`/events/${id}`);
   const { data: eventAttendance, isLoading } = useSWR<EventAttendance>(
@@ -50,6 +51,7 @@ export default function AttendanceEvent({
 
   const [openDeleteDialog, setOpenDeleteDialog] = React.useState(false);
   const [openDeleteDialog2, setOpenDeleteDialog2] = React.useState(false);
+  // const [itemToDelete, setItemToDelete] = React.useState(null);
 
   const [rowSelectionModel, setRowSelectionModel] =
     useState<GridRowSelectionModel>([]);
@@ -65,6 +67,23 @@ export default function AttendanceEvent({
 
   const recurrentEvent = event.recurrentEvent || event;
   const isRecurrent = Boolean(event.recurrentEvent);
+
+  const deleteEvent = async () => {
+    // if (itemToDelete === null) {
+    //   return;
+    // }
+
+    await getApi().then((api) =>
+      api.delete(`/events/${id}`, {
+        data: {
+          option: "THIS_EVENT",
+        },
+      })
+    );
+    alert.showMessage("Eliminado");
+    router.push(`/portal/${locId}/event`);
+    // setItemToDelete(null);
+  };
 
   const initialValues: EventFormValues = {
     name: event.title,
@@ -126,14 +145,12 @@ export default function AttendanceEvent({
                 }}
               />
             ) : (
-              <DialogDelete2
+              <DialogDeleteConfirmation
                 open={openDeleteDialog2}
                 close={() => setOpenDeleteDialog2(false)}
+                onDelete={deleteEvent}
               />
             )}
-            {/* {isRecurrent && (
-              
-            )} */}
           </Grid>
           <Grid xs={12} display="flex" alignItems="center">
             <Typography variant="h6" gutterBottom>
