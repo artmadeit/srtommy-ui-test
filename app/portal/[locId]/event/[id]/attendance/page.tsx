@@ -50,7 +50,8 @@ export default function AttendanceEvent({
   );
 
   const [openDeleteDialog, setOpenDeleteDialog] = React.useState(false);
-  const [openDeleteDialog2, setOpenDeleteDialog2] = React.useState(false);
+  const [openConfirmDeleteDialog, setOpenConfirmDeleteDialog] =
+    React.useState(false);
 
   const [rowSelectionModel, setRowSelectionModel] =
     useState<GridRowSelectionModel>([]);
@@ -75,6 +76,9 @@ export default function AttendanceEvent({
         },
       })
     );
+    setOpenDeleteDialog(false);
+    alert.showMessage("Eliminado");
+    router.push(`/portal/${locId}/event`);
   };
 
   const deleteEvent = async () => {
@@ -122,9 +126,8 @@ export default function AttendanceEvent({
                     onClick={() =>
                       isRecurrent
                         ? setOpenDeleteDialog(true)
-                        : setOpenDeleteDialog2(true)
+                        : setOpenConfirmDeleteDialog(true)
                     }
-                    // onClick={() => setOpenDeleteDialog(true)}
                   >
                     <DeleteIcon />
                   </Fab>
@@ -148,8 +151,8 @@ export default function AttendanceEvent({
               />
             ) : (
               <DialogDeleteConfirmation
-                open={openDeleteDialog2}
-                close={() => setOpenDeleteDialog2(false)}
+                open={openConfirmDeleteDialog}
+                close={() => setOpenConfirmDeleteDialog(false)}
                 onDelete={deleteEvent}
               />
             )}
