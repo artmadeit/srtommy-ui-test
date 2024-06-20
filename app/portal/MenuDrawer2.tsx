@@ -86,7 +86,8 @@ export default function MenuDrawer2({
     padding: theme.spacing(0, 1),
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
-    justifyContent: "flex-end",
+    justifyContent: "center",
+    // justifyContent: "flex-end",
   }));
 
   const router = useRouter();
@@ -127,7 +128,6 @@ export default function MenuDrawer2({
             }}
           >
             <Stack direction="row" spacing={2} alignItems="center">
-              <Typography>Sr. Tommy</Typography>
               <Button
                 variant="outlined"
                 color="inherit"
@@ -211,7 +211,7 @@ export default function MenuDrawer2({
           }}
           open
         >
-          <DrawerHeader />
+          <DrawerHeader>Sr. Tommy</DrawerHeader>
           <Divider />
           {listDrawer}
         </Drawer>
