@@ -7,12 +7,7 @@ import { SnackbarContext } from "@/app/(components)/SnackbarContext";
 import { useContext, useState } from "react";
 import { EventForm } from "@/app/(components)/EventForm";
 import CloseIcon from "@mui/icons-material/Close";
-
-function getDateTime(date: Date, time: Date) {
-  return `${date.toISOString().split("T")[0]}T${
-    time.toISOString().split("T")[1]
-  }`;
-}
+import { set } from "date-fns";
 
 export default function EventListPage({
   params,
@@ -85,11 +80,12 @@ export default function EventListPage({
               name: values.name,
               address: values.address,
               organizationId: locId,
-              startTime: getDateTime(values.date, values.startTime),
-              endTime: getDateTime(
-                (values.isRecurrent ? values.endRecur : values.date) as Date,
-                values.endTime
-              ),
+              startTime: values.startTime,
+              endTime: values.isRecurrent ? set(new Date(values.endRecur as Date), {
+                hours: values.endTime.getHours(),
+                minutes: values.endTime.getMinutes(),
+                seconds: values.endTime.getSeconds(),
+              }) : values.endTime,
               speakerIds: values.speakers.map((x) => x.id),
               description: values.description,
               isRecurrent: values.isRecurrent,
