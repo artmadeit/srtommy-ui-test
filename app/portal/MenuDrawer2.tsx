@@ -87,7 +87,6 @@ export default function MenuDrawer2({
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
     justifyContent: "center",
-    // justifyContent: "flex-end",
   }));
 
   const router = useRouter();

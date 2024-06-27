@@ -136,7 +136,6 @@ export const EventForm = ({
         <Grid xs={12}>
           <CheckboxElement
             onChange={(e) => {
-              // console.log(e.target.checked)
               if (e.target.checked) {
                 const date = formContext.getValues().date;
                 formContext.setValue("daysOfWeek", date ? [date.getDay()] : []);
@@ -244,9 +243,6 @@ export const EventForm = ({
               Guardar
             </Button>
           )}
-          {/* <Button type="submit" variant="contained">
-            Guardar
-          </Button> */}
         </Grid>
       </Grid>
     </FormContainer>

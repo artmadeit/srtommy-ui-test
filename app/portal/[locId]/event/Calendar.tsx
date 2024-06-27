@@ -2,7 +2,7 @@ import interactionPlugin from "@fullcalendar/interaction"; // for selectable
 import FullCalendar from "@fullcalendar/react";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import esLocale from "@fullcalendar/core/locales/es";
-import { differenceInDays, format, formatISO } from "date-fns";
+import { differenceInDays } from "date-fns";
 import { useAuthApi } from "@/app/(api)/api";
 import { EventInput } from "@fullcalendar/core/index.js";
 import { useRouter } from "next/navigation";
