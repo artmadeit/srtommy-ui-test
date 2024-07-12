@@ -11,5 +11,6 @@ export type EventDetail = {
   address: string;
   description: string;
   speakers: PersonDetailWithId[];
+  endRecur?: Date | null;
   recurrentEvent?: EventDetail;
 };

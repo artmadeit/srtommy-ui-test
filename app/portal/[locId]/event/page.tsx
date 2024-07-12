@@ -1,13 +1,13 @@
 "use client";
 
-import { Dialog, IconButton, Stack, Typography } from "@mui/material";
-import Calendar, { DatesSelection } from "./Calendar";
 import { useAuthApi } from "@/app/(api)/api";
-import { SnackbarContext } from "@/app/(components)/SnackbarContext";
-import { useContext, useState } from "react";
 import { EventForm } from "@/app/(components)/EventForm";
+import { SnackbarContext } from "@/app/(components)/SnackbarContext";
 import CloseIcon from "@mui/icons-material/Close";
-import { set } from "date-fns";
+import { Dialog, IconButton, Stack, Typography } from "@mui/material";
+import { useContext, useState } from "react";
+import Calendar, { DatesSelection } from "./Calendar";
+import { format } from "date-fns";
 
 export default function EventListPage({
   params,
@@ -80,15 +80,11 @@ export default function EventListPage({
               name: values.name,
               address: values.address,
               organizationId: locId,
-              startTime: values.startTime,
-              endTime: values.isRecurrent ? set(new Date(values.endRecur as Date), {
-                hours: values.endTime.getHours(),
-                minutes: values.endTime.getMinutes(),
-                seconds: values.endTime.getSeconds(),
-              }) : values.endTime,
+              startTime: format(values.startTime, "yyyy-MM-dd'T'HH:mm:ssXXX"),
+              endTime:  format(values.endTime, "yyyy-MM-dd'T'HH:mm:ssXXX"),
+              endRecur: values.endRecur,
               speakerIds: values.speakers.map((x) => x.id),
               description: values.description,
-              isRecurrent: values.isRecurrent,
               daysOfWeek: values.daysOfWeek,
               isACourse: values.type === 1,
             };
