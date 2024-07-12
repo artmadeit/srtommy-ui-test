@@ -35,7 +35,7 @@ export default function PortalHome({ params }: { params: { locId: number } }) {
               Bienvenido
             </Typography>
             <Typography variant="subtitle1" gutterBottom>
-              Soy el sr. Tommy, sere su fiel ayudante, cree o seleccione una
+              Soy el sr. Tommy, seré su fiel ayudante, cree o seleccione una
               sede para empezar a administrar su iglesia
             </Typography>
           </Grid>

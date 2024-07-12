@@ -5,14 +5,8 @@ import {
   TextFieldElement,
   useForm,
 } from "react-hook-form-mui";
-import React, { useState } from "react";
-import { GridRowSelectionModel } from "@mui/x-data-grid";
+import React from "react";
 import { GroupTypeLabels } from "./Group";
-import { useDebounce } from "use-debounce";
-import { DEBOUNCE_WAIT_MS } from "@/app/(components)/helpers/debouncing";
-import useSWR from "swr";
-import { SpringPage } from "@/app/(api)/pagination";
-import { PersonDetailWithId } from "../../person/Person";
 import { Option } from "@/app/(components)/Option";
 import { GroupAutocomplete } from "./GroupAutocomplete";
 
