@@ -17,9 +17,9 @@ export default async function Home() {
     .toPromise();
 
   return (
-    <>
+    <div className="Body">
       {/* Render the Builder page */}
       <RenderBuilderContent content={content} />
-    </>
+    </div>
   );
 }
