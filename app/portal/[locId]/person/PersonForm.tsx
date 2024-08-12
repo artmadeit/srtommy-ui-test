@@ -1,5 +1,11 @@
 "use client";
 
+import { Option } from "@/app/(components)/Option";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Button, Typography } from "@mui/material";
+import Grid from "@mui/material/Unstable_Grid2/Grid2";
+import { differenceInYears } from "date-fns";
+import { MuiTelInput } from "mui-tel-input";
 import {
   AutocompleteElement,
   Controller,
@@ -10,25 +16,33 @@ import {
   useForm,
   useFormContext,
 } from "react-hook-form-mui";
-import Grid from "@mui/material/Unstable_Grid2/Grid2";
-import { Button, Typography } from "@mui/material";
-import { MuiTelInput } from "mui-tel-input";
-import { PersonDetailBase } from "./Person";
-import React from "react";
-import { differenceInYears } from "date-fns";
 import useSWR from "swr";
+import { z } from "zod";
 import { RolesLocation } from "../location/page";
 import { toSpanish } from "../location/Roles";
-import { Option } from "@/app/(components)/Option";
 
-export type PersonDetailFormInput = PersonDetailBase & {
-  hasBeenBaptized?: "YES" | "NO";
-  roles: Option[];
-};
+const requiredMessage = "Campo requerido"
+
+const schema = z.object({
+  firstName: z.string().trim().min(1, { message: requiredMessage }),
+  lastName: z.string().trim().min(1, { message: requiredMessage }),
+  phoneNumber: z.string().optional(),
+  age: z.number().optional(),
+  birthdate: z.date().optional().nullable(),
+  hasBeenBaptized: z.enum(["YES", "NO"]).optional(),
+  roles: z.array(
+    z.object({
+      id: z.number(),
+      label: z.string(),
+    })
+  ),
+});
+
+type PersonDetailFormData = z.infer<typeof schema>;
 
 type PersonFormProps = {
-  initialValues: PersonDetailFormInput;
-  submit: (data: PersonDetailFormInput) => Promise<void>;
+  initialValues: PersonDetailFormData;
+  submit: (data: PersonDetailFormData) => Promise<void>;
   locId: number;
 };
 
@@ -47,6 +61,7 @@ export const PersonForm = ({
 
   const formContext = useForm({
     defaultValues: initialValues,
+    resolver: zodResolver(schema),
   });
 
   if (!roles) return <div>Not found</div>;
@@ -147,7 +162,6 @@ export const TelFieldElement = ({ name }: { name: string }) => {
     <Controller
       control={control}
       name={name}
-      // rules={{ required: true }}
       render={({ field }) => (
         <MuiTelInput
           name={field.name}
