@@ -142,7 +142,7 @@ export default function MenuDrawer2({
               startIcon={<AccountCircle />}
               onClick={handleClick}
             >
-              {user?.nickname}
+              {user?.name}
             </Button>
             <Menu
               id="basic-menu"
@@ -264,11 +264,11 @@ const DialogAccounts = ({ open, onClose }: DialogLocationProps) => {
   );
 
   return (
-    <Dialog open={open} onClose={onClose}>
+    <Dialog open={open} onClose={onClose} fullWidth>
       <DialogTitle display="flex" justifyContent="space-between">
-        Selecciona otra sede
+        Seleccione sede
         <Link component={NextLink} href="/portal/location/create">
-          <Button onClick={onClose}>Nueva Sede</Button>
+          <Button onClick={onClose}>Registrar otra sede</Button>
         </Link>
       </DialogTitle>
       <DialogContent>

@@ -1,14 +1,21 @@
-import Script from "next/script";
+import { useAuth0 } from "@auth0/auth0-react";
 import { Typography } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
+import Script from "next/script";
 import { FormContainer, TextFieldElement } from "react-hook-form-mui";
 
 const publicKey =
   process.env.NEXT_PUBLIC_CULQI_API_KEY || "some other culqi key";
 
 export const ProfileForm = () => {
+  const { user } = useAuth0();
+
   return (
-    <FormContainer>
+    <FormContainer
+      values={{
+        email: user?.email,
+      }}
+    >
       <Grid container spacing={2} margin={4}>
         <Grid xs={12}>
           <Typography variant="h5" gutterBottom>
@@ -19,7 +26,7 @@ export const ProfileForm = () => {
           <TextFieldElement name="email" label="Email" type="email" fullWidth />
         </Grid>
         <Grid xs={12}>
-          <Typography variant="h5">Pagar en: </Typography>
+          <Typography variant="h5">Subscripción: </Typography>
           {/* <button
             onClick={(e) => {
               Culqi.open();
@@ -28,7 +35,7 @@ export const ProfileForm = () => {
           >
             Proceder pago
           </button> */}
-          <div id="culqi-container" style={{ height: "80vw" }}></div>
+          <div id="culqi-container" style={{ height: "50vw" }}></div>
         </Grid>
       </Grid>
       <Script
