@@ -1,6 +1,12 @@
+"use client";
+
 import {
   Box,
   Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
   Grid,
   List,
   ListItem,
@@ -10,14 +16,19 @@ import {
 } from "@mui/material";
 import Image from "next/image";
 import MenuDrawer2 from "./MenuDrawer2";
-import tommyImage from "./tomy.png";
+import tommyImage from "./tomy-logo.webp";
 import ChurchIcon from "@mui/icons-material/Church";
 import AddCardIcon from "@mui/icons-material/AddCard";
 import Link from "next/link";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import { FormContainer, TextFieldElement, useForm } from "react-hook-form-mui";
+import { useContext, useState } from "react";
+import { useRouter } from "next/navigation";
+import { SnackbarContext } from "../(components)/SnackbarContext";
 
 export default function PortalHome({ params }: { params: { locId: number } }) {
   const { locId } = params;
+  const [openCreateChurchDialog, setOpenCreateChurchDialog] = useState(false);
 
   return (
     <main style={{ margin: "24px" }}>
@@ -69,8 +80,7 @@ export default function PortalHome({ params }: { params: { locId: number } }) {
                 </Box>
                 <Button
                   endIcon={<ArrowForwardIcon />}
-                  LinkComponent={Link}
-                  href="/church/register"
+                  onClick={() => setOpenCreateChurchDialog(true)}
                 >
                   Registrar iglesia
                 </Button>
@@ -92,6 +102,50 @@ export default function PortalHome({ params }: { params: { locId: number } }) {
           </Stack>
         </MenuDrawer2>
       </Box>
+      <CreateChurchDialog
+        open={openCreateChurchDialog}
+        onClose={() => setOpenCreateChurchDialog(false)}
+      />
     </main>
   );
 }
+
+const CreateChurchDialog = ({
+  onClose,
+  open,
+}: {
+  open: boolean;
+  onClose: () => void;
+}) => {
+  const router = useRouter();
+  const alert = useContext(SnackbarContext);
+
+  const formContext = useForm({
+    defaultValues: {
+      name: "",
+    },
+  });
+
+  const onCreate = () => {
+    onClose();
+    alert.showMessage("Iglesia exitosamente registrada");
+    router.push("/portal/location/create");
+  };
+
+  return (
+    <Dialog open={open} onClose={onClose} fullWidth>
+      <DialogTitle>Registrar iglesia</DialogTitle>
+      <FormContainer formContext={formContext} onSuccess={onCreate}>
+        <DialogContent>
+          <TextFieldElement name="name" label="Nombre" required fullWidth />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={onClose}>Cancelar</Button>
+          <Button type="submit" variant="contained">
+            Registrar
+          </Button>
+        </DialogActions>
+      </FormContainer>
+    </Dialog>
+  );
+};
