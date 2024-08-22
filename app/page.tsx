@@ -1,5 +1,6 @@
 import { RenderBuilderContent } from "@/components/builder";
 import { builder } from "@builder.io/sdk";
+import LandingLayout from "./landing-layout";
 
 // Builder Public API Key set in .env file
 builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
@@ -17,9 +18,9 @@ export default async function Home() {
     .toPromise();
 
   return (
-    <div className="Body">
+    <LandingLayout>
       {/* Render the Builder page */}
       <RenderBuilderContent content={content} />
-    </div>
+    </LandingLayout>
   );
 }
