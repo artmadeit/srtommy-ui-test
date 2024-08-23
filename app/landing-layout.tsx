@@ -21,14 +21,14 @@ export default function LandingLayout({
           },
         ]}
         legalLinks={[
-          { href: "/terms-conditions", text: "Términos de servicio" },
+          { href: "/terms-conditions", text: "Términos y condiciones" },
           {
             href: "",
-            text: "Términos de uso",
+            text: "Políticas de cambio",
           },
           {
             href: "",
-            text: "Privacidad",
+            text: "Libro de reclamaciones",
           },
         ]}
         contactEmail="info@sr-tommy.com"
