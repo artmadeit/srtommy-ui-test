@@ -15,7 +15,7 @@ import {
   ListItem,
   Paper,
   Stack,
-  Typography
+  Typography,
 } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
@@ -26,10 +26,14 @@ import { useAuthApi } from "../(api)/api";
 import { SnackbarContext } from "../(components)/SnackbarContext";
 import MenuDrawer2 from "./MenuDrawer2";
 import tommyImage from "./tomy-logo.webp";
+import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 
 export default function PortalHome({ params }: { params: { locId: number } }) {
   const { locId } = params;
   const [openCreateChurchDialog, setOpenCreateChurchDialog] = useState(false);
+  const { user } = useAuth0();
+
+  const hasOrgId = Boolean(user?.["https://sr-tommy.com/orgId"]);
 
   return (
     <main style={{ margin: "24px" }}>
@@ -76,15 +80,18 @@ export default function PortalHome({ params }: { params: { locId: number } }) {
             <Paper sx={{ display: "flex", padding: 4 }}>
               <ChurchIcon fontSize="large" />
               <Box pl={2}>
-                <Box pl={1}>
+                <Box pl={1} sx={{display: "flex", alignItems: "center", gap: 1}}>
                   Registre su iglesia junto a sus sedes o solicite entrar a una
+                  {hasOrgId && <CheckCircleOutlineIcon color="success" />}
                 </Box>
-                <Button
-                  endIcon={<ArrowForwardIcon />}
-                  onClick={() => setOpenCreateChurchDialog(true)}
-                >
-                  Registrar iglesia
-                </Button>
+                {!hasOrgId && (
+                  <Button
+                    endIcon={<ArrowForwardIcon />}
+                    onClick={() => setOpenCreateChurchDialog(true)}
+                  >
+                    Registrar iglesia
+                  </Button>
+                )}
               </Box>
             </Paper>
             <Paper sx={{ display: "flex", padding: 4 }}>
@@ -134,7 +141,7 @@ const CreateChurchDialog = ({
     const api = await getApi();
     await api.post("organizations", {
       name: data.name,
-      userId: user?.sub
+      userId: user?.sub,
     });
 
     onClose();
