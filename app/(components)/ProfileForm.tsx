@@ -25,7 +25,7 @@ export const ProfileForm = () => {
         <Grid xs={6}>
           <TextFieldElement name="email" label="Email" type="email" fullWidth />
         </Grid>
-        <Grid xs={12}>
+        <Grid xs={12} id="payment">
           <Typography variant="h5">Subscripción: </Typography>
           {/* <button
             onClick={(e) => {

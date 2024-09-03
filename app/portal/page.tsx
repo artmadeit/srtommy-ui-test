@@ -101,7 +101,7 @@ export default function PortalHome({ params }: { params: { locId: number } }) {
                 <Button
                   endIcon={<ArrowForwardIcon />}
                   LinkComponent={Link}
-                  href="/payment/register"
+                  href="/portal/profile#payment"
                 >
                   Subscribirse
                 </Button>
