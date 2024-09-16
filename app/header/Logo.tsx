@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 interface LogoProps {
@@ -8,7 +9,9 @@ interface LogoProps {
 const Logo: React.FC<LogoProps> = ({ src, alt }) => {
   return (
     <div className="logo-wrapper">
-      <img src={src} alt={alt} className="logo" />
+      <Link href="/">
+        <img src={src} alt={alt} className="logo" />
+      </Link>
       <style jsx>{`
         .logo-wrapper {
           // display: flex;
@@ -28,11 +31,11 @@ const Logo: React.FC<LogoProps> = ({ src, alt }) => {
           // max-width: 89px;
           // min-height: 20px;
           // min-width: 20px;
-         
+
           // aspect-ratio: 1.27;
 
           // width: 100%;
-          
+
           // overflow: hidden;
           // max-height: 48px;
           // max-width: 89px;
