@@ -1,5 +1,9 @@
 "use client";
 
+import { useAuth0 } from "@auth0/auth0-react";
+import AddCardIcon from "@mui/icons-material/AddCard";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import ChurchIcon from "@mui/icons-material/Church";
 import {
   Box,
   Button,
@@ -7,7 +11,6 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
-  Grid,
   List,
   ListItem,
   Paper,
@@ -15,20 +18,22 @@ import {
   Typography,
 } from "@mui/material";
 import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useContext, useState } from "react";
+import { FormContainer, TextFieldElement, useForm } from "react-hook-form-mui";
+import { useAuthApi } from "../(api)/api";
+import { SnackbarContext } from "../(components)/SnackbarContext";
 import MenuDrawer2 from "./MenuDrawer2";
 import tommyImage from "./tomy-logo.webp";
-import ChurchIcon from "@mui/icons-material/Church";
-import AddCardIcon from "@mui/icons-material/AddCard";
-import Link from "next/link";
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import { FormContainer, TextFieldElement, useForm } from "react-hook-form-mui";
-import { useContext, useState } from "react";
-import { useRouter } from "next/navigation";
-import { SnackbarContext } from "../(components)/SnackbarContext";
+import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 
 export default function PortalHome({ params }: { params: { locId: number } }) {
   const { locId } = params;
   const [openCreateChurchDialog, setOpenCreateChurchDialog] = useState(false);
+  const { user } = useAuth0();
+
+  const hasOrgId = Boolean(user?.["https://sr-tommy.com/orgId"]);
 
   return (
     <main style={{ margin: "24px" }}>
@@ -75,15 +80,18 @@ export default function PortalHome({ params }: { params: { locId: number } }) {
             <Paper sx={{ display: "flex", padding: 4 }}>
               <ChurchIcon fontSize="large" />
               <Box pl={2}>
-                <Box pl={1}>
+                <Box pl={1} sx={{display: "flex", alignItems: "center", gap: 1}}>
                   Registre su iglesia junto a sus sedes o solicite entrar a una
+                  {hasOrgId && <CheckCircleOutlineIcon color="success" />}
                 </Box>
-                <Button
-                  endIcon={<ArrowForwardIcon />}
-                  onClick={() => setOpenCreateChurchDialog(true)}
-                >
-                  Registrar iglesia
-                </Button>
+                {!hasOrgId && (
+                  <Button
+                    endIcon={<ArrowForwardIcon />}
+                    onClick={() => setOpenCreateChurchDialog(true)}
+                  >
+                    Registrar iglesia
+                  </Button>
+                )}
               </Box>
             </Paper>
             <Paper sx={{ display: "flex", padding: 4 }}>
@@ -93,7 +101,7 @@ export default function PortalHome({ params }: { params: { locId: number } }) {
                 <Button
                   endIcon={<ArrowForwardIcon />}
                   LinkComponent={Link}
-                  href="/payment/register"
+                  href="/portal/profile#payment"
                 >
                   Subscribirse
                 </Button>
@@ -119,6 +127,9 @@ const CreateChurchDialog = ({
 }) => {
   const router = useRouter();
   const alert = useContext(SnackbarContext);
+  const { user } = useAuth0();
+
+  const getApi = useAuthApi();
 
   const formContext = useForm({
     defaultValues: {
@@ -126,7 +137,13 @@ const CreateChurchDialog = ({
     },
   });
 
-  const onCreate = () => {
+  const onCreate = async (data: any) => {
+    const api = await getApi();
+    await api.post("organizations", {
+      name: data.name,
+      userId: user?.sub,
+    });
+
     onClose();
     alert.showMessage("Iglesia exitosamente registrada");
     router.push("/portal/location/create");

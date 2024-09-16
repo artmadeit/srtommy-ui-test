@@ -2,10 +2,10 @@
 
 import { useAuth0 } from "@auth0/auth0-react";
 import { AccountCircle } from "@mui/icons-material";
-import PersonIcon from "@mui/icons-material/Person";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import LogoutIcon from "@mui/icons-material/Logout";
 import MenuIcon from "@mui/icons-material/Menu";
+import PersonIcon from "@mui/icons-material/Person";
 import {
   Button,
   Dialog,
@@ -14,8 +14,7 @@ import {
   Link,
   Menu,
   MenuItem,
-  Stack,
-  Typography,
+  Stack
 } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -28,12 +27,11 @@ import Toolbar from "@mui/material/Toolbar";
 import { styled } from "@mui/material/styles";
 import { DataGrid, GridColDef, esES } from "@mui/x-data-grid";
 import NextLink from "next/link";
+import { useRouter } from "next/navigation";
 import * as React from "react";
 import useSWR from "swr";
 import Loading from "../(components)/Loading";
 import { withOutSorting } from "../(components)/helpers/withOutSorting";
-import { ORG_ID } from "./location/create/constants";
-import { useRouter } from "next/navigation";
 
 const drawerWidth = 240;
 
@@ -172,7 +170,7 @@ export default function MenuDrawer2({
                 Cerrar sesión
               </MenuItem>
             </Menu>
-            <DialogAccounts open={openDialog} onClose={onClose} />
+            <LocationsDialog open={openDialog} onClose={onClose} />
           </div>
         </Toolbar>
       </AppBar>
@@ -239,9 +237,11 @@ type DialogLocationProps = {
   onClose: () => void;
 };
 
-const DialogAccounts = ({ open, onClose }: DialogLocationProps) => {
+const LocationsDialog = ({ open, onClose }: DialogLocationProps) => {
+  const { user } = useAuth0();
+
   const { data: accounts, isLoading } = useSWR<LocationListItem[]>(
-    `organizations/${ORG_ID}/childs`
+    user ? `organizations/${user["https://sr-tommy.com/orgId"]}/childs` : null
   );
 
   const columns = React.useMemo(
