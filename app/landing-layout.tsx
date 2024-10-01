@@ -42,8 +42,8 @@ export default function LandingLayout({
         legalLinks={[
           { href: "/terms-conditions", text: "Términos y condiciones" },
           {
-            href: "",
-            text: "Políticas de cambio",
+            href: "/privacy-policy",
+            text: "Política de privacidad",
           },
           {
             href: "",
