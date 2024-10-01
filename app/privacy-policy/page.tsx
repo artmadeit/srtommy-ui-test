@@ -8,7 +8,7 @@ builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
 export default async function PrivacyPolicy() {
   const content = await builder
     // Get the page content from Builder with the specified options
-    .get("Page", {
+    .get("page", {
       userAttributes: {
         // Use the page path specified in the URL to fetch the content
         urlPath: "/privacy-policy",
