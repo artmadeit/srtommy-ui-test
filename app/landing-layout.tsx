@@ -1,5 +1,6 @@
 import Footer from "./footer/Footer";
 import Header from "./header/Header";
+// import bowTie from "./bow_tie.webp";
 
 export default function LandingLayout({
   children,
@@ -23,7 +24,8 @@ export default function LandingLayout({
             label: "Precio",
           },
         ]}
-        logoSrc="https://cdn.builder.io/api/v1/image/assets%2FYJIGb4i01jvw0SRdL5Bt%2F1bc483cb64c5410099c519ed6e11be05"
+        logoSrc="./bow_tie.webp"
+        // logoSrc="https://cdn.builder.io/api/v1/image/assets%2FYJIGb4i01jvw0SRdL5Bt%2F1bc483cb64c5410099c519ed6e11be05"
 
         // logoSrc="Icon.jpeg"
       ></Header>
