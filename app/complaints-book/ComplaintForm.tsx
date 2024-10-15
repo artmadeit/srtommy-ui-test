@@ -12,51 +12,68 @@ export default function ComplaintForm() {
           <Typography variant="h5">Ingresa tus datos</Typography>
         </Grid>
         <Grid xs={6}>
-          <TextFieldElement name="name" label="Nombre" required fullWidth />
+          <label style={{ color: "#878C8F" }}>Nombre</label>
+          <TextFieldElement
+            name="name"
+            required
+            fullWidth
+            style={{ marginTop: "5px" }}
+          />
         </Grid>
         <Grid xs={6}>
+          <label style={{ color: "#878C8F" }}>Apellido</label>
           <TextFieldElement
             name="lastName"
-            label="Apellido"
             required
             fullWidth
+            style={{ marginTop: "5px" }}
           />
         </Grid>
         <Grid xs={6}>
+          <label style={{ color: "#878C8F" }}>Dirección</label>
           <TextFieldElement
             name="address"
-            label="Dirección"
             required
             fullWidth
+            style={{ marginTop: "5px" }}
           />
         </Grid>
         <Grid xs={6}>
+          <label style={{ color: "#878C8F" }}>Email</label>
           <TextFieldElement
             name="email"
-            label="Email"
             type="email"
             required
             fullWidth
+            style={{ marginTop: "5px" }}
           />
         </Grid>
         <Grid xs={6}>
+          <label style={{ color: "#878C8F" }}>Confirmar email</label>
           <TextFieldElement
             name="confirmEmail"
-            label="Confirmar email"
             required
             fullWidth
+            style={{ marginTop: "5px" }}
           />
         </Grid>
         <Grid xs={6}>
-          <TextFieldElement name="id" label="DNI" required fullWidth />
+          <label style={{ color: "#878C8F" }}>DNI</label>
+          <TextFieldElement
+            name="id"
+            required
+            fullWidth
+            style={{ marginTop: "5px" }}
+          />
         </Grid>
         <Grid xs={12}>
+          <label style={{ color: "#878C8F" }}>Deja tu comentario</label>
           <TextFieldElement
             name="comments"
-            label="Deja tu comentario"
             multiline
             rows={2}
             fullWidth
+            style={{ marginTop: "5px" }}
           />
         </Grid>
         <Grid xs={6}>
