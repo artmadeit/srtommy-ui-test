@@ -30,34 +30,6 @@ export default function ComplaintForm() {
           />
         </Grid>
         <Grid xs={6}>
-          <label style={{ color: "#878C8F" }}>Dirección</label>
-          <TextFieldElement
-            name="address"
-            required
-            fullWidth
-            style={{ marginTop: "5px" }}
-          />
-        </Grid>
-        <Grid xs={6}>
-          <label style={{ color: "#878C8F" }}>Email</label>
-          <TextFieldElement
-            name="email"
-            type="email"
-            required
-            fullWidth
-            style={{ marginTop: "5px" }}
-          />
-        </Grid>
-        <Grid xs={6}>
-          <label style={{ color: "#878C8F" }}>Confirmar email</label>
-          <TextFieldElement
-            name="confirmEmail"
-            required
-            fullWidth
-            style={{ marginTop: "5px" }}
-          />
-        </Grid>
-        <Grid xs={6}>
           <label style={{ color: "#878C8F" }}>DNI</label>
           <TextFieldElement
             name="id"
@@ -66,6 +38,25 @@ export default function ComplaintForm() {
             style={{ marginTop: "5px" }}
           />
         </Grid>
+        <Grid xs={6}>
+          <label style={{ color: "#878C8F" }}>Dirección</label>
+          <TextFieldElement
+            name="address"
+            required
+            fullWidth
+            style={{ marginTop: "5px" }}
+          />
+        </Grid>
+        <Grid xs={12}>
+          <label style={{ color: "#878C8F" }}>Email</label>
+          <TextFieldElement
+            name="email"
+            type="email"
+            required
+            fullWidth
+            style={{ marginTop: "5px" }}
+          />
+        </Grid>       
         <Grid xs={12}>
           <label style={{ color: "#878C8F" }}>Deja tu comentario</label>
           <TextFieldElement
