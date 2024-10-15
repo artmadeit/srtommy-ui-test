@@ -2,7 +2,7 @@
 
 import { FormContainer, TextFieldElement } from "react-hook-form-mui";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
-import { Typography } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 
 export default function ComplaintForm() {
   return (
@@ -12,24 +12,17 @@ export default function ComplaintForm() {
           <Typography variant="h5">Ingresa tus datos</Typography>
         </Grid>
         <Grid xs={6}>
-          <TextFieldElement
-            name="name"
-            label="Nombre"
-            variant="standard"
-            required
-            fullWidth
-          />
+          <TextFieldElement name="name" label="Nombre" required fullWidth />
         </Grid>
         <Grid xs={6}>
           <TextFieldElement
             name="lastName"
             label="Apellido"
-            variant="standard"
             required
             fullWidth
           />
         </Grid>
-        <Grid xs={6}> 
+        <Grid xs={6}>
           <TextFieldElement
             name="address"
             label="Dirección"
@@ -55,12 +48,25 @@ export default function ComplaintForm() {
           />
         </Grid>
         <Grid xs={6}>
+          <TextFieldElement name="id" label="DNI" required fullWidth />
+        </Grid>
+        <Grid xs={12}>
           <TextFieldElement
-            name="id"
-            label="DNI"
-            required
+            name="comments"
+            label="Deja tu comentario"
+            multiline
+            rows={2}
             fullWidth
           />
+        </Grid>
+        <Grid xs={6}>
+          <Button
+            type="submit"
+            variant="contained"
+            style={{ background: "#000" }}
+          >
+            Enviar Mensaje
+          </Button>
         </Grid>
       </Grid>
     </FormContainer>
