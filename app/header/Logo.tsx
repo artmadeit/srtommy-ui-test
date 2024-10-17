@@ -1,8 +1,9 @@
+import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
 import React from "react";
 
 interface LogoProps {
-  src: string;
+  src: StaticImageData;
   alt: string;
 }
 
@@ -10,7 +11,12 @@ const Logo: React.FC<LogoProps> = ({ src, alt }) => {
   return (
     <div className="logo-wrapper">
       <Link href="/">
-        <img src={src} alt={alt} className="logo" />
+        <Image
+          style={{ width: "60px", height: "60px" }}
+          src={src}
+          alt={alt}
+          className="logo"
+        />
       </Link>
       <style jsx>{`
         .logo-wrapper {

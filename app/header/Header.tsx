@@ -5,18 +5,19 @@ import Logo from "./Logo";
 import Navigation from "./Navigation";
 import CallToAction from "./CallToAction";
 // import MobileMenu from "./MobileMenu";
+import bowTie from "../bow-tie.webp";
 
 interface HeaderProps {
-  logoSrc: string;
+
   navItems: Array<{ label: string; href: string }>;
 }
 
-const Header: React.FC<HeaderProps> = ({ logoSrc, navItems }) => {
+const Header: React.FC<HeaderProps> = ({  navItems }) => {
   return (
     <div className="header-box">
       <header className="header">
         <div className="header-content">
-          <Logo src={logoSrc} alt="Company Logo" />
+          <Logo src={bowTie} alt="Company Logo" />
           <Navigation items={navItems} />
           <CallToAction />
         </div>
