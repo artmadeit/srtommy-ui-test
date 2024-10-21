@@ -70,7 +70,7 @@ export default function PortalHome({ params }: { params: { locId: number } }) {
             Bienvenido
           </Typography>
           <p>
-            Sigo los siguientes pasos para dar un gran salto en la
+            Siga los siguientes pasos para dar un gran salto en la
             administración de su iglesia
           </p>
           <Typography variant="h4" gutterBottom>
@@ -80,7 +80,10 @@ export default function PortalHome({ params }: { params: { locId: number } }) {
             <Paper sx={{ display: "flex", padding: 4 }}>
               <ChurchIcon fontSize="large" />
               <Box pl={2}>
-                <Box pl={1} sx={{display: "flex", alignItems: "center", gap: 1}}>
+                <Box
+                  pl={1}
+                  sx={{ display: "flex", alignItems: "center", gap: 1 }}
+                >
                   Registre su iglesia junto a sus sedes o solicite entrar a una
                   {hasOrgId && <CheckCircleOutlineIcon color="success" />}
                 </Box>
