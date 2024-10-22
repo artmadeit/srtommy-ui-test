@@ -8,6 +8,8 @@ import React from "react";
 import { SnackbarContext } from "../(components)/SnackbarContext";
 
 export default function ComplaintForm() {
+  const [active, setActive] = React.useState(false);
+
   const getApi = useAuthApi();
   const alert = React.useContext(SnackbarContext);
 
@@ -35,6 +37,7 @@ export default function ComplaintForm() {
           email: formValues.email,
           comment: formValues.comment,
         });
+        setActive(!active);
         alert.showMessage("Enviado");
       }}
     >
@@ -102,7 +105,7 @@ export default function ComplaintForm() {
           <Button
             type="submit"
             variant="contained"
-            // disabled
+            disabled={active}
             // style={{ background: "#000" }}
           >
             Enviar Mensaje
