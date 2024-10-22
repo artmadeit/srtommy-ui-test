@@ -1,12 +1,43 @@
 "use client";
 
-import { FormContainer, TextFieldElement } from "react-hook-form-mui";
+import { FormContainer, TextFieldElement, useForm } from "react-hook-form-mui";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import { Button, Typography } from "@mui/material";
+import { useAuthApi } from "../(api)/api";
+import React from "react";
+import { SnackbarContext } from "../(components)/SnackbarContext";
 
 export default function ComplaintForm() {
+  const getApi = useAuthApi();
+  const alert = React.useContext(SnackbarContext);
+
+  const formContext = useForm({
+    defaultValues: {
+      firstName: "",
+      lastName: "",
+      dni: "",
+      address: "",
+      email: "",
+      comment: "",
+    },
+  });
+
   return (
-    <FormContainer onSuccess={() => console.log("Enviando")}>
+    <FormContainer
+      formContext={formContext}
+      onSuccess={async (formValues) => {
+        const api = await getApi();
+        await api.post("complaints", {
+          firstName: formValues.firstName,
+          lastName: formValues.lastName,
+          dni: formValues.dni,
+          address: formValues.address,
+          email: formValues.email,
+          comment: formValues.comment,
+        });
+        alert.showMessage("Enviado");
+      }}
+    >
       <Grid container spacing={4} margin={4} style={{ width: "600px" }}>
         <Grid xs={12}>
           <Typography variant="h5">Ingresa tus datos</Typography>
@@ -14,7 +45,7 @@ export default function ComplaintForm() {
         <Grid xs={6}>
           <label style={{ color: "#878C8F" }}>Nombre</label>
           <TextFieldElement
-            name="name"
+            name="firstName"
             required
             fullWidth
             style={{ marginTop: "5px" }}
@@ -32,7 +63,7 @@ export default function ComplaintForm() {
         <Grid xs={6}>
           <label style={{ color: "#878C8F" }}>DNI</label>
           <TextFieldElement
-            name="id"
+            name="dni"
             required
             fullWidth
             style={{ marginTop: "5px" }}
@@ -56,11 +87,11 @@ export default function ComplaintForm() {
             fullWidth
             style={{ marginTop: "5px" }}
           />
-        </Grid>       
+        </Grid>
         <Grid xs={12}>
           <label style={{ color: "#878C8F" }}>Deja tu comentario</label>
           <TextFieldElement
-            name="comments"
+            name="comment"
             multiline
             rows={2}
             fullWidth
@@ -71,7 +102,8 @@ export default function ComplaintForm() {
           <Button
             type="submit"
             variant="contained"
-            style={{ background: "#000" }}
+            // disabled
+            // style={{ background: "#000" }}
           >
             Enviar Mensaje
           </Button>
