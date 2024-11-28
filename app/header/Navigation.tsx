@@ -47,6 +47,7 @@ const Navigation: React.FC<NavigationProps> = ({ items }) => {
           pointer-events: auto;
           text-decoration: none;
           color: rgba(78, 77, 77, 1);
+          font-family: Helvetica;
         }
         @media (max-width: 991px) {
           .navigation {

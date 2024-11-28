@@ -40,6 +40,7 @@ const LegalLinks: React.FC<LegalLinksProps> = ({ links }) => {
           color: #fff;
           font-size: 15px;
           text-decoration: none;
+          font-family: Helvetica;
         }
       `}</style>
     </section>

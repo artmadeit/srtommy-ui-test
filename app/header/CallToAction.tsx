@@ -33,6 +33,7 @@ const CallToAction: React.FC = () => {
           cursor: pointer;
           flex-grow: 0;
           padding: 12px;
+          font-family: Helvetica;
         }
         .cta-button,
         .login-button {

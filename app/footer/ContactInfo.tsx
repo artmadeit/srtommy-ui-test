@@ -25,6 +25,7 @@ const ContactInfo: React.FC<ContactInfoProps> = ({ email, phone }) => {
         .contact-phone {
           color: #fff;
           font-size: 15px;
+          font-family: Helvetica;
         }
         .contact-email {
           margin-top: 10px;
