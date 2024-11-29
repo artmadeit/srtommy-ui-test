@@ -22,6 +22,7 @@ const SocialButtons: React.FC<SocialButtonsProps> = ({ links }) => {
           color: #fff;
           font-size: 1em;
           font-weight: bold;
+          font-family: Helvetica;
         }
         .social-buttons {
           display: flex;

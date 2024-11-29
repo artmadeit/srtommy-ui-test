@@ -43,7 +43,7 @@ export default function ComplaintForm() {
     >
       <Grid container spacing={4} margin={4} style={{ width: "600px" }}>
         <Grid xs={12}>
-          <Typography variant="h5">Ingresa tus datos</Typography>
+          <Typography sx={{ fontSize: "40px" }}>Ingresa tus datos</Typography>
         </Grid>
         <Grid xs={6}>
           <label style={{ color: "#878C8F" }}>Nombre</label>

@@ -28,6 +28,7 @@ const LegalLinks: React.FC<LegalLinksProps> = ({ links }) => {
           color: #fff;
           font-size: 1em;
           font-weight: bold;
+          font-family: Helvetica;
         }
         .legal-links {
           list-style-type: none;

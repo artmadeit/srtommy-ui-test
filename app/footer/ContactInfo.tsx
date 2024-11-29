@@ -20,6 +20,7 @@ const ContactInfo: React.FC<ContactInfoProps> = ({ email, phone }) => {
           color: #fff;
           font-size: 1em;
           font-weight: bold;
+          font-family: Helvetica;
         }
         .contact-email,
         .contact-phone {
