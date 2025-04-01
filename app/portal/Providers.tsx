@@ -7,7 +7,7 @@ import React from "react";
 import { SWRConfig } from "swr";
 import { useAuthApi } from "../(api)/api";
 import { AxiosRequestConfig } from "axios";
-import { SnackbarProvider } from "../(components)/SnackbarContext";
+
 
 export const Providers = ({ children }: { children: React.ReactNode }) => {
   const getApi = useAuthApi();
@@ -30,7 +30,7 @@ export const Providers = ({ children }: { children: React.ReactNode }) => {
         dateAdapter={AdapterDateFns}
         adapterLocale={dateFnsEs}
       >
-        <SnackbarProvider>{children}</SnackbarProvider>
+        {children}
       </LocalizationProvider>
     </SWRConfig>
   );

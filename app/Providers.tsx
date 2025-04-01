@@ -1,6 +1,7 @@
 "use client";
 import { Auth0Provider } from "@auth0/auth0-react";
 import React from "react";
+import { SnackbarProvider } from "./(components)/SnackbarContext";
 
 export const Providers = ({ children }: { children: React.ReactNode }) => {
   const domain = process.env.NEXT_PUBLIC_AUTH0_DOMAIN;
@@ -18,7 +19,7 @@ export const Providers = ({ children }: { children: React.ReactNode }) => {
         redirect_uri: globalThis.location?.origin + "/portal",
       }}
     >
-      {children}
+      <SnackbarProvider>{children}</SnackbarProvider>      
     </Auth0Provider>
   );
 };
