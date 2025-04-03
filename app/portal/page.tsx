@@ -97,7 +97,7 @@ export default function PortalHome({ params }: { params: { locId: number } }) {
                 )}
               </Box>
             </Paper>
-            <Paper sx={{ display: "flex", padding: 4 }}>
+            {/* <Paper sx={{ display: "flex", padding: 4 }}>
               <AddCardIcon fontSize="large" />
               <Box pl={2}>
                 <Box pl={1}>Suscríbase a un plan de pago</Box>
@@ -109,7 +109,7 @@ export default function PortalHome({ params }: { params: { locId: number } }) {
                   Subscribirse
                 </Button>
               </Box>
-            </Paper>
+            </Paper> */}
           </Stack>
         </MenuDrawer2>
       </Box>
