@@ -25,18 +25,18 @@ export const ProfileForm = () => {
         <Grid xs={6}>
           <TextFieldElement name="email" label="Email" type="email" fullWidth />
         </Grid>
-        <Grid xs={12} id="payment">
+        {/* <Grid xs={12} id="payment">
           <Typography variant="h5">Subscripción: </Typography>
-          {/* <button
+          <button
             onClick={(e) => {
               Culqi.open();
               e.preventDefault();
             }}
           >
             Proceder pago
-          </button> */}
+          </button>
           <div id="culqi-container" style={{ height: "50vw" }}></div>
-        </Grid>
+        </Grid> */}
       </Grid>
       <Script
         src="https://js.culqi.com/checkout-js"
