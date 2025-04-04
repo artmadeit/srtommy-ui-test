@@ -35,22 +35,26 @@ export function PeopleLayout({
           </Tooltip>
         </Stack>
         <ToggleButtonGroup value={value} exclusive aria-label="text alignment">
-          <ToggleButton
-            value="table"
-            aria-label="table"
-            LinkComponent={Link}
-            href={`/portal/${locId}/person`}
-          >
-            <TableRows />
-          </ToggleButton>
-          <ToggleButton
-            value="board"
-            aria-label="kanban board"
-            LinkComponent={Link}
-            href={`/portal/${locId}/person/board`}
-          >
-            <TableChart />
-          </ToggleButton>
+          <Tooltip title="Lista de personas">
+            <ToggleButton
+              value="table"
+              aria-label="table"
+              LinkComponent={Link}
+              href={`/portal/${locId}/person`}
+            >
+              <TableRows />
+            </ToggleButton>
+          </Tooltip>
+          <Tooltip title="Board de personas">
+            <ToggleButton
+              value="board"
+              aria-label="kanban board"
+              LinkComponent={Link}
+              href={`/portal/${locId}/person/board`}
+            >
+              <TableChart />
+            </ToggleButton>
+          </Tooltip>
         </ToggleButtonGroup>
       </Box>
 
