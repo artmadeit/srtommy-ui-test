@@ -19,6 +19,7 @@ import { useRouter } from "next/navigation";
 import { PersonListItem } from "./PersonListItem";
 import { PersonDetailWithId } from "./Person";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { DialogDeleteConfirmation } from "@/app/(components)/DialogDeleteConfirmation";
 
 export type MyDataGridProps = Omit<DataGridProps, "columns" | "rows">;
 
@@ -35,6 +36,7 @@ export const PersonTable = ({
   const router = useRouter();
   const [searchText, setSearchText] = useState("");
   const [searchTextDebounced] = useDebounce(searchText, DEBOUNCE_WAIT_MS);
+  const [openDialog, setOpenDialog] = React.useState(false);
   const { data: people, isLoading } = useSWR<SpringPage<PersonListItem>>([
     `people`,
     {
@@ -71,7 +73,7 @@ export const PersonTable = ({
                   <GridActionsCellItem
                     icon={<DeleteIcon />}
                     label="Eliminar"
-                    onClick={() => console.log("Eliminando")}
+                    onClick={() => setOpenDialog(true)}
                   />
                 </Tooltip>,
               ];
@@ -112,6 +114,11 @@ export const PersonTable = ({
           {...dataGridProps}
         />
       </div>
+      <DialogDeleteConfirmation
+        open={openDialog}
+        close={() => setOpenDialog(false)}
+        onDelete={() => console.log("eliminando")}
+      />
     </>
   );
 };
