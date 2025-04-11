@@ -21,11 +21,12 @@ import { z } from "zod";
 import { RolesLocation } from "../location/page";
 import { toSpanish } from "../location/Roles";
 
-const requiredMessage = "Campo requerido"
+const requiredFirstNameMessage = "Por favor ingrese su nombre";
+const requiredLastNameMessage = "Por favor ingrese su apellido";
 
 const schema = z.object({
-  firstName: z.string().trim().min(1, { message: requiredMessage }),
-  lastName: z.string().trim().min(1, { message: requiredMessage }),
+  firstName: z.string().trim().min(1, { message: requiredFirstNameMessage }),
+  lastName: z.string().trim().min(1, { message: requiredLastNameMessage }),
   phoneNumber: z.string().optional(),
   age: z.number().optional(),
   birthdate: z.date().optional().nullable(),

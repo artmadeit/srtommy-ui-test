@@ -1,7 +1,7 @@
 "use client";
 
 import { useAuthApi } from "@/app/(api)/api";
-import { EventForm, EventFormValues } from "@/app/(components)/EventForm";
+import { EventDetailFormData, EventForm} from "@/app/(components)/EventForm";
 import Loading from "@/app/(components)/Loading";
 import { SnackbarContext } from "@/app/(components)/SnackbarContext";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -93,14 +93,14 @@ export default function AttendanceEvent({
     router.push(`/portal/${locId}/event`);
   };
 
-  const initialValues: EventFormValues = {
+  const initialValues: EventDetailFormData = {
     name: event.title,
     date: event.start,
     startTime: event.start,
     endTime: event.end,
     isRecurrent,
     daysOfWeek: isRecurrent ? recurrentEvent.daysOfWeek : [],
-    endRecur: isRecurrent ? recurrentEvent.endRecur : null,
+    endRecur: isRecurrent ? recurrentEvent.endRecur : undefined,
     type: event.isACourse ? 1 : 0,
     address: event.address,
     speakers: event.speakers.map((speaker) => ({

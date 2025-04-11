@@ -45,56 +45,58 @@ export default function EventListPage({
         >
           <CloseIcon />
         </IconButton>
-        <EventForm
-          locId={locId}
-          initialValues={{
-            name: "",
-            date: spanSelected?.start,
-            startTime: spanSelected?.start,
-            endTime: spanSelected?.end,
-            address: "",
-            description: "",
-            isRecurrent: false,
-            daysOfWeek: [],
-            type: 0,
-            speakers: [],
-          }}
-          submit={async (values) => {
-            if (!values.startTime) {
-              return;
-            }
+        {spanSelected && (
+          <EventForm
+            locId={locId}
+            initialValues={{
+              name: "",
+              date: spanSelected.start,
+              startTime: spanSelected.start,
+              endTime: spanSelected.end,
+              address: "",
+              description: "",
+              isRecurrent: false,
+              daysOfWeek: [],
+              type: 0,
+              speakers: [],
+            }}
+            submit={async (values) => {
+              if (!values.startTime) {
+                return;
+              }
 
-            if (!values.date) {
-              return;
-            }
+              if (!values.date) {
+                return;
+              }
 
-            if (!values.endTime) {
-              return;
-            }
+              if (!values.endTime) {
+                return;
+              }
 
-            if (values.isRecurrent && !values.endRecur) {
-              return;
-            }
+              if (values.isRecurrent && !values.endRecur) {
+                return;
+              }
 
-            const data = {
-              name: values.name,
-              address: values.address,
-              organizationId: locId,
-              startTime: format(values.startTime, "yyyy-MM-dd'T'HH:mm:ssXXX"),
-              endTime:  format(values.endTime, "yyyy-MM-dd'T'HH:mm:ssXXX"),
-              endRecur: values.endRecur,
-              speakerIds: values.speakers.map((x) => x.id),
-              description: values.description,
-              daysOfWeek: values.daysOfWeek,
-              isACourse: values.type === 1,
-            };
+              const data = {
+                name: values.name,
+                address: values.address,
+                organizationId: locId,
+                startTime: format(values.startTime, "yyyy-MM-dd'T'HH:mm:ssXXX"),
+                endTime: format(values.endTime, "yyyy-MM-dd'T'HH:mm:ssXXX"),
+                endRecur: values.endRecur,
+                speakerIds: values.speakers.map((x) => x.id),
+                description: values.description,
+                daysOfWeek: values.daysOfWeek,
+                isACourse: values.type === 1,
+              };
 
-            await getApi().then((api) => api.post(`/events`, data));
-            close();
-            alert.showMessage("Guardado exitosamente");
-          }}
-          editable={true}
-        />
+              await getApi().then((api) => api.post(`/events`, data));
+              close();
+              alert.showMessage("Guardado exitosamente");
+            }}
+            editable={true}
+          />
+        )}
       </Dialog>
     </Stack>
   );

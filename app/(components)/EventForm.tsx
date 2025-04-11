@@ -22,25 +22,48 @@ import { Option } from "./Option";
 import PlaceOutlinedIcon from "@mui/icons-material/PlaceOutlined";
 import { WeekChips } from "./WeekChips";
 import { ToogleButton } from "./ToogleButton";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
 
-export type EventFormValues = {
-  name: string;
-  date?: Date;
-  startTime?: Date | null;
-  endTime?: Date | null;
-  endRecur?: Date | null;
-  address: string;
-  isRecurrent: boolean;
-  description: string;
-  daysOfWeek: number[];
-  type: number;
-  speakers: Option[];
-};
+// export type EventFormValues = {
+//   name: string;
+//   date?: Date;
+//   startTime?: Date | null;
+//   endTime?: Date | null;
+//   endRecur?: Date | null;
+//   address: string;
+//   isRecurrent: boolean;
+//   description: string;
+//   daysOfWeek: number[];
+//   type: number;
+//   speakers: Option[];
+// };
+
+const schema = z.object({
+  name: z.string(),
+  date: z.date(),
+  startTime: z.date(),
+  endTime: z.date(),
+  endRecur: z.date().optional(),
+  address: z.string(),
+  isRecurrent: z.boolean(),
+  description: z.string().optional(),
+  daysOfWeek: z.array(z.number()),
+  type: z.number(),
+  speakers: z.array(
+    z.object({
+      id: z.number(),
+      label: z.string(),
+    })
+  ),
+});
+
+export type EventDetailFormData = z.infer<typeof schema>;
 
 type EventFormProps = {
   locId: number;
-  initialValues: EventFormValues;
-  submit: SubmitHandler<EventFormValues>;
+  initialValues: EventDetailFormData;
+  submit: SubmitHandler<EventDetailFormData>;
   editable: boolean;
 };
 
@@ -52,8 +75,9 @@ export const EventForm = ({
 }: EventFormProps) => {
   const [searchTextSpeaker, setSearchTextSpeaker] = React.useState("");
 
-  const formContext = useForm<EventFormValues>({
+  const formContext = useForm({
     defaultValues: initialValues,
+    resolver: zodResolver(schema),
   });
 
   const watch = formContext.watch;
@@ -89,7 +113,9 @@ export const EventForm = ({
             placeholder="Agregar título"
             sx={{ padding: "10px 0px" }}
             variant="standard"
-            required
+            error={true}
+            helperText={"hola"}
+            
             autoFocus
           />
         </Grid>
@@ -112,7 +138,12 @@ export const EventForm = ({
             ampm
             sx={{ width: "100%" }}
             value={formContext.getValues().startTime}
-            onChange={(value) => formContext.setValue("startTime", value)}
+            onChange={(value) => {
+              if (value !== null) {
+                formContext.setValue("startTime", value);
+              }
+            }}
+            // onChange={(value) => console.log(typeof value)}
             viewRenderers={{
               hours: renderTimeViewClock,
               minutes: renderTimeViewClock,
@@ -125,7 +156,7 @@ export const EventForm = ({
             ampm
             sx={{ width: "100%" }}
             value={formContext.getValues().endTime}
-            onChange={(value) => formContext.setValue("endTime", value)}
+            // onChange={(value) => formContext.setValue("endTime", value)}
             viewRenderers={{
               hours: renderTimeViewClock,
               minutes: renderTimeViewClock,
