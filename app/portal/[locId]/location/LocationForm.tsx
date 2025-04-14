@@ -11,19 +11,30 @@ import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import { isArray } from "lodash";
 import { FormContainer, TextFieldElement, useForm } from "react-hook-form-mui";
 import { TelFieldElement } from "../person/PersonForm";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
-export type LocationFormValues = {
-  name: string;
-  address: string;
-  phoneNumber: string;
-  roles: string[];
-};
+// export type LocationFormValues = {
+//   name: string;
+//   address: string;
+//   phoneNumber: string;
+//   roles: string[];
+// };
+
+const schema = z.object({
+  name: z.string(),
+  address: z.string(),
+  phoneNumber: z.string(),
+  roles: z.array(z.string()),
+});
+
+export type LocationDetailForm = z.infer<typeof schema>;
 
 type LocationFormProps = {
   title: string;
-  submit: (data: LocationFormValues) => Promise<void>;
+  initialValues: LocationDetailForm;
+  submit: (data: LocationDetailForm) => Promise<void>;
   fixedOptions: string[];
-  initialValues: LocationFormValues;
 };
 
 export const LocationForm = ({
@@ -32,8 +43,9 @@ export const LocationForm = ({
   initialValues,
   fixedOptions,
 }: LocationFormProps) => {
-  const formContext = useForm<LocationFormValues>({
+  const formContext = useForm({
     defaultValues: initialValues,
+    resolver: zodResolver(schema),
   });
 
   return (

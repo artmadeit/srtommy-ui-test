@@ -7,8 +7,8 @@ import React from "react";
 import useSWR from "swr";
 import MenuDrawer2 from "../../MenuDrawer2";
 import {
-  LocationForm,
-  LocationFormValues,
+  LocationDetailForm,
+  LocationForm,  
 } from "../../[locId]/location/LocationForm";
 import { getFixedOptions } from "../../[locId]/location/Roles";
 import { RolesLocation } from "../../[locId]/location/page";
@@ -34,7 +34,7 @@ export default function LocationCreatePage({
 
   const fixedOptions: string[] = getFixedOptions(roles);
 
-  const submit = async (data: LocationFormValues) => {
+  const submit = async (data: LocationDetailForm) => {
     const api = await getApi();
     const response = await api.post("organizations/locations", {
       ...data,
