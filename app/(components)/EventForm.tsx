@@ -40,13 +40,13 @@ import { z } from "zod";
 // };
 
 const schema = z.object({
-  name: z.string(),
+  name: z.string().trim().min(1, { message: "Por favor ingrese el título" }),
   date: z.date(),
   startTime: z.date(),
   endTime: z.date(),
   endRecur: z.date().optional(),
-  address: z.string(),
-  isRecurrent: z.boolean(),
+  address: z.string().optional(),
+  isRecurrent: z.boolean().optional(),
   description: z.string().optional(),
   daysOfWeek: z.array(z.number()),
   type: z.number(),
@@ -113,9 +113,7 @@ export const EventForm = ({
             placeholder="Agregar título"
             sx={{ padding: "10px 0px" }}
             variant="standard"
-            error={true}
-            helperText={"hola"}
-            
+            required
             autoFocus
           />
         </Grid>
