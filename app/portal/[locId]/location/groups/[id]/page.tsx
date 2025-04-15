@@ -1,7 +1,7 @@
 "use client";
 
 import useSWR from "swr";
-import { GroupDetail, GroupForm } from "../GroupForm";
+import { GroupDetailForm, GroupForm } from "../GroupForm";
 import Loading from "@/app/(components)/Loading";
 import { PersonDetailWithId } from "../../../person/Person";
 import { fullName } from "../../../person/PersonTable";
@@ -18,7 +18,7 @@ export default function GroupDetailPage({
 }) {
   const { id, locId } = params;
 
-  const { data: group, isLoading } = useSWR<GroupDetail>(
+  const { data: group, isLoading } = useSWR<GroupDetailForm>(
     `/organizations/${id}`
   );
 
@@ -29,7 +29,7 @@ export default function GroupDetailPage({
   if (isLoading) return <Loading />;
   if (!group || !members) return <div>Not found</div>;
 
-  const initialValues: GroupDetail = {
+  const initialValues: GroupDetailForm = {
     name: group.name,
     description: group.description,
     type: group.type,

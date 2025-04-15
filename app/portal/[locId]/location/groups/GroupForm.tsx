@@ -9,19 +9,43 @@ import React from "react";
 import { GroupTypeLabels } from "./Group";
 import { Option } from "@/app/(components)/Option";
 import { GroupAutocomplete } from "./GroupAutocomplete";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
 
-export type GroupDetail = {
-  name: string;
-  description: string;
-  type: "GROUP" | "MINISTRY";
-  members: Option[];
-  leaders: Option[];
-};
+// export type GroupDetail = {
+//   name: string;
+//   description: string;
+//   type: "GROUP" | "MINISTRY";
+//   members: Option[];
+//   leaders: Option[];
+// };
+
+const schema = z.object({
+  name: z
+    .string()
+    .min(1, { message: "Por favor ingrese el nombre del Grupo o ministerio" }),
+  description: z.string().optional(),
+  type: z.string(),
+  members: z.array(
+    z.object({
+      id: z.number(),
+      label: z.string(),
+    })
+  ),
+  leaders: z.array(
+    z.object({
+      id: z.number(),
+      label: z.string(),
+    })
+  ),
+});
+
+export type GroupDetailForm = z.infer<typeof schema>;
 
 type GroupFormContext = {
   locId: number;
-  initialValues: GroupDetail;
-  submit: (data: GroupDetail) => Promise<void>;
+  initialValues: GroupDetailForm;
+  submit: (data: GroupDetailForm) => Promise<void>;
 };
 
 export const GroupForm = ({
@@ -31,6 +55,7 @@ export const GroupForm = ({
 }: GroupFormContext) => {
   const formContext = useForm({
     defaultValues: initialValues,
+    resolver: zodResolver(schema),
   });
 
   // useEffect(() => {
