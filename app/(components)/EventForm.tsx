@@ -39,24 +39,34 @@ import { z } from "zod";
 //   speakers: Option[];
 // };
 
-const schema = z.object({
-  name: z.string().trim().min(1, { message: "Por favor ingrese el título" }),
-  date: z.date(),
-  startTime: z.date(),
-  endTime: z.date(),
-  endRecur: z.date().optional(),
-  address: z.string().optional(),
-  isRecurrent: z.boolean().optional(),
-  description: z.string().optional(),
-  daysOfWeek: z.array(z.number()),
-  type: z.number(),
-  speakers: z.array(
-    z.object({
-      id: z.number(),
-      label: z.string(),
-    })
-  ),
-});
+const schema = z
+  .object({
+    name: z.string().trim().min(1, { message: "Por favor ingrese el título" }),
+    date: z.date(),
+    startTime: z.date(),
+    endTime: z.date(),
+    endRecur: z.date().optional(),
+    address: z.string().optional(),
+    isRecurrent: z.boolean().optional(),
+    description: z.string().optional(),
+    daysOfWeek: z.array(z.number()),
+    type: z.number(),
+    speakers: z.array(
+      z.object({
+        id: z.number(),
+        label: z.string(),
+      })
+    ),
+  })
+  .refine(
+    (data) =>
+      data.isRecurrent ? data.daysOfWeek.length >= 1 && data.endRecur : false,
+    {
+      message:
+        "Por favor seleccionar el/los día(s) y la fecha que finaliza el evento",
+      path: ["name"],
+    }
+  );
 
 export type EventDetailFormData = z.infer<typeof schema>;
 
@@ -102,6 +112,7 @@ export const EventForm = ({
 
   const daysOfWeek = watch("daysOfWeek");
   const type = watch("type");
+  const startTime = watch("startTime");
 
   return (
     <FormContainer formContext={formContext} onSuccess={submit}>
@@ -152,6 +163,7 @@ export const EventForm = ({
         <Grid xs={4}>
           <TimePicker
             ampm
+            minTime={startTime}
             sx={{ width: "100%" }}
             value={formContext.getValues().endTime}
             // onChange={(value) => formContext.setValue("endTime", value)}

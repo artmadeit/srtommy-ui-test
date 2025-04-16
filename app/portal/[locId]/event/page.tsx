@@ -61,22 +61,9 @@ export default function EventListPage({
               speakers: [],
             }}
             submit={async (values) => {
-              if (!values.startTime) {
-                return;
-              }
-
-              if (!values.date) {
-                return;
-              }
-
-              if (!values.endTime) {
-                return;
-              }
-
               if (values.isRecurrent && !values.endRecur) {
                 return;
-              }
-
+              }              
               const data = {
                 name: values.name,
                 address: values.address,
