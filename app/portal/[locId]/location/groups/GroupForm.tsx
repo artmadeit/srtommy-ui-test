@@ -25,7 +25,7 @@ const schema = z.object({
     .string()
     .min(1, { message: "Por favor ingrese el nombre del Grupo o ministerio" }),
   description: z.string().optional(),
-  type: z.string(),
+  type: z.enum(["GROUP","MINISTRY"]),
   members: z.array(
     z.object({
       id: z.number(),

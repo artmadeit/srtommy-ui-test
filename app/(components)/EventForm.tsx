@@ -25,20 +25,6 @@ import { ToogleButton } from "./ToogleButton";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 
-// export type EventFormValues = {
-//   name: string;
-//   date?: Date;
-//   startTime?: Date | null;
-//   endTime?: Date | null;
-//   endRecur?: Date | null;
-//   address: string;
-//   isRecurrent: boolean;
-//   description: string;
-//   daysOfWeek: number[];
-//   type: number;
-//   speakers: Option[];
-// };
-
 const schema = z
   .object({
     name: z.string().trim().min(1, { message: "Por favor ingrese el título" }),
