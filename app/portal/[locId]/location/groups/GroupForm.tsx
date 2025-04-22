@@ -25,13 +25,19 @@ const schema = z.object({
     .string()
     .min(1, { message: "Por favor ingrese el nombre del Grupo o ministerio" }),
   description: z.string().optional(),
-  type: z.enum(["GROUP","MINISTRY"]),
-  members: z.array(
-    z.object({
-      id: z.number(),
-      label: z.string(),
-    })
-  ),
+  type: z.enum(["GROUP", "MINISTRY"]),
+  members: z
+    .array(
+      z.object({
+        id: z.number(),
+        label: z.string(),
+      })
+    )
+    .nonempty()
+    .min(1, {
+      message:
+        "Por favor ingrese al menos un miembro para habilitar el grupo/ministerio",
+    }),
   leaders: z.array(
     z.object({
       id: z.number(),
@@ -118,6 +124,7 @@ export const GroupForm = ({
               label="Escriba o seleccione los miembros del grupo/ministerio"
             />
           </div>
+          {/* <ErrorMessage errors={errors} name="singleErrorInput" /> */}
         </Stack>
         <Grid>
           <Button type="submit" variant="contained">
