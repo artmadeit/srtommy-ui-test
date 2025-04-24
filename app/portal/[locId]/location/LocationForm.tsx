@@ -14,13 +14,6 @@ import { TelFieldElement } from "../person/PersonForm";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-// export type LocationFormValues = {
-//   name: string;
-//   address: string;
-//   phoneNumber: string;
-//   roles: string[];
-// };
-
 const schema = z.object({
   name: z
     .string()

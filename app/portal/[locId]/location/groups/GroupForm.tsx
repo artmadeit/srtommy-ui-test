@@ -12,14 +12,6 @@ import { GroupAutocomplete } from "./GroupAutocomplete";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 
-// export type GroupDetail = {
-//   name: string;
-//   description: string;
-//   type: "GROUP" | "MINISTRY";
-//   members: Option[];
-//   leaders: Option[];
-// };
-
 const schema = z.object({
   name: z
     .string()
