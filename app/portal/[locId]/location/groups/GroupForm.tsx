@@ -12,12 +12,29 @@ import { GroupAutocomplete } from "./GroupAutocomplete";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 
-const schema = z.object({
+const baseSchema = z.object({
   name: z
     .string()
     .min(1, { message: "Por favor ingrese el nombre del Grupo o ministerio" }),
   description: z.string().optional(),
   type: z.enum(["GROUP", "MINISTRY"]),
+  members: z.array(
+    z.object({
+      id: z.number(),
+      label: z.string(),
+    })
+  ),
+  leaders: z.array(
+    z.object({
+      id: z.number(),
+      label: z.string(),
+    })
+  ),
+});
+
+export const initialValuesSchema = baseSchema;
+
+const submitSchema = baseSchema.extend({
   members: z
     .array(
       z.object({
@@ -30,19 +47,14 @@ const schema = z.object({
       message:
         "Por favor ingrese al menos un miembro para habilitar el grupo/ministerio",
     }),
-  leaders: z.array(
-    z.object({
-      id: z.number(),
-      label: z.string(),
-    })
-  ),
 });
 
-export type GroupDetailForm = z.infer<typeof schema>;
+export type GroupDetailForm = z.infer<typeof submitSchema>;
+export type GroupInitialValues = z.infer<typeof initialValuesSchema>;
 
 type GroupFormContext = {
   locId: number;
-  initialValues: GroupDetailForm;
+  initialValues: GroupInitialValues;
   submit: (data: GroupDetailForm) => Promise<void>;
 };
 
@@ -52,8 +64,8 @@ export const GroupForm = ({
   initialValues,
 }: GroupFormContext) => {
   const formContext = useForm({
-    defaultValues: initialValues,
-    resolver: zodResolver(schema),
+    defaultValues: initialValues as GroupDetailForm,
+    resolver: zodResolver(submitSchema),
   });
 
   // useEffect(() => {
