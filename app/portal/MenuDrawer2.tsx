@@ -14,7 +14,7 @@ import {
   Link,
   Menu,
   MenuItem,
-  Stack
+  Stack,
 } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -197,6 +197,7 @@ export default function MenuDrawer2({
         >
           {listDrawer}
         </Drawer>
+
         <Drawer
           variant="permanent"
           sx={{
@@ -208,9 +209,24 @@ export default function MenuDrawer2({
           }}
           open
         >
-          <DrawerHeader>Sr. Tommy</DrawerHeader>
+          {/*Need to make dynamic */}
+          <DrawerHeader>Iglesia puerta al cielo</DrawerHeader>
           <Divider />
-          {listDrawer}
+          <Box
+            sx={{
+              height: "100%",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+            }}
+          >
+            <div>{listDrawer}</div>
+            <div>
+              <p style={{ fontSize: "10px", paddingLeft: "30px" }}>
+                &copy;Sr Tommy all right reserved
+              </p>
+            </div>
+          </Box>
         </Drawer>
       </Box>
       <Box
