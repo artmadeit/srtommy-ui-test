@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const CallToAction: React.FC = () => {
@@ -6,7 +7,9 @@ const CallToAction: React.FC = () => {
       <button className="cta-button">Solicita una demo</button>
       <div className="divider" />
       <div className="action-buttons">
-        <button className="login-button">Iniciar sesión</button>
+        <Link href="/portal">
+          <button className="login-button">Iniciar sesión</button>
+        </Link>
         <a href="#price" className="product-link">
           Obtén el Producto
         </a>
