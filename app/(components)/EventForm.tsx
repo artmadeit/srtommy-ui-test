@@ -45,8 +45,11 @@ const schema = z
     ),
   })
   .refine(
-    (data) =>
-      data.isRecurrent ? data.daysOfWeek.length >= 1 && data.endRecur : false,
+    (data) => {
+      return data.isRecurrent
+        ? data.daysOfWeek.length >= 1 && data.endRecur
+        : true;
+    },
     {
       message:
         "Por favor seleccionar el/los día(s) y la fecha que finaliza el evento",
