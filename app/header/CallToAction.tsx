@@ -7,7 +7,7 @@ const CallToAction: React.FC = () => {
       <button className="cta-button">Solicita una demo</button>
       <div className="divider" />
       <div className="action-buttons">
-        <Link href="/portal">
+        <Link href="/portal" style={{ textDecoration: "none" }}>
           <button className="login-button">Iniciar sesión</button>
         </Link>
         <a href="#price" className="product-link">
