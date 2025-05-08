@@ -256,8 +256,10 @@ type DialogLocationProps = {
 const LocationsDialog = ({ open, onClose }: DialogLocationProps) => {
   const { user } = useAuth0();
 
+  const orgId = user?.["https://sr-tommy.com/orgId"];
+
   const { data: accounts, isLoading } = useSWR<LocationListItem[]>(
-    user ? `organizations/${user["https://sr-tommy.com/orgId"]}/childs` : null
+    user && orgId ? `organizations/${orgId}/childs` : null
   );
 
   const columns = React.useMemo(
