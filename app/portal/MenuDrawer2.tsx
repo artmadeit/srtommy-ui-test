@@ -33,6 +33,13 @@ import useSWR from "swr";
 import Loading from "../(components)/Loading";
 import { withOutSorting } from "../(components)/helpers/withOutSorting";
 
+type Organization = {
+  //TODO review LocationDetail
+  name: string;
+  address: string;
+  phoneNumber: string;
+};
+
 const drawerWidth = 240;
 
 export default function MenuDrawer2({
@@ -55,6 +62,12 @@ export default function MenuDrawer2({
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
+
+  const orgId = user?.["https://sr-tommy.com/orgId"];
+
+  const { data: organization } = useSWR<Organization>(
+    orgId ? `/organizations/${orgId}` : null
+  );
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -210,7 +223,7 @@ export default function MenuDrawer2({
           open
         >
           {/*Need to make dynamic */}
-          <DrawerHeader>Iglesia puerta al cielo</DrawerHeader>
+          <DrawerHeader>{organization?.name}</DrawerHeader>
           <Divider />
           <Box
             sx={{
