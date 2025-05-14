@@ -33,7 +33,7 @@ import useSWR from "swr";
 import Loading from "../(components)/Loading";
 import { withOutSorting } from "../(components)/helpers/withOutSorting";
 
-type Organization = {
+export type Organization = {
   //TODO review LocationDetail
   name: string;
   address: string;
