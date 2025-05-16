@@ -139,6 +139,12 @@ export default function MenuDrawer2({
           >
             <Stack direction="row" spacing={2} alignItems="center">
               <Button
+                sx={{
+                  fontSize: {
+                    xs: "10px",
+                    sm: "14px",
+                  },
+                }}
                 variant="outlined"
                 color="inherit"
                 endIcon={<KeyboardArrowDownIcon />}
@@ -148,6 +154,12 @@ export default function MenuDrawer2({
               </Button>
             </Stack>
             <Button
+              sx={{
+                fontSize: {
+                  xs: "10px",
+                  sm: "14px",
+                },
+              }}
               variant="text"
               color="inherit"
               startIcon={<AccountCircle />}
