@@ -308,10 +308,19 @@ const LocationsDialog = ({ open, onClose }: DialogLocationProps) => {
 
   return (
     <Dialog open={open} onClose={onClose} fullWidth>
-      <DialogTitle display="flex" justifyContent="space-between">
+      <DialogTitle
+        display="flex"
+        justifyContent="space-between"
+        sx={{ fontSize: { xs: "16px", sm: "20px" } }}
+      >
         Seleccione sede
         <Link component={NextLink} href="/portal/location/create">
-          <Button onClick={onClose}>Registrar otra sede</Button>
+          <Button
+            onClick={onClose}
+            sx={{ fontSize: { xs: "12px", sm: "14px" } }}
+          >
+            Registrar otra sede
+          </Button>
         </Link>
       </DialogTitle>
       <DialogContent>

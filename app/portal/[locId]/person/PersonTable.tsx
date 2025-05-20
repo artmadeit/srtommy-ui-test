@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { InputAdornment, TextField, Tooltip } from "@mui/material";
+import { Box, InputAdornment, TextField, Tooltip } from "@mui/material";
 import {
   DataGrid,
   DataGridProps,
@@ -100,7 +100,20 @@ export const PersonTable = ({
         value={searchText}
         onChange={(event) => setSearchText(event.target.value)}
       />
-      <div style={{ height: "70vh", width: "100%" }}>
+
+      <Box
+        sx={{
+          // height: "70vw",
+          height: "70vh",
+          width: "100%",
+          // width: {
+          //   //xs: "50vh",
+          //   xs: "99%",
+          //   sm: "100%",
+          //   // sm: "100%",
+          // },
+        }}
+      >
         <DataGrid
           loading={isLoading}
           columns={columns}
@@ -111,9 +124,9 @@ export const PersonTable = ({
           rows={people?.content || []}
           rowCount={people?.totalElements || 0}
           localeText={esES.components.MuiDataGrid.defaultProps.localeText}
-          {...dataGridProps}
+          {...dataGridProps}          
         />
-      </div>
+      </Box>
       <DialogDeleteConfirmation
         open={openDialog}
         close={() => setOpenDialog(false)}
