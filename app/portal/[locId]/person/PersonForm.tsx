@@ -84,7 +84,7 @@ export const PersonForm = ({
             Datos generales de persona
           </Typography>
         </Grid>
-        <Grid xs={6}>
+        <Grid xs={12} sm={6}>
           <TextFieldElement
             fullWidth
             name="firstName"
@@ -92,7 +92,7 @@ export const PersonForm = ({
             required
           />
         </Grid>
-        <Grid xs={6}>
+        <Grid xs={12} sm={6}>
           <TextFieldElement
             fullWidth
             name="lastName"
@@ -103,7 +103,7 @@ export const PersonForm = ({
         <Grid xs={12}>
           <TelFieldElement name="phoneNumber" />
         </Grid>
-        <Grid xs={4}>
+        <Grid xs={12} sm={4}>
           <DatePickerElement
             sx={{ width: "100%" }}
             name="birthdate"
@@ -111,7 +111,7 @@ export const PersonForm = ({
             onChange={handleChange}
           />
         </Grid>
-        <Grid xs={4}>
+        <Grid xs={12} sm={4}>
           <TextFieldElement fullWidth name="age" label="Edad" type="number" />
         </Grid>
         <Grid xs={4}>
