@@ -109,7 +109,12 @@ export const GroupForm = ({
         <Typography variant="body1" gutterBottom>
           Seleccione quienes conforman su grupo / ministerio
         </Typography>
-        <Stack direction="row" spacing={5} alignItems="center">
+        <Stack
+          direction={{ xs: "column", sm: "row" }}
+          spacing={{ xs: 2, sm: 5 }}
+          alignItems="center"
+          sx={{ display: { xs: "flex" } }}
+        >
           <Typography variant="h6">Lider(es):</Typography>
           <div style={{ width: "100%" }}>
             <GroupAutocomplete
@@ -119,7 +124,12 @@ export const GroupForm = ({
             />
           </div>
         </Stack>
-        <Stack direction="row" spacing={2} alignItems="center">
+        <Stack
+          direction={{ xs: "column", sm: "row" }}
+          spacing={2}
+          alignItems="center"
+          sx={{ display: { xs: "flex" } }}
+        >
           <Typography variant="h6">Miembro(s):</Typography>
           <div style={{ width: "100%" }}>
             <GroupAutocomplete
