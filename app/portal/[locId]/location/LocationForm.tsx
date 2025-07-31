@@ -51,10 +51,10 @@ export const LocationForm = ({
             {title}
           </Typography>
         </Grid>
-        <Grid xs={6}>
+        <Grid xs={12} sm={6}>
           <TextFieldElement name="name" label="Nombre" required fullWidth />
         </Grid>
-        <Grid xs={6}>
+        <Grid xs={12} sm={6}>
           <TextFieldElement
             name="address"
             label="Dirección"
