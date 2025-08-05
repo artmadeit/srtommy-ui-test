@@ -185,7 +185,7 @@ export const TelFieldElement = ({ name }: { name: string }) => {
           // }
           fullWidth
           label="Teléfono"
-          onlyCountries={["PE"]}
+          onlyCountries={["PE", "CO"]}
         />
       )}
     />

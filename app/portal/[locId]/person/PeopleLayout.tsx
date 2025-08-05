@@ -34,7 +34,7 @@ export function PeopleLayout({
             </Link>
           </Tooltip>
         </Stack>
-        <ToggleButtonGroup value={value} exclusive aria-label="text alignment">
+        {/* <ToggleButtonGroup value={value} exclusive aria-label="text alignment">
           <Tooltip title="Lista de personas">
             <ToggleButton
               value="table"
@@ -55,7 +55,7 @@ export function PeopleLayout({
               <TableChart />
             </ToggleButton>
           </Tooltip>
-        </ToggleButtonGroup>
+        </ToggleButtonGroup> */}
       </Box>
 
       {children}
