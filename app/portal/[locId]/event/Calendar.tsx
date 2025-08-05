@@ -1,4 +1,5 @@
 import interactionPlugin from "@fullcalendar/interaction"; // for selectable
+import AddIcon from "@mui/icons-material/Add";
 import FullCalendar from "@fullcalendar/react";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import esLocale from "@fullcalendar/core/locales/es";
@@ -6,7 +7,7 @@ import { differenceInDays } from "date-fns";
 import { useAuthApi } from "@/app/(api)/api";
 import { EventInput } from "@fullcalendar/core/index.js";
 import { useRouter } from "next/navigation";
-import { Button, useMediaQuery, useTheme } from "@mui/material";
+import { Box, Fab, useMediaQuery, useTheme } from "@mui/material";
 import listPlugin from "@fullcalendar/list";
 
 export type DatesSelection = {
@@ -75,14 +76,17 @@ export default function Calendar({
         }}
       />
       {!isDesktop && (
-        <Button
-          onClick={() =>
-            onSelect({ start: new Date(), end: new Date(), jsEvent: null })
-          }
-          variant="contained"
-        >
-          +
-        </Button>
+        <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+          <Fab
+            color="primary"
+            aria-labelledby="Dialog"
+            onClick={() =>
+              onSelect({ start: new Date(), end: new Date(), jsEvent: null })
+            }
+          >
+            <AddIcon />
+          </Fab>
+        </Box>
       )}
     </>
   );
