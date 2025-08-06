@@ -123,7 +123,7 @@ export const EventForm = ({
             onChange={(type) => formContext.setValue("type", type)}
           />
         </Grid>
-        <Grid xs={4}>
+        <Grid xs={12} sm={4}>
           <DatePickerElement
             sx={{ width: "100%" }}
             label="Fecha"
@@ -131,7 +131,7 @@ export const EventForm = ({
             required
           />
         </Grid>
-        <Grid xs={4}>
+        <Grid xs={12} sm={4}>
           <TimePicker
             ampm
             sx={{ width: "100%" }}
@@ -149,7 +149,7 @@ export const EventForm = ({
             }}
           />
         </Grid>
-        <Grid xs={4}>
+        <Grid xs={12} sm={4}>
           <TimePicker
             ampm
             minTime={startTime}
