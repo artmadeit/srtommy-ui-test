@@ -16,6 +16,7 @@ import { useRouter } from "next/navigation";
 import useSWR from "swr";
 import { GroupTypeLabels } from "./Group";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { DialogDeleteConfirmation } from "@/app/(components)/DialogDeleteConfirmation";
 
 type GroupsProps = {
   locId: number;
@@ -28,6 +29,7 @@ type GroupListItem = {
 };
 
 export function Groups({ locId }: GroupsProps) {
+  const [openDDelete, setOpenDDelete] = React.useState(false);
   const router = useRouter();
 
   const { data: groups, isLoading } = useSWR(`/organizations/${locId}/childs`);
@@ -65,7 +67,7 @@ export function Groups({ locId }: GroupsProps) {
                   <GridActionsCellItem
                     label="Eliminar"
                     icon={<DeleteIcon />}
-                    onClick={() => console.log("eliminar")}
+                    onClick={() => setOpenDDelete(true)}
                   />
                 </Tooltip>,
               ];
@@ -96,6 +98,11 @@ export function Groups({ locId }: GroupsProps) {
           localeText={esES.components.MuiDataGrid.defaultProps.localeText}
         />
       </div>
+      <DialogDeleteConfirmation
+        open={openDDelete}
+        close={() => setOpenDDelete(false)}
+        onDelete={() => console.log("Eliminando =D")}
+      />
     </Stack>
   );
 }
