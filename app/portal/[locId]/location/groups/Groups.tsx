@@ -15,6 +15,7 @@ import { withOutSorting } from "@/app/(components)/helpers/withOutSorting";
 import { useRouter } from "next/navigation";
 import useSWR from "swr";
 import { GroupTypeLabels } from "./Group";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 type GroupsProps = {
   locId: number;
@@ -58,6 +59,13 @@ export function Groups({ locId }: GroupsProps) {
                     onClick={() =>
                       router.push(`location/groups/${params.row.id}`)
                     }
+                  />
+                </Tooltip>,
+                <Tooltip title="Eliminar" key="delete">
+                  <GridActionsCellItem
+                    label="Eliminar"
+                    icon={<DeleteIcon />}
+                    onClick={() => console.log("eliminar")}
                   />
                 </Tooltip>,
               ];
