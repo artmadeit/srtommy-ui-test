@@ -3,7 +3,7 @@ import AddIcon from "@mui/icons-material/Add";
 import FullCalendar from "@fullcalendar/react";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import esLocale from "@fullcalendar/core/locales/es";
-import { differenceInDays } from "date-fns";
+import { addHours, differenceInDays } from "date-fns";
 import { useAuthApi } from "@/app/(api)/api";
 import { EventInput } from "@fullcalendar/core/index.js";
 import { useRouter } from "next/navigation";
@@ -29,6 +29,10 @@ export default function Calendar({
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up("sm"));
   console.log(isDesktop);
+  console.log(new Date());
+
+  const startDate = addHours(new Date(), 1);
+  const endDate = addHours(new Date(), 2);
 
   return (
     <>
@@ -81,7 +85,7 @@ export default function Calendar({
             color="primary"
             aria-labelledby="Dialog"
             onClick={() =>
-              onSelect({ start: new Date(), end: new Date(), jsEvent: null })
+              onSelect({ start: startDate, end: endDate, jsEvent: null })
             }
           >
             <AddIcon />
