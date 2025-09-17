@@ -5,9 +5,9 @@ import {
   DataGrid,
   DataGridProps,
   GridActionsCellItem,
-  GridColDef,
-  esES,
+  GridColDef
 } from "@mui/x-data-grid";
+import { esES } from "@mui/x-data-grid/locales";
 import SearchIcon from "@mui/icons-material/Search";
 import { withOutSorting } from "@/app/(components)/helpers/withOutSorting";
 import { SpringPage } from "@/app/(api)/pagination";
@@ -124,7 +124,7 @@ export const PersonTable = ({
           rows={people?.content || []}
           rowCount={people?.totalElements || 0}
           localeText={esES.components.MuiDataGrid.defaultProps.localeText}
-          {...dataGridProps}          
+          {...dataGridProps}
         />
       </Box>
       <DialogDeleteConfirmation

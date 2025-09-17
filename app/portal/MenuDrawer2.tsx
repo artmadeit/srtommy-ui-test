@@ -25,7 +25,8 @@ import IconButton from "@mui/material/IconButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import Toolbar from "@mui/material/Toolbar";
 import { styled } from "@mui/material/styles";
-import { DataGrid, GridColDef, esES } from "@mui/x-data-grid";
+import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import {esES} from "@mui/x-data-grid/locales";
 import NextLink from "next/link";
 import { useRouter } from "next/navigation";
 import * as React from "react";
@@ -306,6 +307,9 @@ const LocationsDialog = ({ open, onClose }: DialogLocationProps) => {
     []
   );
 
+  console.log(accounts)
+  console.log(columns)
+
   return (
     <Dialog open={open} onClose={onClose} fullWidth>
       <DialogTitle
@@ -326,9 +330,9 @@ const LocationsDialog = ({ open, onClose }: DialogLocationProps) => {
       <DialogContent>
         <div style={{ width: "100%", height: "70vh" }}>
           <DataGrid
+          
             loading={isLoading}
             columns={columns}
-            rowCount={accounts?.length}
             hideFooter={true}
             rows={accounts || []}
             localeText={esES.components.MuiDataGrid.defaultProps.localeText}

@@ -16,8 +16,8 @@ import {
   Stack,
   Tooltip,
   Typography,
+  Grid
 } from "@mui/material";
-import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import { GridRowSelectionModel } from "@mui/x-data-grid";
 import React, { useContext, useEffect, useState } from "react";
 import { FormContainer, RadioButtonGroup, useForm } from "react-hook-form-mui";
@@ -116,7 +116,7 @@ export default function AttendanceEvent({
         "No hay evento registrado"
       ) : (
         <>
-          <Grid xs={12}>
+          <Grid size={{ xs: 12 }}>
             <Box>
               <div style={{ display: "flex", justifyContent: "flex-end" }}>
                 <Tooltip title="Eliminar">
@@ -157,12 +157,12 @@ export default function AttendanceEvent({
               />
             )}
           </Grid>
-          <Grid xs={12} display="flex" alignItems="center">
+          <Grid size={{ xs: 12 }} display="flex" alignItems="center">
             <Typography variant="h6" gutterBottom>
               Toma de asistencia
             </Typography>
           </Grid>
-          <Grid xs={12}>
+          <Grid size={{ xs: 12 }}>
             <Stack spacing={2}>
               <PersonTable
                 locId={locId}
@@ -177,7 +177,7 @@ export default function AttendanceEvent({
               />
             </Stack>
           </Grid>
-          <Grid xs={12}>
+          <Grid size={{ xs: 12 }}>
             <Button
               type="submit"
               variant="contained"

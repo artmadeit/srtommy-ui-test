@@ -1,5 +1,4 @@
-import { Box, Button, Typography } from "@mui/material";
-import Grid from "@mui/material/Unstable_Grid2/Grid2";
+import { Box, Button, Typography, Grid } from "@mui/material";
 import { TimePicker } from "@mui/x-date-pickers";
 import { renderTimeViewClock } from "@mui/x-date-pickers/timeViewRenderers";
 import React from "react";
@@ -106,7 +105,7 @@ export const EventForm = ({
   return (
     <FormContainer formContext={formContext} onSuccess={submit}>
       <Grid container spacing={2} margin={4}>
-        <Grid xs={12}>
+        <Grid size={{ xs: 12 }}>
           <TextFieldElement
             fullWidth
             name="name"
@@ -117,13 +116,13 @@ export const EventForm = ({
             autoFocus
           />
         </Grid>
-        <Grid xs={12}>
+        <Grid size={{ xs: 12 }}>
           <ToogleButton
             eventType={type}
             onChange={(type) => formContext.setValue("type", type)}
           />
         </Grid>
-        <Grid xs={12} sm={4}>
+        <Grid size={{ xs: 12, sm: 4 }}>
           <DatePickerElement
             sx={{ width: "100%" }}
             label="Fecha"
@@ -131,7 +130,7 @@ export const EventForm = ({
             required
           />
         </Grid>
-        <Grid xs={12} sm={4}>
+        <Grid size={{ xs: 12, sm: 4 }}>
           <TimePicker
             ampm
             sx={{ width: "100%" }}
@@ -149,7 +148,7 @@ export const EventForm = ({
             }}
           />
         </Grid>
-        <Grid xs={12} sm={4}>
+        <Grid size={{ xs: 12, sm: 4 }}>
           <TimePicker
             ampm
             minTime={startTime}
@@ -163,7 +162,7 @@ export const EventForm = ({
             }}
           />
         </Grid>
-        <Grid xs={12}>
+        <Grid size={{ xs: 12 }}>
           <CheckboxElement
             onChange={(e) => {
               if (e.target.checked) {
@@ -193,7 +192,7 @@ export const EventForm = ({
                 }}
               >
                 <Typography>Finaliza el: </Typography>
-                <Grid xs={4}>
+                <Grid size={{ xs: 4 }}>
                   <DatePickerElement
                     name="endRecur"
                     inputProps={{
@@ -207,7 +206,7 @@ export const EventForm = ({
             </Box>
           )}
         </Grid>
-        <Grid xs={12}>
+        <Grid size={{ xs: 12 }}>
           <AutocompleteElement
             autocompleteProps={{
               freeSolo: true,
@@ -229,7 +228,7 @@ export const EventForm = ({
             options={[Location?.address]}
           />
         </Grid>
-        <Grid xs={12}>
+        <Grid size={{ xs: 12 }}>
           {/* TODO: make creatable */}
           <AutocompleteElement
             multiple
@@ -255,7 +254,7 @@ export const EventForm = ({
             }
           />
         </Grid>
-        <Grid xs={12}>
+        <Grid size={{ xs: 12 }}>
           <TextFieldElement
             fullWidth
             name="description"
@@ -267,7 +266,7 @@ export const EventForm = ({
             variant="standard"
           />
         </Grid>
-        <Grid xs={6}>
+        <Grid size={{ xs: 6 }}>
           {editable && (
             <Button type="submit" variant="contained">
               Guardar

@@ -8,7 +8,6 @@ import { SWRConfig } from "swr";
 import { useAuthApi } from "../(api)/api";
 import { AxiosRequestConfig } from "axios";
 
-
 export const Providers = ({ children }: { children: React.ReactNode }) => {
   const getApi = useAuthApi();
 
@@ -21,7 +20,11 @@ export const Providers = ({ children }: { children: React.ReactNode }) => {
     //   };
     // }
 
-    return getApi().then((api) => api.get(url, config).then((res) => res.data));
+    return getApi().then((api) => {
+      return api.get(url, config).then((res) => {
+        return res.data;
+      });
+    });
   };
 
   return (

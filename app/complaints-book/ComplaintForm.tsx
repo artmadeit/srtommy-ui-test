@@ -1,8 +1,7 @@
 "use client";
 
 import { FormContainer, TextFieldElement, useForm } from "react-hook-form-mui";
-import Grid from "@mui/material/Unstable_Grid2/Grid2";
-import { Button, Typography } from "@mui/material";
+import { Button, Typography, Grid } from "@mui/material";
 import { useAuthApi } from "../(api)/api";
 import React from "react";
 import { SnackbarContext } from "../(components)/SnackbarContext";
@@ -42,10 +41,10 @@ export default function ComplaintForm() {
       }}
     >
       <Grid container spacing={4} margin={4} style={{ width: "600px" }}>
-        <Grid xs={12}>
+        <Grid size={{ xs: 12 }}>
           <Typography sx={{ fontSize: "40px" }}>Ingresa tus datos</Typography>
         </Grid>
-        <Grid xs={6}>
+        <Grid size={{ xs: 6 }}>
           <label style={{ color: "#878C8F" }}>Nombre</label>
           <TextFieldElement
             name="firstName"
@@ -54,7 +53,7 @@ export default function ComplaintForm() {
             style={{ marginTop: "5px" }}
           />
         </Grid>
-        <Grid xs={6}>
+        <Grid size={{ xs: 6 }}>
           <label style={{ color: "#878C8F" }}>Apellido</label>
           <TextFieldElement
             name="lastName"
@@ -63,7 +62,7 @@ export default function ComplaintForm() {
             style={{ marginTop: "5px" }}
           />
         </Grid>
-        <Grid xs={6}>
+        <Grid size={{ xs: 6 }}>
           <label style={{ color: "#878C8F" }}>DNI</label>
           <TextFieldElement
             name="dni"
@@ -72,7 +71,7 @@ export default function ComplaintForm() {
             style={{ marginTop: "5px" }}
           />
         </Grid>
-        <Grid xs={6}>
+        <Grid size={{ xs: 6 }}>
           <label style={{ color: "#878C8F" }}>Dirección</label>
           <TextFieldElement
             name="address"
@@ -81,7 +80,7 @@ export default function ComplaintForm() {
             style={{ marginTop: "5px" }}
           />
         </Grid>
-        <Grid xs={12}>
+        <Grid size={{ xs: 12 }}>
           <label style={{ color: "#878C8F" }}>Email</label>
           <TextFieldElement
             name="email"
@@ -91,7 +90,7 @@ export default function ComplaintForm() {
             style={{ marginTop: "5px" }}
           />
         </Grid>
-        <Grid xs={12}>
+        <Grid size={{ xs: 12 }}>
           <label style={{ color: "#878C8F" }}>Deja tu comentario</label>
           <TextFieldElement
             name="comment"
@@ -101,7 +100,7 @@ export default function ComplaintForm() {
             style={{ marginTop: "5px" }}
           />
         </Grid>
-        <Grid xs={6}>
+        <Grid size={{ xs: 6 }}>
           <Button
             type="submit"
             variant="contained"

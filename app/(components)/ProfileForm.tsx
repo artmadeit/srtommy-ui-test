@@ -1,6 +1,5 @@
 import { useAuth0 } from "@auth0/auth0-react";
-import { Typography } from "@mui/material";
-import Grid from "@mui/material/Unstable_Grid2/Grid2";
+import { Typography, Grid } from "@mui/material";
 import Script from "next/script";
 import { FormContainer, TextFieldElement } from "react-hook-form-mui";
 
@@ -17,12 +16,12 @@ export const ProfileForm = () => {
       }}
     >
       <Grid container spacing={2} margin={4}>
-        <Grid xs={12}>
+        <Grid size={{ xs: 12 }}>
           <Typography variant="h5" gutterBottom>
             Perfil
           </Typography>
         </Grid>
-        <Grid xs={6}>
+        <Grid size={{ xs: 6 }}>
           <TextFieldElement name="email" label="Email" type="email" fullWidth />
         </Grid>
         {/* <Grid xs={12} id="payment">

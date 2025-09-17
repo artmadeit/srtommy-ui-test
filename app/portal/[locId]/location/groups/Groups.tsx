@@ -6,8 +6,9 @@ import {
   DataGrid,
   GridActionsCellItem,
   GridColDef,
-  esES,
+
 } from "@mui/x-data-grid";
+import {esES} from "@mui/x-data-grid/locales";
 import SearchIcon from "@mui/icons-material/Search";
 import Link from "next/link";
 import React from "react";

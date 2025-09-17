@@ -2,20 +2,19 @@
 
 import { Option } from "@/app/(components)/Option";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Button, Typography } from "@mui/material";
-import Grid from "@mui/material/Unstable_Grid2/Grid2";
+import { Button, Typography, Grid } from "@mui/material";
 import { differenceInYears } from "date-fns";
 import { MuiTelInput } from "mui-tel-input";
 import {
   AutocompleteElement,
-  Controller,
-  DatePickerElement,
+  Controller,  
   FormContainer,
   RadioButtonGroup,
   TextFieldElement,
   useForm,
   useFormContext,
 } from "react-hook-form-mui";
+import { DatePickerElement } from 'react-hook-form-mui';
 import useSWR from "swr";
 import { z } from "zod";
 import { RolesLocation } from "../location/page";
@@ -79,12 +78,12 @@ export const PersonForm = ({
   return (
     <FormContainer formContext={formContext} onSuccess={submit}>
       <Grid container spacing={2} margin={4}>
-        <Grid xs={12}>
+        <Grid size={{ xs: 12 }}>
           <Typography variant="h5" gutterBottom>
             Datos generales de persona
           </Typography>
         </Grid>
-        <Grid xs={12} sm={6}>
+        <Grid size={{ xs: 12, sm: 6 }}>
           <TextFieldElement
             fullWidth
             name="firstName"
@@ -92,7 +91,7 @@ export const PersonForm = ({
             required
           />
         </Grid>
-        <Grid xs={12} sm={6}>
+        <Grid size={{ xs: 12, sm: 6 }}>
           <TextFieldElement
             fullWidth
             name="lastName"
@@ -100,10 +99,10 @@ export const PersonForm = ({
             required
           />
         </Grid>
-        <Grid xs={12}>
+        <Grid size={{ xs: 12 }}>
           <TelFieldElement name="phoneNumber" />
         </Grid>
-        <Grid xs={12} sm={4}>
+        <Grid size={{ xs: 12, sm: 4 }}>
           <DatePickerElement
             sx={{ width: "100%" }}
             name="birthdate"
@@ -111,10 +110,10 @@ export const PersonForm = ({
             onChange={handleChange}
           />
         </Grid>
-        <Grid xs={12} sm={4}>
+        <Grid size={{ xs: 12, sm: 4 }}>
           <TextFieldElement fullWidth name="age" label="Edad" type="number" />
         </Grid>
-        <Grid xs={4}>
+        <Grid size={{ xs: 4 }}>
           <RadioButtonGroup
             label="Bautizado:"
             name="hasBeenBaptized"
@@ -131,7 +130,7 @@ export const PersonForm = ({
             row
           />
         </Grid>
-        <Grid xs={12}>
+        <Grid size={{ xs: 12 }}>
           <Grid sx={{ paddingBottom: "10px" }}>
             <Typography variant="h6">Roles:</Typography>
           </Grid>
@@ -143,7 +142,7 @@ export const PersonForm = ({
             options={roles.map(roleToOption)}
           />
         </Grid>
-        <Grid xs={12}>
+        <Grid size={{ xs: 12 }}>
           <Button type="submit" variant="contained">
             Guardar
           </Button>
