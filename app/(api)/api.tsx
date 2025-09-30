@@ -8,7 +8,7 @@ export const apiUrl = process.env.NEXT_PUBLIC_API_URL || "";
 export const useAuthApi = () => {
   // const { getAccessTokenSilently } = useAuth0();
 
-  return () => {
+  return async () => {
     // getAccessTokenSilently().then((accessToken) => {
     const api = axios.create({
       baseURL: apiUrl,
@@ -22,7 +22,7 @@ export const useAuthApi = () => {
       return originalResponse;
     });
 
-    return Promise.resolve(api);
+    return api;
     // });
   };
 };
