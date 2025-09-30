@@ -14,7 +14,7 @@ import {
   useForm,
   useFormContext,
 } from "react-hook-form-mui";
-import { DatePickerElement } from 'react-hook-form-mui';
+import { DatePickerElement } from 'react-hook-form-mui/date-pickers';
 import useSWR from "swr";
 import { z } from "zod";
 import { RolesLocation } from "../location/page";

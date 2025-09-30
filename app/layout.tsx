@@ -3,6 +3,9 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { GoogleTagManager } from "@next/third-parties/google";
 import { Providers } from "./Providers";
+import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
+import { ThemeProvider } from "@mui/material/styles";
+import theme from "./src/theme";
 // import useSWR from "swr";
 // import { Organization } from "./portal/MenuDrawer2";
 // import { useAuth0 } from "@auth0/auth0-react";
@@ -47,7 +50,11 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body className={inter.className}>
-        <Providers>{children}</Providers>
+        <ThemeProvider theme={theme}>
+          <AppRouterCacheProvider>
+            <Providers>{children}</Providers>
+          </AppRouterCacheProvider>
+        </ThemeProvider>
       </body>
       <GoogleTagManager gtmId="GTM-KHZ22MM9" />
     </html>

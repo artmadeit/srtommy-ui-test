@@ -1,7 +1,7 @@
 "use client";
 
 import { useAuthApi } from "@/app/(api)/api";
-import { EventDetailFormData, EventForm} from "@/app/(components)/EventForm";
+import { EventDetailFormData, EventForm } from "@/app/(components)/EventForm";
 import Loading from "@/app/(components)/Loading";
 import { SnackbarContext } from "@/app/(components)/SnackbarContext";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -16,9 +16,9 @@ import {
   Stack,
   Tooltip,
   Typography,
-  Grid
+  Grid,
 } from "@mui/material";
-import { GridRowSelectionModel } from "@mui/x-data-grid";
+import { GridRowId, GridRowSelectionModel } from "@mui/x-data-grid";
 import React, { useContext, useEffect, useState } from "react";
 import { FormContainer, RadioButtonGroup, useForm } from "react-hook-form-mui";
 import useSWR from "swr";
@@ -54,11 +54,17 @@ export default function AttendanceEvent({
     React.useState(false);
 
   const [rowSelectionModel, setRowSelectionModel] =
-    useState<GridRowSelectionModel>([]);
+    React.useState<GridRowSelectionModel>({
+      type: "include", // or 'exclude'
+      ids: new Set<GridRowId>([]),
+    });
 
   useEffect(() => {
     if (eventAttendance) {
-      setRowSelectionModel(eventAttendance.personIds);
+      setRowSelectionModel({
+        type: "include", // or 'exclude'
+        ids: new Set<GridRowId>(eventAttendance.personIds),
+      });
     }
   }, [eventAttendance]);
 

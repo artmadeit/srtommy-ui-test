@@ -5,12 +5,12 @@ import React from "react";
 import {
   AutocompleteElement,
   CheckboxElement,
-  DatePickerElement,
   FormContainer,
   SubmitHandler,
   TextFieldElement,
   useForm,
 } from "react-hook-form-mui";
+import { DatePickerElement } from "react-hook-form-mui/date-pickers";
 import useSWR from "swr";
 import { useDebounce } from "use-debounce";
 import { SpringPage } from "../(api)/pagination";

@@ -44,8 +44,8 @@ export function Groups({ locId }: GroupsProps) {
             field: "type",
             headerName: "Tipo",
             flex: 1,
-            valueGetter: ({ row }) =>
-              row.type === "GROUP"
+            valueGetter: (value) =>
+              value === "GROUP"
                 ? GroupTypeLabels.GROUP
                 : GroupTypeLabels.MINISTRY,
           },
