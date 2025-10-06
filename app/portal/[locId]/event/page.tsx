@@ -9,6 +9,10 @@ import { useContext, useState } from "react";
 import Calendar, { DatesSelection } from "./Calendar";
 import { format } from "date-fns";
 
+interface EventListPageProps  {
+  params: Promise<{ locId: string }>; // locId es típicamente un string
+}
+
 export default function EventListPage({
   params,
 }: {
