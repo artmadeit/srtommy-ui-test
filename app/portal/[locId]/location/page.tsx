@@ -17,7 +17,10 @@ export type RolesLocation = {
   isPredefined: boolean;
 };
 
-export default function Location({ params }: { params: { locId: number } }) {
+export default function Location(props: {
+  params: Promise<{ locId: number }>;
+}) {
+  const params = React.use(props.params);
   const { locId } = params;
 
   const { data: location, isLoading } = useSWR<LocationDetail>(
