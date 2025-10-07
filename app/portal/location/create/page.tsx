@@ -30,7 +30,7 @@ export default function LocationCreatePage({
   );
 
   if(!user) return <div>User must be logged in</div>
-  console.log(roles)
+  // console.log(roles)
   if (!roles) return <div>Abcd</div>;
 
   const fixedOptions: string[] = getFixedOptions(roles);

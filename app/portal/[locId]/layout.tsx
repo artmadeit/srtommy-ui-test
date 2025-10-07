@@ -16,13 +16,13 @@ import MenuDrawer2 from "../MenuDrawer2";
 import useSWR from "swr";
 import { LocationDetail } from "./Location";
 
-export default function LocLayout({
-  children,
-  params,
-}: {
+export default function LocLayout(props: {
   children: React.ReactNode;
-  params: { locId: number };
+  params: Promise <{ locId: number }>;
 }) {
+
+  const children = props.children
+  const params = React.use(props.params)
   const { locId } = params;
 
   const { data: location } = useSWR<LocationDetail>(`organizations/${locId}`);

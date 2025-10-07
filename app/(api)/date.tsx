@@ -30,7 +30,7 @@ export function handleDates(body: any) {
 
   for (const key of Object.keys(body)) {
     const value = body[key];
-    console.log("value", value)
+    // console.log("value", value)
     if (isIsoDateString(value)) body[key] = parseISO(value);
     else if(isIsoZonedDateString(value)) body[key] = new Date(value);
     //TODO fix date
