@@ -14,11 +14,10 @@ import useSWR from "swr";
 import { RolesLocation } from "../../location/page";
 import { PersonDetail } from "../Person";
 
-export default function PersonEdit({
-  params,
-}: {
-  params: { id: number; locId: number };
+export default function PersonEdit(props: {
+  params: Promise<{ id: number; locId: number }>;
 }) {
+  const params = React.use(props.params);
   const { id, locId } = params;
 
   const {
