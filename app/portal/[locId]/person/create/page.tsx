@@ -6,14 +6,13 @@ import { PersonForm } from "@/app/portal/[locId]/person/PersonForm";
 import React from "react";
 import { SnackbarContext } from "@/app/(components)/SnackbarContext";
 
-export default function CreatePerson({
-  params,
-}: {
-  params: { locId: number };
+export default function CreatePerson(props: {
+  params: Promise<{ locId: number }>;
 }) {
   const getApi = useAuthApi();
   const router = useRouter();
   const alert = React.useContext(SnackbarContext);
+  const params = React.use(props.params);
   const { locId } = params;
 
   return (
