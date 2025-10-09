@@ -33,11 +33,10 @@ type EventAttendance = {
   personIds: number[];
 };
 
-export default function AttendanceEvent({
-  params,
-}: {
-  params: { id: number; locId: number };
+export default function AttendanceEvent(props: {
+  params: Promise <{ id: number; locId: number }>;
 }) {
+  const params = React.use(props.params);
   const { id, locId } = params;
 
   const alert = useContext(SnackbarContext);
