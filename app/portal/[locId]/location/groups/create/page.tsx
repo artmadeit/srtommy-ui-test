@@ -6,11 +6,10 @@ import { useAuthApi } from "@/app/(api)/api";
 import { useRouter } from "next/navigation";
 import { SnackbarContext } from "@/app/(components)/SnackbarContext";
 
-export default function GroupCreatePage({
-  params,
-}: {
-  params: { id: number; locId: number };
+export default function GroupCreatePage(props: {
+  params: Promise<{ id: number; locId: number }>;
 }) {
+  const params = React.use(props.params);
   const { id, locId } = params;
 
   const getApi = useAuthApi();
