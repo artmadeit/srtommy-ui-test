@@ -5,17 +5,17 @@ import { GroupDetailForm, GroupForm } from "../GroupForm";
 import Loading from "@/app/(components)/Loading";
 import { PersonDetailWithId } from "../../../person/Person";
 import { fullName } from "../../../person/PersonTable";
+import React from "react";
 
 export type GroupMembers = {
   LEADER: PersonDetailWithId[];
   IS_PART_OF: PersonDetailWithId[];
 };
 
-export default function GroupDetailPage({
-  params,
-}: {
-  params: { id: number; locId: number };
+export default function GroupDetailPage(props: {
+  params: Promise<{ id: number; locId: number }>;
 }) {
+  const params = React.use(props.params);
   const { id, locId } = params;
 
   const { data: group, isLoading } = useSWR<GroupDetailForm>(
