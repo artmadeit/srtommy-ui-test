@@ -6,7 +6,7 @@ import {
   Chip,
   TextField,
   Typography,
-  Grid
+  Grid,
 } from "@mui/material";
 import { isArray } from "lodash";
 import { FormContainer, TextFieldElement, useForm } from "react-hook-form-mui";
@@ -46,15 +46,15 @@ export const LocationForm = ({
   return (
     <FormContainer formContext={formContext} onSuccess={submit}>
       <Grid container spacing={2} margin={4}>
-        <Grid>
+        <Grid size={{ xs: 12 }}>
           <Typography variant="h5" gutterBottom>
             {title}
           </Typography>
         </Grid>
-        <Grid size={{xs: 12, sm: 6}}>
+        <Grid size={{ xs: 12, sm: 6 }}>
           <TextFieldElement name="name" label="Nombre" required fullWidth />
         </Grid>
-        <Grid size={{xs: 12, sm: 6}}>
+        <Grid size={{ xs: 12, sm: 6 }}>
           <TextFieldElement
             name="address"
             label="Dirección"
@@ -62,14 +62,14 @@ export const LocationForm = ({
             fullWidth
           />
         </Grid>
-        <Grid size={{xs: 12}}>
+        <Grid size={{ xs: 12 }}>
           <TelFieldElement name="phoneNumber" />
         </Grid>
-        <Grid size={{xs: 12}} container alignItems="center">
-          <Grid size={{xs: 12}} sx={{ padding: "0px 0px 0px 8px" }}>
+        <Grid size={{ xs: 12 }} container alignItems="center">
+          <Grid size={{ xs: 12 }} sx={{ padding: "0px 0px 0px 8px" }}>
             <Typography variant="h6">Roles en la Iglesia:</Typography>
           </Grid>
-          <Grid size={{xs: 12}}>
+          <Grid size={{ xs: 12 }}>
             <Autocomplete
               freeSolo
               multiple
@@ -111,7 +111,7 @@ export const LocationForm = ({
             />
           </Grid>
         </Grid>
-        <Grid size={{xs: 12}}>
+        <Grid size={{ xs: 12 }}>
           <Button type="submit" variant="contained">
             Guardar
           </Button>
