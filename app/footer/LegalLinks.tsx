@@ -1,4 +1,5 @@
-import React from 'react';
+import Link from "next/link";
+import React from "react";
 
 interface LegalLinksProps {
   links: { text: string; href: string }[];
@@ -12,9 +13,9 @@ const LegalLinks: React.FC<LegalLinksProps> = ({ links }) => {
         <ul className="legal-links">
           {links.map((link, index) => (
             <li key={index}>
-              <a href={link.href} className="legal-link">
+              <Link href={link.href} className="legal-link">
                 {link.text}
-              </a>
+              </Link>
             </li>
           ))}
         </ul>
@@ -35,15 +36,19 @@ const LegalLinks: React.FC<LegalLinksProps> = ({ links }) => {
           padding: 0;
           margin: 0;
         }
-        .legal-link {
-          display: block;
-          margin-top: 20px;
-          color: #fff;
-          font-size: 15px;
-          text-decoration: none;
-          font-family: Helvetica;
-        }
       `}</style>
+      <style jsx global>
+        {`
+          .legal-link {
+            display: block;
+            margin-top: 20px;
+            color: #fff;
+            font-size: 15px;
+            text-decoration: none;
+            font-family: Helvetica;
+          }
+        `}
+      </style>
     </section>
   );
 };
