@@ -1,5 +1,6 @@
 import { builder } from "@builder.io/sdk";
 import { RenderBuilderContent } from "../../components/builder";
+import React from "react";
 
 // Builder Public API Key set in .env file
 builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
@@ -11,13 +12,14 @@ builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
 export default async function Page(props: {
   params: Promise<{ page: string[] }>;
 }) {
+  const params = await props.params;
   const content = await builder
     // Get the page content from Builder with the specified options
     .get("page", {
       fetchOptions: { next: { revalidate: 5 } },
       userAttributes: {
         // Use the page path specified in the URL to fetch the content
-        urlPath: "/" + ((await props?.params)?.page?.join("/") || ""),
+        urlPath: "/" + (params?.page?.join("/") || ""),
       },
       prerender: false,
     })
