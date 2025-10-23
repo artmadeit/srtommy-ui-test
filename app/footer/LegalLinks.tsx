@@ -41,7 +41,7 @@ const LegalLinks: React.FC<LegalLinksProps> = ({ links }) => {
         {`
           .legal-link {
             display: block;
-            margin-top: 20px;
+            margin-top: 15px;
             color: #fff;
             font-size: 15px;
             text-decoration: none;
