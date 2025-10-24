@@ -5,10 +5,6 @@ import React from "react";
 // Builder Public API Key set in .env file
 builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
 
-// interface PageProps {
-
-// }
-
 export default async function Page(props: {
   params: Promise<{ page: string[] }>;
 }) {

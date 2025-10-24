@@ -25,12 +25,8 @@ export default function Calendar({
 }) {
   const getApi = useAuthApi();
   const router = useRouter();
-
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up("sm"));
-  console.log(isDesktop);
-  console.log(new Date());
-
   const startDate = addHours(new Date(), 1);
   const endDate = addHours(new Date(), 2);
 

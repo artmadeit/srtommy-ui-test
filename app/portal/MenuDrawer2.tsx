@@ -26,7 +26,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import Toolbar from "@mui/material/Toolbar";
 import { styled } from "@mui/material/styles";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import {esES} from "@mui/x-data-grid/locales";
+import { esES } from "@mui/x-data-grid/locales";
 import NextLink from "next/link";
 import { useRouter } from "next/navigation";
 import * as React from "react";
@@ -306,10 +306,7 @@ const LocationsDialog = ({ open, onClose }: DialogLocationProps) => {
       ).map(withOutSorting),
     []
   );
-
-  // console.log(accounts)
-  // console.log(columns)
-
+  
   return (
     <Dialog open={open} onClose={onClose} fullWidth>
       <DialogTitle
@@ -329,7 +326,7 @@ const LocationsDialog = ({ open, onClose }: DialogLocationProps) => {
       </DialogTitle>
       <DialogContent>
         <div style={{ width: "100%", height: "70vh" }}>
-          <DataGrid          
+          <DataGrid
             loading={isLoading}
             columns={columns}
             hideFooter={true}
