@@ -16,14 +16,14 @@ export const Providers = ({ children }: { children: React.ReactNode }) => {
 
     try {
       const api = await getApi();
-      console.log("📡 API instance created:", api)
-      console.log("🔗 API baseURL:", api.defaults.baseURL)
+      // console.log("📡 API instance created:", api)
+      // console.log("🔗 API baseURL:", api.defaults.baseURL)
       
       const res = await api.get(url, config);
-      console.log("✅ Response received:", res.data)
+      // console.log("✅ Response received:", res.data)
       return res.data;
     } catch (error) {
-      console.error("❌ Error in fetcher:", error)
+      // console.error("❌ Error in fetcher:", error)
       throw error;
     }
   };

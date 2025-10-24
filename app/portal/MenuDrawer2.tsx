@@ -307,8 +307,8 @@ const LocationsDialog = ({ open, onClose }: DialogLocationProps) => {
     []
   );
 
-  console.log(accounts)
-  console.log(columns)
+  // console.log(accounts)
+  // console.log(columns)
 
   return (
     <Dialog open={open} onClose={onClose} fullWidth>
@@ -329,8 +329,7 @@ const LocationsDialog = ({ open, onClose }: DialogLocationProps) => {
       </DialogTitle>
       <DialogContent>
         <div style={{ width: "100%", height: "70vh" }}>
-          <DataGrid
-          
+          <DataGrid          
             loading={isLoading}
             columns={columns}
             hideFooter={true}
