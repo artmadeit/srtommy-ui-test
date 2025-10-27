@@ -18,6 +18,8 @@ import useSWR from "swr";
 import { GroupTypeLabels } from "./Group";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { DialogDeleteConfirmation } from "@/app/(components)/DialogDeleteConfirmation";
+import { useAuthApi } from "@/app/(api)/api";
+import { SnackbarContext } from "@/app/(components)/SnackbarContext";
 
 type GroupsProps = {
   locId: number;
@@ -30,10 +32,22 @@ type GroupListItem = {
 };
 
 export function Groups({ locId }: GroupsProps) {
-  const [openDDelete, setOpenDDelete] = React.useState(false);
+  const [groupToDeleteId, setGroupToDeleteId] = React.useState<number | null>(null);
   const router = useRouter();
 
-  const { data: groups, isLoading } = useSWR(`/organizations/${locId}/childs`);
+  const { data: groups, isLoading, mutate } = useSWR(`/organizations/${locId}/childs`);
+  const getApi = useAuthApi();
+  const alert = React.useContext(SnackbarContext);
+
+  const deleteGroup = async (id: number | null) => {
+    if (!id) return;
+    await getApi().then((api) =>
+      api.delete(`/organizations/${id}`)
+    );
+    setGroupToDeleteId(null);
+    alert.showMessage("Eliminado exitosamente");
+    mutate();
+  };
 
   const columns = React.useMemo(
     () =>
@@ -68,7 +82,7 @@ export function Groups({ locId }: GroupsProps) {
                   <GridActionsCellItem
                     label="Eliminar"
                     icon={<DeleteIcon />}
-                    onClick={() => setOpenDDelete(true)}
+                    onClick={() => setGroupToDeleteId(params.row.id)}
                   />
                 </Tooltip>,
               ];
@@ -100,9 +114,9 @@ export function Groups({ locId }: GroupsProps) {
         />
       </div>
       <DialogDeleteConfirmation
-        open={openDDelete}
-        close={() => setOpenDDelete(false)}
-        onDelete={() => console.log("Eliminando =D")}
+        open={groupToDeleteId !== null}
+        close={() => setGroupToDeleteId(null)}
+        onDelete={() => deleteGroup(groupToDeleteId)}
       />
     </Stack>
   );
