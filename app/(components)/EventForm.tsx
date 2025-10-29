@@ -187,17 +187,17 @@ export const EventForm = ({
               <Box
                 sx={{
                   padding: "10px 0px",
-                  display: "flex",
+                  display: { xs:"block", sm:"flex"},                  
                   alignItems: "center",
                 }}
               >
-                <Typography>Finaliza el: </Typography>
-                <Grid size={{ xs: 4 }}>
+                <Typography sx={{ paddingRight: "10px" }}>Finaliza el: </Typography>
+                <Grid size={{ xs: 12, sm: 4 }}>
                   <DatePickerElement
                     name="endRecur"
                     inputProps={{
                       sx: {
-                        width: "170px",
+                        width: "100%",
                       },
                     }}
                   />
