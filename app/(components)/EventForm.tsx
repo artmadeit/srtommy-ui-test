@@ -186,7 +186,7 @@ export const EventForm = ({
               />
               <Box
                 sx={{
-                  padding: "10px 0px",
+                  padding: "20px 0px",
                   display: { xs:"block", sm:"flex"},                  
                   alignItems: "center",
                 }}
