@@ -8,12 +8,12 @@ import {
   roleToOption,
 } from "@/app/portal/[locId]/person/PersonForm";
 import { Box } from "@mui/material";
+import { formatISO } from "date-fns";
 import { useRouter } from "next/navigation";
 import React from "react";
 import useSWR from "swr";
 import { RolesLocation } from "../../location/page";
-import { PersonDetail } from "../Person";
-import { formatISO } from "date-fns";
+import { PersonResponseSchema } from "../Person";
 
 export default function PersonEdit(props: {
   params: Promise<{ id: number; locId: number }>;
@@ -22,10 +22,11 @@ export default function PersonEdit(props: {
   const { id, locId } = params;
 
   const {
-    data: person,
+    data,
     mutate: mutatePerson,
     isLoading,
-  } = useSWR<PersonDetail>(`/people/${id}`);
+  } = useSWR(`/people/${id}`);
+  const person = data ? PersonResponseSchema.parse(data) : null;
 
   const { data: roles, mutate: mutateRoles } = useSWR<RolesLocation[]>(
     `/organizations/locations/${locId}/person/${id}/roles`
