@@ -1,6 +1,6 @@
 import Footer from "./footer/Footer";
 import Header from "./header/Header";
-
+import bowTie from "./bow-tie.webp";
 
 export default function LandingLayout({
   children,
@@ -10,6 +10,8 @@ export default function LandingLayout({
   return (
     <div>
       <Header
+        src={bowTie}
+        alt="Company Logo"
         navItems={[
           {
             href: "#tools",
@@ -24,7 +26,6 @@ export default function LandingLayout({
             label: "Precio",
           },
         ]}
-
       ></Header>
       <main>{children}</main>
       <Footer
