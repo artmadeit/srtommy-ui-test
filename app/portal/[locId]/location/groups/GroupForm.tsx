@@ -7,7 +7,6 @@ import {
 } from "react-hook-form-mui";
 import React from "react";
 import { GroupTypeLabels } from "./Group";
-import { Option } from "@/app/(components)/Option";
 import { GroupAutocomplete } from "./GroupAutocomplete";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -23,39 +22,23 @@ const baseSchema = z.object({
       id: z.number(),
       label: z.string(),
     })
-  ),
+  ).nonempty(),
   leaders: z.array(
     z.object({
       id: z.number(),
       label: z.string(),
     })
-  ),
+  ).nonempty(),
 });
 
 export const initialValuesSchema = baseSchema;
 
-const submitSchema = baseSchema.extend({
-  members: z
-    .array(
-      z.object({
-        id: z.number(),
-        label: z.string(),
-      })
-    )
-    .nonempty()
-    .min(1, {
-      message:
-        "Por favor ingrese al menos un miembro para habilitar el grupo/ministerio",
-    }),
-});
-
-export type GroupDetailForm = z.infer<typeof submitSchema>;
 export type GroupInitialValues = z.infer<typeof initialValuesSchema>;
 
 type GroupFormContext = {
   locId: number;
   initialValues: GroupInitialValues;
-  submit: (data: GroupDetailForm) => Promise<void>;
+  submit: (data: GroupInitialValues) => Promise<void>;
 };
 
 export const GroupForm = ({
@@ -64,15 +47,9 @@ export const GroupForm = ({
   initialValues,
 }: GroupFormContext) => {
   const formContext = useForm({
-    defaultValues: initialValues as GroupDetailForm,
-    resolver: zodResolver(submitSchema),
+    defaultValues: initialValues,
+    resolver: zodResolver(initialValuesSchema),
   });
-
-  // useEffect(() => {
-  //   if (eventAttendance) {
-  //     setRowSelectionModel(eventAttendance.personIds);
-  //   }
-  // }, [eventAttendance]);
 
   return (
     <FormContainer formContext={formContext} onSuccess={submit}>
