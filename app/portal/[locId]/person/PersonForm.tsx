@@ -111,7 +111,7 @@ export const PersonForm = ({
           />
         </Grid>
         <Grid size={{ xs: 12, sm: 4 }}>
-          <TextFieldElement fullWidth name="age" label="Edad" type="number" />
+          <TextFieldElement fullWidth name="age" label="Edad" type="number" disabled />
         </Grid>
         <Grid size={{ xs: 4 }}>
           <RadioButtonGroup
