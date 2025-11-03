@@ -13,6 +13,7 @@ import React from "react";
 import useSWR from "swr";
 import { RolesLocation } from "../../location/page";
 import { PersonDetail } from "../Person";
+import { formatISO } from "date-fns";
 
 export default function PersonEdit(props: {
   params: Promise<{ id: number; locId: number }>;
@@ -55,7 +56,7 @@ export default function PersonEdit(props: {
               lastName: formValues.lastName,
               phoneNumber: formValues.phoneNumber,
               age: formValues.age,
-              birthdate: formValues.birthdate,
+              birthdate: formValues.birthdate ? formatISO(formValues.birthdate, { representation: "date" }) : null,
               organizationId: locId,
               hasBeenBaptized: formValues.hasBeenBaptized === "YES",
               roles: formValues.roles.map((x) => x.id),
