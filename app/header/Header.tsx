@@ -20,8 +20,6 @@ const Header: React.FC<HeaderProps> = ({ navItems, src, alt }) => {
   return (
     <div className="header-box">
       <header className="header">
-        {/* <div className="header-content"> */}
-        {/* <div className="logo-wrapper"> */}
         <input type="checkbox" id="check" />
         <label htmlFor="check" className="checkbtn">
           <MenuIcon />
@@ -47,7 +45,6 @@ const Header: React.FC<HeaderProps> = ({ navItems, src, alt }) => {
         </div>
         {/* <MobileMenu /> */}
       </header>
-
       <style jsx>{`
         .header-box {
           box-sizing: border-box;
@@ -69,25 +66,6 @@ const Header: React.FC<HeaderProps> = ({ navItems, src, alt }) => {
           align-items: center;
           //order:1
         }
-
-        // .cta-container {
-        //   display: flex; /* Visible en desktop */
-        //   align-items: center;
-        //   order: 2;
-        // }
-
-        // /* Logo: Hacerlo siempre responsive a su contenedor */
-        // .logo-container img {
-        //   /* Esto sobreescribe el style inline y lo hace flexible */
-        //   width: 100% !important;
-        //   height: auto !important;
-        // }
-
-        // /* Contenedor del logo para controlar su tamaño máximo */
-        // .logo-container > a {
-        //   width: 60px; /* Tamaño fijo para desktop */
-        //   height: 60px;
-        // }
 
         .cta-button,
         .login-button {
