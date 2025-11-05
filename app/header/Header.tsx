@@ -48,7 +48,7 @@ const Header: React.FC<HeaderProps> = ({ navItems, src, alt }) => {
       <style jsx>{`
         .header-box {
           box-sizing: border-box;
-          // padding: 8px 20px 8px 20px;
+          padding: 8px 20px 8px 20px;
           // box-shadow: 1px 2px 8px 1px rgba(0, 0, 0, 0.12);
         }
 
@@ -67,12 +67,17 @@ const Header: React.FC<HeaderProps> = ({ navItems, src, alt }) => {
           //order:1
         }
 
+        .cta-button {
+          margin-right: 10px;
+        }
+
         .cta-button,
         .login-button {
           background: none;
           border: none;
           cursor: pointer;
-          font-family: "Helvetica";
+          font-size: 16px;
+          font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
         }
 
         .login-button {
@@ -93,11 +98,26 @@ const Header: React.FC<HeaderProps> = ({ navItems, src, alt }) => {
         }
 
         // media queries
+        @media (max-width: 850px) {
+          .cta-button,
+          .login-button {
+            font-size: 13px;
+          }
+        }
+
         @media (max-width: 640px) {
+          .header-box {
+            padding: 0;
+          }
+
           header {
             flex-direction: row;
             justify-content: space-between;
             align-items: center;
+          }
+
+          .cta-button {
+            margin: 0px;
           }
 
           /* 1. Mostramos el botón de menú hamburguesa */
@@ -118,15 +138,16 @@ const Header: React.FC<HeaderProps> = ({ navItems, src, alt }) => {
             z-index: 1;
             top: 76px;
             width: 100%;
-            height: 78vh;
+            height: 90vh;
             gap: 10px;
             padding: 20px 0;
             background-color: #f8f8f8;
           }
-        }
 
-        #check:checked ~ .cta-container {
-          display: flex; /* NUEVO: Aparece el menú */
+          /* 3. Aparece el menú */
+          #check:checked ~ .cta-container {
+            display: flex;
+          }
         }
 
         //   /* 3. Ajustamos el tamaño del logo en móvil */
