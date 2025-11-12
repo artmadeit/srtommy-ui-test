@@ -19,7 +19,7 @@ const Footer: React.FC<FooterProps> = ({
   legalLinks,
 }) => {
   return (
-    <footer className="footer">
+    <footer className="footer" id="footer-contact">
       <div className="footer-content">
         <div className="footer-columns">
           <SocialButtons links={socialLinks} />

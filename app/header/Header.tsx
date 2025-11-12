@@ -17,6 +17,13 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ navItems, src, alt }) => {
+  const scrollToFooter = () => {
+    const footer = document.getElementById("footer-contact");
+    if (footer) {
+      footer.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <div className="header-box">
       <header className="header">
@@ -35,7 +42,9 @@ const Header: React.FC<HeaderProps> = ({ navItems, src, alt }) => {
           </Link>
         </div>
         <div className="cta-container">
-          <button className="cta-button">Solicita una demo</button>
+          <button className="cta-button" onClick={scrollToFooter}>
+            Solicita una demo
+          </button>
           <div className="divider" />
           <div className="action-buttons">
             <Link href="/portal" style={{ textDecoration: "none" }}>
