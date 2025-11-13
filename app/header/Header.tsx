@@ -107,12 +107,12 @@ const Header: React.FC<HeaderProps> = ({ navItems, src, alt }) => {
         }
 
         // media queries
-        @media (max-width: 850px) {
-          .cta-button,
-          .login-button {
-            font-size: 13px;
-          }
-        }
+        // @media (max-width: 850px) {
+        //   .cta-button,
+        //   .login-button {
+        //     font-size: 13px;
+        //   }
+        // }
 
         @media (max-width: 640px) {
           .header-box {
@@ -149,7 +149,7 @@ const Header: React.FC<HeaderProps> = ({ navItems, src, alt }) => {
             width: 100%;
             height: 90vh;
             gap: 10px;
-            padding: 20px 0;
+            padding: 40px 0;
             background-color: #f8f8f8;
           }
 
