@@ -34,15 +34,19 @@ export default function Calendar({
     <>
       <Box
         sx={{
-          '& .fc-header-toolbar > .fc-toolbar-chunk:nth-child(3)': {
-            display: "flex"
-          }
+          "& .fc-header-toolbar > .fc-toolbar-chunk:nth-child(3)": {
+            display: "flex",
+          },
+          // '& .fc .fc-view-harness': {
+          //   xs: {height: "50vh !important"}
+          // }
         }}
       >
         <FullCalendar
           locale={esLocale}
           plugins={[interactionPlugin, timeGridPlugin, listPlugin]}
           initialView={isDesktop ? "timeGridWeek" : "listWeek"}
+          height={isDesktop ? undefined : "60vh"}
           nowIndicator
           allDaySlot={false}
           selectable
