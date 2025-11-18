@@ -1,4 +1,5 @@
-import React from 'react';
+import Link from "next/link";
+import React from "react";
 
 interface SocialButtonsProps {
   links: { src: string; alt: string }[];
@@ -10,7 +11,14 @@ const SocialButtons: React.FC<SocialButtonsProps> = ({ links }) => {
       <h2 className="section-title">SÍGUENOS EN</h2>
       <div className="social-buttons">
         {links.map((link, index) => (
-          <img key={index} loading="lazy" src={link.src} alt={link.alt} className="social-icon" />
+          <Link href="https://wa.me/51941475889" target="_blank" key={index}>
+            <img
+              loading="lazy"
+              src={link.src}
+              alt={link.alt}
+              className="social-icon"
+            />
+          </Link>
         ))}
       </div>
       <style jsx>{`
