@@ -5,7 +5,16 @@ import ComplaintForm from "./ComplaintForm";
 export default function ComplaintsBook() {
   return (
     <LandingLayout>
-      <ComplaintForm />
+      <ComplaintForm
+        initialValues={{
+          firstName: "",
+          lastName: "",
+          dni: "",
+          address: "",
+          email: "",
+          comment: "",
+        }}
+      />
     </LandingLayout>
   );
 }

@@ -5,29 +5,60 @@ import { Button, Typography, Grid } from "@mui/material";
 import { useAuthApi } from "../(api)/api";
 import React from "react";
 import { SnackbarContext } from "../(components)/SnackbarContext";
+import { zodResolver } from "@hookform/resolvers/zod";
+import z from "zod";
 
-export default function ComplaintForm() {
+const schema = z.object({
+  firstName: z.string().trim().min(1, { message: "Escriba su nombre" }),
+  lastName: z.string().trim().min(1, {message: "Escriba su apellido"}),
+  dni: z.string().length(8, { message: "Digite su DNI" }),
+  address: z.string().trim().min(1, {message: "Registre su dirección"}),
+  email: z.string(),
+  comment: z.string(),
+});
+
+type ComplaintFormData = z.infer<typeof schema>;
+
+type ComplaintFormProps = {
+  initialValues: ComplaintFormData;
+};
+
+export default function ComplaintForm({ initialValues }: ComplaintFormProps) {
   const [active, setActive] = React.useState(false);
 
   const getApi = useAuthApi();
   const alert = React.useContext(SnackbarContext);
 
   const formContext = useForm({
-    defaultValues: {
-      firstName: "",
-      lastName: "",
-      dni: "",
-      address: "",
-      email: "",
-      comment: "",
-    },
+    defaultValues: initialValues,
+    resolver: zodResolver(schema),
   });
+
+  // const formContext = useForm({
+  //   defaultValues: {
+  //     firstName: "",
+  //     lastName: "",
+  //     dni: "",
+  //     address: "",
+  //     email: "",
+  //     comment: "",
+  //   },
+  // });
 
   return (
     <FormContainer
       formContext={formContext}
       onSuccess={async (formValues) => {
         const api = await getApi();
+        // console.log("Payload enviado:", {
+        //   firstName: formValues.firstName,
+        //   lastName: formValues.lastName,
+        //   dni: formValues.dni,
+        //   address: formValues.address,
+        //   email: formValues.email,
+        //   comment: formValues.comment,
+
+        // });
         await api.post("complaints", {
           firstName: formValues.firstName,
           lastName: formValues.lastName,
