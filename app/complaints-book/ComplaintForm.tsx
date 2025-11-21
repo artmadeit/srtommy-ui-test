@@ -1,7 +1,13 @@
 "use client";
 
 import { FormContainer, TextFieldElement, useForm } from "react-hook-form-mui";
-import { Button, Typography, Grid } from "@mui/material";
+import {
+  Button,
+  Typography,
+  Grid,
+  InputLabel,
+  FormControl,
+} from "@mui/material";
 import { useAuthApi } from "../(api)/api";
 import React from "react";
 import { SnackbarContext } from "../(components)/SnackbarContext";
@@ -10,9 +16,9 @@ import z from "zod";
 
 const schema = z.object({
   firstName: z.string().trim().min(1, { message: "Escriba su nombre" }),
-  lastName: z.string().trim().min(1, {message: "Escriba su apellido"}),
+  lastName: z.string().trim().min(1, { message: "Escriba su apellido" }),
   dni: z.string().length(8, { message: "Digite su DNI" }),
-  address: z.string().trim().min(1, {message: "Registre su dirección"}),
+  address: z.string().trim().min(1, { message: "Registre su dirección" }),
   email: z.string(),
   comment: z.string(),
 });
@@ -71,50 +77,50 @@ export default function ComplaintForm({ initialValues }: ComplaintFormProps) {
         alert.showMessage("Enviado");
       }}
     >
-      <Grid container spacing={4} margin={4} style={{ width: "600px" }}>
+      <Grid container spacing={4} margin={4} sx={{ width: { sm: "600px" } }}>
         <Grid size={{ xs: 12 }}>
           <Typography sx={{ fontSize: "40px" }}>Ingresa tus datos</Typography>
         </Grid>
-        <Grid size={{ xs: 6 }}>
-          <label style={{ color: "#878C8F" }}>Nombre</label>
+        <Grid size={{ xs: 12, sm: 6 }}>
           <TextFieldElement
             name="firstName"
+            label="Nombre"
             required
             fullWidth
             style={{ marginTop: "5px" }}
           />
         </Grid>
-        <Grid size={{ xs: 6 }}>
-          <label style={{ color: "#878C8F" }}>Apellido</label>
+        <Grid size={{ xs: 12, sm: 6 }}>
           <TextFieldElement
             name="lastName"
+            label="Apellido"
             required
             fullWidth
             style={{ marginTop: "5px" }}
           />
         </Grid>
-        <Grid size={{ xs: 6 }}>
-          <label style={{ color: "#878C8F" }}>DNI</label>
+        <Grid size={{ xs: 12, sm: 6 }}>
           <TextFieldElement
             name="dni"
+            label="DNI"
             required
             fullWidth
             style={{ marginTop: "5px" }}
           />
         </Grid>
-        <Grid size={{ xs: 6 }}>
-          <label style={{ color: "#878C8F" }}>Dirección</label>
+        <Grid size={{ xs: 12, sm: 6 }}>
           <TextFieldElement
             name="address"
+            label="Dirección"
             required
             fullWidth
             style={{ marginTop: "5px" }}
           />
         </Grid>
         <Grid size={{ xs: 12 }}>
-          <label style={{ color: "#878C8F" }}>Email</label>
           <TextFieldElement
             name="email"
+            label="Email"
             type="email"
             required
             fullWidth
@@ -122,9 +128,9 @@ export default function ComplaintForm({ initialValues }: ComplaintFormProps) {
           />
         </Grid>
         <Grid size={{ xs: 12 }}>
-          <label style={{ color: "#878C8F" }}>Deja tu comentario</label>
           <TextFieldElement
             name="comment"
+            label="Deja tu comentario"
             multiline
             rows={2}
             fullWidth
