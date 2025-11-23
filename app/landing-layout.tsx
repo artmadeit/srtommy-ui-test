@@ -8,7 +8,14 @@ export default function LandingLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div>
+    <div
+      style={{
+        height: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+      }}
+    >
       <Header
         src={bowTie}
         alt="Company Logo"
@@ -56,3 +63,5 @@ export default function LandingLayout({
     </div>
   );
 }
+
+//display: "flex", flexDirection: "column"
