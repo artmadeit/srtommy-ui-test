@@ -97,7 +97,7 @@ export const GroupForm = ({
             <GroupAutocomplete
               locId={locId}
               name="leaders"
-              label="Escriba o seleccione el lider o lideres del grupo/ministerio"
+              label="Escriba/seleccione el lider o lideres"
             />
           </div>
         </Stack>
@@ -112,7 +112,7 @@ export const GroupForm = ({
             <GroupAutocomplete
               locId={locId}
               name="members"
-              label="Escriba o seleccione los miembros del grupo/ministerio"
+              label="Escriba/seleccione los miembros"
             />
           </div>
           {/* <ErrorMessage errors={errors} name="singleErrorInput" /> */}
