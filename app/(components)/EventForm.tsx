@@ -26,7 +26,7 @@ import { z } from "zod";
 
 const schema = z
   .object({
-    name: z.string().trim().min(1, { message: "Por favor ingrese el título" }),
+    name: z.string().trim().min(1, { error: "Por favor ingrese el título" }),
     date: z.date(),
     startTime: z.date(),
     endTime: z.date(),
