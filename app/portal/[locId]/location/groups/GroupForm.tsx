@@ -14,7 +14,7 @@ import { z } from "zod";
 const baseSchema = z.object({
   name: z
     .string()
-    .min(1, { message: "Por favor ingrese el nombre del Grupo o ministerio" }),
+    .min(1, { error: "Por favor ingrese el nombre del Grupo o ministerio" }),
   description: z.string().optional(),
   type: z.enum(["GROUP", "MINISTRY"]),
   members: z.array(
@@ -22,13 +22,13 @@ const baseSchema = z.object({
       id: z.number(),
       label: z.string(),
     })
-  ).nonempty(),
+  ).nonempty({error: "Añada al menos un miembro"}),
   leaders: z.array(
     z.object({
       id: z.number(),
       label: z.string(),
     })
-  ).nonempty(),
+  ).nonempty({error:"Añada al menos un líder"}),
 });
 
 export const initialValuesSchema = baseSchema;

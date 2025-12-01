@@ -17,8 +17,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 const schema = z.object({
   name: z
     .string()
-    .min(1, { message: "Por favor ingrese el nombre de la sede" }),
-  address: z.string().min(1, { message: "Por favor ingrese la dirección" }),
+    .min(1, { error: "Por favor ingrese el nombre de la sede" }),
+  address: z.string().min(1, { error: "Por favor ingrese la dirección" }),
   phoneNumber: z.string(),
   roles: z.array(z.string()),
 });
