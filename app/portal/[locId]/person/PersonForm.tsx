@@ -24,8 +24,8 @@ const requiredFirstNameMessage = "Por favor ingrese su nombre";
 const requiredLastNameMessage = "Por favor ingrese su apellido";
 
 const schema = z.object({
-  firstName: z.string().trim().min(1, { error: requiredFirstNameMessage }),
-  lastName: z.string().trim().min(1, { error: requiredLastNameMessage }),
+  firstName: z.string().trim().min(1, { message: requiredFirstNameMessage }),
+  lastName: z.string().trim().min(1, { message: requiredLastNameMessage }),
   phoneNumber: z.string().optional(),
   age: z.number().optional(),
   birthdate: z.date().optional().nullable(),

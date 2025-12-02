@@ -15,10 +15,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import z from "zod";
 
 const schema = z.object({
-  firstName: z.string().trim().min(1, { error: "Escriba su nombre" }),
-  lastName: z.string().trim().min(1, { error: "Escriba su apellido" }),
-  dni: z.string().length(8, { error: "Escriba su DNI" }),
-  address: z.string().trim().min(1, { error: "Registre su dirección" }),
+  firstName: z.string().trim().min(1, { message: "Escriba su nombre" }),
+  lastName: z.string().trim().min(1, { message: "Escriba su apellido" }),
+  dni: z.string().length(8, { message: "Escriba su DNI" }),
+  address: z.string().trim().min(1, { message: "Registre su dirección" }),
   email: z.string(),
   comment: z.string(),
 });

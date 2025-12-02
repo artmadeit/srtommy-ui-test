@@ -26,11 +26,11 @@ import { z } from "zod";
 
 const schema = z
   .object({
-    name: z.string().trim().min(1, { error: "Por favor ingrese el título" }),
+    name: z.string().trim().min(1, { message: "Por favor ingrese el título" }),
     date: z.date(),
     startTime: z.date(),
     endTime: z.date(),
-    endRecur: z.date().optional(),
+    endRecur: z.date().nullable().optional(),
     address: z.string().optional(),
     isRecurrent: z.boolean().optional(),
     description: z.string().optional(),
@@ -52,7 +52,7 @@ const schema = z
     {
       message:
         "Por favor seleccionar el/los día(s) y la fecha que finaliza el evento",
-      path: ["name"],
+      path: ["isRecurrent"],
     }
   );
 
