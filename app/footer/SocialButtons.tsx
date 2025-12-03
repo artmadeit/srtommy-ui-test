@@ -5,13 +5,18 @@ interface SocialButtonsProps {
   links: { src: string; alt: string }[];
 }
 
+const WHATSAPP_NUMBER = "941475889";
+const WHATSAPP_MESSAGE = "Hola estoy interesado en Sr.Tommy";
+
+const whatsappURL = `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MESSAGE}`;
+
 const SocialButtons: React.FC<SocialButtonsProps> = ({ links }) => {
   return (
     <section className="social-section">
       <h2 className="section-title">SÍGUENOS EN</h2>
       <div className="social-buttons">
         {links.map((link, index) => (
-          <Link href="https://wa.me/51941475889" target="_blank" key={index}>
+          <Link href={whatsappURL} target="_blank" key={index}>
             <img
               loading="lazy"
               src={link.src}
