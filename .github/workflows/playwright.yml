@@ -8,6 +8,20 @@ jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+    env: 
+    # --- CLAVES PÚBLICAS ---
+      NEXT_PUBLIC_BUILDER_API_KEY: ${{ secrets.BUILDER_API_KEY }}
+      NEXT_PUBLIC_AUTH0_DOMAIN: ${{ secrets.NEXT_PUBLIC_AUTH0_DOMAIN }}
+      NEXT_PUBLIC_AUTH0_CLIENT_ID: ${{ secrets.NEXT_PUBLIC_AUTH0_CLIENT_ID }}
+
+      # --- CLAVES DE SERVIDOR NECESARIAS PARA EL CI ---
+      # Estas claves de servidor son necesarias por si Next.js o Auth0 las buscan durante SSR/Testing.
+      AUTH0_SECRET: ${{ secrets.AUTH0_SECRET }} # La clave aleatoria que creaste.
+      AUTH0_BASE_URL: http://127.0.0.1:3000 # La dirección de prueba.
+      
+      # Otras variables que tengas...
+      NEXT_PUBLIC_API_URL: http://localhost:8080
+      NEXT_PUBLIC_CULQUI_API_KEY: ${{ secrets.NEXT_PUBLIC_CULQUI_API_KEY }}
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
