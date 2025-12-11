@@ -58,25 +58,3 @@ const Footer: React.FC<FooterProps> = ({
 
 export default Footer;
 
-// import { Typography } from "@mui/material";
-
-// export default function Footer() {
-//   return (
-// <div id="footer">
-//   <div>
-//     <Typography>SÍGUENOS EN</Typography>
-//   </div>
-//   <div>
-//     <Typography>CONTACTO</Typography>
-//     <p>info@sr-tommy.com</p>
-//     <p>Consultas al: 941475889</p>
-//   </div>
-//   <div>
-//     <Typography>LEGAL</Typography>
-//     <p>Términos de servicio</p>
-//     <p>Términos de uso</p>
-//     <p>Privacidad</p>
-//   </div>
-// </div>
-//   );
-// }
