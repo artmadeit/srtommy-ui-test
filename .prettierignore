@@ -1,0 +1,6 @@
+#Directorio excluido por defecto por next.js
+/node_modules
+/.next/
+
+#Directorio de build
+/dist

@@ -12,7 +12,11 @@ type DialogDeleteConfirmationProps = {
   onDelete: () => void;
 };
 
-export const DialogDeleteConfirmation = ({ open, close, onDelete }: DialogDeleteConfirmationProps) => {
+export const DialogDeleteConfirmation = ({
+  open,
+  close,
+  onDelete,
+}: DialogDeleteConfirmationProps) => {
   return (
     <Dialog open={open} onClose={close}>
       <DialogTitle>Deseas eliminar</DialogTitle>

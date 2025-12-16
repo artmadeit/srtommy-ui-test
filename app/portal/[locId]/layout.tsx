@@ -18,11 +18,10 @@ import { LocationDetail } from "./Location";
 
 export default function LocLayout(props: {
   children: React.ReactNode;
-  params: Promise <{ locId: number }>;
+  params: Promise<{ locId: number }>;
 }) {
-
-  const children = props.children
-  const params = React.use(props.params)
+  const children = props.children;
+  const params = React.use(props.params);
   const { locId } = params;
 
   const { data: location } = useSWR<LocationDetail>(`organizations/${locId}`);

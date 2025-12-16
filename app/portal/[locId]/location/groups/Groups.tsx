@@ -2,13 +2,8 @@
 
 import AddIcon from "@mui/icons-material/Add";
 import { Fab, Stack, Tooltip, Typography } from "@mui/material";
-import {
-  DataGrid,
-  GridActionsCellItem,
-  GridColDef,
-
-} from "@mui/x-data-grid";
-import {esES} from "@mui/x-data-grid/locales";
+import { DataGrid, GridActionsCellItem, GridColDef } from "@mui/x-data-grid";
+import { esES } from "@mui/x-data-grid/locales";
 import SearchIcon from "@mui/icons-material/Search";
 import Link from "next/link";
 import React from "react";
@@ -32,18 +27,22 @@ type GroupListItem = {
 };
 
 export function Groups({ locId }: GroupsProps) {
-  const [groupToDeleteId, setGroupToDeleteId] = React.useState<number | null>(null);
+  const [groupToDeleteId, setGroupToDeleteId] = React.useState<number | null>(
+    null,
+  );
   const router = useRouter();
 
-  const { data: groups, isLoading, mutate } = useSWR(`/organizations/${locId}/childs`);
+  const {
+    data: groups,
+    isLoading,
+    mutate,
+  } = useSWR(`/organizations/${locId}/childs`);
   const getApi = useAuthApi();
   const alert = React.useContext(SnackbarContext);
 
   const deleteGroup = async (id: number | null) => {
     if (!id) return;
-    await getApi().then((api) =>
-      api.delete(`/organizations/${id}`)
-    );
+    await getApi().then((api) => api.delete(`/organizations/${id}`));
     setGroupToDeleteId(null);
     alert.showMessage("Eliminado exitosamente");
     mutate();
@@ -90,7 +89,7 @@ export function Groups({ locId }: GroupsProps) {
           },
         ] as GridColDef<GroupListItem>[]
       ).map(withOutSorting),
-    [router]
+    [router],
   );
 
   return (

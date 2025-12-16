@@ -24,11 +24,11 @@ export default function Location(props: {
   const { locId } = params;
 
   const { data: location, isLoading } = useSWR<LocationDetail>(
-    `/organizations/${locId}`
+    `/organizations/${locId}`,
   );
 
   const { data: roles } = useSWR<RolesLocation[]>(
-    `/organizations/locations/${locId}/roles`
+    `/organizations/locations/${locId}/roles`,
   );
 
   const getApi = useAuthApi();
@@ -66,7 +66,7 @@ export default function Location(props: {
                 address: formValues.address,
                 phoneNumber: formValues.phoneNumber,
                 roles: formValues.roles.filter(
-                  (role) => !fixedOptions.includes(role)
+                  (role) => !fixedOptions.includes(role),
                 ),
               });
               alert.showMessage("Guardado exitosamente");

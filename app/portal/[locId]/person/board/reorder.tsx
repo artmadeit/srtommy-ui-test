@@ -36,7 +36,7 @@ export const reorderMap = ({
     const reordered: Author[] = reorder(
       current,
       source.index,
-      destination.index
+      destination.index,
     );
     const result: PersonMap = {
       ...personMap,

@@ -7,14 +7,14 @@ import { differenceInYears } from "date-fns";
 import { MuiTelInput } from "mui-tel-input";
 import {
   AutocompleteElement,
-  Controller,  
+  Controller,
   FormContainer,
   RadioButtonGroup,
   TextFieldElement,
   useForm,
   useFormContext,
 } from "react-hook-form-mui";
-import { DatePickerElement } from 'react-hook-form-mui/date-pickers';
+import { DatePickerElement } from "react-hook-form-mui/date-pickers";
 import useSWR from "swr";
 import { z } from "zod";
 import { RolesLocation } from "../location/page";
@@ -34,7 +34,7 @@ const schema = z.object({
     z.object({
       id: z.number(),
       label: z.string(),
-    })
+    }),
   ),
 });
 
@@ -56,7 +56,7 @@ export const PersonForm = ({
   locId,
 }: PersonFormProps) => {
   const { data: roles } = useSWR<RolesLocation[]>(
-    `/organizations/locations/${locId}/roles`
+    `/organizations/locations/${locId}/roles`,
   );
 
   const formContext = useForm({
@@ -111,7 +111,13 @@ export const PersonForm = ({
           />
         </Grid>
         <Grid size={{ xs: 12, sm: 4 }}>
-          <TextFieldElement fullWidth name="age" label="Edad" type="number" disabled />
+          <TextFieldElement
+            fullWidth
+            name="age"
+            label="Edad"
+            type="number"
+            disabled
+          />
         </Grid>
         <Grid size={{ xs: 4 }}>
           <RadioButtonGroup

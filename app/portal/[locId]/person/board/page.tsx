@@ -26,7 +26,7 @@ export default function PersonBoardPage({
   const { locId } = params;
 
   const { data: accountabilities, isLoading } = useSWR<Accountability[]>(
-    `organizations/${locId}/member-state`
+    `organizations/${locId}/member-state`,
   );
 
   const personMap: PersonMap = accountabilities
@@ -44,7 +44,7 @@ export default function PersonBoardPage({
 
           return prev;
         },
-        { ...emptyPersonMap }
+        { ...emptyPersonMap },
       )
     : { ...emptyPersonMap };
 

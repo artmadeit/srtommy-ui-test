@@ -79,10 +79,10 @@ export default function Calendar({
                       }
                       event.classNames = ["cursor-pointer"];
                       return event;
-                    })
-                  )
+                    }),
+                  ),
                 )
-                .catch((err) => failureCallback(err))
+                .catch((err) => failureCallback(err)),
             );
           }}
         />

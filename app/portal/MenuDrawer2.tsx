@@ -67,7 +67,7 @@ export default function MenuDrawer2({
   const orgId = user?.["https://sr-tommy.com/orgId"];
 
   const { data: organization } = useSWR<Organization>(
-    orgId ? `/organizations/${orgId}` : null
+    orgId ? `/organizations/${orgId}` : null,
   );
 
   const handleClose = () => {
@@ -285,7 +285,7 @@ const LocationsDialog = ({ open, onClose }: DialogLocationProps) => {
   const orgId = user?.["https://sr-tommy.com/orgId"];
 
   const { data: accounts, isLoading } = useSWR<LocationListItem[]>(
-    user && orgId ? `organizations/${orgId}/childs` : null
+    user && orgId ? `organizations/${orgId}/childs` : null,
   );
 
   const columns = React.useMemo(
@@ -304,9 +304,9 @@ const LocationsDialog = ({ open, onClose }: DialogLocationProps) => {
           },
         ] as GridColDef<LocationListItem>[]
       ).map(withOutSorting),
-    []
+    [],
   );
-  
+
   return (
     <Dialog open={open} onClose={onClose} fullWidth>
       <DialogTitle

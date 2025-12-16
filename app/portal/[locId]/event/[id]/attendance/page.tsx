@@ -34,7 +34,7 @@ type EventAttendance = {
 };
 
 export default function AttendanceEvent(props: {
-  params: Promise <{ id: number; locId: number }>;
+  params: Promise<{ id: number; locId: number }>;
 }) {
   const params = React.use(props.params);
   const { id, locId } = params;
@@ -45,7 +45,7 @@ export default function AttendanceEvent(props: {
 
   const { data: event } = useSWR<EventDetail>(`/events/${id}`);
   const { data: eventAttendance, isLoading } = useSWR<EventAttendance>(
-    `/events/${id}/attendance`
+    `/events/${id}/attendance`,
   );
 
   const [openDeleteDialog, setOpenDeleteDialog] = React.useState(false);
@@ -79,7 +79,7 @@ export default function AttendanceEvent(props: {
         data: {
           option: values.option,
         },
-      })
+      }),
     );
     setOpenDeleteDialog(false);
     alert.showMessage("Eliminado");
@@ -92,7 +92,7 @@ export default function AttendanceEvent(props: {
         data: {
           option: "THIS_EVENT",
         },
-      })
+      }),
     );
     alert.showMessage("Eliminado");
     router.push(`/portal/${locId}/event`);

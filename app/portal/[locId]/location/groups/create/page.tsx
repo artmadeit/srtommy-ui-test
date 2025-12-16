@@ -37,7 +37,7 @@ export default function GroupCreatePage(props: {
         };
 
         const response = await getApi().then((api) =>
-          api.post("/organizations/locations/childs", data)
+          api.post("/organizations/locations/childs", data),
         );
         alert.showMessage("Guardado exitosamente");
         router.push(`/portal/${locId}/location`);

@@ -34,4 +34,4 @@ export type PersonDetailWithId = {
   age?: number;
   birthdate?: Date | null;
   hasBeenBaptized?: boolean;
-}
+};

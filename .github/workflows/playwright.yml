@@ -1,15 +1,15 @@
 name: Playwright Tests
 on:
   push:
-    branches: [ main, master ]
+    branches: [main, master]
   pull_request:
-    branches: [ main, master ]
+    branches: [main, master]
 jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
-    env: 
-    # --- CLAVES PÚBLICAS ---
+    env:
+      # --- CLAVES PÚBLICAS ---
       NEXT_PUBLIC_BUILDER_API_KEY: ${{ secrets.BUILDER_API_KEY }}
       NEXT_PUBLIC_AUTH0_DOMAIN: ${{ secrets.NEXT_PUBLIC_AUTH0_DOMAIN }}
       NEXT_PUBLIC_AUTH0_CLIENT_ID: ${{ secrets.NEXT_PUBLIC_AUTH0_CLIENT_ID }}
@@ -18,24 +18,24 @@ jobs:
       # Estas claves de servidor son necesarias por si Next.js o Auth0 las buscan durante SSR/Testing.
       AUTH0_SECRET: ${{ secrets.AUTH0_SECRET }} # La clave aleatoria que creaste.
       AUTH0_BASE_URL: http://127.0.0.1:3000 # La dirección de prueba.
-      
+
       # Otras variables que tengas...
       NEXT_PUBLIC_API_URL: http://localhost:8080
       NEXT_PUBLIC_CULQUI_API_KEY: ${{ secrets.NEXT_PUBLIC_CULQUI_API_KEY }}
     steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-node@v4
-      with:
-        node-version: '20'
-    - name: Install dependencies
-      run: npm ci
-    - name: Install Playwright Browsers
-      run: npx playwright install --with-deps
-    - name: Run Playwright tests
-      run: npx playwright test
-    - uses: actions/upload-artifact@v4
-      if: ${{ !cancelled() }}
-      with:
-        name: playwright-report
-        path: playwright-report/
-        retention-days: 30
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Install dependencies
+        run: npm ci
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+      - name: Run Playwright tests
+        run: npx playwright test
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30

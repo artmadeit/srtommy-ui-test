@@ -19,11 +19,11 @@ export default function GroupDetailPage(props: {
   const { id, locId } = params;
 
   const { data: group, isLoading } = useSWR<GroupInitialValues>(
-    `/organizations/${id}`
+    `/organizations/${id}`,
   );
 
   const { data: members } = useSWR<GroupMembers>(
-    `/organizations/locations/childs/${id}/members`
+    `/organizations/locations/childs/${id}/members`,
   );
 
   if (isLoading) return <Loading />;

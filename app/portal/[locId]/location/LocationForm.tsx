@@ -83,10 +83,10 @@ export const LocationForm = ({
                   [
                     ...fixedOptions,
                     ...newValue.filter(
-                      (option) => fixedOptions.indexOf(option) === -1
+                      (option) => fixedOptions.indexOf(option) === -1,
                     ),
                   ],
-                  { shouldValidate: true }
+                  { shouldValidate: true },
                 );
               }}
               renderTags={(tagValue, getTagProps) => {

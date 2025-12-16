@@ -14,7 +14,7 @@ import { Author } from "./types";
 
 export const getBackgroundColor = (
   isDraggingOver: boolean,
-  isDraggingFrom: boolean
+  isDraggingFrom: boolean,
 ): string => {
   if (isDraggingOver) {
     return "#FFEBE6";
@@ -40,7 +40,9 @@ const Wrapper = styled.div<WrapperProps>`
   padding: ${grid}px;
   border: ${grid}px;
   padding-bottom: 0;
-  transition: background-color 0.2s ease, opacity 0.1s ease;
+  transition:
+    background-color 0.2s ease,
+    opacity 0.1s ease;
   user-select: none;
   width: 250px;
 `;
@@ -91,7 +93,7 @@ function InnerPersonList(props: PersonListProps): ReactElement {
         <Draggable key={author.id} draggableId={author.id} index={index}>
           {(
             dragProvided: DraggableProvided,
-            dragSnapshot: DraggableStateSnapshot
+            dragSnapshot: DraggableStateSnapshot,
           ) => (
             <PersonItem
               key={author.id}
@@ -166,7 +168,7 @@ export default function PersonList(props: Props): ReactElement {
     >
       {(
         dropProvided: DroppableProvided,
-        dropSnapshot: DroppableStateSnapshot
+        dropSnapshot: DroppableStateSnapshot,
       ) => (
         <Wrapper
           style={style}

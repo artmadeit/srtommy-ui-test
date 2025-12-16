@@ -18,7 +18,7 @@ export const Providers = ({ children }: { children: React.ReactNode }) => {
       const api = await getApi();
       // console.log("📡 API instance created:", api)
       // console.log("🔗 API baseURL:", api.defaults.baseURL)
-      
+
       const res = await api.get(url, config);
       // console.log("✅ Response received:", res.data)
       return res.data;

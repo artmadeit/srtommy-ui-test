@@ -8,7 +8,7 @@ import useSWR from "swr";
 import MenuDrawer2 from "../../MenuDrawer2";
 import {
   LocationDetailForm,
-  LocationForm,  
+  LocationForm,
 } from "../../[locId]/location/LocationForm";
 import { getFixedOptions } from "../../[locId]/location/Roles";
 import { RolesLocation } from "../../[locId]/location/page";
@@ -26,10 +26,10 @@ export default function LocationCreatePage({
   const { user } = useAuth0();
 
   const { data: roles } = useSWR<RolesLocation[]>(
-    `/organizations/locations/predefined-roles`
+    `/organizations/locations/predefined-roles`,
   );
 
-  if(!user) return <div>User must be logged in</div>
+  if (!user) return <div>User must be logged in</div>;
   // console.log(roles)
   if (!roles) return <div>Abcd</div>;
 

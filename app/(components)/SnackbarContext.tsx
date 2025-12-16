@@ -14,7 +14,7 @@ export const SnackbarProvider = ({
   const [alertMessage, setAlertMessage] = React.useState<string>("");
   const handleClose = (
     event: React.SyntheticEvent | Event,
-    reason?: string
+    reason?: string,
   ) => {
     setAlertMessage("");
   };

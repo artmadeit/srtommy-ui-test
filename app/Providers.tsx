@@ -19,7 +19,7 @@ export const Providers = ({ children }: { children: React.ReactNode }) => {
         redirect_uri: globalThis.location?.origin + "/portal",
       }}
     >
-      <SnackbarProvider>{children}</SnackbarProvider>      
+      <SnackbarProvider>{children}</SnackbarProvider>
     </Auth0Provider>
   );
 };

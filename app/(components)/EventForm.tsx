@@ -40,7 +40,7 @@ const schema = z
       z.object({
         id: z.number(),
         label: z.string(),
-      })
+      }),
     ),
   })
   .refine(
@@ -53,7 +53,7 @@ const schema = z
       message:
         "Por favor seleccionar el/los día(s) y la fecha que finaliza el evento",
       path: ["isRecurrent"],
-    }
+    },
   );
 
 export type EventDetailFormData = z.infer<typeof schema>;
@@ -83,7 +83,7 @@ export const EventForm = ({
 
   const [searchTextDebounced] = useDebounce(
     searchTextSpeaker,
-    DEBOUNCE_WAIT_MS
+    DEBOUNCE_WAIT_MS,
   );
 
   const { data: Location } = useSWR<LocationDetail>(`organizations/${locId}`);
@@ -187,11 +187,13 @@ export const EventForm = ({
               <Box
                 sx={{
                   padding: "20px 0px",
-                  display: { xs:"block", sm:"flex"},                  
+                  display: { xs: "block", sm: "flex" },
                   alignItems: "center",
                 }}
               >
-                <Typography sx={{ paddingRight: "10px" }}>Finaliza el: </Typography>
+                <Typography sx={{ paddingRight: "10px" }}>
+                  Finaliza el:
+                </Typography>
                 <Grid size={{ xs: 12, sm: 4 }}>
                   <DatePickerElement
                     name="endRecur"

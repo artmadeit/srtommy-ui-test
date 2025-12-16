@@ -21,15 +21,11 @@ export default function PersonEdit(props: {
   const params = React.use(props.params);
   const { id, locId } = params;
 
-  const {
-    data,
-    mutate: mutatePerson,
-    isLoading,
-  } = useSWR(`/people/${id}`);
+  const { data, mutate: mutatePerson, isLoading } = useSWR(`/people/${id}`);
   const person = data ? PersonResponseSchema.parse(data) : null;
 
   const { data: roles, mutate: mutateRoles } = useSWR<RolesLocation[]>(
-    `/organizations/locations/${locId}/person/${id}/roles`
+    `/organizations/locations/${locId}/person/${id}/roles`,
   );
 
   const getApi = useAuthApi();
@@ -57,7 +53,9 @@ export default function PersonEdit(props: {
               lastName: formValues.lastName,
               phoneNumber: formValues.phoneNumber,
               age: formValues.age,
-              birthdate: formValues.birthdate ? formatISO(formValues.birthdate, { representation: "date" }) : null,
+              birthdate: formValues.birthdate
+                ? formatISO(formValues.birthdate, { representation: "date" })
+                : null,
               organizationId: locId,
               hasBeenBaptized: formValues.hasBeenBaptized === "YES",
               roles: formValues.roles.map((x) => x.id),

@@ -5,7 +5,7 @@ import {
   DataGrid,
   DataGridProps,
   GridActionsCellItem,
-  GridColDef
+  GridColDef,
 } from "@mui/x-data-grid";
 import { esES } from "@mui/x-data-grid/locales";
 import SearchIcon from "@mui/icons-material/Search";
@@ -81,7 +81,7 @@ export const PersonTable = ({
           },
         ] as GridColDef<PersonListItem>[]
       ).map(withOutSorting),
-    [router, locId]
+    [router, locId],
   );
 
   return (

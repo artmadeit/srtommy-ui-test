@@ -28,7 +28,9 @@ export default function CreatePerson(props: {
         const api = await getApi();
         await api.post("people", {
           ...data,
-          birthdate: data.birthdate ? formatISO(data.birthdate, { representation: "date" }) : null,
+          birthdate: data.birthdate
+            ? formatISO(data.birthdate, { representation: "date" })
+            : null,
           hasBeenBaptized: data.hasBeenBaptized === "YES",
           organizationId: locId,
           roles: data.roles.map((x) => x.id),

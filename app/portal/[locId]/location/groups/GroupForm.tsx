@@ -17,18 +17,22 @@ const baseSchema = z.object({
     .min(1, { message: "Por favor ingrese el nombre del Grupo o ministerio" }),
   description: z.string().optional(),
   type: z.enum(["GROUP", "MINISTRY"]),
-  members: z.array(
-    z.object({
-      id: z.number(),
-      label: z.string(),
-    })
-  ).nonempty({error: "Añada al menos un miembro"}),
-  leaders: z.array(
-    z.object({
-      id: z.number(),
-      label: z.string(),
-    })
-  ).nonempty({error:"Añada al menos un líder"}),
+  members: z
+    .array(
+      z.object({
+        id: z.number(),
+        label: z.string(),
+      }),
+    )
+    .nonempty({ error: "Añada al menos un miembro" }),
+  leaders: z
+    .array(
+      z.object({
+        id: z.number(),
+        label: z.string(),
+      }),
+    )
+    .nonempty({ error: "Añada al menos un líder" }),
 });
 
 export const initialValuesSchema = baseSchema;

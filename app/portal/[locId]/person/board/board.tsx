@@ -91,7 +91,7 @@ export default function Board({
       const newOrdered: string[] = reorder(
         ordered,
         source.index,
-        destination.index
+        destination.index,
       );
 
       console.log("reorder column");
