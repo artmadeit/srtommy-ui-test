@@ -39,18 +39,7 @@ export default function ComplaintForm({ initialValues }: ComplaintFormProps) {
     defaultValues: initialValues,
     resolver: zodResolver(schema),
   });
-
-  // const formContext = useForm({
-  //   defaultValues: {
-  //     firstName: "",
-  //     lastName: "",
-  //     dni: "",
-  //     address: "",
-  //     email: "",
-  //     comment: "",
-  //   },
-  // });
-
+  
   return (
     <FormContainer
       formContext={formContext}
