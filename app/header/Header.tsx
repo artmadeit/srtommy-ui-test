@@ -1,13 +1,8 @@
 "use client";
 
 import React from "react";
-// import Logo from "./Logo";
 import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
-// import Navigation from "./Navigation";
-// import CallToAction from "./CallToAction";
-// import MobileMenu from "./MobileMenu";
-import bowTie from "../bow-tie.webp";
 import MenuIcon from "@mui/icons-material/Menu";
 
 interface HeaderProps {
@@ -52,7 +47,6 @@ const Header: React.FC<HeaderProps> = ({ navItems, src, alt }) => {
             </Link>
           </div>
         </div>
-        {/* <MobileMenu /> */}
       </header>
       <style jsx>{`
         .header-box {
@@ -107,13 +101,6 @@ const Header: React.FC<HeaderProps> = ({ navItems, src, alt }) => {
         }
 
         // media queries
-        // @media (max-width: 850px) {
-        //   .cta-button,
-        //   .login-button {
-        //     font-size: 13px;
-        //   }
-        // }
-
         @media (max-width: 640px) {
           .header-box {
             padding: 0;
@@ -158,13 +145,6 @@ const Header: React.FC<HeaderProps> = ({ navItems, src, alt }) => {
             display: flex;
           }
         }
-
-        //   /* 3. Ajustamos el tamaño del logo en móvil */
-        //   .logo-container > a {
-        //     width: 45px; /* Reducimos el logo para móvil */
-        //     height: 45px;
-        //   }
-        // }
       `}</style>
     </div>
   );

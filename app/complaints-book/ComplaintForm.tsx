@@ -44,16 +44,7 @@ export default function ComplaintForm({ initialValues }: ComplaintFormProps) {
     <FormContainer
       formContext={formContext}
       onSuccess={async (formValues) => {
-        const api = await getApi();
-        // console.log("Payload enviado:", {
-        //   firstName: formValues.firstName,
-        //   lastName: formValues.lastName,
-        //   dni: formValues.dni,
-        //   address: formValues.address,
-        //   email: formValues.email,
-        //   comment: formValues.comment,
-
-        // });
+        const api = await getApi();       
         await api.post("complaints", {
           firstName: formValues.firstName,
           lastName: formValues.lastName,
