@@ -24,13 +24,13 @@ test.describe("Registro de persona", () => {
   const personData = {
     firstName: faker.person.firstName(),
     lastName: faker.person.lastName(),
-    phone: "980702910",
+    phone: "9" + faker.string.numeric(8),
   }
 
   //Llenar campos 
   await page.getByLabel("Nombre").fill(personData.firstName);  
   await page.getByLabel("Apellido").fill(personData.lastName);
-  await page.getByLabel("Teléfono").fill(personData.phone);
+  await page.getByLabel("Teléfono").pressSequentially(personData.phone);
 
   const birthdateInput = page.getByLabel("Fecha de nacimiento"); 
   await birthdateInput.fill("01/01/1990");
@@ -46,6 +46,19 @@ test.describe("Registro de persona", () => {
   
   await rolesInput.click();
   await page.getByRole("option", {name: "Ujier" }).click();
+
+  //interceptar submit 
+  await page.route("**/people", async (route) => {
+    if(route.request().method() === "POST") {
+      await route.fulfill({
+        status: 201, 
+        contentType: "application/json",
+        body: JSON.stringify({message: "Persona registrada exitosamente"})
+      })
+    } else {
+      await route.continue();
+    }
+  })
 
   //Envio del formulario
   await page.getByRole("button", {name: "Guardar"}).click();
