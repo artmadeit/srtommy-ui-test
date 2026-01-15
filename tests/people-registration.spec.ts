@@ -1,11 +1,13 @@
 import {test, expect} from "@playwright/test";
-import {faker } from "@faker-js/faker";
+// import {faker } from "@faker-js/faker";
 
 test.describe("Registro de persona", () => {
 
   const mLocId = 12;
   
   test("formulario de registro", async ({ page }) => {
+    //Importación dinámica de faker
+    const {faker} = await import("@faker-js/faker");
 
     await page.route('**/organizations/locations/*/roles', async (route) => {
       await route.fulfill({
@@ -21,6 +23,9 @@ test.describe("Registro de persona", () => {
 
   await page.goto(`/portal/${mLocId}/person/create`);
 
+    //ESPERA CLAVE: Esperamos a que el campo "Nombre" sea visible.
+    await page.waitForSelector('text=Nombre', { state: 'visible', timeout: 30000 });
+
   const personData = {
     firstName: faker.person.firstName(),
     lastName: faker.person.lastName(),
@@ -33,7 +38,7 @@ test.describe("Registro de persona", () => {
   await page.getByLabel("Teléfono").pressSequentially(personData.phone);
 
   const birthdateInput = page.getByLabel("Fecha de nacimiento"); 
-  await birthdateInput.fill("01/01/1990");
+  await birthdateInput.fill("1990-01-01");
 
   const ageValue = await page.getByLabel("Edad").inputValue();
   expect(Number(ageValue)).toBeGreaterThan(0);

@@ -33,6 +33,7 @@ export default defineConfig({
   },
 
   /* Configure projects for major browsers */
+  timeout: 90000,
   projects: [
     {
       name: "setup",
@@ -43,17 +44,19 @@ export default defineConfig({
       use: { ...devices["Desktop Chrome"],
         storageState: "playwright/.auth/user.json",
        },
-       dependencies: ["setup"],
+      //  dependencies: ["setup"],
     },
 
     {
       name: "firefox",
       use: { ...devices["Desktop Firefox"] },
+      // dependencies: ["setup"],
     },
 
     {
       name: "webkit",
       use: { ...devices["Desktop Safari"] },
+      // dependencies: ["setup"],
     },
 
     /* Test against mobile viewports. */
