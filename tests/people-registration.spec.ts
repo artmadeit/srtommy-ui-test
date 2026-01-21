@@ -9,6 +9,7 @@ test.describe("Registro de persona", () => {
     //Importación dinámica de faker
     const {faker} = await import("@faker-js/faker");
 
+    //1. Mocks de red (Roles y post)
     await page.route('**/organizations/locations/*/roles', async (route) => {
       await route.fulfill({
         status: 200,
@@ -33,6 +34,7 @@ test.describe("Registro de persona", () => {
       }
     });  
 
+    //2. Navegación directa en el token ya cargado
     await page.goto(`/portal/${mLocId}/person/create`, { waitUntil : "networkidle"});
 
     //ESPERA CLAVE: Esperamos a que el campo "Nombre" sea visible.
@@ -40,40 +42,66 @@ test.describe("Registro de persona", () => {
     // const firstNameInput = page.getByLabel("Nombre");
     // await firstNameInput.waitFor({ state: "visible", timeout: 30000 });
     // await page.waitForSelector('text=Nombre', { state: 'visible', timeout: 30000 });
+   
+    //3.Esperar que el formulario cargue
     const nombreInput = page.getByLabel(/Nombre/i);
     await nombreInput.waitFor({state: "visible", timeout: 20000});
 
-  const personData = {
+    const personData = {
     firstName: faker.person.firstName(),
     lastName: faker.person.lastName(),
     phone: "9" + faker.string.numeric(8),
-  }
+    }
 
-  //Llenar campos 
-  // await page.getByLabel("Nombre").fill(personData.firstName);
-  await nombreInput.fill(personData.firstName);  
-  await page.getByLabel(/Apellido/i).fill(personData.lastName);
-  await page.getByLabel(/Teléfono/i).pressSequentially(personData.phone);
+    //4. Llenar campos 
+    // await page.getByLabel("Nombre").fill(personData.firstName);
+    await nombreInput.fill(personData.firstName);  
+    await page.getByLabel(/Apellido/i).fill(personData.lastName);
+    await page.getByLabel(/Teléfono/i).pressSequentially(personData.phone);
 
-  // const birthdateInput = page.getByLabel("Fecha de nacimiento"); 
-  const birthdateInput = page.getByRole("group", { name: /Fecha de nacimiento/i} ).getByRole("textbox");
-  await birthdateInput.fill("1990-01-01");
+    // const birthdateInput = page.getByLabel("Fecha de nacimiento");  
+    //5. Fecha de nacimiento
+    const dateGroup = page.getByRole("group", { name: /Fecha de nacimiento/i} );
+    
+    await dateGroup.getByRole("spinbutton", { name: /Day/i}).fill("01");
+    await dateGroup.getByRole("spinbutton", { name: /Month/i }).fill("01");
+    await dateGroup.getByRole("spinbutton", { name: /Year/i}).fill("1990");
 
-  await birthdateInput.press("tab");
+    await dateGroup.getByRole("spinbutton", { name: /Year/i}).press("Tab");
+    
+    // await birthdateInput.click();
+    //Escribir la fecha en este orden DDMMYYYY
+    // await birthdateInput.pressSequentially("01011990" , { delay: 100 });
+    // await birthdateInput.press("tab");
 
-  const ageValue = await page.getByLabel(/Edad/i).inputValue();
-  expect(Number(ageValue)).toBeGreaterThan(0);
+    //6. Validación de Edad 
+    const ageValue = await page.getByLabel(/Edad/i).inputValue();
+    expect(Number(ageValue)).toBeGreaterThan(0);
 
-  await page.getByLabel("Si").check();
-
-  const rolesInput = page.getByLabel(/Escriba o seleccione/i);
-  await rolesInput.click();
-  await page.getByRole("option", { name: "Líder"}).click(); 
+    //7. Bautismo y Roles 
+    await page.getByLabel("Si").check();
+    // const rolesInput = page.getByLabel(/Escriba o seleccione/i);
+    const rolesInput = page.getByRole("combobox", { name: /Escriba o seleccione/i })
+    //selección del primer rol 
+    await rolesInput.click();
+    await page.getByRole("option", { name: /Líder/i }).click(); 
   
-  await rolesInput.click();
-  await page.getByRole("option", {name: "Ujier" }).click();
+    //selección del segundo rol
+    await rolesInput.click();
+    await page.getByRole("option", {  name: /Ujier/i }).click();
+    await page.keyboard.press('Escape');
 
-  //interceptar submit 
+    // await birthdateInput.fill("1990-01-01");    
+
+    //8. Envío final 
+    await page.getByRole("button", {name: /Guardar/i}).click();
+    console.log("✅ Formulario enviado con éxito")
+  });
+});
+
+
+
+  // interceptar submit 
   // await page.route("**/people", async (route) => {
   //   if(route.request().method() === "POST") {
   //     await route.fulfill({
@@ -85,14 +113,3 @@ test.describe("Registro de persona", () => {
   //     await route.continue();
   //   }
   // })
-
-  //Envio del formulario
-  await page.getByRole("button", {name: /Guardar/i}).click();
-  console.log("✅ Formulario enviado con éxito")
-
-  });
-});
-
-
-
-
