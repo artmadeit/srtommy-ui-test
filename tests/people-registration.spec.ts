@@ -85,13 +85,27 @@ test.describe("Registro de persona", () => {
     //selección del primer rol 
     await rolesInput.click();
     await page.getByRole("option", { name: /Líder/i }).click(); 
+
+    await rolesInput.press("ArrowDown");
+
+    // const opcionLider = page.getByRole("option", { name: /Líder/i });
+    // await opcionLider.waitFor({ state: "visible" });
+    // await opcionLider.click();
+   
   
     //selección del segundo rol
-    await rolesInput.click();
-    await page.getByRole("option", {  name: /Ujier/i }).click();
-    await page.keyboard.press('Escape');
+    // await rolesInput.click();
+    const opcionUjier = page.getByRole("option", { name: /Ujier/i });
+    await opcionUjier.waitFor({ state: "visible" });
+    await opcionUjier.click();
+    // await page.getByRole("option", {  name: /Ujier/i }).click();
+    await page.keyboard.press('Escape'); 
+    
 
-    // await birthdateInput.fill("1990-01-01");    
+    // await birthdateInput.fill("1990-01-01");
+    
+    await expect(page.getByText("Líder de alabanza")).toBeVisible();
+    await expect(page.getByText("Ujier")).toBeVisible();
 
     //8. Envío final 
     await page.getByRole("button", {name: /Guardar/i}).click();
