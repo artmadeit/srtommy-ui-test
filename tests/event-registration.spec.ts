@@ -48,30 +48,44 @@ test.describe("Registro de eventos", ()=> {
       await calendarGrid.getByRole("gridcell").first().click({ force: true });
 
       // await page.getByText('10', { exact: true }).first().click();
-      await expect(page.getByRole('dialog')).toBeVisible({ timeout: 10000 });
+      // await expect(page.getByRole('dialog')).toBeVisible({ timeout: 10000 });
 
       //4 Llenar el eventForm
-      await page.getByPlaceholder(/Agregar título/i).fill(`Evento ${faker.company.name()}`);
+      const dialog = page.getByRole("dialog");
+      await expect(dialog).toBeVisible();
+
+      //título
+      await dialog.getByPlaceholder(/Agregar título/i).fill(`Evento ${faker.company.name()}`);
       // const eventName = `Conferencia de ${faker.company.name()}`;
       // título (TextFieldElement)
       // await page.getByPlaceholder(/Agregar título/i).fill(eventName);
 
       //Lugar 
-      const addressInput = page.getByPlaceholder(/Agregar lugar/i);
-      await addressInput.fill("Sede central");
-      await page.keyboard.press("Enter");
+      await dialog.getByPlaceholder(/Agregar lugar/i).fill("Sede central");
+      // const addressInput = dialog.getByPlaceholder(/Agregar lugar/i);
+      // await addressInput.fill("Sede central");
+      // await page.keyboard.press("Enter");
       
       //Speakers con autocomplete     
-      const speakerInput = page.getByPlaceholder(/Agregar ponente/i);
+      const speakerInput = dialog.getByPlaceholder(/Agregar ponente/i);
+      
+      // await speakerInput.waitFor({ state: "visible"});
       await speakerInput.click();
-      await page.getByRole("option", { name: "Paul" }).click(); 
-      await page.keyboard.press("Escape");
+      await speakerInput.fill("Paul");
+
+      //Seleccionar Dropdown
+      // await page.getByRole("option", { name: /Paul/i }).click(); 
+
+      const option = page.getByRole("option", { name: /Paul/i }).first();
+      await option.waitFor({ state: "visible" });
+      await option.click();
+      // await page.keyboard.press("Escape");
 
       //Descripción
-      await page.getByPlaceholder(/Agregar descripción/i).fill(faker.lorem.paragraph());
+      await dialog.getByPlaceholder(/Agregar descripción/i).fill(faker.lorem.paragraph());
 
       //5 Guardar 
-      const btnGuardar = page.getByRole("button", { name: /Guardar/i });
+      const btnGuardar = dialog.getByRole("button", { name: /Guardar/i });
       await btnGuardar.click();
 
       //6 Verificación  
