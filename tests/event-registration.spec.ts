@@ -10,18 +10,22 @@ test.describe("Registro de eventos", ()=> {
       await page.route(`**/organizations/${locId}`, async (route) => {
         await route.fulfill({
           status: 200,
+          contentType: "application/json",
           body: JSON.stringify({ id: locId , address: "Calle Principal 123" }),
         });
       });
 
       //Mock para obtner ponentes
-      await page.route("**/people", async(route) => {
+      await page.route("**/people*", async(route) => {
+        await new Promise(f => setTimeout(f, 500));
+
         await route.fulfill({
           status: 200,
+          contentType: "application/json",
           body: JSON.stringify({
             content: [
-              { id: 101, name : "Paul", lastName: "Ricoeur" }, 
-              { id: 102, name: "Hans", lastName: "Gadamer" }
+              { id: 101, firstName : "Paul", lastName: "Ricoeur" }, 
+              { id: 102, firstName: "Hans", lastName: "Gadamer" }
             ],
           }),
         });
@@ -32,6 +36,7 @@ test.describe("Registro de eventos", ()=> {
         if(route.request().method()=== "POST") {
           await route.fulfill({
             status: 201,
+            contentType: "application/json",
             body: JSON.stringify({ message: "Guardar exitosamente" }),            
           })
         } 
@@ -73,11 +78,13 @@ test.describe("Registro de eventos", ()=> {
       await speakerInput.click();
       await speakerInput.fill("Paul");
 
-      //Seleccionar Dropdown
+      //5. Seleccionar Dropdown
       // await page.getByRole("option", { name: /Paul/i }).click(); 
 
-      const option = page.getByRole("option", { name: /Paul/i }).first();
-      await option.waitFor({ state: "visible" });
+      const option = page.getByRole("option", { name: /Ricoeur/i }).first();
+      // await option.waitFor({ state: "visible" });
+      //Esperar y hacer clic
+      await option.waitFor({ state: "visible", timeout: 5000 });
       await option.click();
       // await page.keyboard.press("Escape");
 
@@ -89,7 +96,7 @@ test.describe("Registro de eventos", ()=> {
       await btnGuardar.click();
 
       //6 Verificación  
-      await expect(page.getByText(/Guardar exitosamente/i)).toBeVisible();
+      await expect(page.getByRole("alert").filter({ hasText: /Guardado exitosamente/i})).toBeVisible();
       
       console.log("✅ Evento creado")
       
