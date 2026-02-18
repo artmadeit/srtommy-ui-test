@@ -52,24 +52,15 @@ test.describe("Registro de eventos", ()=> {
       const calendarGrid = page.getByRole('grid');
       await calendarGrid.getByRole("gridcell").first().click({ force: true });
 
-      // await page.getByText('10', { exact: true }).first().click();
-      // await expect(page.getByRole('dialog')).toBeVisible({ timeout: 10000 });
-
       //4 Llenar el eventForm
       const dialog = page.getByRole("dialog");
       await expect(dialog).toBeVisible();
 
       //título
       await dialog.getByPlaceholder(/Agregar título/i).fill(`Evento ${faker.company.name()}`);
-      // const eventName = `Conferencia de ${faker.company.name()}`;
-      // título (TextFieldElement)
-      // await page.getByPlaceholder(/Agregar título/i).fill(eventName);
 
       //Lugar 
       await dialog.getByPlaceholder(/Agregar lugar/i).fill("Sede central");
-      // const addressInput = dialog.getByPlaceholder(/Agregar lugar/i);
-      // await addressInput.fill("Sede central");
-      // await page.keyboard.press("Enter");
       
       //Speakers con autocomplete     
       const speakerInput = dialog.getByPlaceholder(/Agregar ponente/i);
@@ -79,15 +70,12 @@ test.describe("Registro de eventos", ()=> {
       await speakerInput.fill("Paul");
 
       //5. Seleccionar Dropdown
-      // await page.getByRole("option", { name: /Paul/i }).click(); 
-
       const option = page.getByRole("option", { name: /Ricoeur/i }).first();
-      // await option.waitFor({ state: "visible" });
+      
       //Esperar y hacer clic
       await option.waitFor({ state: "visible", timeout: 5000 });
       await option.click();
-      // await page.keyboard.press("Escape");
-
+      
       //Descripción
       await dialog.getByPlaceholder(/Agregar descripción/i).fill(faker.lorem.paragraph());
 
