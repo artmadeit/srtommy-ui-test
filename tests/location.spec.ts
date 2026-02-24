@@ -3,10 +3,11 @@ import { test, expect } from "@playwright/test";
 test.describe("Editar Sede", () => {
 
   const locId = 12;
-  test("Editar Sede y editar roles", async ({ page }) => {
-    const { faker } = await import("@faker-js/faker");
 
-    //1. Mocks
+  //1. Se ejecutan antes de cada test
+  test.beforeEach(async ({ page })=> {
+
+    //Datos de la sede
     await page.route(`**/organizations/${locId}`, async (route) => {
       await route.fulfill({
         status:200,
@@ -17,9 +18,10 @@ test.describe("Editar Sede", () => {
           address: "Av. Siempre Viva 123",
           phoneNumber: "987654321",
         }),
-      })
+      });
     });
 
+    //Datos de roles
     await page.route(`**/organizations/locations/${locId}/roles`, async (route) => {
       await route.fulfill({
         status:200,
@@ -31,6 +33,7 @@ test.describe("Editar Sede", () => {
       });
     });
 
+    //Guardado
     await page.route(`**/organizations/locations/${locId}`, async (route) => {
       if(route.request().method() === "PUT") {
         await route.fulfill({
@@ -40,54 +43,108 @@ test.describe("Editar Sede", () => {
         });
       }
     });
+  });
 
+
+  test("Editar sede y roles", async ({ page }) => {
+    const { faker } = await import("@faker-js/faker");
     //2. Navegación
     await page.goto(`/portal/${locId}/location`);
-    //3. Verificación de carga
+    //3. Verificación
     await expect(page.getByText("Datos generales de la sede")).toBeVisible();
-
-    //Solución
+    //getByRole para evitar ambigüedad
     const nameInput = page.getByRole("textbox", { name: "Nombre", exact: true });
     const addressInput = page.getByRole("textbox", { name: "Dirección", exact: true });
-    //
-    await expect(nameInput).toHaveValue("Sede Central Antigua"); 
+
+    await expect(nameInput).toHaveValue("Sede Central Antigua");
     await expect(addressInput).toHaveValue("Av. Siempre Viva 123");
-  
-    //4. interacción con el autocomplete
-    const nuevoNombreSede =`Sede ${faker.location.city()}`;
-    const nuevoRol = "Líder de jovenes";
 
-    //Editar nombre
+    //4. Interacción con el autocomplete
+    const nuevoNombreSede = `Sede ${faker.location.city()}`;
+    const nuevoRol = "Lider de jovenes";
+
     await nameInput.fill(nuevoNombreSede);
-
     //Añadir rol
     const rolesInput = page.getByPlaceholder(/Si desea añada otros roles/i);
     await rolesInput.fill(nuevoRol);
     await page.keyboard.press("Enter");
 
-    //verificar
+    //Verificar
     await expect(page.getByRole("button", { name: nuevoRol })).toBeVisible();
     await expect(page.getByRole("button", { name: "Pastor"})).toBeVisible();
 
     //5. Guardar
     await page.getByRole("button", { name: /Guardar/i }).click();
 
-    //6 Verificar snackbar
+    //6. Snackbar
     await expect(page.getByText(/Guardado exitosamente/i)).toBeVisible();
-    console.log(`✅ Sede "${nuevoNombreSede}" actualizada con rol ${nuevoRol}`);  
+    console.log(`✅ Sede "${nuevoNombreSede}" actualizada con rol ${nuevoRol}`);
+  });  
+
+    test("error de validación", async ({ page }) => {
+    await page.goto(`/portal/${locId}/location`);
+    //Limpiar cambio de nombre
+    const nameInput = page.getByRole("textbox", { name: "Nombre", exact: true});
+    // const nameInput = page.getByLabel(/Nombre/i);
+    // await nameInput.fill("");
+
+    //aa
+    await expect(nameInput).toHaveValue("Sede Central Antigua");
+    await nameInput.fill("");
+
+    //Guardar
+    await page.getByRole("button", { name: /Guardar/i }).click();
+
+    //Verificar
+    await expect(page.getByText(/Por favor ingrese el nombre de la sede/i)).toBeVisible();
+    console.log("✅Error de validación de zod verificado")
+    });
   });
 
-  // test("error de validación", async ({page}) => {
-  //   await page.goto(`/portal/${locId}/location`);
-  //   //Limpiar cambio de nombre
-  //   const nameInput = page.getByLabel(/Nombre/i);
-  //   await nameInput.fill("");
+  // test("Editar Sede y editar roles", async ({ page }) => {
+    // const { faker } = await import("@faker-js/faker");
 
-  //   //Guardar
-  //   await page.getByRole("button", { name: /Guardar/i }).click();
+    //1. Mocks
 
-  //   //Verificar 
-  //   await expect(page.getByText(/Por favor ingrese el nombre de la sede/i)).toBeVisible();
 
+
+
+
+    //2. Navegación
+    // await page.goto(`/portal/${locId}/location`);
+    //3. Verificación de carga
+    // await expect(page.getByText("Datos generales de la sede")).toBeVisible();
+
+    //Solución
+    // const nameInput = page.getByRole("textbox", { name: "Nombre", exact: true });
+    // const addressInput = page.getByRole("textbox", { name: "Dirección", exact: true });
+    //
+    // await expect(nameInput).toHaveValue("Sede Central Antigua");
+    // await expect(addressInput).toHaveValue("Av. Siempre Viva 123");
+
+    //4. interacción con el autocomplete
+    // const nuevoNombreSede =`Sede ${faker.location.city()}`;
+    // const nuevoRol = "Líder de jovenes";
+
+    //Editar nombre
+    // await nameInput.fill(nuevoNombreSede);
+
+    //Añadir rol
+    // const rolesInput = page.getByPlaceholder(/Si desea añada otros roles/i);
+    // await rolesInput.fill(nuevoRol);
+    // await page.keyboard.press("Enter");
+
+    //verificar
+    // await expect(page.getByRole("button", { name: nuevoRol })).toBeVisible();
+    // await expect(page.getByRole("button", { name: "Pastor"})).toBeVisible();
+
+    //5. Guardar
+    // await page.getByRole("button", { name: /Guardar/i }).click();
+
+    //6 Verificar snackbar
+    // await expect(page.getByText(/Guardado exitosamente/i)).toBeVisible();
+    // console.log(`✅ Sede "${nuevoNombreSede}" actualizada con rol ${nuevoRol}`);
   // });
-})
+
+
+// })
