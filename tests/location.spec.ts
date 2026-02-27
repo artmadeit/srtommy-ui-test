@@ -85,10 +85,6 @@ test.describe("Editar Sede", () => {
     await page.goto(`/portal/${locId}/location`);
     //Limpiar cambio de nombre
     const nameInput = page.getByRole("textbox", { name: "Nombre", exact: true});
-    // const nameInput = page.getByLabel(/Nombre/i);
-    // await nameInput.fill("");
-
-    //aa
     await expect(nameInput).toHaveValue("Sede Central Antigua");
     await nameInput.fill("");
 
@@ -100,51 +96,3 @@ test.describe("Editar Sede", () => {
     console.log("✅Error de validación de zod verificado")
     });
   });
-
-  // test("Editar Sede y editar roles", async ({ page }) => {
-    // const { faker } = await import("@faker-js/faker");
-
-    //1. Mocks
-
-
-
-
-
-    //2. Navegación
-    // await page.goto(`/portal/${locId}/location`);
-    //3. Verificación de carga
-    // await expect(page.getByText("Datos generales de la sede")).toBeVisible();
-
-    //Solución
-    // const nameInput = page.getByRole("textbox", { name: "Nombre", exact: true });
-    // const addressInput = page.getByRole("textbox", { name: "Dirección", exact: true });
-    //
-    // await expect(nameInput).toHaveValue("Sede Central Antigua");
-    // await expect(addressInput).toHaveValue("Av. Siempre Viva 123");
-
-    //4. interacción con el autocomplete
-    // const nuevoNombreSede =`Sede ${faker.location.city()}`;
-    // const nuevoRol = "Líder de jovenes";
-
-    //Editar nombre
-    // await nameInput.fill(nuevoNombreSede);
-
-    //Añadir rol
-    // const rolesInput = page.getByPlaceholder(/Si desea añada otros roles/i);
-    // await rolesInput.fill(nuevoRol);
-    // await page.keyboard.press("Enter");
-
-    //verificar
-    // await expect(page.getByRole("button", { name: nuevoRol })).toBeVisible();
-    // await expect(page.getByRole("button", { name: "Pastor"})).toBeVisible();
-
-    //5. Guardar
-    // await page.getByRole("button", { name: /Guardar/i }).click();
-
-    //6 Verificar snackbar
-    // await expect(page.getByText(/Guardado exitosamente/i)).toBeVisible();
-    // console.log(`✅ Sede "${nuevoNombreSede}" actualizada con rol ${nuevoRol}`);
-  // });
-
-
-// })
