@@ -85,5 +85,17 @@ test.describe("Grupos y Ministerios", () =>{
 
   });
 
+  test("error de validación", async ({ page }) => {
+    await page.goto(`/portal/${locId}/location/groups/create`);
 
-})
+    //1. Intentar guardar sin llenar
+    await page.getByRole("button", { name: /Guardar/i }).click();
+
+    //2. Verificar mensajes de error de Zod
+    await expect(page.getByText(/Por favor ingrese el nombre del Grupo o ministerio/i)).toBeVisible();
+    await expect(page.getByText(/Añada al menos un líder/i)).toBeVisible();
+    await expect(page.getByText(/Añada al menos un miembro/i)).toBeVisible();
+
+    console.log("✅ validaciones de Zod verificadas")
+  });
+});
