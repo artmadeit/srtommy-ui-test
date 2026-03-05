@@ -61,15 +61,13 @@ test.describe("Grupos y Ministerios", () =>{
     const optionJuan = page.getByRole("option", { name: "Juan Perez" });
     await expect(optionJuan).toBeVisible();
     await optionJuan.click();
-    // await page.getByText("Juan Perez").click();
-
+    
     //6. Llenar miembros (Autocomplete)
     const membersInput = page.getByLabel(/Escriba\/seleccione los miembros/i);
     await membersInput.fill("Maria");
     const optionMaria = page.getByRole("option", { name: "Maria Garcia"});
     await expect(optionMaria).toBeVisible();
     await optionMaria.click();
-
 
     // await page.getByText("Maria Garcia").click();
 
