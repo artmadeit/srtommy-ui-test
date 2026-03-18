@@ -1,7 +1,7 @@
-import { test } from "@playwright/test";
+import { expect, test } from "@playwright/test";
 
 test.describe("Editar Grupos y ministerios", () => {
-  // const locId = 12; 
+  const locId = 12; 
   const groupId = 13;
 
   test.beforeEach( async ({ page }) => {
@@ -44,6 +44,35 @@ test.describe("Editar Grupos y ministerios", () => {
     });
   });
 
+  test("Cargar los datos y editar", async ({ page }) => {
+    // Navegar directamente a la URL
+    await page.goto(`/portal/${locId}/location/groups/${groupId}`);
 
+    //A. Verificar que los datos se cargaron correctamente
+    const nameInput = page.getByRole("textbox", { name: /nombre/i });
+    await expect(nameInput).toHaveValue("Grupo de Jóvenes");
 
+    const description = page.getByRole("textbox", { name: /descripción/i });
+    await expect(description).toHaveValue("Reunión de los sábados");
+
+    //B. Verificar los Autocomplete 
+    await expect(page.getByText("Juan Perez")).toBeVisible();
+    await expect(page.getByText("Maria Garcia")).toBeVisible();
+
+    //C. Editar el nombre
+    await nameInput.fill("Grupo de Jóvenes - Editado");
+
+    //D. Agregar un nuevo Líder
+    const leadersInput = page.getByLabel(/Escriba\/seleccione el lider o lideres/i); 
+    await leadersInput.fill("Pedro");
+    const optionPedro = page.getByRole("option", { name: "Pedro Picapiedra" });
+    await expect(optionPedro).toBeVisible();
+    await optionPedro.click();
+
+    //E. Guardar
+    await page.getByRole("button", { name: /Guardar/i }).click();
+
+    console.log("✅ Datos cargads y edición");
+
+  })
 })
