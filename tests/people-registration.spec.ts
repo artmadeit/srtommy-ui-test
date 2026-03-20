@@ -38,11 +38,7 @@ test.describe("Registro de persona", () => {
     await page.goto(`/portal/${mLocId}/person/create`, { waitUntil : "networkidle"});
 
     //ESPERA CLAVE: Esperamos a que el campo "Nombre" sea visible.
-
-    // const firstNameInput = page.getByLabel("Nombre");
-    // await firstNameInput.waitFor({ state: "visible", timeout: 30000 });
-    // await page.waitForSelector('text=Nombre', { state: 'visible', timeout: 30000 });
-   
+  
     //3.Esperar que el formulario cargue
     const nombreInput = page.getByLabel(/Nombre/i);
     await nombreInput.waitFor({state: "visible", timeout: 20000});
@@ -69,11 +65,6 @@ test.describe("Registro de persona", () => {
 
     await dateGroup.getByRole("spinbutton", { name: /Year/i}).press("Tab");
     
-    // await birthdateInput.click();
-    //Escribir la fecha en este orden DDMMYYYY
-    // await birthdateInput.pressSequentially("01011990" , { delay: 100 });
-    // await birthdateInput.press("tab");
-
     //6. Validación de Edad 
     const ageValue = await page.getByLabel(/Edad/i).inputValue();
     expect(Number(ageValue)).toBeGreaterThan(0);
@@ -88,22 +79,13 @@ test.describe("Registro de persona", () => {
 
     await rolesInput.press("ArrowDown");
 
-    // const opcionLider = page.getByRole("option", { name: /Líder/i });
-    // await opcionLider.waitFor({ state: "visible" });
-    // await opcionLider.click();
-   
-  
     //selección del segundo rol
     // await rolesInput.click();
     const opcionUjier = page.getByRole("option", { name: /Ujier/i });
     await opcionUjier.waitFor({ state: "visible" });
     await opcionUjier.click();
     // await page.getByRole("option", {  name: /Ujier/i }).click();
-    await page.keyboard.press('Escape'); 
-    
-
-    // await birthdateInput.fill("1990-01-01");
-    
+    await page.keyboard.press('Escape');  
     await expect(page.getByText("Líder de alabanza")).toBeVisible();
     await expect(page.getByText("Ujier")).toBeVisible();
 
@@ -112,18 +94,3 @@ test.describe("Registro de persona", () => {
     console.log("✅ Formulario enviado con éxito")
   });
 });
-
-
-
-  // interceptar submit 
-  // await page.route("**/people", async (route) => {
-  //   if(route.request().method() === "POST") {
-  //     await route.fulfill({
-  //       status: 201, 
-  //       contentType: "application/json",
-  //       body: JSON.stringify({message: "Persona registrada exitosamente"})
-  //     })
-  //   } else {
-  //     await route.continue();
-  //   }
-  // })
