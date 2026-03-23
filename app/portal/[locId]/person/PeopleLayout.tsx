@@ -1,3 +1,4 @@
+import { RegisterButton } from "@/app/(components)/RegisterButton";
 import { TableChart, TableRows } from "@mui/icons-material";
 import AddIcon from "@mui/icons-material/Add";
 import {
@@ -28,9 +29,10 @@ export function PeopleLayout({
           <Typography variant="h4">Personas</Typography>
           <Tooltip title="Registrar">
             <Link href={`/portal/${locId}/person/create`}>
-              <Fab color="primary" aria-labelledby="create">
+              <RegisterButton />
+              {/* <Fab color="primary" aria-labelledby="create">
                 <AddIcon />
-              </Fab>
+              </Fab> */}
             </Link>
           </Tooltip>
         </Stack>
