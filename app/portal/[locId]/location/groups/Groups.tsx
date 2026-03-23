@@ -15,6 +15,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { DialogDeleteConfirmation } from "@/app/(components)/DialogDeleteConfirmation";
 import { useAuthApi } from "@/app/(api)/api";
 import { SnackbarContext } from "@/app/(components)/SnackbarContext";
+import { pink } from "@mui/material/colors";
 
 type GroupsProps = {
   locId: number;
@@ -80,7 +81,7 @@ export function Groups({ locId }: GroupsProps) {
                 <Tooltip title="Eliminar" key="delete">
                   <GridActionsCellItem
                     label="Eliminar"
-                    icon={<DeleteIcon />}
+                    icon={<DeleteIcon sx={{ color: pink[500] }} />}
                     onClick={() => setGroupToDeleteId(params.row.id)}
                   />
                 </Tooltip>,

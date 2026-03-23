@@ -20,6 +20,7 @@ import { PersonListItem } from "./PersonListItem";
 import { PersonDetailWithId } from "./Person";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { DialogDeleteConfirmation } from "@/app/(components)/DialogDeleteConfirmation";
+import { pink } from "@mui/material/colors";
 
 export type MyDataGridProps = Omit<DataGridProps, "columns" | "rows">;
 
@@ -71,7 +72,7 @@ export const PersonTable = ({
                 </Tooltip>,
                 <Tooltip title="Eliminar" key="delete">
                   <GridActionsCellItem
-                    icon={<DeleteIcon />}
+                    icon={<DeleteIcon sx={{ color: pink[500] }} />}
                     label="Eliminar"
                     onClick={() => setOpenDialog(true)}
                   />

@@ -119,6 +119,7 @@ export default function MenuDrawer2({
         sx={{
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           ml: { sm: `${drawerWidth}px` },
+          background: "#7C2BED",
         }}
       >
         <Toolbar>
@@ -143,7 +144,7 @@ export default function MenuDrawer2({
                 sx={{
                   fontSize: {
                     xs: "10px",
-                    sm: "14px",
+                    sm: "12px",
                   },
                 }}
                 variant="outlined"
@@ -158,7 +159,7 @@ export default function MenuDrawer2({
               sx={{
                 fontSize: {
                   xs: "10px",
-                  sm: "14px",
+                  sm: "12px",
                 },
               }}
               variant="text"
