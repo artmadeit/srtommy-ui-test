@@ -16,6 +16,7 @@ import { DialogDeleteConfirmation } from "@/app/(components)/DialogDeleteConfirm
 import { useAuthApi } from "@/app/(api)/api";
 import { SnackbarContext } from "@/app/(components)/SnackbarContext";
 import { pink } from "@mui/material/colors";
+import { RegisterButton } from "@/app/(components)/RegisterButton";
 
 type GroupsProps = {
   locId: number;
@@ -99,9 +100,10 @@ export function Groups({ locId }: GroupsProps) {
         <Typography variant="h6">Grupos y Ministerios</Typography>
         <Tooltip title="Registrar">
           <Link href="location/groups/create">
-            <Fab color="primary" aria-labelledby="add">
+            <RegisterButton />
+            {/* <Fab color="primary" aria-labelledby="add">
               <AddIcon />
-            </Fab>
+            </Fab> */}
           </Link>
         </Tooltip>
       </Stack>
