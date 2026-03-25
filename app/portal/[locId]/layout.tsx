@@ -40,7 +40,7 @@ export default function LocLayout(props: {
             <ListItem>
               <ListItemButton>
                 <ListItemIcon>
-                  <DashboardIcon />
+                  <DashboardIcon sx={{ color: "#2D3748" }} />
                 </ListItemIcon>
                 <ListItemText primary="Dashboard" />
               </ListItemButton>
@@ -54,7 +54,7 @@ export default function LocLayout(props: {
             <ListItem>
               <ListItemButton>
                 <ListItemIcon>
-                  <PersonIcon />
+                  <PersonIcon sx={{ color: "#1976D2" }} />
                 </ListItemIcon>
                 <ListItemText primary="Personas" />
               </ListItemButton>
@@ -68,7 +68,7 @@ export default function LocLayout(props: {
             <ListItem>
               <ListItemButton>
                 <ListItemIcon>
-                  <EventIcon />
+                  <EventIcon sx={{ color: "#2D6A4F" }} />
                 </ListItemIcon>
                 <ListItemText primary="Eventos y cursos" />
               </ListItemButton>
@@ -82,7 +82,7 @@ export default function LocLayout(props: {
             <ListItem>
               <ListItemButton>
                 <ListItemIcon>
-                  <ChurchIcon />
+                  <ChurchIcon sx={{ color: "#C05621" }} />
                 </ListItemIcon>
                 <ListItemText primary="Sede" />
               </ListItemButton>
