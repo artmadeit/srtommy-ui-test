@@ -100,7 +100,7 @@ export function Groups({ locId }: GroupsProps) {
         <Typography variant="h6">Grupos y Ministerios</Typography>
         <Tooltip title="Registrar">
           <Link href="location/groups/create">
-            <RegisterButton icon={<AddIcon />} />
+            <RegisterButton icon={<AddIcon />} ariaLabel="create" />
           </Link>
         </Tooltip>
       </Stack>

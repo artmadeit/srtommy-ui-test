@@ -26,6 +26,7 @@ import { PersonTable, fullName } from "../../../person/PersonTable";
 import { EventDetail } from "../EventDetail";
 import { DialogDeleteConfirmation } from "@/app/(components)/DialogDeleteConfirmation";
 import { useRouter } from "next/navigation";
+import { RegisterButton } from "@/app/(components)/RegisterButton";
 
 type EventAttendance = {
   numberOfVisitors: number;
@@ -125,7 +126,16 @@ export default function AttendanceEvent(props: {
             <Box>
               <div style={{ display: "flex", justifyContent: "flex-end" }}>
                 <Tooltip title="Eliminar">
-                  <Fab
+                  <RegisterButton
+                    icon={<DeleteIcon />}
+                    ariaLabel="delete"
+                    onClick={() =>
+                      isRecurrent
+                        ? setOpenDeleteDialog(true)
+                        : setOpenConfirmDeleteDialog(true)
+                    }
+                  />
+                  {/* <Fab
                     aria-labelledby="delete"
                     color="primary"
                     onClick={() =>
@@ -135,7 +145,7 @@ export default function AttendanceEvent(props: {
                     }
                   >
                     <DeleteIcon />
-                  </Fab>
+                  </Fab> */}
                 </Tooltip>
               </div>
               <EventForm
