@@ -19,6 +19,7 @@ import useSWR from "swr";
 import { z } from "zod";
 import { RolesLocation } from "../location/page";
 import { toSpanish } from "../location/Roles";
+import { SaveButton } from "@/app/(components)/SaveButton";
 
 const requiredFirstNameMessage = "Por favor ingrese su nombre";
 const requiredLastNameMessage = "Por favor ingrese su apellido";
@@ -149,9 +150,10 @@ export const PersonForm = ({
           />
         </Grid>
         <Grid size={{ xs: 12 }}>
-          <Button type="submit" variant="contained">
+          <SaveButton />
+          {/* <Button type="submit" variant="contained">
             Guardar
-          </Button>
+          </Button> */}
         </Grid>
       </Grid>
     </FormContainer>

@@ -10,6 +10,7 @@ import { GroupTypeLabels } from "./Group";
 import { GroupAutocomplete } from "./GroupAutocomplete";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { SaveButton } from "@/app/(components)/SaveButton";
 
 const baseSchema = z.object({
   name: z
@@ -122,9 +123,10 @@ export const GroupForm = ({
           {/* <ErrorMessage errors={errors} name="singleErrorInput" /> */}
         </Stack>
         <Grid>
-          <Button type="submit" variant="contained">
+          <SaveButton />
+          {/* <Button type="submit" variant="contained">
             Guardar
-          </Button>
+          </Button> */}
         </Grid>
       </Stack>
     </FormContainer>
