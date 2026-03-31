@@ -123,7 +123,7 @@ export const GroupForm = ({
           {/* <ErrorMessage errors={errors} name="singleErrorInput" /> */}
         </Stack>
         <Grid>
-          <SaveButton />
+          <SaveButton name="Guardar" />
           {/* <Button type="submit" variant="contained">
             Guardar
           </Button> */}

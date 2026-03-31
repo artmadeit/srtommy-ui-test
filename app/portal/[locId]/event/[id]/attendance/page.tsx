@@ -27,6 +27,7 @@ import { EventDetail } from "../EventDetail";
 import { DialogDeleteConfirmation } from "@/app/(components)/DialogDeleteConfirmation";
 import { useRouter } from "next/navigation";
 import { RegisterButton } from "@/app/(components)/RegisterButton";
+import { SaveButton } from "@/app/(components)/SaveButton";
 
 type EventAttendance = {
   numberOfVisitors: number;
@@ -193,7 +194,17 @@ export default function AttendanceEvent(props: {
             </Stack>
           </Grid>
           <Grid size={{ xs: 12 }}>
-            <Button
+            <SaveButton
+              name="Registrar asistencias"
+              onClick={async () => {
+                const api = await getApi();
+                await api.put(`/events/${id}/attendance`, {
+                  personIds: rowSelectionModel,
+                });
+                alert.showMessage("Asistencia guardada exitosamente");
+              }}
+            />
+            {/* <Button
               type="submit"
               variant="contained"
               onClick={async () => {
@@ -205,7 +216,7 @@ export default function AttendanceEvent(props: {
               }}
             >
               Registrar asistencias
-            </Button>
+            </Button> */}
           </Grid>
         </>
       )}

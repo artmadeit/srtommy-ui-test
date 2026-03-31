@@ -150,7 +150,7 @@ export const PersonForm = ({
           />
         </Grid>
         <Grid size={{ xs: 12 }}>
-          <SaveButton />
+          <SaveButton name="Guardar" />
           {/* <Button type="submit" variant="contained">
             Guardar
           </Button> */}

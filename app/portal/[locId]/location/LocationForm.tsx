@@ -13,6 +13,7 @@ import { FormContainer, TextFieldElement, useForm } from "react-hook-form-mui";
 import { TelFieldElement } from "../person/PersonForm";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { SaveButton } from "@/app/(components)/SaveButton";
 
 const schema = z.object({
   name: z
@@ -112,9 +113,10 @@ export const LocationForm = ({
           </Grid>
         </Grid>
         <Grid size={{ xs: 12 }}>
-          <Button type="submit" variant="contained">
+          <SaveButton name="Guardar" />
+          {/* <Button type="submit" variant="contained">
             Guardar
-          </Button>
+          </Button> */}
         </Grid>
       </Grid>
     </FormContainer>
