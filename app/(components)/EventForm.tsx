@@ -23,6 +23,7 @@ import { WeekChips } from "./WeekChips";
 import { ToogleButton } from "./ToogleButton";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { SaveButton } from "./SaveButton";
 
 const schema = z
   .object({
@@ -270,9 +271,10 @@ export const EventForm = ({
         </Grid>
         <Grid size={{ xs: 6 }}>
           {editable && (
-            <Button type="submit" variant="contained">
+            <SaveButton name="Guardar" />
+            /* <Button type="submit" variant="contained">
               Guardar
-            </Button>
+            </Button> */
           )}
         </Grid>
       </Grid>
