@@ -6,21 +6,36 @@ type ToogleButtonProps = {
 };
 
 export const ToogleButton = ({ onChange, eventType }: ToogleButtonProps) => {
+  const mainColor = "#7C2BED";
   return (
     <>
       <Button
         sx={{
           mr: 1,
           mb: 1,
+          //Fondo
+          backgroundColor: eventType === 0 ? mainColor : "transparent",
+          //Texto
+          color: eventType === 0 ? "#fff" : mainColor,
+          border: `1px solid ${mainColor}`,
+          // background: "#7C2BED",
+          // color: "#fff",
         }}
-        variant={eventType === 0 ? "contained" : "outlined"}
+        // variant={eventType === 0 ? "contained" : "outlined"}
         onClick={() => onChange(0)}
       >
         Evento
       </Button>
       <Button
-        sx={{ mb: 1 }}
-        variant={eventType === 1 ? "contained" : "outlined"}
+        sx={{
+          mb: 1,
+          //fondo
+          backgroundColor: eventType === 1 ? mainColor : "transparent",
+          //texto
+          color: eventType === 1 ? "#fff" : mainColor,
+          border: `1px solid ${mainColor}`,
+        }}
+        // variant={eventType === 1 ? "contained" : "outlined"}
         onClick={() => onChange(1)}
       >
         Curso
