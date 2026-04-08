@@ -29,7 +29,7 @@ export function PeopleLayout({
           <Typography variant="h4">Personas</Typography>
           <Tooltip title="Registrar">
             <Link href={`/portal/${locId}/person/create`}>
-              <RegisterButton icon={<AddIcon />} />
+              <RegisterButton icon={<AddIcon />} ariaLabel="create" />
             </Link>
           </Tooltip>
         </Stack>
