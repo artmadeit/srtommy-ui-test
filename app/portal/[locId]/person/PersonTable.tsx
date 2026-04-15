@@ -118,6 +118,43 @@ export const PersonTable = ({
         <DataGrid
           loading={isLoading}
           columns={columns}
+          // rowHeight={65}
+          sx={{
+            border: "none",
+            backgroundColor: "#fff",
+            "& .MuiDataGrid-columnHeaders": {
+              // backgroundColor: "#fafafa !important",
+              borderBottom: "1px solid #dbdbdb !important",
+              borderRadius: 0,
+            },
+
+            "& .MuiDataGrid-columnHeaderTitle": {
+              fontWeight: "700 !important", // Texto en negrita
+              color: "#8e8e8e", // Color gris suave de IG
+              textTransform: "uppercase",
+              fontSize: "0.75rem",
+              letterSpacing: "0.5px",
+            },
+            //2. Estilo de filas y celdas
+            "& .MuiDataGrid-cell": {
+              borderBottom: "none",
+              display: "flex",
+              alignItems: "center",
+              color: "#262626",
+              fontSize: "0.9rem",
+            },
+            "& .MuiDataGrid-columnSeparator": {
+              display: "none",
+            },
+
+            "& .MuiDataGrid-cell:focus": {
+              outline: "none",
+            },
+            //FOOTER
+            "& .MuiDataGrid-footerContainer": {
+              borderTop: "none",
+            },
+          }}
           paginationModel={paginationModel}
           paginationMode="server"
           onPaginationModelChange={setPaginationModel}
