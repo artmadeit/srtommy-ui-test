@@ -90,16 +90,16 @@ export const LocationForm = ({
                   { shouldValidate: true },
                 );
               }}
-              renderTags={(tagValue, getTagProps) => {
+              renderValue={(tagValue, getTagProps) => {
                 return isArray(tagValue)
                   ? tagValue.map((option, index) => (
-                      <Chip
-                        label={option}
-                        {...getTagProps({ index })}
-                        key={option}
-                        disabled={fixedOptions.indexOf(option) !== -1}
-                      />
-                    ))
+                    <Chip
+                      label={option}
+                      {...getTagProps({ index })}
+                      key={option}
+                      disabled={fixedOptions.indexOf(option) !== -1}
+                    />
+                  ))
                   : null;
               }}
               renderInput={(params) => (

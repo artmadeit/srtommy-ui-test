@@ -82,7 +82,7 @@ export function Groups({ locId }: GroupsProps) {
                 <Tooltip title="Eliminar" key="delete">
                   <GridActionsCellItem
                     label="Eliminar"
-                    icon={<DeleteIcon sx={{ color: pink[500] }} />}
+                    icon={<DeleteIcon sx={{ "&:hover": { color: pink[500] } }} />}
                     onClick={() => setGroupToDeleteId(params.row.id)}
                   />
                 </Tooltip>,

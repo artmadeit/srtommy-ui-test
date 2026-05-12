@@ -72,7 +72,7 @@ export const PersonTable = ({
                 </Tooltip>,
                 <Tooltip title="Eliminar" key="delete">
                   <GridActionsCellItem
-                    icon={<DeleteIcon sx={{ color: pink[500] }} />}
+                    icon={<DeleteIcon sx={{ "&:hover": { color: pink[500] } }} />}
                     label="Eliminar"
                     onClick={() => setOpenDialog(true)}
                   />
