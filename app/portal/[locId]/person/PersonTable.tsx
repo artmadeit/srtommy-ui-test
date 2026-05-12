@@ -90,12 +90,14 @@ export const PersonTable = ({
       <TextField
         placeholder="Buscar"
         variant="outlined"
-        InputProps={{
-          startAdornment: (
-            <InputAdornment position="start">
-              <SearchIcon />
-            </InputAdornment>
-          ),
+        slotProps={{
+          input: {
+            startAdornment: (
+              <InputAdornment position="start">
+                <SearchIcon />
+              </InputAdornment>
+            )
+          }
         }}
         fullWidth
         value={searchText}

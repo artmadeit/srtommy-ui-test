@@ -263,8 +263,10 @@ export const EventForm = ({
             name="description"
             multiline
             minRows={1}
-            InputProps={{
-              placeholder: "Agregar descripción",
+            slotProps={{
+              input: {
+                placeholder: "Agregar descripción"
+              }
             }}
             variant="standard"
           />
