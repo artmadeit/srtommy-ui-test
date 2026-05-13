@@ -13,6 +13,11 @@ export const SaveButton = ({ name, onClick }: SaveButtonProps) => {
         padding: "6px 50px",
         color: "#000000DE",
         border: "1px solid #7C2BED",
+
+        "&:hover": {
+          color: "#fff",
+          backgroundColor: "#7C2BED",
+        }
       }}
       onClick={onClick}
     >
