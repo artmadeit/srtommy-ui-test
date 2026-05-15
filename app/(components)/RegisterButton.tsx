@@ -16,9 +16,13 @@ export const RegisterButton = forwardRef<HTMLButtonElement, IconsProps>(
         aria-labelledby={ariaLabel}
         sx={{
           boxShadow: "none",
-          // background: "#f5f5f5",
+          background: "#f5f5f5",
           border: "1px solid #7C2BED",
           borderRadius: "20%",
+
+          "&:hover": {
+            background: "#e0e0e0",
+          }
         }}
         onClick={onClick}
       >

@@ -73,7 +73,7 @@ export function Groups({ locId }: GroupsProps) {
                 <Tooltip title="Ver / editar" key="see">
                   <GridActionsCellItem
                     label="Ver"
-                    icon={<SearchIcon />}
+                    icon={<SearchIcon sx={{ "&:hover": { color: "#1976D2" } }} />}
                     onClick={() =>
                       router.push(`location/groups/${params.row.id}`)
                     }
