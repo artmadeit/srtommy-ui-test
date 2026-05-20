@@ -31,7 +31,13 @@ export default function LocLayout(props: {
       location={location}
       locId={locId}
       listDrawer={
-        <List>
+        <List
+          sx={{
+            "& .MuiListItemIcon-root": {
+              minWidth: "40px"
+            }
+          }}
+        >
           <Link
             component={NextLink}
             href={`/portal/${locId}/`}
