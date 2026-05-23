@@ -63,8 +63,9 @@ export default function RootLayout({
             <Providers>{children}</Providers>
           </AppRouterCacheProvider>
         </ThemeProvider>
+        <GoogleTagManager gtmId="GTM-KHZ22MM9" />
       </body>
-      <GoogleTagManager gtmId="GTM-KHZ22MM9" />
+
     </html>
   );
 }
