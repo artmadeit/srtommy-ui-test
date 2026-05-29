@@ -233,11 +233,12 @@ export default function MenuDrawer2({
               boxSizing: "border-box",
               width: drawerWidth,
             },
+
           }}
           open
         >
           {/*Need to make dynamic */}
-          <DrawerHeader>{organization?.name}</DrawerHeader>
+          <DrawerHeader sx={{ background: "#2a2b36", color: "#fff" }}>{organization?.name}</DrawerHeader>
           <Divider />
           <Box
             sx={{
@@ -245,11 +246,12 @@ export default function MenuDrawer2({
               display: "flex",
               flexDirection: "column",
               justifyContent: "space-between",
+              background: "#2a2b36",
             }}
           >
             <div>{listDrawer}</div>
             <div>
-              <p style={{ fontSize: "10px", paddingLeft: "30px" }}>
+              <p style={{ fontSize: "10px", paddingLeft: "30px", color: "#fff" }}>
                 &copy;Sr Tommy all right reserved
               </p>
             </div>

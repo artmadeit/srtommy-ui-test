@@ -1,9 +1,13 @@
 "use client";
 
-import ChurchIcon from "@mui/icons-material/Church";
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import EventIcon from "@mui/icons-material/Event";
-import PersonIcon from "@mui/icons-material/Person";
+// import ChurchIcon from "@mui/icons-material/Church";
+import ChurchOutlinedIcon from '@mui/icons-material/ChurchOutlined';
+// import DashboardIcon from "@mui/icons-material/Dashboard";
+import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined';
+// import EventIcon from "@mui/icons-material/Event";
+import EventOutlinedIcon from '@mui/icons-material/EventOutlined';
+// import PersonIcon from "@mui/icons-material/Person";
+import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
 import { Link } from "@mui/material";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -34,7 +38,17 @@ export default function LocLayout(props: {
         <List
           sx={{
             "& .MuiListItemIcon-root": {
-              minWidth: "40px"
+              minWidth: "40px",
+              color: "#fff",
+              fontSize: "50px"
+            },
+            // background: "#2a2b36",
+            color: "#fff",
+            fontSize: "50px",
+
+            "& .MuiListItemText-primary": {
+              fontSize: "0.9rem",
+              fontWeight: "200",
             }
           }}
         >
@@ -46,7 +60,7 @@ export default function LocLayout(props: {
             <ListItem>
               <ListItemButton>
                 <ListItemIcon>
-                  <DashboardIcon sx={{ color: "#2D3748" }} />
+                  <DashboardOutlinedIcon />
                 </ListItemIcon>
                 <ListItemText primary="Dashboard" />
               </ListItemButton>
@@ -60,7 +74,7 @@ export default function LocLayout(props: {
             <ListItem>
               <ListItemButton>
                 <ListItemIcon>
-                  <PersonIcon sx={{ color: "#1976D2" }} />
+                  <PersonOutlinedIcon />
                 </ListItemIcon>
                 <ListItemText primary="Personas" />
               </ListItemButton>
@@ -74,7 +88,7 @@ export default function LocLayout(props: {
             <ListItem>
               <ListItemButton>
                 <ListItemIcon>
-                  <EventIcon sx={{ color: "#2D6A4F" }} />
+                  <EventOutlinedIcon />
                 </ListItemIcon>
                 <ListItemText primary="Eventos y cursos" />
               </ListItemButton>
@@ -88,7 +102,7 @@ export default function LocLayout(props: {
             <ListItem>
               <ListItemButton>
                 <ListItemIcon>
-                  <ChurchIcon sx={{ color: "#C05621" }} />
+                  <ChurchOutlinedIcon />
                 </ListItemIcon>
                 <ListItemText primary="Sede" />
               </ListItemButton>
