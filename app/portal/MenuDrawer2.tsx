@@ -174,9 +174,14 @@ export default function MenuDrawer2({
               anchorEl={anchorEl}
               open={open}
               onClose={handleClose}
-              MenuListProps={{
-                "aria-labelledby": "basic-button",
+              slotProps={{
+                list: {
+                  "aria-labelledby": "basic-button",
+                },
               }}
+            // MenuListProps={{
+            //   "aria-labelledby": "basic-button",
+            // }}
             >
               <MenuItem
                 onClick={() =>
