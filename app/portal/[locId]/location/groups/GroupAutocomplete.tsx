@@ -4,7 +4,8 @@ import React from "react";
 import { AutocompleteElement } from "react-hook-form-mui";
 import useSWR from "swr";
 import { useDebounce } from "use-debounce";
-import { PersonDetailWithId } from "../../person/Person";
+// import { PersonDetailWithId  } from "../../person/Person";
+import { PersonResponse } from "../../person/Person";
 
 type GroupAutocompleteProps = {
   name: string;
@@ -20,7 +21,7 @@ export const GroupAutocomplete = ({
   const [searchMember, setSearchMember] = React.useState("");
   const [searchTextDebounced] = useDebounce(searchMember, DEBOUNCE_WAIT_MS);
 
-  const { data: people } = useSWR<SpringPage<PersonDetailWithId>>([
+  const { data: people } = useSWR<SpringPage<PersonResponse>>([
     `people`,
     {
       params: {

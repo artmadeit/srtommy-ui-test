@@ -1,5 +1,7 @@
 "use client";
-import { PersonDetailWithId } from "../../person/Person";
+// import { PersonDetailWithId } from "../../person/Person";
+import { PersonResponse } from "../../person/Person";
+// ../portal/[locId]/person/Person
 
 export type EventDetail = {
   id: number;
@@ -10,7 +12,7 @@ export type EventDetail = {
   isACourse: Boolean;
   address: string;
   description: string;
-  speakers: PersonDetailWithId[];
+  speakers: PersonResponse[];
   endRecur?: Date;
   recurrentEvent?: EventDetail;
 };

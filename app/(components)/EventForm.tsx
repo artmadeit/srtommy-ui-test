@@ -15,7 +15,8 @@ import useSWR from "swr";
 import { useDebounce } from "use-debounce";
 import { SpringPage } from "../(api)/pagination";
 import { LocationDetail } from "../portal/[locId]/Location";
-import { PersonDetailWithId } from "../portal/[locId]/person/Person";
+// import { PersonDetailWithId } from "../portal/[locId]/person/Person";
+import { PersonResponse } from "../portal/[locId]/person/Person";
 import { DEBOUNCE_WAIT_MS } from "./helpers/debouncing";
 import { Option } from "./Option";
 import PlaceOutlinedIcon from "@mui/icons-material/PlaceOutlined";
@@ -89,7 +90,7 @@ export const EventForm = ({
 
   const { data: Location } = useSWR<LocationDetail>(`organizations/${locId}`);
 
-  const { data: people } = useSWR<SpringPage<PersonDetailWithId>>([
+  const { data: people } = useSWR<SpringPage<PersonResponse>>([
     `people`,
     {
       params: {

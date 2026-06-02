@@ -17,7 +17,8 @@ import { useDebounce } from "use-debounce";
 import { DEBOUNCE_WAIT_MS } from "@/app/(components)/helpers/debouncing";
 import { useRouter } from "next/navigation";
 import { PersonListItem } from "./PersonListItem";
-import { PersonDetailWithId } from "./Person";
+// import { PersonDetailWithId } from "./Person";
+import { PersonResponse } from "./Person";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { DialogDeleteConfirmation } from "@/app/(components)/DialogDeleteConfirmation";
 import { pink } from "@mui/material/colors";
@@ -185,6 +186,6 @@ export const PersonTable = ({
   );
 };
 
-export const fullName = (person: PersonDetailWithId) => {
+export const fullName = (person: PersonResponse) => {
   return person.firstName + " " + person.lastName;
 };

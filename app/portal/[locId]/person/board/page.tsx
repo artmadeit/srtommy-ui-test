@@ -5,10 +5,11 @@ import { PeopleLayout } from "../PeopleLayout";
 import Board from "./board";
 import { Author, PersonMap } from "./types";
 import Loading from "@/app/(components)/Loading";
-import { PersonDetailWithId } from "../Person";
+// import { PersonDetailWithId } from "../Person";
+import { PersonResponse } from "../Person";
 
 type Accountability = {
-  child: PersonDetailWithId;
+  child: PersonResponse;
   type: string;
 };
 
@@ -31,21 +32,21 @@ export default function PersonBoardPage({
 
   const personMap: PersonMap = accountabilities
     ? accountabilities.reduce(
-        (prev, currentValue) => {
-          const author: Author = {
-            id: String(currentValue.child.id),
-            name:
-              currentValue.child.firstName + " " + currentValue.child.lastName,
-          };
+      (prev, currentValue) => {
+        const author: Author = {
+          id: String(currentValue.child.id),
+          name:
+            currentValue.child.firstName + " " + currentValue.child.lastName,
+        };
 
-          if (!prev[currentValue.type].map((x) => x.id).includes(author.id)) {
-            prev[currentValue.type].push(author);
-          }
+        if (!prev[currentValue.type].map((x) => x.id).includes(author.id)) {
+          prev[currentValue.type].push(author);
+        }
 
-          return prev;
-        },
-        { ...emptyPersonMap },
-      )
+        return prev;
+      },
+      { ...emptyPersonMap },
+    )
     : { ...emptyPersonMap };
 
   if (isLoading) return <Loading></Loading>;

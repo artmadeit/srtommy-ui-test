@@ -3,13 +3,14 @@
 import useSWR from "swr";
 import { GroupInitialValues, GroupForm } from "../GroupForm";
 import Loading from "@/app/(components)/Loading";
-import { PersonDetailWithId } from "../../../person/Person";
+// import { PersonDetailWithId  } from "../../../person/Person";
+import { PersonResponse } from "../../../person/Person";
 import { fullName } from "../../../person/PersonTable";
 import React from "react";
 
 export type GroupMembers = {
-  LEADER: PersonDetailWithId[];
-  IS_PART_OF: PersonDetailWithId[];
+  LEADER: PersonResponse[];
+  IS_PART_OF: PersonResponse[];
 };
 
 export default function GroupDetailPage(props: {
