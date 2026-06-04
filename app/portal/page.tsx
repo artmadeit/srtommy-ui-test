@@ -43,17 +43,17 @@ export default function PortalHome({ params }: { params: { locId: number } }) {
           listDrawer={
             <List>
               <ListItem sx={{ display: "flex", flexDirection: "column" }}>
-                <Image
+                {/* <Image
                   src={tommyImage}
                   alt="Sr Tommy"
                   style={{ width: "100%", height: "100%" }}
-                />
-                <Typography gutterBottom>
+                /> */}
+                {/* <Typography gutterBottom>
                   Soy el sr. Tommy, seré su fiel ayudante, aquí el versiculo del
                   día:
-                </Typography>
+                </Typography> */}
                 {/* TODO: randomize versicles?*/}
-                <blockquote style={{ margin: ".5rem" }}>
+                <blockquote style={{ margin: ".5rem", color: "#fff" }}>
                   Mejores son dos que uno; porque tienen mejor paga de su
                   trabajo. Porque si caen, el uno levantará a su compañero; pero
                   ¡ay del solo! que cuando caiga, no habrá segundo que lo
