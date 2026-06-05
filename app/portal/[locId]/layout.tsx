@@ -52,6 +52,7 @@ export default function LocLayout(props: {
             }
           }}
         >
+
           <Link
             component={NextLink}
             href={`/portal/${locId}/`}
@@ -63,6 +64,20 @@ export default function LocLayout(props: {
                   <DashboardOutlinedIcon />
                 </ListItemIcon>
                 <ListItemText primary="Dashboard" />
+              </ListItemButton>
+            </ListItem>
+          </Link>
+          <Link
+            component={NextLink}
+            href={`/portal/${locId}/location`}
+            style={{ textDecoration: "none", color: "inherit" }}
+          >
+            <ListItem>
+              <ListItemButton>
+                <ListItemIcon>
+                  <ChurchOutlinedIcon />
+                </ListItemIcon>
+                <ListItemText primary="Sede" />
               </ListItemButton>
             </ListItem>
           </Link>
@@ -94,20 +109,7 @@ export default function LocLayout(props: {
               </ListItemButton>
             </ListItem>
           </Link>
-          <Link
-            component={NextLink}
-            href={`/portal/${locId}/location`}
-            style={{ textDecoration: "none", color: "inherit" }}
-          >
-            <ListItem>
-              <ListItemButton>
-                <ListItemIcon>
-                  <ChurchOutlinedIcon />
-                </ListItemIcon>
-                <ListItemText primary="Sede" />
-              </ListItemButton>
-            </ListItem>
-          </Link>
+
         </List>
       }
     >
