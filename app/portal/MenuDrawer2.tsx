@@ -119,7 +119,9 @@ export default function MenuDrawer2({
         sx={{
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           ml: { sm: `${drawerWidth}px` },
-          background: "#7C2BED",
+          background: "#fff",
+          color: "#000",
+          // boxShadow: "none",
         }}
       >
         <Toolbar>
