@@ -18,14 +18,18 @@ export const DialogDeleteConfirmation = ({
   onDelete,
 }: DialogDeleteConfirmationProps) => {
   return (
-    <Dialog open={open} onClose={close}>
+    <Dialog open={open} onClose={close} sx={{ "& .MuiDialog-paper": { borderRadius: "30px" } }}>
       <DialogTitle>Deseas eliminar</DialogTitle>
       <DialogContent>
         Recuerda que una vez eliminado no podrás recuperarlo
       </DialogContent>
-      <DialogActions>
-        <Button onClick={close}>Cancelar</Button>
-        <Button onClick={onDelete}>Eliminar</Button>
+      <DialogActions sx={{ padding: "20px" }}>
+        <Button onClick={close} >Cancelar</Button>
+        <Button onClick={onDelete} sx={{
+          color: "#000000DE", "&:hover": {
+            color: "#fff", background: "#ff385c"
+          }
+        }}>Eliminar</Button>
       </DialogActions>
     </Dialog>
   );
