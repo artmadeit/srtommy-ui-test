@@ -306,7 +306,7 @@ const LocationsDialog = ({ open, onClose }: DialogLocationProps) => {
             field: "name",
             headerName: "Nombre",
             renderCell: ({ row }) => (
-              <Link component={NextLink} href={`/portal/${row.id}`}>
+              <Link component={NextLink} href={`/portal/${row.id}`} sx={{ textDecoration: "none" }}>
                 {row.name}
               </Link>
             ),
@@ -318,7 +318,11 @@ const LocationsDialog = ({ open, onClose }: DialogLocationProps) => {
   );
 
   return (
-    <Dialog open={open} onClose={onClose} fullWidth>
+    <Dialog open={open} onClose={onClose} fullWidth sx={{
+      "& .MuiDialog-paper": {
+        borderRadius: "30px"
+      }
+    }}>
       <DialogTitle
         display="flex"
         justifyContent="space-between"
