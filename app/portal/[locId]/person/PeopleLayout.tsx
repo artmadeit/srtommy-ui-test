@@ -1,17 +1,26 @@
+"use client";
 import { RegisterButton } from "@/app/(components)/RegisterButton";
 import { TableChart, TableRows } from "@mui/icons-material";
 import AddIcon from "@mui/icons-material/Add";
 import {
   Box,
+  Button,
   Fab,
+  InputAdornment,
   Stack,
+  TextField,
   ToggleButton,
   ToggleButtonGroup,
   Tooltip,
   Typography,
 } from "@mui/material";
 import Link from "next/link";
-import React from "react";
+import React, { useState, useEffect } from "react";
+import SearchIcon from "@mui/icons-material/Search";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
+import { useDebounce } from "use-debounce";
+import { DEBOUNCE_WAIT_MS } from "@/app/(components)/helpers/debouncing";
+
 
 export function PeopleLayout({
   children,
@@ -22,17 +31,61 @@ export function PeopleLayout({
   value: "table" | "board";
   locId: number;
 }) {
+
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const [searchText, setSearchText] = useState(searchParams.get("search") || "");
+  const [searchTextDebounced] = useDebounce(searchText, DEBOUNCE_WAIT_MS);
+
+  useEffect(() => {
+    const params = new URLSearchParams(searchParams.toString());
+    if (searchTextDebounced) {
+      params.set("search", searchTextDebounced);
+    } else {
+      params.delete("search");
+    }
+    params.set("page", "0");
+
+    router.push(`${pathname}?${params.toString()}`);
+  }, [searchTextDebounced, pathname, router, searchParams]);
+
   return (
     <Stack direction="column" spacing={2} p={4}>
       <Box display="flex" justifyContent="space-between">
         <Stack direction="row" alignItems="center" spacing={2}>
           <Typography variant="h4">Personas</Typography>
-          <Tooltip title="Registrar">
+
+          {/* <Tooltip title="Registrar">
             <Link href={`/portal/${locId}/person/create`}>
               <RegisterButton icon={<AddIcon />} ariaLabel="create" />
             </Link>
-          </Tooltip>
+          </Tooltip> */}
         </Stack>
+        <div>
+          <Button variant="outlined" color="inherit">
+            Registrar
+          </Button>
+          <TextField
+            placeholder="Buscar"
+            variant="outlined"
+            slotProps={{
+              input: {
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <SearchIcon />
+                  </InputAdornment>
+                )
+              }
+            }}
+            fullWidth
+            value={searchText}
+            onChange={(event) => setSearchText(event.target.value)}
+          />
+        </div>
+
+
         {/* <ToggleButtonGroup value={value} exclusive aria-label="text alignment">
           <Tooltip title="Lista de personas">
             <ToggleButton

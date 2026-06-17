@@ -13,9 +13,10 @@ import { withOutSorting } from "@/app/(components)/helpers/withOutSorting";
 import { SpringPage } from "@/app/(api)/pagination";
 import { usePagination } from "@/app/(components)/hook-customization/usePagination";
 import useSWR from "swr";
-import { useDebounce } from "use-debounce";
-import { DEBOUNCE_WAIT_MS } from "@/app/(components)/helpers/debouncing";
-import { useRouter } from "next/navigation";
+// import { useDebounce } from "use-debounce";
+// import { DEBOUNCE_WAIT_MS } from "@/app/(components)/helpers/debouncing";
+// import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { PersonListItem } from "./PersonListItem";
 // import { PersonDetailWithId } from "./Person";
 import { PersonResponse } from "./Person";
@@ -36,8 +37,12 @@ export const PersonTable = ({
 }: PersonTableProps) => {
   const { paginationModel, setPaginationModel } = usePagination();
   const router = useRouter();
-  const [searchText, setSearchText] = useState("");
-  const [searchTextDebounced] = useDebounce(searchText, DEBOUNCE_WAIT_MS);
+  // const [searchText, setSearchText] = useState("");
+  // const [searchTextDebounced] = useDebounce(searchText, DEBOUNCE_WAIT_MS);
+  const searchParams = useSearchParams();
+  const searchParamQuery = searchParams.get("search") || "";
+
+
   const [openDialog, setOpenDialog] = React.useState(false);
   const { data: people, isLoading } = useSWR<SpringPage<PersonListItem>>([
     `people`,
@@ -46,7 +51,7 @@ export const PersonTable = ({
         organizationId: locId,
         page: paginationModel.page,
         size: paginationModel.pageSize,
-        ...(searchTextDebounced ? { searchText: searchTextDebounced } : {}),
+        ...(searchParamQuery ? { searchText: searchParamQuery } : {}),
       },
     },
   ]);
@@ -88,7 +93,7 @@ export const PersonTable = ({
 
   return (
     <>
-      <TextField
+      {/* <TextField
         placeholder="Buscar"
         variant="outlined"
         slotProps={{
@@ -103,7 +108,7 @@ export const PersonTable = ({
         fullWidth
         value={searchText}
         onChange={(event) => setSearchText(event.target.value)}
-      />
+      /> */}
 
       <Box
         sx={{
