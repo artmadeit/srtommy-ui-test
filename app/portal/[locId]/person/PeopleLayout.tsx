@@ -63,8 +63,8 @@ export function PeopleLayout({
             </Link>
           </Tooltip> */}
         </Stack>
-        <div>
-          <Button variant="outlined" color="inherit">
+        <div style={{ display: "flex" }}>
+          <Button variant="outlined" color="inherit" sx={{ fontSize: "12px", marginRight: "20px", background: "#3B82F6", color: "#fff" }}>
             Registrar
           </Button>
           <TextField
@@ -76,8 +76,20 @@ export function PeopleLayout({
                   <InputAdornment position="start">
                     <SearchIcon />
                   </InputAdornment>
-                )
+                ),
+
+                // sx: {
+                //   "MuiOutlinedInput-input": {
+                //     padding: "16.5px 10px 16.5px 10px"
+                //   }
+                // }
+              },
+              htmlInput: {
+                style: {
+                  padding: "12px 10px 12px 10px"
+                }
               }
+
             }}
             fullWidth
             value={searchText}
