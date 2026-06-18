@@ -21,7 +21,6 @@ import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { useDebounce } from "use-debounce";
 import { DEBOUNCE_WAIT_MS } from "@/app/(components)/helpers/debouncing";
 
-
 export function PeopleLayout({
   children,
   value,
@@ -31,12 +30,13 @@ export function PeopleLayout({
   value: "table" | "board";
   locId: number;
 }) {
-
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  const [searchText, setSearchText] = useState(searchParams.get("search") || "");
+  const [searchText, setSearchText] = useState(
+    searchParams.get("search") || "",
+  );
   const [searchTextDebounced] = useDebounce(searchText, DEBOUNCE_WAIT_MS);
 
   useEffect(() => {
@@ -64,7 +64,19 @@ export function PeopleLayout({
           </Tooltip> */}
         </Stack>
         <div style={{ display: "flex" }}>
-          <Button variant="outlined" color="inherit" sx={{ fontSize: "12px", marginRight: "20px", background: "#3B82F6", color: "#fff" }}>
+          <Button
+            variant="outlined"
+            component={Link}
+            href={`/portal/${locId}/person/create`}
+            color="inherit"
+            sx={{
+              fontSize: "12px",
+              marginRight: "20px",
+              padding: "0px 40px",
+              background: "#3B82F6",
+              color: "#fff",
+            }}
+          >
             Registrar
           </Button>
           <TextField
@@ -86,17 +98,15 @@ export function PeopleLayout({
               },
               htmlInput: {
                 style: {
-                  padding: "12px 10px 12px 10px"
-                }
-              }
-
+                  padding: "12px 10px 12px 10px",
+                },
+              },
             }}
             fullWidth
             value={searchText}
             onChange={(event) => setSearchText(event.target.value)}
           />
         </div>
-
 
         {/* <ToggleButtonGroup value={value} exclusive aria-label="text alignment">
           <Tooltip title="Lista de personas">
