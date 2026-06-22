@@ -17,6 +17,7 @@ import { useAuthApi } from "@/app/(api)/api";
 import { SnackbarContext } from "@/app/(components)/SnackbarContext";
 import { pink } from "@mui/material/colors";
 import { RegisterButton } from "@/app/(components)/RegisterButton";
+import { RButton } from "@/app/(components)/RButton";
 
 type GroupsProps = {
   locId: number;
@@ -98,11 +99,13 @@ export function Groups({ locId }: GroupsProps) {
     <Stack direction="column" spacing={2} p={4}>
       <Stack direction="row" spacing={2} alignItems="center">
         <Typography variant="h6">Grupos y Ministerios</Typography>
-        <Tooltip title="Registrar">
+        {/* <Tooltip title="Registrar">
           <Link href="location/groups/create">
             <RegisterButton icon={<AddIcon />} ariaLabel="create" />
           </Link>
-        </Tooltip>
+
+        </Tooltip> */}
+        <RButton name="Registrar" href={`location/groups/create`} padding="10px 40px" />
       </Stack>
       <div style={{ width: "100%", height: "70vh" }}>
         <DataGrid

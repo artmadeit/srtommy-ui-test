@@ -20,6 +20,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { useDebounce } from "use-debounce";
 import { DEBOUNCE_WAIT_MS } from "@/app/(components)/helpers/debouncing";
+import { RButton } from "@/app/(components)/RButton";
 
 export function PeopleLayout({
   children,
@@ -64,7 +65,8 @@ export function PeopleLayout({
           </Tooltip> */}
         </Stack>
         <div style={{ display: "flex" }}>
-          <Button
+          <RButton name="Registrar" href={`/portal/${locId}/person/create`} />
+          {/* <Button
             variant="outlined"
             component={Link}
             href={`/portal/${locId}/person/create`}
@@ -78,7 +80,7 @@ export function PeopleLayout({
             }}
           >
             Registrar
-          </Button>
+          </Button> */}
           <TextField
             placeholder="Buscar"
             variant="outlined"
