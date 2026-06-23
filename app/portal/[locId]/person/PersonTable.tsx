@@ -128,20 +128,16 @@ export const PersonTable = ({
           columns={columns}
           // rowHeight={65}
           sx={{
-            // border: "none",
-            border: "1px solid #dbdbdb",
-            backgroundColor: "#fff",
             "& .MuiDataGrid-columnHeaders": {
-              // backgroundColor: "#fafafa !important",
               borderBottom: "1px solid #dbdbdb !important",
               borderRadius: 0,
             },
 
             "& .MuiDataGrid-columnHeaderTitle": {
-              fontWeight: "700 !important", // Texto en negrita
+              fontWeight: "700", // Texto en negrita
               color: "#8e8e8e", // Color gris suave de IG
               textTransform: "uppercase",
-              fontSize: "0.75rem",
+              fontSize: "0.8rem",
               letterSpacing: "0.5px",
             },
             //2. Estilo de filas y celdas
@@ -150,14 +146,6 @@ export const PersonTable = ({
               "&: hover": {
                 backgroundColor: "#fafafa",
               },
-            },
-
-            "& .MuiDataGrid-cell": {
-              borderBottom: "none",
-              display: "flex",
-              alignItems: "center",
-              color: "#262626",
-              fontSize: "0.9rem",
             },
             //3. Quitar elementos
             "& .MuiDataGrid-columnSeparator": {
