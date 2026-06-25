@@ -109,6 +109,36 @@ export function Groups({ locId }: GroupsProps) {
       </Stack>
       <div style={{ width: "100%", height: "70vh" }}>
         <DataGrid
+          sx={{
+            "& .MuiDataGrid-columnHeaders": {
+              borderBottom: "1px solid #dbdbdb !important",
+              borderRadius: 0,
+            },
+            "& .MuiDataGrid-row": {
+              borderBottom: "1px solid #efefef",
+
+              "&:hover": {
+                background: "#fafafa",
+              },
+            },
+            "& .MuiDataGrid-columnHeaderTitle": {
+              fontWeight: "700",
+              color: "#8e8e8e",
+              textTransform: "uppercase",
+              fontSize: "0.8rem",
+              letterSpacing: "0.5px",
+            },
+
+            "& .MuiDataGrid-columnSeparator": {
+              display: "none",
+            },
+            "& .MuiDataGrid-cell:focus": {
+              outline: "none",
+            },
+            "& .MuiDataGrid-footerContainer": {
+              borderTop: "none",
+            },
+          }}
           loading={isLoading}
           columns={columns}
           rows={groups || []}
