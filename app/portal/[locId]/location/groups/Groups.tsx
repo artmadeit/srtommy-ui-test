@@ -98,14 +98,18 @@ export function Groups({ locId }: GroupsProps) {
   return (
     <Stack direction="column" spacing={2} p={4}>
       <Stack direction="row" spacing={2} alignItems="center">
-        <Typography variant="h6">Grupos y Ministerios</Typography>
+        <div style={{ display: "flex", justifyContent: "space-between", width: "100%" }}>
+          <Typography variant="h6">Grupos y Ministerios</Typography>
+          <RButton name="Registrar" href={`location/groups/create`} padding="10px 40px" />
+        </div>
+
         {/* <Tooltip title="Registrar">
           <Link href="location/groups/create">
             <RegisterButton icon={<AddIcon />} ariaLabel="create" />
           </Link>
 
         </Tooltip> */}
-        <RButton name="Registrar" href={`location/groups/create`} padding="10px 40px" />
+
       </Stack>
       <div style={{ width: "100%", height: "70vh" }}>
         <DataGrid
