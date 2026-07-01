@@ -26,9 +26,12 @@ export const DialogDeleteConfirmation = ({
       <DialogActions sx={{ padding: "20px" }}>
         <Button onClick={close} >Cancelar</Button>
         <Button onClick={onDelete} sx={{
-          color: "#000000DE", "&:hover": {
-            color: "#fff", background: "#ff385c"
-          }
+          color: "#fff",
+          background: "#ff385c",
+
+          // "&:hover": {
+          //   color: "#fff", background: "#ff385c"
+          // }
         }}>Eliminar</Button>
       </DialogActions>
     </Dialog>
