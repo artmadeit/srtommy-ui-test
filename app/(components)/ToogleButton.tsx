@@ -6,7 +6,7 @@ type ToogleButtonProps = {
 };
 
 export const ToogleButton = ({ onChange, eventType }: ToogleButtonProps) => {
-  const mainColor = "#7C2BED";
+  const mainColor = "#3B82F6";
   return (
     <>
       <Button
