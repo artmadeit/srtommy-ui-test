@@ -240,12 +240,13 @@ export default function MenuDrawer2({
               boxSizing: "border-box",
               width: drawerWidth,
             },
-
           }}
           open
         >
           {/*Need to make dynamic */}
-          <DrawerHeader sx={{ background: "#2a2b36", color: "#fff" }}>{organization?.name}</DrawerHeader>
+          <DrawerHeader sx={{ background: "#2a2b36", color: "#fff" }}>
+            {organization?.name}
+          </DrawerHeader>
           <Divider />
           <Box
             sx={{
@@ -258,7 +259,9 @@ export default function MenuDrawer2({
           >
             <div>{listDrawer}</div>
             <div>
-              <p style={{ fontSize: "10px", paddingLeft: "30px", color: "#fff" }}>
+              <p
+                style={{ fontSize: "10px", paddingLeft: "30px", color: "#fff" }}
+              >
                 &copy;Sr Tommy all right reserved
               </p>
             </div>
@@ -306,7 +309,11 @@ const LocationsDialog = ({ open, onClose }: DialogLocationProps) => {
             field: "name",
             headerName: "Nombre",
             renderCell: ({ row }) => (
-              <Link component={NextLink} href={`/portal/${row.id}`} sx={{ textDecoration: "none" }}>
+              <Link
+                component={NextLink}
+                href={`/portal/${row.id}`}
+                sx={{ textDecoration: "none" }}
+              >
                 {row.name}
               </Link>
             ),
@@ -318,11 +325,16 @@ const LocationsDialog = ({ open, onClose }: DialogLocationProps) => {
   );
 
   return (
-    <Dialog open={open} onClose={onClose} fullWidth sx={{
-      "& .MuiDialog-paper": {
-        borderRadius: "30px"
-      }
-    }}>
+    <Dialog
+      open={open}
+      onClose={onClose}
+      fullWidth
+      sx={{
+        "& .MuiDialog-paper": {
+          borderRadius: "30px",
+        },
+      }}
+    >
       <DialogTitle
         display="flex"
         justifyContent="space-between"
@@ -342,6 +354,24 @@ const LocationsDialog = ({ open, onClose }: DialogLocationProps) => {
         <div style={{ width: "100%", height: "70vh" }}>
           <DataGrid
             loading={isLoading}
+            sx={{
+              "& .MuiDataGrid-columnHeaders": {
+                borderBottom: "1px solid  #dbdbdb !important",
+                borderRadius: 0,
+              },
+              "& .MuiDataGrid-columnHeaderTitle": {
+                fontWeight: "700",
+                color: "#8e8e8e",
+                textTransform: "uppercase",
+              },
+              "& .MuiDataGrid-row": {
+                borderBottom: "1px solid #efefef",
+                "&: hover": {
+                  backgroundColor: "#fafafa",
+                },
+              },
+              ".MuiDataGrid-cell:focus": { outline: "none" },
+            }}
             columns={columns}
             hideFooter={true}
             rows={accounts || []}
