@@ -1,4 +1,4 @@
-import { Button, Grid, Stack, Typography } from "@mui/material";
+import { Box, Button, Grid, Stack, Typography } from "@mui/material";
 import {
   FormContainer,
   RadioButtonGroup,
@@ -58,77 +58,126 @@ export const GroupForm = ({
 
   return (
     <FormContainer formContext={formContext} onSuccess={submit}>
-      <Stack spacing={2} margin={4}>
-        <Typography variant="h5" gutterBottom>
-          Datos generales del Grupo / Ministerio
-        </Typography>
-        <TextFieldElement fullWidth name="name" label="Nombre" required />
-        <TextFieldElement
-          fullWidth
-          name="description"
-          label="Descripción"
-          multiline
-          rows={4}
-        />
-        <RadioButtonGroup
-          label="Tipo"
-          name="type"
-          options={[
-            {
-              id: "GROUP",
-              label: GroupTypeLabels.GROUP,
-            },
-            {
-              id: "MINISTRY",
-              label: GroupTypeLabels.MINISTRY,
-            },
-          ]}
-          row
-        />
-        <Typography variant="h6" gutterBottom>
-          Miembros
-        </Typography>
-        <Typography variant="body1" gutterBottom>
-          Seleccione quienes conforman su grupo / ministerio
-        </Typography>
-        <Stack
-          direction={{ xs: "column", sm: "row" }}
-          spacing={{ xs: 2, sm: 5 }}
-          alignItems="center"
-          sx={{ display: { xs: "flex" } }}
-        >
-          <Typography variant="h6">Lider(es):</Typography>
-          <div style={{ width: "100%" }}>
-            <GroupAutocomplete
-              locId={locId}
-              name="leaders"
-              label="Escriba/seleccione el lider o lideres"
-            />
-          </div>
-        </Stack>
-        <Stack
-          direction={{ xs: "column", sm: "row" }}
-          spacing={2}
-          alignItems="center"
-          sx={{ display: { xs: "flex" } }}
-        >
-          <Typography variant="h6">Miembro(s):</Typography>
-          <div style={{ width: "100%" }}>
-            <GroupAutocomplete
-              locId={locId}
-              name="members"
-              label="Escriba/seleccione los miembros"
-            />
-          </div>
-          {/* <ErrorMessage errors={errors} name="singleErrorInput" /> */}
-        </Stack>
-        <Grid>
+      <Box sx={{ maxWidth: 650 }}>
+        {/* <Stack spacing={2} margin={4}> */}
+        <Grid container spacing={6}>
+
+          <Grid size={{ xs: 12, md: 6 }}>
+            <Stack spacing={3}>
+              <Typography variant="h5" gutterBottom>
+                Datos generales del Grupo / Ministerio
+              </Typography>
+              <TextFieldElement fullWidth name="name" label="Nombre" required />
+              <TextFieldElement
+                fullWidth
+                name="description"
+                label="Descripción"
+                multiline
+                rows={4}
+              />
+              <RadioButtonGroup
+                label="Tipo"
+                name="type"
+                options={[
+                  {
+                    id: "GROUP",
+                    label: GroupTypeLabels.GROUP,
+                  },
+                  {
+                    id: "MINISTRY",
+                    label: GroupTypeLabels.MINISTRY,
+                  },
+                ]}
+                row
+              />
+            </Stack>
+          </Grid>
+          <Grid size={{ xs: 12, md: 6 }}>
+            <Stack spacing={3}>
+              <Box>
+                <Typography variant="h6" gutterBottom>
+                  Miembros
+                </Typography>
+                <Typography variant="body1" gutterBottom>
+                  Seleccione quienes conforman su grupo / ministerio
+                </Typography>
+              </Box>
+
+              <Grid container spacing={2} alignItems="center">
+                <Grid size={{ xs: 12, sm: 3 }} >
+                  <Typography variant="h6">Lider(es):</Typography>
+                </Grid>
+                <Grid size={{ xs: 12, sm: 9 }}>
+                  <GroupAutocomplete
+                    locId={locId}
+                    name="leaders"
+                    label="Escriba/seleccione el lider o lideres"
+                  />
+                </Grid>
+                <Grid size={{ xs: 12, sm: 3 }}>
+                  <Typography variant="h6">Miembro(s):</Typography>
+                </Grid>
+                <Grid size={{ xs: 12, sm: 9 }}>
+                  <GroupAutocomplete
+                    locId={locId}
+                    name="members"
+                    label="Escriba/seleccione los miembros"
+                  />
+                </Grid>
+
+              </Grid>
+
+            </Stack>
+          </Grid>
+
+
+
+        </Grid>
+
+
+
+        {/* <Stack
+            direction={{ xs: "column", sm: "row" }}
+            spacing={{ xs: 2, sm: 5 }}
+            alignItems="center"
+            sx={{ display: { xs: "flex" } }}
+          >
+            <Typography variant="h6">Lider(es):</Typography>
+            <div style={{ width: "100%" }}>
+              <GroupAutocomplete
+                locId={locId}
+                name="leaders"
+                label="Escriba/seleccione el lider o lideres"
+              />
+            </div>
+          </Stack> */}
+        {/* <Stack
+            direction={{ xs: "column", sm: "row" }}
+            spacing={2}
+            alignItems="center"
+            sx={{ display: { xs: "flex" } }}
+          >
+            <Typography variant="h6">Miembro(s):</Typography>
+            <div style={{ width: "100%" }}>
+              <GroupAutocomplete
+                locId={locId}
+                name="members"
+                label="Escriba/seleccione los miembros"
+              />
+            </div>
+
+          </Stack> */}
+        {/* <Grid>
           <SaveButton name="Guardar" />
-          {/* <Button type="submit" variant="contained">
+          
+        </Grid> */}
+
+        <SaveButton name="Guardar" />
+        {/* </Stack> */}
+      </Box>
+      {/* <Button type="submit" variant="contained">
             Guardar
           </Button> */}
-        </Grid>
-      </Stack>
     </FormContainer>
   );
 };
