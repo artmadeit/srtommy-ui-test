@@ -58,7 +58,7 @@ export const GroupForm = ({
 
   return (
     <FormContainer formContext={formContext} onSuccess={submit}>
-      <Box sx={{ maxWidth: 650 }}>
+      <Box sx={{ maxWidth: 1200, margin: 4 }}>
         {/* <Stack spacing={2} margin={4}> */}
         <Grid container spacing={6}>
 
@@ -124,12 +124,13 @@ export const GroupForm = ({
                     label="Escriba/seleccione los miembros"
                   />
                 </Grid>
-
               </Grid>
 
             </Stack>
           </Grid>
-
+          <Box>
+            <SaveButton name="Guardar" />
+          </Box>
 
 
         </Grid>
@@ -172,7 +173,7 @@ export const GroupForm = ({
           
         </Grid> */}
 
-        <SaveButton name="Guardar" />
+
         {/* </Stack> */}
       </Box>
       {/* <Button type="submit" variant="contained">
