@@ -105,7 +105,7 @@ export const EventForm = ({
   const startTime = watch("startTime");
 
   return (
-    <FormContainer formContext={formContext} onSuccess={submit} >
+    <FormContainer formContext={formContext} onSuccess={submit}>
       <Grid container spacing={2} margin={4}>
         <Grid size={{ xs: 12 }}>
           <TextFieldElement
@@ -266,8 +266,8 @@ export const EventForm = ({
             minRows={1}
             slotProps={{
               input: {
-                placeholder: "Agregar descripción"
-              }
+                placeholder: "Agregar descripción",
+              },
             }}
             variant="standard"
           />

@@ -32,7 +32,12 @@ export default function EventListPage(props: {
           setSpanSelected(x);
         }}
       />
-      <Dialog open={Boolean(spanSelected)} sx={{ ".MuiDialog-paper": { borderRadius: "30px", scrollbarWidth: "none" } }}>
+      <Dialog
+        open={Boolean(spanSelected)}
+        sx={{
+          ".MuiDialog-paper": { borderRadius: "30px", scrollbarWidth: "none" },
+        }}
+      >
         <IconButton
           onClick={close}
           sx={{

@@ -16,13 +16,14 @@ export const PersonResponseSchema = z.object({
   firstName: z.string(),
   lastName: z.string(),
   phoneNumber: z.string(),
-  age: z.number().nullable().transform(val => val ?? undefined),
-  birthdate: z
-    .union([z.string(), z.null()])
-    .transform((val) => {
-      if (val === null || val === "") return undefined;
-      return LocalDateSchema.parse(val);
-    }),
+  age: z
+    .number()
+    .nullable()
+    .transform((val) => val ?? undefined),
+  birthdate: z.union([z.string(), z.null()]).transform((val) => {
+    if (val === null || val === "") return undefined;
+    return LocalDateSchema.parse(val);
+  }),
   hasBeenBaptized: z.boolean().optional(),
 });
 

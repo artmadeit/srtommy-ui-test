@@ -1,5 +1,5 @@
-import { Button, SxProps, Theme } from "@mui/material"
-import Link from "next/link"
+import { Button, SxProps, Theme } from "@mui/material";
+import Link from "next/link";
 
 interface RButtonProps {
   name: string;
@@ -8,7 +8,6 @@ interface RButtonProps {
 }
 
 export const RButton = ({ name, href, padding }: RButtonProps) => {
-
   return (
     <Button
       variant="contained"
@@ -21,9 +20,10 @@ export const RButton = ({ name, href, padding }: RButtonProps) => {
         background: "#3B82F6",
         color: "#fff",
 
-        // 
-      }}>
+        //
+      }}
+    >
       {name}
     </Button>
-  )
-}
+  );
+};

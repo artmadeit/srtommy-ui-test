@@ -39,12 +39,12 @@ export default function ComplaintForm({ initialValues }: ComplaintFormProps) {
     defaultValues: initialValues,
     resolver: zodResolver(schema),
   });
-  
+
   return (
     <FormContainer
       formContext={formContext}
       onSuccess={async (formValues) => {
-        const api = await getApi();       
+        const api = await getApi();
         await api.post("complaints", {
           firstName: formValues.firstName,
           lastName: formValues.lastName,

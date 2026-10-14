@@ -42,7 +42,6 @@ export const PersonTable = ({
   const searchParams = useSearchParams();
   const searchParamQuery = searchParams.get("search") || "";
 
-
   const [openDialog, setOpenDialog] = React.useState(false);
   const { data: people, isLoading } = useSWR<SpringPage<PersonListItem>>([
     `people`,
@@ -69,7 +68,9 @@ export const PersonTable = ({
               return [
                 <Tooltip title="Ver" key="see">
                   <GridActionsCellItem
-                    icon={<SearchIcon sx={{ "&:hover": { color: "#1976D2" } }} />}
+                    icon={
+                      <SearchIcon sx={{ "&:hover": { color: "#1976D2" } }} />
+                    }
                     label="Ver"
                     onClick={() =>
                       router.push(`/portal/${locId}/person/${params.id}`)
@@ -78,7 +79,9 @@ export const PersonTable = ({
                 </Tooltip>,
                 <Tooltip title="Eliminar" key="delete">
                   <GridActionsCellItem
-                    icon={<DeleteIcon sx={{ "&:hover": { color: pink[500] } }} />}
+                    icon={
+                      <DeleteIcon sx={{ "&:hover": { color: pink[500] } }} />
+                    }
                     label="Eliminar"
                     onClick={() => setOpenDialog(true)}
                   />

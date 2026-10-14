@@ -61,7 +61,6 @@ export const GroupForm = ({
       <Box sx={{ maxWidth: 1200, margin: 4 }}>
         {/* <Stack spacing={2} margin={4}> */}
         <Grid container spacing={6}>
-
           <Grid size={{ xs: 12, md: 6 }}>
             <Stack spacing={3}>
               <Typography variant="h5" gutterBottom>
@@ -104,7 +103,7 @@ export const GroupForm = ({
               </Box>
 
               <Grid container spacing={2} alignItems="center">
-                <Grid size={{ xs: 12, sm: 3 }} >
+                <Grid size={{ xs: 12, sm: 3 }}>
                   <Typography variant="h6">Lider(es):</Typography>
                 </Grid>
                 <Grid size={{ xs: 12, sm: 9 }}>
@@ -125,17 +124,12 @@ export const GroupForm = ({
                   />
                 </Grid>
               </Grid>
-
             </Stack>
           </Grid>
           <Box>
             <SaveButton name="Guardar" />
           </Box>
-
-
         </Grid>
-
-
 
         {/* <Stack
             direction={{ xs: "column", sm: "row" }}
@@ -172,7 +166,6 @@ export const GroupForm = ({
           <SaveButton name="Guardar" />
           
         </Grid> */}
-
 
         {/* </Stack> */}
       </Box>
