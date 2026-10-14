@@ -8,6 +8,7 @@ Create a .env.local <= ask more on this to devs. Then run:
 
 ```sh
 nvm use
-npm install
-npm run dev
+corepack enable   # o: npm i -g pnpm
+pnpm install
+pnpm dev
 ```
