@@ -44,3 +44,16 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - name: check:fast (tipos, lint, formato)
         run: pnpm check:fast
+
+  sonar:
+    name: sonarqube cloud
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Sonar needs full history for blame and new-code detection.
+          fetch-depth: 0
+      - name: análisis de SonarQube Cloud
+        uses: SonarSource/sonarqube-scan-action@v5
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
