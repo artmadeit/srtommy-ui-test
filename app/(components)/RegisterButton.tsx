@@ -22,7 +22,7 @@ export const RegisterButton = forwardRef<HTMLButtonElement, IconsProps>(
 
           "&:hover": {
             background: "#e0e0e0",
-          }
+          },
         }}
         onClick={onClick}
       >
@@ -31,3 +31,5 @@ export const RegisterButton = forwardRef<HTMLButtonElement, IconsProps>(
     );
   },
 );
+
+RegisterButton.displayName = "RegisterButton";

@@ -28,8 +28,7 @@ import MenuDrawer2 from "./MenuDrawer2";
 import tommyImage from "./tomy-logo.webp";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 
-export default function PortalHome({ params }: { params: { locId: number } }) {
-  const { locId } = params;
+export default function PortalHome() {
   const [openCreateChurchDialog, setOpenCreateChurchDialog] = useState(false);
   const { user } = useAuth0();
 
@@ -39,7 +38,6 @@ export default function PortalHome({ params }: { params: { locId: number } }) {
     <main style={{ margin: "24px" }}>
       <Box>
         <MenuDrawer2
-          locId={locId}
           listDrawer={
             <List>
               <ListItem sx={{ display: "flex", flexDirection: "column" }}>

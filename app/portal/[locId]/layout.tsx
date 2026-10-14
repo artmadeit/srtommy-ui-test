@@ -1,13 +1,13 @@
 "use client";
 
 // import ChurchIcon from "@mui/icons-material/Church";
-import ChurchOutlinedIcon from '@mui/icons-material/ChurchOutlined';
+import ChurchOutlinedIcon from "@mui/icons-material/ChurchOutlined";
 // import DashboardIcon from "@mui/icons-material/Dashboard";
-import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined';
+import DashboardOutlinedIcon from "@mui/icons-material/DashboardOutlined";
 // import EventIcon from "@mui/icons-material/Event";
-import EventOutlinedIcon from '@mui/icons-material/EventOutlined';
+import EventOutlinedIcon from "@mui/icons-material/EventOutlined";
 // import PersonIcon from "@mui/icons-material/Person";
-import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
+import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import { Link } from "@mui/material";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -22,11 +22,11 @@ import { LocationDetail } from "./Location";
 
 export default function LocLayout(props: {
   children: React.ReactNode;
-  params: Promise<{ locId: number }>;
+  params: Promise<{ locId: string }>;
 }) {
   const children = props.children;
   const params = React.use(props.params);
-  const { locId } = params;
+  const locId = Number(params.locId);
 
   const { data: location } = useSWR<LocationDetail>(`organizations/${locId}`);
 
@@ -40,7 +40,7 @@ export default function LocLayout(props: {
             "& .MuiListItemIcon-root": {
               minWidth: "40px",
               color: "#fff",
-              fontSize: "50px"
+              fontSize: "50px",
             },
             // background: "#2a2b36",
             color: "#fff",
@@ -49,10 +49,9 @@ export default function LocLayout(props: {
             "& .MuiListItemText-primary": {
               fontSize: "0.9rem",
               fontWeight: "200",
-            }
+            },
           }}
         >
-
           <Link
             component={NextLink}
             href={`/portal/${locId}/`}
@@ -109,7 +108,6 @@ export default function LocLayout(props: {
               </ListItemButton>
             </ListItem>
           </Link>
-
         </List>
       }
     >

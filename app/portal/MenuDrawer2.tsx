@@ -51,7 +51,7 @@ export default function MenuDrawer2({
 }: React.PropsWithChildren<{
   listDrawer?: React.ReactNode;
   location?: { name: string };
-  locId: number;
+  locId?: number;
 }>) {
   const { user, isAuthenticated, isLoading, loginWithRedirect } = useAuth0();
   const { logout } = useAuth0();
@@ -181,9 +181,9 @@ export default function MenuDrawer2({
                   "aria-labelledby": "basic-button",
                 },
               }}
-            // MenuListProps={{
-            //   "aria-labelledby": "basic-button",
-            // }}
+              // MenuListProps={{
+              //   "aria-labelledby": "basic-button",
+              // }}
             >
               <MenuItem
                 onClick={() =>
