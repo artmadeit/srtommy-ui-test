@@ -36,16 +36,8 @@ export default defineConfig({
   timeout: 90000,
   projects: [
     {
-      name: "setup",
-      testMatch: /auth\.setup\.ts/,
-    },
-    {
       name: "chromium",
-      use: {
-        ...devices["Desktop Chrome"],
-        storageState: "playwright/.auth/user.json",
-      },
-      //  dependencies: ["setup"],
+      use: { ...devices["Desktop Chrome"] },
     },
 
     {
@@ -83,9 +75,17 @@ export default defineConfig({
 
   /* Run your local dev server before starting the tests */
   webServer: {
-    command: "npm run dev",
+    command: "pnpm dev",
     url: "http://localhost:3000",
     reuseExistingServer: !process.env.CI,
     timeout: 120 * 1000,
+    // Fake values: e2e never reaches Auth0, Builder or the backend. Tests
+    // intercept those requests (see tests/fixtures.ts).
+    env: {
+      NEXT_PUBLIC_AUTH0_DOMAIN: "test.auth0.local",
+      NEXT_PUBLIC_AUTH0_CLIENT_ID: "e2e-client",
+      NEXT_PUBLIC_BUILDER_API_KEY: "e2e-placeholder",
+      NEXT_PUBLIC_API_URL: "http://localhost:8080",
+    },
   },
 });
