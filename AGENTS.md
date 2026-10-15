@@ -29,19 +29,6 @@ Work on a branch, never push directly to `main`. Open a PR with `gh pr create`; 
 
 Claude Code runs Prettier and ESLint `--fix` on every file it edits (`.claude/hooks/format-on-edit.sh`). Do not fight the formatter.
 
-## Specs
-
-For a new feature, write the spec before the code. Keep specs and plans organized by feature, not in one big file at the repo root:
-
-| Path                      | Holds                                                            |
-| ------------------------- | ---------------------------------------------------------------- |
-| `specs/<feature>.md`      | What we're building: objective, acceptance criteria, boundaries. |
-| `tasks/<feature>/plan.md` | Phases, decisions, risks.                                        |
-| `tasks/<feature>/todo.md` | The executable checklist.                                        |
-| `docs/`                   | Reference: research, ADRs, operational notes.                    |
-
-Number acceptance criteria (`AC-1`, `AC-2`) so commits and PRs can cite them.
-
 ## Language
 
 Code identifiers and comments are in English. UI copy and user-facing messages are in Spanish.
