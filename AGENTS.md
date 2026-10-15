@@ -29,6 +29,12 @@ Work on a branch, never push directly to `main`. Open a PR with `gh pr create`; 
 
 Claude Code runs Prettier and ESLint `--fix` on every file it edits (`.claude/hooks/format-on-edit.sh`). Do not fight the formatter.
 
+## Specs and plans
+
+Use spec-kit (the `speckit-*` skills) for specs, plans and task lists. Do not use addy's `/spec` or `/planning` commands, the `spec-driven-development` and `planning-and-task-breakdown` skills, or write `SPEC.md` or `tasks/plan.md` at the repo root. Those write to a second place and split the plan.
+
+Other addy skills stay available for code review, TDD, security and performance.
+
 ## Language
 
 Code identifiers and comments are in English. UI copy and user-facing messages are in Spanish.
