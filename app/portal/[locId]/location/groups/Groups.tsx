@@ -74,7 +74,9 @@ export function Groups({ locId }: GroupsProps) {
                 <Tooltip title="Ver / editar" key="see">
                   <GridActionsCellItem
                     label="Ver"
-                    icon={<SearchIcon sx={{ "&:hover": { color: "#1976D2" } }} />}
+                    icon={
+                      <SearchIcon sx={{ "&:hover": { color: "#1976D2" } }} />
+                    }
                     onClick={() =>
                       router.push(`location/groups/${params.row.id}`)
                     }
@@ -83,7 +85,9 @@ export function Groups({ locId }: GroupsProps) {
                 <Tooltip title="Eliminar" key="delete">
                   <GridActionsCellItem
                     label="Eliminar"
-                    icon={<DeleteIcon sx={{ "&:hover": { color: pink[500] } }} />}
+                    icon={
+                      <DeleteIcon sx={{ "&:hover": { color: pink[500] } }} />
+                    }
                     onClick={() => setGroupToDeleteId(params.row.id)}
                   />
                 </Tooltip>,
@@ -98,9 +102,19 @@ export function Groups({ locId }: GroupsProps) {
   return (
     <Stack direction="column" spacing={2} p={4}>
       <Stack direction="row" spacing={2} alignItems="center">
-        <div style={{ display: "flex", justifyContent: "space-between", width: "100%" }}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            width: "100%",
+          }}
+        >
           <Typography variant="h6">Grupos y Ministerios</Typography>
-          <RButton name="Registrar" href={`location/groups/create`} padding="10px 40px" />
+          <RButton
+            name="Registrar"
+            href={`location/groups/create`}
+            padding="10px 40px"
+          />
         </div>
 
         {/* <Tooltip title="Registrar">
@@ -109,7 +123,6 @@ export function Groups({ locId }: GroupsProps) {
           </Link>
 
         </Tooltip> */}
-
       </Stack>
       <div style={{ width: "100%", height: "70vh" }}>
         <DataGrid

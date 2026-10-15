@@ -1,3 +1,6 @@
 {
-  "recommendations": ["prettier.prettier-vscode"]
+  "recommendations": [
+    "prettier.prettier-vscode",
+    "sonarsource.sonarlint-vscode"
+  ]
 }

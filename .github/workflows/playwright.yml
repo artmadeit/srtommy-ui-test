@@ -6,38 +6,24 @@ on:
     branches: [main, master]
 jobs:
   test:
-    timeout-minutes: 60
+    timeout-minutes: 30
     runs-on: ubuntu-latest
-    env:
-      # --- CLAVES PÚBLICAS ---
-      NEXT_PUBLIC_BUILDER_API_KEY: ${{ secrets.BUILDER_API_KEY }}
-      NEXT_PUBLIC_AUTH0_DOMAIN: ${{ secrets.NEXT_PUBLIC_AUTH0_DOMAIN }}
-      NEXT_PUBLIC_AUTH0_CLIENT_ID: ${{ secrets.NEXT_PUBLIC_AUTH0_CLIENT_ID }}
-
-      # --- CLAVES DE SERVIDOR NECESARIAS PARA EL CI ---
-      # Estas claves de servidor son necesarias por si Next.js o Auth0 las buscan durante SSR/Testing.
-      AUTH0_SECRET: ${{ secrets.AUTH0_SECRET }} # La clave aleatoria que creaste.
-      AUTH0_BASE_URL: http://127.0.0.1:3000 # La dirección de prueba.
-
-      # Otras variables que tengas...
-      NEXT_PUBLIC_API_URL: http://localhost:8080
-      NEXT_PUBLIC_CULQUI_API_KEY: ${{ secrets.NEXT_PUBLIC_CULQUI_API_KEY }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 10.33.0
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1 # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: "22"
           cache: pnpm
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
-      - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
+      # Only chromium runs in CI. The app's env values for e2e are fake and
+      # live in playwright.config.ts, so no repo secrets are needed.
+      - name: Install Playwright Chromium
+        run: pnpm exec playwright install --with-deps chromium
       - name: Run Playwright tests
-        run: npx playwright test
-      - uses: actions/upload-artifact@v4
+        run: pnpm exec playwright test --project=chromium
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         if: ${{ !cancelled() }}
         with:
           name: playwright-report
