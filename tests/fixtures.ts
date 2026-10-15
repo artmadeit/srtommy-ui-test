@@ -1,4 +1,4 @@
-import { test as base, expect } from "@playwright/test";
+import { test as base } from "@playwright/test";
 import { AUTH0_CLIENT_ID, AUTH0_DOMAIN, APP_ORIGIN, ORG_ID } from "./e2e-env";
 
 // Auth0 silent login (prompt=none, response_mode=web_message) answers in an
@@ -77,4 +77,4 @@ export const test = base.extend({
   },
 });
 
-export { expect };
+export { expect } from "@playwright/test";
