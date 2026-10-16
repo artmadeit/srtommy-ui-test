@@ -17,6 +17,7 @@ export const Providers = ({ children }: { children: React.ReactNode }) => {
       clientId={clientId}
       authorizationParams={{
         redirect_uri: globalThis.location?.origin + "/portal",
+        audience: process.env.NEXT_PUBLIC_AUTH0_AUDIENCE,
       }}
     >
       <SnackbarProvider>{children}</SnackbarProvider>
