@@ -14,12 +14,7 @@ import { getFixedOptions } from "../../[locId]/location/Roles";
 import { RolesLocation } from "../../[locId]/location/page";
 import { useAuth0 } from "@auth0/auth0-react";
 
-export default function LocationCreatePage({
-  params,
-}: {
-  params: { locId: number };
-}) {
-  const { locId } = params;
+export default function LocationCreatePage() {
   const getApi = useAuthApi();
   const router = useRouter();
   const alert = React.useContext(SnackbarContext);
@@ -47,7 +42,7 @@ export default function LocationCreatePage({
   };
 
   return (
-    <MenuDrawer2 locId={locId}>
+    <MenuDrawer2>
       <LocationForm
         initialValues={{
           name: "",

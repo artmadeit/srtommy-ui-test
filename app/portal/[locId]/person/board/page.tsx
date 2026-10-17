@@ -1,5 +1,6 @@
 "use client";
 
+import { use } from "react";
 import useSWR from "swr";
 import { PeopleLayout } from "../PeopleLayout";
 import Board from "./board";
@@ -22,9 +23,9 @@ const emptyPersonMap: PersonMap = {
 export default function PersonBoardPage({
   params,
 }: {
-  params: { locId: number };
+  params: Promise<{ locId: string }>;
 }) {
-  const { locId } = params;
+  const locId = Number(use(params).locId);
 
   const { data: accountabilities, isLoading } = useSWR<Accountability[]>(
     `organizations/${locId}/member-state`,
