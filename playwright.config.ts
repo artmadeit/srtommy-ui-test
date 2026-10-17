@@ -98,6 +98,7 @@ export default defineConfig({
     // to test.auth0.local, so they must not come from secrets. The Builder key
     // is required because the home page is served from Builder.
     env: {
+      E2E_TEST: "1",
       NEXT_PUBLIC_AUTH0_DOMAIN: "test.auth0.local",
       NEXT_PUBLIC_AUTH0_CLIENT_ID: "e2e-client",
       NEXT_PUBLIC_BUILDER_API_KEY: requireEnv("NEXT_PUBLIC_BUILDER_API_KEY"),
