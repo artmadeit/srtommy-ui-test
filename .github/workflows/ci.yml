@@ -44,3 +44,24 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - name: check:fast (tipos, lint, formato)
         run: pnpm check:fast
+
+  build:
+    name: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1 # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      # Fake values, same as playwright.config.ts: the build never reaches
+      # Auth0, Builder or the backend.
+      - name: next build
+        run: pnpm build
+        env:
+          NEXT_PUBLIC_AUTH0_DOMAIN: test.auth0.local
+          NEXT_PUBLIC_AUTH0_CLIENT_ID: ci-client
+          NEXT_PUBLIC_BUILDER_API_KEY: ci-placeholder
+          NEXT_PUBLIC_API_URL: http://localhost:8080
