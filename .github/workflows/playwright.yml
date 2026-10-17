@@ -6,7 +6,10 @@ on:
     branches: [main, master]
 jobs:
   test:
-    timeout-minutes: 30
+    # Forks get no secrets, so e2e runs only for pushes and PRs from this repo.
+    if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository
+    environment: dev
+    timeout-minutes: 20
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
@@ -17,12 +20,14 @@ jobs:
           cache: pnpm
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
-      # Only chromium runs in CI. The app's env values for e2e are fake and
-      # live in playwright.config.ts, so no repo secrets are needed.
+      # Only chromium runs in CI. Secrets come from the "dev" environment;
+      # playwright.config.ts fails if NEXT_PUBLIC_BUILDER_API_KEY is missing.
       - name: Install Playwright Chromium
         run: pnpm exec playwright install --with-deps chromium
       - name: Run Playwright tests
         run: pnpm exec playwright test --project=chromium
+        env:
+          NEXT_PUBLIC_BUILDER_API_KEY: ${{ secrets.NEXT_PUBLIC_BUILDER_API_KEY }}
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         if: ${{ !cancelled() }}
         with:
