@@ -74,8 +74,8 @@ importers:
         specifier: ^4.4.0
         version: 4.4.0
       i18next:
-        specifier: ^25.10.10
-        version: 25.10.10(typescript@6.0.3)
+        specifier: ^26.5.2
+        version: 26.5.2(typescript@6.0.3)
       i18next-browser-languagedetector:
         specifier: ^8.2.1
         version: 8.2.1
@@ -107,8 +107,8 @@ importers:
         specifier: ^8.2.0
         version: 8.2.0(75ad334dee3919ebfbad4571cbeb5b0c)
       react-i18next:
-        specifier: ^16.6.6
-        version: 16.6.6(i18next@25.10.10(typescript@6.0.3))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(typescript@6.0.3)
+        specifier: ^17.1.0
+        version: 17.1.0(i18next@26.5.2(typescript@6.0.3))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(typescript@6.0.3)
       swr:
         specifier: ^2.5.1
         version: 2.5.1(react@19.3.1)
@@ -120,7 +120,7 @@ importers:
         version: 4.6.7
       zod-i18n-map:
         specifier: ^2.27.0
-        version: 2.27.0(i18next@25.10.10(typescript@6.0.3))(zod@4.6.7)
+        version: 2.27.0(i18next@26.5.2(typescript@6.0.3))(zod@4.6.7)
     devDependencies:
       "@builder.io/dev-tools":
         specifier: ^1.16.4
@@ -4377,10 +4377,10 @@ packages:
         integrity: sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==,
       }
 
-  html-parse-stringify@3.1.0:
+  html-parse-stringify@4.0.1:
     resolution:
       {
-        integrity: sha512-E0oAXcELOtsXe+BmpJ2EZyedbldPpriV5vICzEuo6xjC/D1lDukOI7KrpfQGF2Qc4wWEy0nk3bFORS2K5ZAhFQ==,
+        integrity: sha512-0zHsZJrK7S3K2aucXWL6ycoYJ/iNtIcFHC/nYQgFklPtrv5LpJctIiSCroWZWeuoXvuyFdzp6KzjJQ+OT5MfFw==,
       }
 
   http-cache-semantics@4.3.0:
@@ -4444,13 +4444,13 @@ packages:
         integrity: sha512-8Y/LLAm5fqZc2ckQxtTWbu75ndjNLzF7mcYl6rhc4g+WBopIsG3YhdYqF5qhJy64tlYhlU2KSSnEgW3gGHLqwg==,
       }
 
-  i18next@25.10.10:
+  i18next@26.5.2:
     resolution:
       {
-        integrity: sha512-cqUW2Z3EkRx7NqSyywjkgCLK7KLCL6IFVFcONG7nVYIJ3ekZ1/N5jUsihHV6Bq37NfhgtczxJcxduELtjTwkuQ==,
+        integrity: sha512-6fIXt//2MZNok3tULyjnypxe3vbsy3pV1bVg8p2x3yKrzZvp7z3T+wXx/88LQsATRdhyJeAUAvUxEtxsHdJ29w==,
       }
     peerDependencies:
-      typescript: ^5 || ^6
+      typescript: ^5 || ^6 || ^7
     peerDependenciesMeta:
       typescript:
         optional: true
@@ -5778,17 +5778,17 @@ packages:
       "@types/react":
         optional: true
 
-  react-i18next@16.6.6:
+  react-i18next@17.1.0:
     resolution:
       {
-        integrity: sha512-ZgL2HUoW34UKUkOV7uSQFE1CDnRPD+tCR3ywSuWH7u2iapnz86U8Bi3Vrs620qNDzCf1F47NxglCEkchCTDOHw==,
+        integrity: sha512-4VouOnTDyvhvqXx6WZ+s3/cgSiaLutILdYkO3P1Ms+4qcKR7At+JP4Vi7IeHkVLyVV+DmN1l23Pn73UcwSGGPA==,
       }
     peerDependencies:
-      i18next: ">= 25.10.9"
+      i18next: ">= 26.2.0"
       react: ">= 16.8.0"
       react-dom: "*"
       react-native: "*"
-      typescript: ^5 || ^6
+      typescript: ^5 || ^6 || ^7
     peerDependenciesMeta:
       react-dom:
         optional: true
@@ -6679,13 +6679,6 @@ packages:
         integrity: sha512-u4J1hr6Y+C/hit34GwL3eIcUf3wngT8TlYUjK7tk0jxydKLAq3sYvifjdTDA6U3KCKRcQCQDGf/srjxfZF3l7g==,
       }
     engines: { node: ">=18.12.0" }
-
-  void-elements@3.1.0:
-    resolution:
-      {
-        integrity: sha512-Dhxzh5HZuiHQhbvTW9AMetFfBHDMYpo23Uo9btPXgdYP+3T5S+p+jgNy7spra+veYhBP2dCSgxR/i2Y02h5/6w==,
-      }
-    engines: { node: ">=0.10.0" }
 
   webidl-conversions@3.0.1:
     resolution:
@@ -9758,9 +9751,7 @@ snapshots:
     dependencies:
       react-is: 16.13.1
 
-  html-parse-stringify@3.1.0:
-    dependencies:
-      void-elements: 3.1.0
+  html-parse-stringify@4.0.1: {}
 
   http-cache-semantics@4.3.0: {}
 
@@ -9803,9 +9794,7 @@ snapshots:
     dependencies:
       "@babel/runtime": 7.29.10
 
-  i18next@25.10.10(typescript@6.0.3):
-    dependencies:
-      "@babel/runtime": 7.29.10
+  i18next@26.5.2(typescript@6.0.3):
     optionalDependencies:
       typescript: 6.0.3
 
@@ -10498,11 +10487,11 @@ snapshots:
     optionalDependencies:
       "@types/react": 19.3.0
 
-  react-i18next@16.6.6(i18next@25.10.10(typescript@6.0.3))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(typescript@6.0.3):
+  react-i18next@17.1.0(i18next@26.5.2(typescript@6.0.3))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(typescript@6.0.3):
     dependencies:
       "@babel/runtime": 7.29.10
-      html-parse-stringify: 3.1.0
-      i18next: 25.10.10(typescript@6.0.3)
+      html-parse-stringify: 4.0.1
+      i18next: 26.5.2(typescript@6.0.3)
       react: 19.3.1
       use-sync-external-store: 1.7.0(react@19.3.1)
     optionalDependencies:
@@ -11117,8 +11106,6 @@ snapshots:
 
   verkit@0.5.0: {}
 
-  void-elements@3.1.0: {}
-
   webidl-conversions@3.0.1: {}
 
   whatwg-url@5.0.0:
@@ -11234,9 +11221,9 @@ snapshots:
 
   zen-observable@0.10.0: {}
 
-  zod-i18n-map@2.27.0(i18next@25.10.10(typescript@6.0.3))(zod@4.6.7):
+  zod-i18n-map@2.27.0(i18next@26.5.2(typescript@6.0.3))(zod@4.6.7):
     dependencies:
-      i18next: 25.10.10(typescript@6.0.3)
+      i18next: 26.5.2(typescript@6.0.3)
       zod: 4.6.7
 
   zod-validation-error@4.0.2(zod@4.6.7):
