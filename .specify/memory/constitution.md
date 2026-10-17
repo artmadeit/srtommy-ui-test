@@ -1,50 +1,79 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+# Sr. Tommy UI Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Quality Gates Are Never Weakened
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+Every change MUST pass `pnpm check:fast` (typecheck, lint, format) before it is considered done, and
+CI MUST enforce the same gate. Changes MUST NOT add `@ts-ignore`, `eslint-disable`, skipped tests
+or lowered thresholds to make a check pass. New code MUST NOT introduce `any`, `console.*` calls or
+commented-out code.
+Rationale: gates only protect the codebase if they cannot be bypassed one exception at a time.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### II. Test What Matters
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+Pure logic (date handling, reordering, schema validation, mappers, hooks) MUST have unit tests.
+User-facing flows (registration, groups, events, location) MUST have Playwright e2e tests that mock
+Auth0 and the backend. A bug fix MUST include a test that fails without the fix.
+Rationale: the product handles church members' data and attendance; regressions are costly and
+usually found by users first.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### III. Security and Privacy by Default
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+Secrets and environment files MUST NOT be committed; only `.env.example` is versioned. Environment
+variables MUST be validated at startup (`app/env.ts`). Authorization decisions MUST be enforced by
+the backend; the UI guard only improves experience. Third-party scripts that track users (e.g.
+Google Tag Manager) MUST NOT load before the user has consented. Personal data MUST NOT be logged
+or placed in URLs.
+Rationale: the app stores personal data of members, including minors, and is subject to privacy law.
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+### IV. Accessible, Spanish-First UI
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+All user-facing text MUST be in Spanish; code identifiers and comments MUST be in English. Interactive
+elements MUST have accessible names, images MUST have `alt` text and forms MUST show validation
+errors. Every user-visible loading, empty and error state MUST be handled explicitly (no blank
+screens or placeholder text such as "Not found" while loading).
+Rationale: users are non-technical church staff and volunteers on varied devices.
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+### V. Simplicity and Deliberate Dependencies
+
+Features MUST use the existing stack (Next.js, MUI, SWR, react-hook-form + zod, Auth0) before
+adding a library. A new dependency MUST be justified in its PR and MUST NOT duplicate an existing
+one. Builder.io is legacy and being removed: no new features may depend on it. Dependencies MUST be
+kept current through grouped, regularly reviewed updates.
+Rationale: every dependency is maintenance and attack surface; stale ones compound upgrade cost.
+
+### VI. Small, Traceable Changes
+
+Work MUST happen on a branch and reach `main` through a pull request; nobody pushes to `main`.
+Commits and PR titles MUST follow Conventional Commits. Non-trivial features MUST go through
+spec-kit (spec, plan, tasks) rather than ad-hoc notes. PRs SHOULD be scoped to one concern.
+Rationale: small reviewed changes are easier to verify, revert and explain.
+
+## Technical Constraints
+
+- Runtime: Node >= 22 and pnpm (see `.nvmrc` and `packageManager`); `pnpm-lock.yaml` MUST be
+  committed and CI MUST install with `--frozen-lockfile`.
+- Stack: Next.js App Router, React, TypeScript in `strict` mode, MUI, SWR, Auth0, zod.
+- API access MUST go through the shared authenticated client (`app/(api)/api.tsx`); components MUST
+  NOT build their own HTTP clients or read tokens directly.
+- GitHub Actions MUST be pinned by commit SHA.
+- `next build` MUST succeed in CI before merge.
+
+## Development Workflow
+
+- Run `nvm use`, `pnpm install` and `pnpm dev` per the README.
+- Before opening a PR: `pnpm check:fast` passes and relevant tests (`pnpm test:e2e`) pass.
+- The pre-push hook runs `pnpm check:fast`; `--no-verify` MUST NOT be used to land a failing change.
+- Reviewers MUST verify compliance with this constitution; deviations MUST be justified in the PR.
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+This constitution supersedes other project practices where they conflict; `AGENTS.md` and
+`README.md` provide runtime guidance and MUST stay consistent with it. Amendments are made by pull
+request that updates this file, states the reason and, for breaking changes, a migration plan.
+Versioning follows semantic versioning: MAJOR for removed or redefined principles, MINOR for added
+principles or materially expanded guidance, PATCH for clarifications. Compliance is reviewed on every
+PR and revisited whenever a retrospective or incident shows a principle is missing or wrong.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+**Version**: 1.0.0 | **Ratified**: 2026-10-17 | **Last Amended**: 2026-10-17

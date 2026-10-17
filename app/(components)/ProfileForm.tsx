@@ -2,9 +2,9 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { Typography, Grid } from "@mui/material";
 import Script from "next/script";
 import { FormContainer, TextFieldElement } from "react-hook-form-mui";
+import { env } from "../env";
 
-const publicKey =
-  process.env.NEXT_PUBLIC_CULQI_API_KEY || "some other culqi key";
+const publicKey = env.NEXT_PUBLIC_CULQI_API_KEY || "some other culqi key";
 
 export const ProfileForm = () => {
   const { user } = useAuth0();
