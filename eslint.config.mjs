@@ -20,5 +20,12 @@ export default defineConfig([
     files: ["tests/**"],
     rules: { "react-hooks/rules-of-hooks": "off" },
   },
-  globalIgnores([".next/**", "node_modules/**", "next-env.d.ts"]),
+  globalIgnores([
+    ".next/**",
+    "node_modules/**",
+    "next-env.d.ts",
+    "coverage/**",
+    "playwright-report/**",
+    "test-results/**",
+  ]),
 ]);

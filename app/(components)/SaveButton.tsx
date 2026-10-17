@@ -10,18 +10,12 @@ export const SaveButton = ({ name, onClick }: SaveButtonProps) => {
     <Button
       type="submit"
       sx={{
-        // padding: "6px 50px",
         padding: "10px 40px",
-        background: "#3B82F6",
+        // #2563EB on white is 5.2:1 (WCAG AA needs 4.5:1 at this font size).
+        background: "#2563EB",
         color: "#fff",
         fontSize: "12px",
-        // color: "#000000DE",
-        // border: "1px solid #7C2BED",
-
-        // "&:hover": {
-        //   color: "#fff",
-        //   backgroundColor: "#7C2BED",
-        // }
+        "&:hover": { background: "#1D4ED8" },
       }}
       onClick={onClick}
     >
