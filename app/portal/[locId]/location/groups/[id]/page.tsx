@@ -28,7 +28,7 @@ export default function GroupDetailPage(props: {
   );
 
   if (isLoading) return <Loading />;
-  if (!group || !members) return <div>Not found</div>;
+  if (!group || !members) return <Loading />;
 
   const initialValues: GroupInitialValues = {
     name: group.name,

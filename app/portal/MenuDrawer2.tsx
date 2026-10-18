@@ -53,7 +53,7 @@ export default function MenuDrawer2({
   location?: { name: string };
   locId?: number;
 }>) {
-  const { user, isAuthenticated, isLoading, loginWithRedirect } = useAuth0();
+  const { user, isLoading } = useAuth0();
   const { logout } = useAuth0();
 
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -102,12 +102,6 @@ export default function MenuDrawer2({
   }));
 
   const router = useRouter();
-
-  React.useEffect(() => {
-    if (!isLoading && !isAuthenticated) {
-      loginWithRedirect();
-    }
-  }, [isLoading, isAuthenticated, loginWithRedirect]);
 
   if (isLoading) return <Loading />;
 

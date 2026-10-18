@@ -35,7 +35,7 @@ export default function Location(props: {
   const alert = React.useContext(SnackbarContext);
 
   if (isLoading) return <Loading />;
-  if (!location || !roles) return <div>Not found</div>;
+  if (!location || !roles) return <Loading />;
 
   const fixedOptions: string[] = getFixedOptions(roles);
 

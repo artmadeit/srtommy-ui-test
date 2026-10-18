@@ -20,6 +20,7 @@ import { z } from "zod";
 import { RolesLocation } from "../location/page";
 import { toSpanish } from "../location/Roles";
 import { SaveButton } from "@/app/(components)/SaveButton";
+import Loading from "@/app/(components)/Loading";
 
 const requiredFirstNameMessage = "Por favor ingrese su nombre";
 const requiredLastNameMessage = "Por favor ingrese su apellido";
@@ -65,7 +66,7 @@ export const PersonForm = ({
     resolver: zodResolver(schema),
   });
 
-  if (!roles) return <div>Not found</div>;
+  if (!roles) return <Loading />;
 
   const handleChange = (birthdate: Date | null) => {
     formContext.setValue("birthdate", birthdate);

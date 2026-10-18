@@ -33,7 +33,7 @@ export default function PersonEdit(props: {
   const router = useRouter();
 
   if (isLoading) return <Loading />;
-  if (!roles) return <div>Not found</div>;
+  if (!roles) return <Loading />;
 
   return (
     <Box>

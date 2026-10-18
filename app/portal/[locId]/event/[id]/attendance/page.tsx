@@ -70,7 +70,7 @@ export default function AttendanceEvent(props: {
   }, [eventAttendance]);
 
   if (isLoading) return <Loading />;
-  if (!event) return <div>Not found</div>;
+  if (!event) return <Loading />;
 
   const recurrentEvent = event.recurrentEvent || event;
   const isRecurrent = Boolean(event.recurrentEvent);
