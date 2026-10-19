@@ -3,7 +3,10 @@ import axios from "axios";
 import { env } from "../env";
 import { handleDates } from "./date";
 
-export const apiUrl = env.NEXT_PUBLIC_API_URL;
+// srtomy-api versions its endpoints under /v1 (see srtomy-api#23); kept out of
+// NEXT_PUBLIC_API_URL itself so every environment's env var only has to name
+// the API's origin, not repeat the version suffix.
+export const apiUrl = `${env.NEXT_PUBLIC_API_URL}/v1`;
 
 export const useAuthApi = () => {
   const { getAccessTokenSilently } = useAuth0();

@@ -4,7 +4,7 @@ const schema = z.object({
   NEXT_PUBLIC_AUTH0_DOMAIN: z.string().min(1),
   NEXT_PUBLIC_AUTH0_CLIENT_ID: z.string().min(1),
   NEXT_PUBLIC_AUTH0_AUDIENCE: z.string().optional(),
-  NEXT_PUBLIC_API_URL: z.string().default(""),
+  NEXT_PUBLIC_API_URL: z.string(),
   NEXT_PUBLIC_CULQI_API_KEY: z.string().optional(),
 });
 
