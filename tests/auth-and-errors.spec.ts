@@ -60,4 +60,37 @@ test.describe("Errores de carga", () => {
     await expect(page.getByRole("progressbar")).toBeVisible();
     await expect(page.getByText("Not found")).toHaveCount(0);
   });
+
+  test("muestra 'No encontrado' cuando el recurso no existe (404)", async ({
+    page,
+  }) => {
+    await page.route("**/organizations/999", (route) =>
+      route.fulfill({ status: 404, body: "{}" }),
+    );
+    await page.route("**/organizations/locations/childs/999/members", (route) =>
+      route.fulfill({
+        status: 200,
+        contentType: "application/json",
+        body: "{}",
+      }),
+    );
+
+    await page.goto(`/portal/${locId}/location/groups/999`);
+
+    await expect(
+      page.getByRole("heading", { name: "No encontrado" }),
+    ).toBeVisible();
+  });
+
+  test("ofrece reintentar cuando la petición falla", async ({ page }) => {
+    await page.route("**/organizations/locations/*/roles**", (route) =>
+      route.fulfill({ status: 500, body: "{}" }),
+    );
+
+    await page.goto(`/portal/${locId}/person/create`);
+
+    await expect(
+      page.getByRole("button", { name: "Reintentar" }),
+    ).toBeVisible();
+  });
 });

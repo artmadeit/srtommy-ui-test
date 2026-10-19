@@ -21,6 +21,7 @@ import { RolesLocation } from "../location/page";
 import { toSpanish } from "../location/Roles";
 import { SaveButton } from "@/app/(components)/SaveButton";
 import Loading from "@/app/(components)/Loading";
+import { ResourceError } from "@/app/(components)/ResourceError";
 
 const requiredFirstNameMessage = "Por favor ingrese su nombre";
 const requiredLastNameMessage = "Por favor ingrese su apellido";
@@ -57,16 +58,19 @@ export const PersonForm = ({
   submit,
   locId,
 }: PersonFormProps) => {
-  const { data: roles } = useSWR<RolesLocation[]>(
-    `/organizations/locations/${locId}/roles`,
-  );
+  const {
+    data: roles,
+    error: rolesError,
+    isLoading,
+  } = useSWR<RolesLocation[]>(`/organizations/locations/${locId}/roles`);
 
   const formContext = useForm({
     defaultValues: initialValues,
     resolver: zodResolver(schema),
   });
 
-  if (!roles) return <Loading />;
+  if (isLoading) return <Loading />;
+  if (!roles) return <ResourceError error={rolesError} />;
 
   const handleChange = (birthdate: Date | null) => {
     formContext.setValue("birthdate", birthdate);

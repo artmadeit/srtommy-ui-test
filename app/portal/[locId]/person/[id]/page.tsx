@@ -2,6 +2,7 @@
 
 import { useAuthApi } from "@/app/(api)/api";
 import Loading from "@/app/(components)/Loading";
+import { ResourceError } from "@/app/(components)/ResourceError";
 import { SnackbarContext } from "@/app/(components)/SnackbarContext";
 import {
   PersonForm,
@@ -24,7 +25,12 @@ export default function PersonEdit(props: {
   const { data, mutate: mutatePerson, isLoading } = useSWR(`/people/${id}`);
   const person = data ? PersonResponseSchema.parse(data) : null;
 
-  const { data: roles, mutate: mutateRoles } = useSWR<RolesLocation[]>(
+  const {
+    data: roles,
+    error: rolesError,
+    mutate: mutateRoles,
+    isLoading: rolesLoading,
+  } = useSWR<RolesLocation[]>(
     `/organizations/locations/${locId}/person/${id}/roles`,
   );
 
@@ -32,8 +38,8 @@ export default function PersonEdit(props: {
   const alert = React.useContext(SnackbarContext);
   const router = useRouter();
 
-  if (isLoading) return <Loading />;
-  if (!roles) return <Loading />;
+  if (isLoading || rolesLoading) return <Loading />;
+  if (!roles) return <ResourceError error={rolesError} />;
 
   return (
     <Box>

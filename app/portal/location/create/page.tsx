@@ -2,6 +2,7 @@
 
 import { useAuthApi } from "@/app/(api)/api";
 import Loading from "@/app/(components)/Loading";
+import { ResourceError } from "@/app/(components)/ResourceError";
 import { SnackbarContext } from "@/app/(components)/SnackbarContext";
 import { useRouter } from "next/navigation";
 import React from "react";
@@ -21,13 +22,16 @@ export default function LocationCreatePage() {
   const alert = React.useContext(SnackbarContext);
   const { user } = useAuth0();
 
-  const { data: roles } = useSWR<RolesLocation[]>(
-    `/organizations/locations/predefined-roles`,
-  );
+  const {
+    data: roles,
+    error: rolesError,
+    isLoading,
+  } = useSWR<RolesLocation[]>(`/organizations/locations/predefined-roles`);
 
   if (!user) return <div>User must be logged in</div>;
   // console.log(roles)
-  if (!roles) return <Loading />;
+  if (isLoading) return <Loading />;
+  if (!roles) return <ResourceError error={rolesError} />;
 
   const fixedOptions: string[] = getFixedOptions(roles);
 

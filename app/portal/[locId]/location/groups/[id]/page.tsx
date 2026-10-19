@@ -3,6 +3,7 @@
 import useSWR from "swr";
 import { GroupInitialValues, GroupForm } from "../GroupForm";
 import Loading from "@/app/(components)/Loading";
+import { ResourceError } from "@/app/(components)/ResourceError";
 // import { PersonDetailWithId  } from "../../../person/Person";
 import { PersonResponse } from "../../../person/Person";
 import { fullName } from "../../../person/PersonTable";
@@ -19,16 +20,21 @@ export default function GroupDetailPage(props: {
   const params = React.use(props.params);
   const { id, locId } = params;
 
-  const { data: group, isLoading } = useSWR<GroupInitialValues>(
-    `/organizations/${id}`,
-  );
+  const {
+    data: group,
+    error: groupError,
+    isLoading,
+  } = useSWR<GroupInitialValues>(`/organizations/${id}`);
 
-  const { data: members } = useSWR<GroupMembers>(
-    `/organizations/locations/childs/${id}/members`,
-  );
+  const {
+    data: members,
+    error: membersError,
+    isLoading: membersLoading,
+  } = useSWR<GroupMembers>(`/organizations/locations/childs/${id}/members`);
 
-  if (isLoading) return <Loading />;
-  if (!group || !members) return <Loading />;
+  if (isLoading || membersLoading) return <Loading />;
+  if (!group || !members)
+    return <ResourceError error={groupError ?? membersError} />;
 
   const initialValues: GroupInitialValues = {
     name: group.name,

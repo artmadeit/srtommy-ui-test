@@ -6,6 +6,7 @@ import { LocationForm } from "./LocationForm";
 import useSWR from "swr";
 import { LocationDetail } from "../Location";
 import Loading from "@/app/(components)/Loading";
+import { ResourceError } from "@/app/(components)/ResourceError";
 import { useAuthApi } from "@/app/(api)/api";
 import { SnackbarContext } from "@/app/(components)/SnackbarContext";
 import { Groups } from "./groups/Groups";
@@ -23,19 +24,24 @@ export default function Location(props: {
   const params = React.use(props.params);
   const { locId } = params;
 
-  const { data: location, isLoading } = useSWR<LocationDetail>(
-    `/organizations/${locId}`,
-  );
+  const {
+    data: location,
+    error: locationError,
+    isLoading,
+  } = useSWR<LocationDetail>(`/organizations/${locId}`);
 
-  const { data: roles } = useSWR<RolesLocation[]>(
-    `/organizations/locations/${locId}/roles`,
-  );
+  const {
+    data: roles,
+    error: rolesError,
+    isLoading: rolesLoading,
+  } = useSWR<RolesLocation[]>(`/organizations/locations/${locId}/roles`);
 
   const getApi = useAuthApi();
   const alert = React.useContext(SnackbarContext);
 
-  if (isLoading) return <Loading />;
-  if (!location || !roles) return <Loading />;
+  if (isLoading || rolesLoading) return <Loading />;
+  if (!location || !roles)
+    return <ResourceError error={locationError ?? rolesError} />;
 
   const fixedOptions: string[] = getFixedOptions(roles);
 
