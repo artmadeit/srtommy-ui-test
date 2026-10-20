@@ -3,6 +3,7 @@
 import { useAuthApi } from "@/app/(api)/api";
 import { EventDetailFormData, EventForm } from "@/app/(components)/EventForm";
 import Loading from "@/app/(components)/Loading";
+import { ResourceError } from "@/app/(components)/ResourceError";
 import { SnackbarContext } from "@/app/(components)/SnackbarContext";
 import DeleteIcon from "@mui/icons-material/Delete";
 import {
@@ -45,7 +46,11 @@ export default function AttendanceEvent(props: {
   const getApi = useAuthApi();
   const router = useRouter();
 
-  const { data: event } = useSWR<EventDetail>(`/events/${id}`);
+  const {
+    data: event,
+    error: eventError,
+    isLoading: eventLoading,
+  } = useSWR<EventDetail>(`/events/${id}`);
   const { data: eventAttendance, isLoading } = useSWR<EventAttendance>(
     `/events/${id}/attendance`,
   );
@@ -69,8 +74,8 @@ export default function AttendanceEvent(props: {
     }
   }, [eventAttendance]);
 
-  if (isLoading) return <Loading />;
-  if (!event) return <div>Not found</div>;
+  if (isLoading || eventLoading) return <Loading />;
+  if (!event) return <ResourceError error={eventError} />;
 
   const recurrentEvent = event.recurrentEvent || event;
   const isRecurrent = Boolean(event.recurrentEvent);

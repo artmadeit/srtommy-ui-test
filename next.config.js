@@ -21,6 +21,10 @@ const securityHeaders = [
 
 /** @type {import('next').NextConfig} */
 const nextConfig = withBuilderDevTools({
+  // Next 16 builds with Turbopack. The Builder dev-tools wrapper adds a webpack
+  // config that Turbopack ignores (it only matters inside Builder's local visual
+  // editor); the empty object acknowledges that. Remove with Builder.
+  turbopack: {},
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders }];
   },

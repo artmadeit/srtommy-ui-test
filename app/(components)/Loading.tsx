@@ -3,8 +3,8 @@ import * as React from "react";
 
 const Loading = () => {
   return (
-    <Box display="flex">
-      <CircularProgress />
+    <Box display="flex" justifyContent="center" p={4}>
+      <CircularProgress aria-label="Cargando" />
     </Box>
   );
 };

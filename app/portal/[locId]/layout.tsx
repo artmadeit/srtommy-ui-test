@@ -1,14 +1,9 @@
 "use client";
 
-// import ChurchIcon from "@mui/icons-material/Church";
 import ChurchOutlinedIcon from "@mui/icons-material/ChurchOutlined";
-// import DashboardIcon from "@mui/icons-material/Dashboard";
 import DashboardOutlinedIcon from "@mui/icons-material/DashboardOutlined";
-// import EventIcon from "@mui/icons-material/Event";
 import EventOutlinedIcon from "@mui/icons-material/EventOutlined";
-// import PersonIcon from "@mui/icons-material/Person";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
-import { Link } from "@mui/material";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
@@ -19,6 +14,13 @@ import * as React from "react";
 import MenuDrawer2 from "../MenuDrawer2";
 import useSWR from "swr";
 import { LocationDetail } from "./Location";
+
+const menuItems = [
+  { label: "Dashboard", path: "", Icon: DashboardOutlinedIcon },
+  { label: "Sede", path: "/location", Icon: ChurchOutlinedIcon },
+  { label: "Personas", path: "/person", Icon: PersonOutlinedIcon },
+  { label: "Eventos y cursos", path: "/event", Icon: EventOutlinedIcon },
+];
 
 export default function LocLayout(props: {
   children: React.ReactNode;
@@ -36,13 +38,13 @@ export default function LocLayout(props: {
       locId={locId}
       listDrawer={
         <List
+          aria-label="Menú principal"
           sx={{
             "& .MuiListItemIcon-root": {
               minWidth: "40px",
               color: "#fff",
               fontSize: "50px",
             },
-            // background: "#2a2b36",
             color: "#fff",
             fontSize: "50px",
 
@@ -52,62 +54,20 @@ export default function LocLayout(props: {
             },
           }}
         >
-          <Link
-            component={NextLink}
-            href={`/portal/${locId}/`}
-            style={{ textDecoration: "none", color: "inherit" }}
-          >
-            <ListItem>
-              <ListItemButton>
+          {menuItems.map(({ label, path, Icon }) => (
+            <ListItem key={label} disablePadding>
+              <ListItemButton
+                component={NextLink}
+                href={`/portal/${locId}${path}`}
+                sx={{ color: "inherit", textDecoration: "none" }}
+              >
                 <ListItemIcon>
-                  <DashboardOutlinedIcon />
+                  <Icon />
                 </ListItemIcon>
-                <ListItemText primary="Dashboard" />
+                <ListItemText primary={label} />
               </ListItemButton>
             </ListItem>
-          </Link>
-          <Link
-            component={NextLink}
-            href={`/portal/${locId}/location`}
-            style={{ textDecoration: "none", color: "inherit" }}
-          >
-            <ListItem>
-              <ListItemButton>
-                <ListItemIcon>
-                  <ChurchOutlinedIcon />
-                </ListItemIcon>
-                <ListItemText primary="Sede" />
-              </ListItemButton>
-            </ListItem>
-          </Link>
-          <Link
-            component={NextLink}
-            href={`/portal/${locId}/person`}
-            style={{ textDecoration: "none", color: "inherit" }}
-          >
-            <ListItem>
-              <ListItemButton>
-                <ListItemIcon>
-                  <PersonOutlinedIcon />
-                </ListItemIcon>
-                <ListItemText primary="Personas" />
-              </ListItemButton>
-            </ListItem>
-          </Link>
-          <Link
-            component={NextLink}
-            href={`/portal/${locId}/event`}
-            style={{ textDecoration: "none", color: "inherit" }}
-          >
-            <ListItem>
-              <ListItemButton>
-                <ListItemIcon>
-                  <EventOutlinedIcon />
-                </ListItemIcon>
-                <ListItemText primary="Eventos y cursos" />
-              </ListItemButton>
-            </ListItem>
-          </Link>
+          ))}
         </List>
       }
     >
